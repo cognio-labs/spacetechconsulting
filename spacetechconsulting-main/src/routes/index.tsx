@@ -3,17 +3,12 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import {
   ArrowRight, Users, Clock, BarChart3, ShieldCheck, Target, Zap, Lock, Handshake,
-  Building2, Home, Landmark, TrendingUp, Cpu, Building, ChevronDown,
+  ChevronDown,
   Star, Quote, Globe, FileCheck, Languages, Share2, PlayCircle,
 } from "lucide-react";
 import { useState } from "react";
-import heroSkyline from "@/assets/hero-skyline.jpg";
-import propCommercial from "@/assets/prop-commercial.jpg";
-import propResidential from "@/assets/prop-residential.jpg";
-import propAffordable from "@/assets/prop-affordable.jpg";
-import propMilitary from "@/assets/prop-military.jpg";
-import propSfr from "@/assets/prop-sfr.jpg";
-import propMixed from "@/assets/prop-mixed.jpg";
+import { propertyTypes } from "@/data/propertyTypes";
+import heroSectionBg from "@/assets/hero-section-bg.png";
 import servicesDashboard from "@/assets/services-dashboard.jpg";
 
 export const Route = createFileRoute("/")({
@@ -43,15 +38,6 @@ const advantages = [
   { icon: Zap, title: "Deep Yardi Expertise", body: "Our team brings hands-on functional and technical experience across various Yardi modules and ecosystem integrations, developed through operating complex Yardi enterprise environments." },
   { icon: BarChart3, title: "Outcome Driven", body: "We measure success by operational efficiency and cost reduction, not just technical implementations or tickets resolved." },
   { icon: Handshake, title: "Long-Term Partner", body: "We build enduring partnerships by taking long-term accountability for the stability, evolution, and success of your Yardi platform." },
-];
-
-const properties = [
-  { icon: Building2, image: propCommercial, title: "Commercial", body: "We run Voyager Commercial for large portfolios. Lease management, CAM recoveries, tenant billing, Deal Manager configuration, and construction job tracking." },
-  { icon: Home, image: propResidential, title: "Residential (Multifamily)", body: "Voyager Residential and RentCafe, set up end to end. Lead-to-lease workflows, resident portals, maintenance dispatch, budgeting, and revenue tracking." },
-  { icon: Landmark, image: propAffordable, title: "Affordable Housing", body: "LIHTC, HUD, state programs. We configure Voyager Affordable Housing for certifications, recerts, waiting lists, and audit-ready compliance reporting." },
-  { icon: TrendingUp, image: propMilitary, title: "Military Housing", body: "Privatized military housing runs on different rules. We configure Yardi for BAH tracking, occupancy reporting, work order management, and government compliance." },
-  { icon: Cpu, image: propSfr, title: "Single-Family Rental", body: "SFR at scale needs a different Yardi setup. We build it for leasing automation, maintenance dispatch, owner distributions, property-level P&Ls, and investor reporting." },
-  { icon: Building, image: propMixed, title: "Mixed-Use Properties", body: "Residential and commercial under one roof means one Yardi environment. We get the modules working together with shared GL structures and consolidated reporting across asset types." },
 ];
 
 const services = [
@@ -88,29 +74,29 @@ function HomePage() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-        <img src={heroSkyline} alt="Enterprise city skyline" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 gradient-hero-overlay" />
-        <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 70% 30%, rgba(6,182,212,0.25), transparent 50%)" }} />
+      <section className="relative min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
+        <img src={heroSectionBg} alt="Futuristic real estate technology city" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020B1F]/98 via-[#020B1F]/76 to-[#020B1F]/16" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
 
-        <div className="relative max-w-7xl mx-auto px-6 py-24 w-full">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl">
-            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-dark text-cyan-300 text-xs font-bold tracking-widest uppercase">
+        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-2xl">
+            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/55 text-cyan-200 text-xs font-bold tracking-widest uppercase shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur-xl">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /> Your Trusted Yardi Platform Partner
             </motion.span>
-            <motion.h1 variants={fadeUp} className="mt-6 text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-[1.02]">
-              Enterprise Yardi Platform Ownership,{" "}
-              <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-400 bg-clip-text text-transparent">Proven at Scale in ANZ</span>
+            <motion.h1 variants={fadeUp} className="mt-6 text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-[1.02] drop-shadow-[0_18px_38px_rgba(0,0,0,0.45)]">
+              Your Trusted Yardi Platform Partner
+              <span className="block bg-gradient-to-r from-cyan-300 via-blue-200 to-white bg-clip-text text-transparent">SpaceTech Consulting</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-7 text-lg md:text-xl text-slate-200/90 max-w-3xl leading-relaxed">
               Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence for real estate teams across Australia, India, and the USA.
             </motion.p>
             <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-4">
               <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white text-[#0F172A] font-bold shadow-glow hover:scale-105 transition-transform">
+                className="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_18px_42px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-1">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
               </a>
-              <Link to="/services" className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl glass-dark text-white font-bold hover:bg-white/10 transition-colors">
+              <Link to="/services" className="inline-flex items-center gap-2 rounded-2xl border border-white/18 bg-white/8 px-7 py-4 font-bold text-white shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-transform hover:-translate-y-1 hover:bg-white/12">
                 View Capabilities
               </Link>
             </motion.div>
@@ -125,12 +111,12 @@ function HomePage() {
       </section>
 
       {/* STATS */}
-      <section className="relative -mt-16 z-10 px-6">
+      <section className="relative z-10 px-6 pt-8 pb-10 md:pt-10 md:pb-14">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
           className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {stats.map((s) => (
             <motion.div key={s.value} variants={fadeUp}
-              className="glass rounded-3xl p-7 shadow-elegant card-lift">
+              className="bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100">
               <div className="w-12 h-12 rounded-2xl gradient-primary grid place-items-center shadow-glow mb-4">
                 <s.icon className="w-5 h-5 text-white" />
               </div>
@@ -142,11 +128,11 @@ function HomePage() {
       </section>
 
       {/* ADVANTAGE */}
-      <section className="py-28 px-6">
+      <section className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
             <motion.span variants={fadeUp} className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">The SpaceTech Advantage</motion.span>
-            <motion.h2 variants={fadeUp} className="mt-5 text-4xl md:text-6xl font-extrabold text-[#0F172A]">
+            <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">
               Why Choose <span className="text-gradient">SpaceTech Consulting?</span>
             </motion.h2>
             <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">
@@ -155,10 +141,10 @@ function HomePage() {
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {advantages.map((a) => (
               <motion.div key={a.title} variants={fadeUp}
-                className="relative group bg-white rounded-3xl p-8 shadow-elegant card-lift border border-slate-100 overflow-hidden">
+                className="relative group bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
                 <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 opacity-50 group-hover:scale-150 transition-transform duration-700" />
                 <div className="relative">
                   <div className="w-14 h-14 rounded-2xl gradient-primary grid place-items-center shadow-glow mb-5">
@@ -174,21 +160,22 @@ function HomePage() {
       </section>
 
       {/* WHO WE SERVE */}
-      <section className="py-28 px-6 bg-gradient-to-b from-white to-slate-50">
+      <section className="py-16 md:py-20 px-6 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-7xl mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
             <motion.span variants={fadeUp} className="inline-block px-4 py-1.5 rounded-full bg-cyan-50 text-cyan-700 text-xs font-bold tracking-widest uppercase">Who We Serve</motion.span>
-            <motion.h2 variants={fadeUp} className="mt-5 text-4xl md:text-6xl font-extrabold text-[#0F172A]">Yardi Expertise Across <span className="text-gradient">Property Types</span></motion.h2>
+            <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">Yardi Expertise Across <span className="text-gradient">Property Types</span></motion.h2>
             <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">
               Every property type runs Yardi differently. We've operated inside these environments at enterprise scale, and we bring that hands-on knowledge to every engagement.
             </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {properties.map((p) => (
-              <motion.div key={p.title} variants={fadeUp}
+            className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {propertyTypes.map((p) => (
+            <motion.div key={p.title} variants={fadeUp}
                 className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white">
+              <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
                 <div className="relative h-56 overflow-hidden">
                   <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -202,7 +189,9 @@ function HomePage() {
                 </div>
                 <div className="p-6">
                   <p className="text-sm text-slate-600 leading-relaxed">{p.body}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#2563EB]">Explore detail <ArrowRight className="w-4 h-4" /></span>
                 </div>
+              </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -216,18 +205,18 @@ function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section className="py-28 px-6">
+      <section className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
-            <motion.h2 variants={fadeUp} className="text-4xl md:text-6xl font-extrabold text-[#0F172A]">Full-Spectrum <span className="text-gradient">Yardi Services</span></motion.h2>
+            <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-extrabold text-[#0F172A]">Full-Spectrum <span className="text-gradient">Yardi Services</span></motion.h2>
             <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">From implementation to optimization — we cover the complete Yardi lifecycle</motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s) => (
               <motion.div key={s.num} variants={fadeUp}
-                className="group relative bg-white rounded-3xl p-8 shadow-elegant card-lift border border-slate-100 overflow-hidden">
+                className="group relative bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700" />
                 <div className="relative">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] font-extrabold text-lg mb-5">{s.num}</div>
@@ -254,7 +243,7 @@ function HomePage() {
       </section>
 
       {/* BRAND INTRO */}
-      <section className="py-28 px-6 bg-[#0F172A] text-white relative overflow-hidden">
+      <section className="py-16 md:py-20 px-6 bg-[#0F172A] text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-40"
              style={{ background: "radial-gradient(circle at 30% 50%, rgba(37,99,235,0.4), transparent 50%), radial-gradient(circle at 70% 80%, rgba(6,182,212,0.3), transparent 50%)" }} />
         <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -271,23 +260,23 @@ function HomePage() {
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             className="relative">
             <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-3xl blur-2xl" />
-            <img src={servicesDashboard} alt="Analytics dashboard" loading="lazy" width={1280} height={896}
+            <img src={servicesDashboard} alt="SpaceTech Yardi services meeting" loading="lazy" width={1536} height={960}
               className="relative rounded-3xl shadow-2xl w-full" />
           </motion.div>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-28 px-6 bg-slate-50">
+      <section className="py-16 md:py-20 px-6 bg-slate-50">
         <div className="max-w-7xl mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
             <motion.span variants={fadeUp} className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Client Success Stories</motion.span>
-            <motion.h2 variants={fadeUp} className="mt-5 text-4xl md:text-6xl font-extrabold text-[#0F172A]">What Our Clients Say</motion.h2>
+            <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">What Our Clients Say</motion.h2>
             <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">Trusted by leading real estate organizations across the globe.</motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-14 grid md:grid-cols-3 gap-6">
+            className="mt-10 grid md:grid-cols-3 gap-5">
             {testimonials.map((t) => (
               <motion.div key={t.name} variants={fadeUp}
                 className="bg-white rounded-3xl p-8 shadow-elegant card-lift border border-slate-100 relative">
@@ -312,15 +301,16 @@ function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto relative rounded-[2.5rem] overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 gradient-primary" />
+      <section className="py-16 px-6">
+        <div className="max-w-6xl mx-auto relative rounded-[2rem] overflow-hidden shadow-2xl border border-white/20">
+          <div className="absolute inset-0 bg-[#0F172A]" />
+          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(37,99,235,0.78),rgba(6,182,212,0.25)_48%,rgba(255,255,255,0.08))]" />
           <div className="absolute inset-0 opacity-40"
-               style={{ background: "radial-gradient(circle at 80% 20%, rgba(6,182,212,0.5), transparent 50%)" }} />
+               style={{ background: "radial-gradient(circle at 15% 20%, rgba(255,255,255,0.22), transparent 32%), radial-gradient(circle at 80% 20%, rgba(6,182,212,0.5), transparent 46%)" }} />
           <div className="relative p-12 md:p-20 text-center text-white">
             <h2 className="text-4xl md:text-5xl font-extrabold">Let's Optimize Your Yardi Platform</h2>
             <p className="mt-5 text-lg text-blue-100 max-w-2xl mx-auto">
-              Ready to transform your Yardi ecosystem? Let's discuss how we can help you achieve your goals.
+              Ready to transform your Yardi ecosystem? Let's discuss how we can help you.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
               <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer"
@@ -336,7 +326,7 @@ function HomePage() {
       </section>
 
       {/* ABOUT TEASER */}
-      <section className="py-24 px-6">
+      <section className="py-16 md:py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">About SpaceTech</span>
           <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">Your Strategic Yardi Partner</h2>
@@ -357,7 +347,7 @@ function HomePage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24 px-6 bg-slate-50">
+      <section className="py-16 md:py-20 px-6 bg-slate-50">
         <div className="max-w-4xl mx-auto">
           <div className="text-center">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">FAQs</span>
@@ -384,7 +374,7 @@ function HomePage() {
       </section>
 
       {/* POLICIES */}
-      <section className="py-24 px-6 bg-gradient-to-b from-slate-50 to-blue-50/40">
+      <section className="py-16 md:py-20 px-6 bg-gradient-to-b from-slate-50 to-blue-50/40">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Legal & Access</span>

@@ -14,6 +14,7 @@ import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WhoWeServeSlugRouteImport } from './routes/who-we-serve_.$slug'
 
 const WhoWeServeRoute = WhoWeServeRouteImport.update({
   id: '/who-we-serve',
@@ -40,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhoWeServeSlugRoute = WhoWeServeSlugRouteImport.update({
+  id: '/who-we-serve_/$slug',
+  path: '/who-we-serve/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,33 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/who-we-serve_/$slug': typeof WhoWeServeSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/services' | '/who-we-serve'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/who-we-serve'
+    | '/who-we-serve/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/services' | '/who-we-serve'
-  id: '__root__' | '/' | '/about' | '/contact' | '/services' | '/who-we-serve'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/who-we-serve'
+    | '/who-we-serve/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/services'
+    | '/who-we-serve'
+    | '/who-we-serve_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +105,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
   WhoWeServeRoute: typeof WhoWeServeRoute
+  WhoWeServeSlugRoute: typeof WhoWeServeSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/who-we-serve_/$slug': {
+      id: '/who-we-serve_/$slug'
+      path: '/who-we-serve/$slug'
+      fullPath: '/who-we-serve/$slug'
+      preLoaderRoute: typeof WhoWeServeSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
   WhoWeServeRoute: WhoWeServeRoute,
+  WhoWeServeSlugRoute: WhoWeServeSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

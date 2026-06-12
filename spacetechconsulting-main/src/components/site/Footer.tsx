@@ -1,5 +1,23 @@
 import { Link } from "@tanstack/react-router";
-import { Cloud, Building2, Linkedin, MessageCircle, Calendar, Phone, Mail, MapPin } from "lucide-react";
+import { Calendar, Phone, Mail, MapPin } from "lucide-react";
+
+const linkedInUrl = "https://www.linkedin.com/uas/login?session_redirect=%2Fsearch%2Fresults%2Fcompanies%2F%3Fkeywords%3DSpaceTech%2520Consulting&skipRedirect=true";
+
+function LinkedInIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.32 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.1 20.45H3.54V9H7.1v11.45z" />
+    </svg>
+  );
+}
+
+function WhatsAppIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4 fill-current">
+      <path d="M12.04 2a9.86 9.86 0 0 0-8.48 14.9L2.5 22l5.22-1.03A9.88 9.88 0 1 0 12.04 2zm0 2a7.88 7.88 0 0 1 6.66 12.08 7.88 7.88 0 0 1-9.98 2.9l-.35-.17-3.23.64.66-3.15-.2-.36A7.88 7.88 0 0 1 12.04 4zm-3.1 4.18c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.26s.98 2.63 1.12 2.81c.14.18 1.92 2.93 4.65 4.11.65.28 1.16.45 1.56.57.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.12-.25-.18-.52-.32-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.6-1.5-1.87-.16-.27-.02-.42.12-.55.13-.13.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52z" />
+    </svg>
+  );
+}
 
 export function Footer() {
   return (
@@ -9,10 +27,7 @@ export function Footer() {
       <div className="relative max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <div className="relative w-10 h-10 rounded-xl bg-white/10 backdrop-blur grid place-items-center">
-              <Cloud className="w-5 h-5 text-white absolute -top-0.5" strokeWidth={2.5} />
-              <Building2 className="w-4 h-4 text-white mt-2" strokeWidth={2.5} />
-            </div>
+            <img src="/space-tech-logo-mark.png" alt="SpaceTech Consulting logo" className="h-14 w-20 object-contain drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
             <div className="leading-tight">
               <div className="font-extrabold text-lg text-white">SpaceTech</div>
               <div className="text-[10px] tracking-[0.2em] text-cyan-400 font-semibold -mt-1">CONSULTING</div>
@@ -55,11 +70,15 @@ export function Footer() {
             <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-cyan-400" /> info@spacetechconsulting.com</li>
           </ul>
           <div className="flex gap-2 mt-5">
-            {[Linkedin, MessageCircle, Calendar].map((Icon, i) => (
-              <a key={i} href="#" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#2563EB] grid place-items-center transition-colors">
-                <Icon className="w-4 h-4" />
+            <a href={linkedInUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#0A66C2] grid place-items-center transition-colors">
+              <LinkedInIcon />
+            </a>
+            <a href="https://wa.me/14158708418" target="_blank" rel="noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-lg bg-[#25D366] text-white hover:bg-[#1EBE5D] grid place-items-center transition-colors">
+              <WhatsAppIcon />
+            </a>
+            <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer" aria-label="Book a call" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#2563EB] grid place-items-center transition-colors">
+              <Calendar className="w-4 h-4" />
               </a>
-            ))}
           </div>
         </div>
       </div>

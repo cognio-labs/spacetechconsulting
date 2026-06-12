@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
-import { Phone, Mail, MapPin, Clock, MessageCircle, Calendar, Send } from "lucide-react";
-import { useState } from "react";
+import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { useState, type FormEvent } from "react";
+import { submitContactForm } from "@/lib/api/contact.functions";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -16,82 +17,140 @@ export const Route = createFileRoute("/contact")({
   component: Contact,
 });
 
+const serviceOptions = [
+  "Reporting & Business Intelligence",
+  "System Integrations",
+  "Automation & Workflows",
+  "Managed BAU Support",
+  "Data Migration",
+];
+
 function Contact() {
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+
+  const updateField = (field: keyof typeof form, value: string) => {
+    setForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setError("");
+    try {
+      await submitContactForm({ data: form });
+      setSent(true);
+    } catch {
+      setError("Message send nahi ho paya. Thodi der baad try karein ya direct email karein.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <Layout>
-      <section className="relative py-20 px-6 bg-[#0F172A] text-white overflow-hidden">
+      <section className="relative py-16 md:py-20 px-6 bg-[#0F172A] text-white overflow-hidden">
         <div className="absolute inset-0 opacity-50"
           style={{ background: "radial-gradient(circle at 30% 30%, rgba(37,99,235,0.4), transparent 50%), radial-gradient(circle at 70% 70%, rgba(6,182,212,0.3), transparent 50%)" }} />
         <div className="relative max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-bold tracking-widest uppercase">Contact</span>
-          <h1 className="mt-5 text-5xl md:text-6xl font-extrabold">Let's Talk <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Yardi</span></h1>
+          <h1 className="mt-5 text-4xl md:text-6xl font-extrabold">Contact <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Us</span></h1>
           <p className="mt-6 text-lg text-slate-300">
-            Connect with SpaceTech through LinkedIn, email, phone, WhatsApp, or a scheduled discovery call.
+            Have questions about our Yardi solutions? We're here to help.
           </p>
         </div>
       </section>
 
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="bg-white rounded-3xl p-8 md:p-10 shadow-elegant border border-slate-100">
-            <h2 className="text-2xl font-extrabold text-[#0F172A]">Send us a message</h2>
-            <p className="mt-2 text-sm text-slate-500">We use submitted contact details only to respond to enquiries, schedule calls, and provide SpaceTech Consulting services.</p>
+      <section className="py-12 md:py-16 px-6 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+            <div className="bg-white rounded-3xl p-7 md:p-8 shadow-elegant border border-slate-100">
+              <h2 className="text-3xl font-extrabold text-[#0F172A]">Contact Information</h2>
+              <p className="mt-3 text-slate-600">Reach out to discuss how we can help optimize your Yardi platform and property technology stack.</p>
+              <div className="mt-7 grid gap-4">
+                {[
+                  { icon: Phone, title: "Phone (USA)", text: "+1 (415) 870-8418" },
+                  { icon: Phone, title: "Phone (Australia)", text: "+61 468040481" },
+                  { icon: MapPin, title: "Phone (India)", text: "India office: phone coming soon" },
+                  { icon: Mail, title: "Email", text: "info@spacetechconsulting.com" },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 md:p-5">
+                    <div className="flex items-center gap-3">
+                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#2563EB]">
+                        <item.icon className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-[#0F172A]">{item.title}</h3>
+                        <p className="text-sm text-slate-600">{item.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {["Australia", "India", "USA"].map((region) => (
+                  <span key={region} className="rounded-full bg-blue-50 px-4 py-2 text-sm font-bold text-[#2563EB]">{region}</span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="bg-white rounded-3xl p-7 md:p-10 shadow-elegant border border-slate-100 lg:sticky lg:top-28">
+            <h2 className="text-3xl font-extrabold text-[#0F172A]">Send us a message</h2>
+            <p className="mt-2 text-sm text-slate-500">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
             {sent ? (
               <div className="mt-8 p-6 rounded-2xl bg-green-50 border border-green-200 text-green-800">
-                Thanks — we'll be in touch shortly.
+                Thanks. Your message has been submitted and we'll be in touch shortly.
               </div>
             ) : (
-              <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} className="mt-6 space-y-4">
+              <form onSubmit={handleSubmit} className="mt-6 space-y-5">
                 <div className="grid md:grid-cols-2 gap-4">
-                  <input required placeholder="Full name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
-                  <input required type="email" placeholder="Work email" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-semibold text-slate-700">First Name</span>
+                    <input required value={form.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="John" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-semibold text-slate-700">Last Name</span>
+                    <input required value={form.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Doe" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  </label>
                 </div>
-                <input placeholder="Company" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
-                <textarea required rows={5} placeholder="How can we help?" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none resize-none" />
-                <button type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:scale-[1.02] transition-transform">
-                  Send Message <Send className="w-4 h-4" />
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-slate-700">Email</span>
+                  <input required type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="john@company.com" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-slate-700">Phone Number</span>
+                  <input required value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-slate-700">Service Interested In</span>
+                  <select required value={form.service} onChange={(e) => updateField("service", e.target.value)} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
+                    <option value="">Select a service</option>
+                    {serviceOptions.map((service) => (
+                      <option key={service} value={service}>{service}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block">
+                  <span className="mb-2 block text-sm font-semibold text-slate-700">Message</span>
+                  <textarea required rows={5} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none resize-none" />
+                </label>
+                {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
+                <button disabled={submitting} type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl gradient-primary text-white font-bold shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0">
+                  {submitting ? "Sending..." : "Send Message"} <Send className="w-4 h-4" />
                 </button>
               </form>
             )}
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="space-y-6">
-            <div className="rounded-3xl overflow-hidden shadow-elegant border border-slate-100 h-64">
-              <iframe
-                title="Global Offices"
-                src="https://www.openstreetmap.org/export/embed.html?bbox=-170%2C-50%2C180%2C70&layer=mapnik"
-                className="w-full h-full"
-                loading="lazy"
-              />
-            </div>
-
-            <div className="bg-white rounded-3xl p-7 shadow-elegant border border-slate-100">
-              <h3 className="font-extrabold text-[#0F172A] mb-4">Office Information</h3>
-              <ul className="space-y-3 text-sm text-slate-700">
-                <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-[#2563EB]" /> +1 (415) 870-8418</li>
-                <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-[#2563EB]" /> +61 468040481</li>
-                <li className="flex items-center gap-3"><MapPin className="w-4 h-4 text-[#2563EB]" /> India office: phone coming soon</li>
-                <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-[#2563EB]" /> info@spacetechconsulting.com</li>
-              </ul>
-            </div>
-
-            <div className="bg-gradient-to-br from-[#0F172A] to-[#1E3A8A] text-white rounded-3xl p-7 shadow-elegant">
-              <div className="flex items-center gap-3 mb-3">
-                <Clock className="w-5 h-5 text-cyan-300" />
-                <h3 className="font-extrabold">SLA & Support Availability</h3>
-              </div>
-              <p className="text-sm text-slate-300">24/7-ready support model for critical platform operations across Australia, India, and the USA — with issue tracking, governance, testing, and release discipline.</p>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-[#0F172A] text-sm font-bold hover:scale-105 transition-transform">
-                  <Calendar className="w-4 h-4" /> Book a Call
-                </a>
-                <a href="https://wa.me/14158708418" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-sm font-bold">
-                  <MessageCircle className="w-4 h-4" /> WhatsApp
-                </a>
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>

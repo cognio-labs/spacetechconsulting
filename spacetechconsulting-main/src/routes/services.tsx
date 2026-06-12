@@ -28,27 +28,28 @@ const services = [
 function Services() {
   return (
     <Layout>
-      <section className="relative py-24 px-6 overflow-hidden bg-[#0F172A] text-white">
-        <div className="absolute inset-0 opacity-50"
-          style={{ background: "radial-gradient(circle at 20% 30%, rgba(37,99,235,0.4), transparent 50%), radial-gradient(circle at 80% 70%, rgba(6,182,212,0.3), transparent 50%)" }} />
+      <section className="relative py-16 md:py-20 px-6 overflow-hidden bg-[#020617] text-white">
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,#020617_0%,#0F172A_48%,#073B4C_100%)]" />
+        <div className="absolute inset-0 opacity-70"
+          style={{ background: "radial-gradient(circle at 18% 28%, rgba(88,225,255,0.18), transparent 42%), radial-gradient(circle at 82% 64%, rgba(37,99,235,0.28), transparent 48%)" }} />
         <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-bold tracking-widest uppercase">Services</span>
-            <h1 className="mt-5 text-5xl md:text-7xl font-extrabold leading-[1.05]">Full-Spectrum <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Yardi Services</span></h1>
+            <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[1.05]">Full-Spectrum <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Yardi Services</span></h1>
             <p className="mt-6 text-lg text-slate-300">From implementation to optimization — we cover the complete Yardi lifecycle with six dedicated service lines.</p>
           </div>
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-3xl blur-2xl" />
-            <img src={servicesDashboard} alt="Yardi analytics" loading="lazy" width={1280} height={896} className="relative rounded-3xl shadow-2xl" />
+            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-400/22 via-blue-500/18 to-white/8 blur-2xl" />
+            <img src={servicesDashboard} alt="SpaceTech Yardi services meeting" loading="lazy" width={1536} height={960} className="relative rounded-3xl border border-white/10 shadow-2xl" />
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="py-16 md:py-20 px-6">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s, i) => (
             <motion.div key={s.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-              className="group relative bg-white rounded-3xl p-8 shadow-elegant card-lift border border-slate-100 overflow-hidden">
+              className="group relative bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700" />
               <div className="relative">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] font-extrabold text-lg mb-5">{s.num}</div>
