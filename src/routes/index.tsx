@@ -25,7 +25,7 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
     ],
   }),
-  component: Home,
+  component: HomePage,
 });
 
 const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } };
@@ -83,7 +83,7 @@ const policies = [
   { icon: Share2, title: "Social Accessibility", body: "Connect with SpaceTech through LinkedIn, email, phone, WhatsApp, or a scheduled discovery call." },
 ];
 
-function Home() {
+function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   return (
     <Layout>
