@@ -64,9 +64,17 @@ function PropertyTypeDetail() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             {property.features.map((feature) => (
-              <div key={feature} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-elegant">
+              <div key={feature.title} className="rounded-3xl border border-slate-100 bg-white p-6 shadow-elegant card-lift">
                 <CheckCircle2 className="h-5 w-5 text-[#2563EB]" />
-                <h3 className="mt-4 font-extrabold text-[#0F172A]">{feature}</h3>
+                <h3 className="mt-4 font-extrabold text-[#0F172A]">{feature.title}</h3>
+                <div className="mt-4 space-y-2">
+                  {feature.items.map((item) => (
+                    <p key={item} className="flex items-center gap-2 text-sm font-medium text-slate-600">
+                      <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                      {item}
+                    </p>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
