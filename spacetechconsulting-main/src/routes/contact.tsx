@@ -70,20 +70,20 @@ function Contact() {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 px-6 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-8 items-start">
+      <section className="py-10 md:py-12 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white dark:bg-[#020B1F] dark:from-[#0B1329] dark:to-[#020B1F]">
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-[0.92fr_1.08fr] gap-6 items-start">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <div className="bg-white rounded-3xl p-7 md:p-8 shadow-elegant border border-slate-100">
-              <h2 className="text-3xl font-extrabold text-[#0F172A]">Contact Information</h2>
-              <p className="mt-3 text-slate-600">Reach out to discuss how we can help optimize your Yardi platform and property technology stack.</p>
-              <div className="mt-7 grid gap-4">
+            <div className="bg-white rounded-3xl p-6 md:p-7 shadow-elegant border border-slate-100">
+              <h2 className="text-2xl md:text-3xl font-extrabold text-[#0F172A]">Contact Information</h2>
+              <p className="mt-2 text-sm text-slate-600">Reach out to discuss how we can help optimize your Yardi platform and property technology stack.</p>
+              <div className="mt-6 grid gap-3">
                 {[
                   { icon: Phone, title: "Phone (USA)", text: "+1 (415) 870-8418" },
                   { icon: Phone, title: "Phone (Australia)", text: "+61 468040481" },
                   { icon: MapPin, title: "Phone (India)", text: "India office: phone coming soon" },
                   { icon: Mail, title: "Email", text: "info@spacetechconsulting.com" },
                 ].map((item) => (
-                  <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4 md:p-5">
+                  <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-4">
                     <div className="flex items-center gap-3">
                       <div className="grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#2563EB]">
                         <item.icon className="h-4 w-4" />
@@ -96,45 +96,45 @@ function Contact() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="mt-6 flex flex-wrap gap-2">
                 {["Australia", "India", "USA"].map((region) => (
-                  <span key={region} className="rounded-full bg-blue-50 px-4 py-2 text-sm font-bold text-[#2563EB]">{region}</span>
+                  <span key={region} className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-[#2563EB]">{region}</span>
                 ))}
               </div>
             </div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="bg-white rounded-3xl p-7 md:p-10 shadow-elegant border border-slate-100 lg:sticky lg:top-28">
-            <h2 className="text-3xl font-extrabold text-[#0F172A]">Send us a message</h2>
+            className="bg-white rounded-3xl p-6 md:p-8 shadow-elegant border border-slate-100 lg:sticky lg:top-28">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-[#0F172A]">Send us a message</h2>
             <p className="mt-2 text-sm text-slate-500">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
             {sent ? (
               <div className="mt-8 p-6 rounded-2xl bg-green-50 border border-green-200 text-green-800">
                 Thanks. Your message has been submitted and we'll be in touch shortly.
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+              <form onSubmit={handleSubmit} className="mt-5 space-y-4">
                 <div className="grid md:grid-cols-2 gap-4">
                   <label className="block">
                     <span className="mb-2 block text-sm font-semibold text-slate-700">First Name</span>
-                    <input required value={form.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="John" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                    <input required value={form.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="John" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
                   </label>
                   <label className="block">
                     <span className="mb-2 block text-sm font-semibold text-slate-700">Last Name</span>
-                    <input required value={form.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Doe" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                    <input required value={form.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Doe" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
                   </label>
                 </div>
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Email</span>
-                  <input required type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="john@company.com" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  <input required type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="john@company.com" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Phone Number</span>
-                  <input required value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  <input required value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Service Interested In</span>
-                  <select required value={form.service} onChange={(e) => updateField("service", e.target.value)} className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
+                  <select required value={form.service} onChange={(e) => updateField("service", e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
                     <option value="">Select a service</option>
                     {serviceOptions.map((service) => (
                       <option key={service} value={service}>{service}</option>
@@ -143,10 +143,10 @@ function Contact() {
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Message</span>
-                  <textarea required rows={5} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none resize-none" />
+                  <textarea required rows={4} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none resize-none" />
                 </label>
                 {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
-                <button disabled={submitting} type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-2xl gradient-primary text-white font-bold shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0">
+                <button disabled={submitting} type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0">
                   {submitting ? "Sending..." : "Send Message"} <Send className="w-4 h-4" />
                 </button>
               </form>

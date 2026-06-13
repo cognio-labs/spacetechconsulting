@@ -75,12 +75,23 @@ function HomePage() {
     <Layout>
       {/* HERO */}
       <section className="relative min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
-        <img src={heroSectionBg} alt="Futuristic real estate technology city" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <video
+          className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center"
+          src="/hero-section-video.mp4"
+          poster={heroSectionBg}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
         <div className="absolute inset-0 bg-gradient-to-r from-[#020B1F]/98 via-[#020B1F]/76 to-[#020B1F]/16" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
+        <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
 
-        <div className="relative max-w-7xl mx-auto px-6 py-16 md:py-24 w-full">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-2xl">
+        <div className="relative max-w-[86rem] mx-auto px-4 sm:px-6 py-16 md:py-24 w-full">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl">
             <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/55 text-cyan-200 text-xs font-bold tracking-widest uppercase shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur-xl">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /> Your Trusted Yardi Platform Partner
             </motion.span>
@@ -374,7 +385,7 @@ function HomePage() {
       </section>
 
       {/* POLICIES */}
-      <section className="py-16 md:py-20 px-6 bg-gradient-to-b from-slate-50 to-blue-50/40">
+      <section className="py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-blue-50/40 dark:bg-[#020B1F] dark:from-[#0B1329] dark:to-[#020B1F]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Legal & Access</span>

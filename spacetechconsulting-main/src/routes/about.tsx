@@ -160,7 +160,7 @@ function About() {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 px-6 bg-gradient-to-b from-slate-50 to-white">
+      <section className="py-16 md:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white dark:bg-[#020B1F] dark:from-[#0B1329] dark:to-[#020B1F]">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Global Presence</span>
@@ -171,7 +171,7 @@ function About() {
             {regions.map((r, i) => (
               <motion.div key={r.name} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="relative bg-white rounded-3xl p-8 shadow-elegant card-lift border border-slate-100 overflow-hidden">
-                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 opacity-60" />
+                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 opacity-60 dark:from-blue-500/10 dark:to-cyan-500/10 dark:opacity-20" />
                 <div className="relative">
                   <Globe className="w-10 h-10 text-[#2563EB] mb-4" />
                   <h3 className="text-2xl font-extrabold text-[#0F172A]">{r.name}</h3>

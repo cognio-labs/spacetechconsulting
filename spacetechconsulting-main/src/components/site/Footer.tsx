@@ -27,7 +27,7 @@ export function Footer() {
       <div className="relative max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <img src="/space-tech-logo-mark.png" alt="SpaceTech Consulting logo" className="h-14 w-20 object-contain drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
+            <img src="/space-tech-logo-white.png" alt="SpaceTech Consulting logo" className="h-14 w-24 object-contain drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
             <div className="leading-tight">
               <div className="font-extrabold text-lg text-white">SpaceTech</div>
               <div className="text-[10px] tracking-[0.2em] text-cyan-400 font-semibold -mt-1">CONSULTING</div>
