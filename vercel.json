@@ -1,0 +1,4 @@
+{
+  "installCommand": "npm --prefix spacetechconsulting-main install",
+  "buildCommand": "npm run build"
+}
