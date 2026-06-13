@@ -50,11 +50,11 @@ export function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[90px] py-3 flex items-center justify-between gap-4">
-        <Link to="/" className="flex min-w-0 items-center gap-3 group">
+        <Link to="/" className="flex min-w-0 items-center gap-1.5 group">
           <img
             src={dark ? "/space-tech-logo-white.png" : "/space-tech-logo-mark.png"}
             alt="SpaceTech Consulting logo"
-            className={`object-contain ${dark ? "h-[76px] w-[152px] sm:h-[84px] sm:w-[168px]" : "h-[62px] w-[116px] sm:h-[70px] sm:w-[132px]"}`}
+            className={`object-contain ${dark ? "h-[86px] w-[172px] sm:h-[96px] sm:w-[192px]" : "h-[70px] w-[132px] sm:h-[78px] sm:w-[148px]"}`}
           />
           <div className="leading-tight hidden min-[420px]:block">
             <div className={`font-extrabold text-base sm:text-lg ${dark ? "text-white" : "text-[#0F172A]"}`}>SpaceTech</div>
