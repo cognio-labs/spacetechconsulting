@@ -265,9 +265,6 @@ function HomePage() {
             <p className="mt-6 text-lg text-slate-300 leading-relaxed">
               SpaceTech Consulting combines real estate process understanding with Yardi platform execution. Our logo highlights connected buildings, cloud-ready operations, and a service model focused on dependable client outcomes.
             </p>
-            <button className="mt-8 inline-flex items-center gap-3 text-cyan-300 hover:text-cyan-200 font-semibold">
-              <PlayCircle className="w-6 h-6" /> Intro video placeholder ready for your final video asset
-            </button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             className="relative">
