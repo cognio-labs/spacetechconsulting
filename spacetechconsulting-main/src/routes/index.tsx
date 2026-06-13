@@ -74,10 +74,9 @@ function HomePage() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
+      <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
         <video
-          className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center"
-          src="/hero-section-video.mp4"
+          className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center brightness-[0.45] lg:brightness-100"
           poster={heroSectionBg}
           autoPlay
           muted
@@ -85,33 +84,35 @@ function HomePage() {
           playsInline
           preload="metadata"
           aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#020B1F]/98 via-[#020B1F]/76 to-[#020B1F]/16" />
+        >
+          <source src="/hero-section-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.65))] lg:bg-gradient-to-r lg:from-[#020B1F]/98 lg:via-[#020B1F]/76 lg:to-[#020B1F]/16" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
         <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
 
-        <div className="relative max-w-[86rem] mx-auto px-4 sm:px-6 py-16 md:py-24 w-full">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-4xl">
-            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/55 text-cyan-200 text-xs font-bold tracking-widest uppercase shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur-xl">
+        <div className="relative max-w-[86rem] mx-auto w-full px-6 py-12 pt-[90px] sm:px-6 md:py-24">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-full lg:max-w-4xl">
+            <motion.span variants={fadeUp} className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/55 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur-xl sm:px-4 sm:text-xs sm:tracking-widest">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /> Your Trusted Yardi Platform Partner
             </motion.span>
-            <motion.h1 variants={fadeUp} className="mt-6 text-4xl sm:text-5xl md:text-7xl font-extrabold text-white leading-[1.02] drop-shadow-[0_18px_38px_rgba(0,0,0,0.45)]">
+            <motion.h1 variants={fadeUp} className="mt-6 text-[clamp(2.5rem,8vw,4rem)] lg:text-7xl font-extrabold text-white leading-[0.95] lg:leading-[1.02] tracking-[-0.03em] drop-shadow-[0_18px_38px_rgba(0,0,0,0.45)]">
               Your Trusted Yardi Platform Partner
               <span className="block bg-gradient-to-r from-cyan-300 via-blue-200 to-white bg-clip-text text-transparent">SpaceTech Consulting</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="mt-7 text-lg md:text-xl text-slate-200/90 max-w-3xl leading-relaxed">
+            <motion.p variants={fadeUp} className="mt-7 max-w-full text-base leading-[1.8] text-white/85 md:text-xl lg:max-w-3xl lg:leading-relaxed">
               Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence for real estate teams across Australia, India, and the USA.
             </motion.p>
-            <motion.div variants={fadeUp} className="mt-9 flex flex-wrap gap-4">
+            <motion.div variants={fadeUp} className="mt-9 flex w-full max-w-[360px] flex-col gap-3 md:max-w-none md:flex-row md:flex-wrap md:gap-4">
               <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_18px_42px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-1">
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_18px_42px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-1 md:w-auto">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
               </a>
-              <Link to="/services" className="inline-flex items-center gap-2 rounded-2xl border border-white/18 bg-white/8 px-7 py-4 font-bold text-white shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-transform hover:-translate-y-1 hover:bg-white/12">
+              <Link to="/services" className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/18 bg-white/8 px-7 py-4 font-bold text-white shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-transform hover:-translate-y-1 hover:bg-white/12 md:w-auto">
                 View Capabilities
               </Link>
             </motion.div>
-            <motion.div variants={fadeUp} className="mt-12 flex flex-wrap items-center gap-6 text-sm text-slate-300">
+            <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-300 md:mt-12 md:gap-6">
               <span className="font-semibold text-cyan-300">Global Presence:</span>
               {["Australia", "India", "USA"].map((r) => (
                 <span key={r} className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> {r}</span>

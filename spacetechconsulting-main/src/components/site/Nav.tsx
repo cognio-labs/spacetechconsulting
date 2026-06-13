@@ -34,16 +34,16 @@ export function Nav() {
           : "border-slate-200 bg-white/92 shadow-[0_8px_28px_rgba(15,23,42,0.08)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[90px] py-3 flex items-center justify-between gap-4">
-        <Link to="/" className="flex min-w-0 items-center gap-1.5 group">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] lg:h-[90px] py-2 lg:py-3 flex items-center justify-between gap-3">
+        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center gap-2 lg:gap-1.5 group">
           <img
             src="/space-tech-logo-mark.png"
             alt="SpaceTech Consulting logo"
-            className="h-[70px] w-[132px] object-contain sm:h-[78px] sm:w-[148px]"
+            className="h-[46px] w-auto shrink-0 object-contain lg:h-[78px] lg:w-[148px]"
           />
-          <div className="leading-tight hidden min-[420px]:block">
-            <div className="font-extrabold text-base text-[#0F172A] sm:text-lg">SpaceTech</div>
-            <div className="text-[8px] sm:text-[9px] tracking-[0.24em] text-[#22C55E] font-bold -mt-0.5">CONSULTING</div>
+          <div className="min-w-0 leading-tight block">
+            <div className="truncate text-[16px] font-extrabold text-[#0F172A] lg:text-lg">SpaceTech</div>
+            <div className="text-[10px] tracking-[0.2em] text-[#22C55E] font-bold -mt-0.5 lg:text-[9px] lg:tracking-[0.24em]">CONSULTING</div>
           </div>
         </Link>
 
@@ -69,8 +69,8 @@ export function Nav() {
           >
             Book a Call
           </a>
-          <button onClick={() => setOpen(!open)} className="lg:hidden p-2 rounded-lg text-slate-800 hover:bg-slate-100" aria-label="Toggle navigation">
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          <button onClick={() => setOpen(!open)} className="lg:hidden grid h-11 w-11 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100" aria-label="Toggle navigation">
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>

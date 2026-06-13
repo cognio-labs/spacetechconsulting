@@ -88,18 +88,37 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * {
+    border-color: var(--color-border);
+    box-sizing: border-box;
+  }
   html {
+    width: 100%;
+    overflow-x: hidden;
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 72px;
   }
   body {
+    width: 100%;
+    overflow-x: hidden;
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  section,
+  .container {
+    max-width: 100%;
+  }
+  img,
+  video {
+    max-width: 100%;
+  }
   h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+  @media (min-width: 1024px) {
+    html { scroll-padding-top: 90px; }
+  }
 }
 
 @layer utilities {
@@ -168,4 +187,16 @@
   }
   .dark input::placeholder,
   .dark textarea::placeholder { color: rgb(148 163 184); }
+
+  @media (max-width: 767px) {
+    .card-lift {
+      min-height: 100%;
+    }
+
+    .card-lift p,
+    .card-lift li,
+    .card-lift span {
+      overflow-wrap: anywhere;
+    }
+  }
 }
