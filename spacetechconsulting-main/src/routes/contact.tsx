@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
-import { submitContactForm } from "@/lib/api/contact.functions";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -36,6 +35,7 @@ function Contact() {
     phone: "",
     service: "",
     message: "",
+    website: "",
   });
 
   const updateField = (field: keyof typeof form, value: string) => {
@@ -47,10 +47,27 @@ function Contact() {
     setSubmitting(true);
     setError("");
     try {
-      await submitContactForm({ data: form });
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const result = await response.json().catch(() => ({ success: false }));
+      if (!response.ok || !result.success) {
+        throw new Error("Contact submission failed");
+      }
       setSent(true);
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+        website: "",
+      });
     } catch {
-      setError("Message send nahi ho paya. Thodi der baad try karein ya direct email karein.");
+      setError("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -109,11 +126,21 @@ function Contact() {
             <h2 className="text-2xl md:text-3xl font-extrabold text-[#0F172A]">Send us a message</h2>
             <p className="mt-2 text-sm text-slate-500">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
             {sent ? (
-              <div className="mt-8 p-6 rounded-2xl bg-green-50 border border-green-200 text-green-800">
-                Thanks. Your message has been submitted and we'll be in touch shortly.
+              <div className="mt-8 p-6 rounded-2xl bg-green-50 border border-green-200 text-green-800" role="status" aria-live="polite">
+                <p className="font-bold">Message sent successfully.</p>
+                <p className="mt-1">We will contact you shortly.</p>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="mt-5 space-y-4">
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={form.website}
+                  onChange={(e) => updateField("website", e.target.value)}
+                  className="hidden"
+                  aria-hidden="true"
+                />
                 <div className="grid md:grid-cols-2 gap-4">
                   <label className="block">
                     <span className="mb-2 block text-sm font-semibold text-slate-700">First Name</span>
@@ -130,7 +157,7 @@ function Contact() {
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Phone Number</span>
-                  <input required value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  <input value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
                 </label>
                 <label className="block">
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Service Interested In</span>
@@ -145,7 +172,7 @@ function Contact() {
                   <span className="mb-2 block text-sm font-semibold text-slate-700">Message</span>
                   <textarea required rows={4} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none resize-none" />
                 </label>
-                {error && <p className="text-sm font-semibold text-red-600">{error}</p>}
+                {error && <p className="text-sm font-semibold text-red-600" role="alert">{error}</p>}
                 <button disabled={submitting} type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0">
                   {submitting ? "Sending..." : "Send Message"} <Send className="w-4 h-4" />
                 </button>

@@ -15,6 +15,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WhoWeServeSlugRouteImport } from './routes/who-we-serve_.$slug'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
 
 const WhoWeServeRoute = WhoWeServeRouteImport.update({
   id: '/who-we-serve',
@@ -46,6 +47,11 @@ const WhoWeServeSlugRoute = WhoWeServeSlugRouteImport.update({
   path: '/who-we-serve/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/api/contact': typeof ApiContactRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/api/contact': typeof ApiContactRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/api/contact': typeof ApiContactRoute
   '/who-we-serve_/$slug': typeof WhoWeServeSlugRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/who-we-serve'
+    | '/api/contact'
     | '/who-we-serve/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/who-we-serve'
+    | '/api/contact'
     | '/who-we-serve/$slug'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/services'
     | '/who-we-serve'
+    | '/api/contact'
     | '/who-we-serve_/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
   WhoWeServeRoute: typeof WhoWeServeRoute
+  ApiContactRoute: typeof ApiContactRoute
   WhoWeServeSlugRoute: typeof WhoWeServeSlugRoute
 }
 
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhoWeServeSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
   WhoWeServeRoute: WhoWeServeRoute,
+  ApiContactRoute: ApiContactRoute,
   WhoWeServeSlugRoute: WhoWeServeSlugRoute,
 }
 export const routeTree = rootRouteImport
