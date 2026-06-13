@@ -104,10 +104,10 @@ function HomePage() {
               Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence for real estate teams across Australia, India, and the USA.
             </motion.p>
             <motion.div variants={fadeUp} className="mt-9 flex w-full max-w-[360px] flex-col gap-3 md:max-w-none md:flex-row md:flex-wrap md:gap-4">
-              <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer"
+              <Link to="/contact#send-us-a-message-form"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_18px_42px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-1 md:w-auto">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
               <Link to="/services" className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/18 bg-white/8 px-7 py-4 font-bold text-white shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-transform hover:-translate-y-1 hover:bg-white/12 md:w-auto">
                 View Capabilities
               </Link>
@@ -325,10 +325,10 @@ function HomePage() {
               Ready to transform your Yardi ecosystem? Let's discuss how we can help you.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
-              <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer"
+              <Link to="/contact#send-us-a-message-form"
                 className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white text-[#0F172A] font-bold hover:scale-105 transition-transform">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
               <Link to="/services" className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl glass-dark text-white font-bold hover:bg-white/20">
                 Explore Services
               </Link>
