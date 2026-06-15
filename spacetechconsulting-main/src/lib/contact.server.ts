@@ -88,10 +88,10 @@ async function storeLead(data: ReturnType<typeof normalizeLead>, submittedAt: st
 }
 
 async function sendNotification(data: ReturnType<typeof normalizeLead>, submittedAt: string) {
-  const host = process.env.SMTP_HOST;
+  const user = process.env.SMTP_USER || process.env.GMAIL_USER || process.env.GMAIL_EMAIL;
+  const pass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD || process.env.GMAIL_PASSWORD;
+  const host = process.env.SMTP_HOST || (user && pass ? "smtp.gmail.com" : undefined);
   const port = Number(process.env.SMTP_PORT || 465);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
   const receiver = process.env.CONTACT_RECEIVER || process.env.CONTACT_TO_EMAIL || user;
 
   if (!host || !user || !pass || !receiver) {
