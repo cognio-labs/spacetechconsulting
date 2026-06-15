@@ -4,12 +4,11 @@ import { Layout } from "@/components/site/Layout";
 import {
   ArrowRight, Users, Clock, BarChart3, ShieldCheck, Target, Zap, Lock, Handshake,
   ChevronDown,
-  Star, Quote, Globe, FileCheck, Languages, Share2, PlayCircle,
+  Globe, FileCheck, Languages, Share2,
 } from "lucide-react";
 import { useState } from "react";
 import { propertyTypes } from "@/data/propertyTypes";
 import heroSectionBg from "@/assets/hero-section-bg.png";
-import servicesDashboard from "@/assets/services-dashboard.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,12 +46,6 @@ const services = [
   { num: "04", title: "Implementation & Consulting", items: ["Yardi Voyager / Elevate / Breeze Implementation","Multi-module deployment & configuration","Security model & role restructuring","Go-live support & stabilization"] },
   { num: "05", title: "Training & Testing", items: ["Role-based training programs","Knowledge base creation","Process documentation","Yardi product testing","Test scenarios & test case creation"] },
   { num: "06", title: "Data & Analytics", items: ["BI integration / Yardi Data Connect","Data visualization dashboards","Executive reporting packages","KPI tracking & monitoring","Dashboard & analytics setup"] },
-];
-
-const testimonials = [
-  { quote: "SpaceTech transformed our Yardi implementation. Their deep expertise and responsive team helped us achieve 40% improvement in operational efficiency.", name: "Michael Chen", role: "CTO, Pacific Real Estate Group" },
-  { quote: "The automation solutions they built saved us hundreds of hours monthly. Their understanding of real estate operations is unmatched.", name: "Sarah Johnson", role: "VP of Operations, Horizon Property Management" },
-  { quote: "Outstanding data engineering work. They migrated our entire portfolio data seamlessly and built dashboards that give us real-time insights.", name: "David Williams", role: "Director of IT, Summit Investment Partners" },
 ];
 
 const faqs = [
@@ -251,61 +244,6 @@ function HomePage() {
               Discuss Your Requirements <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* BRAND INTRO */}
-      <section className="py-16 md:py-20 px-6 bg-[#0F172A] text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-40"
-             style={{ background: "radial-gradient(circle at 30% 50%, rgba(37,99,235,0.4), transparent 50%), radial-gradient(circle at 70% 80%, rgba(6,182,212,0.3), transparent 50%)" }} />
-        <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-bold tracking-widest uppercase">Brand Introduction</span>
-            <h2 className="mt-5 text-4xl md:text-5xl font-extrabold">Built Around Property Technology Outcomes</h2>
-            <p className="mt-6 text-lg text-slate-300 leading-relaxed">
-              SpaceTech Consulting combines real estate process understanding with Yardi platform execution. Our logo highlights connected buildings, cloud-ready operations, and a service model focused on dependable client outcomes.
-            </p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-br from-cyan-500/30 to-blue-500/30 rounded-3xl blur-2xl" />
-            <img src={servicesDashboard} alt="SpaceTech Yardi services meeting" loading="lazy" width={1536} height={960}
-              className="relative rounded-3xl shadow-2xl w-full" />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="py-16 md:py-20 px-6 bg-slate-50">
-        <div className="max-w-7xl mx-auto">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
-            <motion.span variants={fadeUp} className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Client Success Stories</motion.span>
-            <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">What Our Clients Say</motion.h2>
-            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">Trusted by leading real estate organizations across the globe.</motion.p>
-          </motion.div>
-
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-10 grid md:grid-cols-3 gap-5">
-            {testimonials.map((t) => (
-              <motion.div key={t.name} variants={fadeUp}
-                className="bg-white rounded-3xl p-8 shadow-elegant card-lift border border-slate-100 relative">
-                <Quote className="w-10 h-10 text-blue-100 absolute top-6 right-6" />
-                <div className="flex gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-[#F59E0B] text-[#F59E0B]" />)}
-                </div>
-                <p className="text-slate-700 leading-relaxed mb-6">"{t.quote}"</p>
-                <div className="flex items-center gap-3 pt-5 border-t border-slate-100">
-                  <div className="w-11 h-11 rounded-full gradient-primary grid place-items-center text-white font-bold">
-                    {t.name.split(" ").map(n => n[0]).join("")}
-                  </div>
-                  <div>
-                    <div className="font-bold text-[#0F172A]">{t.name}</div>
-                    <div className="text-xs text-slate-500">{t.role}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
