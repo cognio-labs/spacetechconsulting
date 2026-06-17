@@ -21,7 +21,7 @@ export function Layout({ children }: { children: ReactNode }) {
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp"
-        className="fixed bottom-5 right-5 z-[999] h-[52px] w-[52px] sm:w-14 sm:h-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-110 transition-transform"
+        className="fixed bottom-5 right-5 z-[999] h-[52px] w-[52px] sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] text-white grid place-items-center ring-1 ring-white/20 shadow-[0_4px_12px_rgba(18,140,126,0.3),0_12px_28px_rgba(18,140,126,0.2)] hover:shadow-[0_6px_16px_rgba(18,140,126,0.4),0_16px_36px_rgba(18,140,126,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 select-none will-change-transform"
       >
         <WhatsAppIcon />
       </a>

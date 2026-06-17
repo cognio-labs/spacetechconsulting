@@ -96,12 +96,12 @@ function HomePage() {
             <motion.p variants={fadeUp} className="mt-7 max-w-full text-base leading-[1.8] text-white/85 md:text-xl lg:max-w-3xl lg:leading-relaxed">
               Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence for real estate teams across Australia, India, and the USA.
             </motion.p>
-            <motion.div variants={fadeUp} className="mt-9 flex w-full max-w-[360px] flex-col gap-3 md:max-w-none md:flex-row md:flex-wrap md:gap-4">
+            <motion.div variants={fadeUp} className="mt-9 flex w-full max-w-[360px] flex-col gap-3 md:max-w-none md:flex-row md:flex-wrap md:gap-4 select-none">
               <Link to="/contact#send-us-a-message-form"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_18px_42px_rgba(255,255,255,0.16)] transition-transform hover:-translate-y-1 md:w-auto">
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_4px_12px_rgba(255,255,255,0.12),0_12px_32px_rgba(255,255,255,0.18)] ring-1 ring-black/5 hover:scale-105 active:scale-[0.98] transition-all duration-300 md:w-auto">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/services" className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/18 bg-white/8 px-7 py-4 font-bold text-white shadow-[0_18px_42px_rgba(0,0,0,0.22)] backdrop-blur-xl transition-transform hover:-translate-y-1 hover:bg-white/12 md:w-auto">
+              <Link to="/services" className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-white/18 bg-white/8 px-7 py-4 font-bold text-white shadow-[0_4px_12px_rgba(0,0,0,0.1),0_12px_32px_rgba(0,0,0,0.2)] backdrop-blur-xl hover:scale-105 active:scale-[0.98] transition-all duration-300 hover:bg-white/12 md:w-auto">
                 View Capabilities
               </Link>
             </motion.div>
@@ -121,7 +121,7 @@ function HomePage() {
           className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {stats.map((s) => (
             <motion.div key={s.value} variants={fadeUp}
-              className="bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100">
+              className="bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-200/60">
               <div className="w-12 h-12 rounded-2xl gradient-primary grid place-items-center shadow-glow mb-4">
                 <s.icon className="w-5 h-5 text-white" />
               </div>
@@ -149,7 +149,7 @@ function HomePage() {
             className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
             {advantages.map((a) => (
               <motion.div key={a.title} variants={fadeUp}
-                className="relative group bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
+                className="relative group bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-200/60 overflow-hidden">
                 <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 opacity-50 group-hover:scale-150 transition-transform duration-700" />
                 <div className="relative">
                   <div className="w-14 h-14 rounded-2xl gradient-primary grid place-items-center shadow-glow mb-5">
@@ -179,7 +179,7 @@ function HomePage() {
             className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {propertyTypes.map((p) => (
             <motion.div key={p.title} variants={fadeUp}
-                className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white">
+                className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white border border-slate-200/60">
               <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
                 <div className="relative h-56 overflow-hidden">
                   <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
@@ -200,9 +200,9 @@ function HomePage() {
               </motion.div>
             ))}
           </motion.div>
-
+ 
           <div className="mt-10 text-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white border-2 border-slate-200 text-[#0F172A] font-bold hover:border-[#2563EB] hover:text-[#2563EB] transition-colors">
+            <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white border border-slate-200/80 text-[#0F172A] font-bold shadow-sm hover:border-[#2563EB] hover:text-[#2563EB] active:scale-[0.98] transition-all duration-300 select-none">
               See How We Help <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -221,7 +221,7 @@ function HomePage() {
             className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {services.map((s) => (
               <motion.div key={s.num} variants={fadeUp}
-                className="group relative bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
+                className="group relative bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-200/60 overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700" />
                 <div className="relative">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] font-extrabold text-lg mb-5">{s.num}</div>
@@ -238,9 +238,9 @@ function HomePage() {
               </motion.div>
             ))}
           </motion.div>
-
+ 
           <div className="mt-10 text-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:scale-105 transition-transform">
+            <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:shadow-glow-hover active:scale-[0.98] transition-all duration-300 hover:-translate-y-0.5 select-none">
               Discuss Your Requirements <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -261,10 +261,10 @@ function HomePage() {
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
               <Link to="/contact#send-us-a-message-form"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white text-[#0F172A] font-bold hover:scale-105 transition-transform">
+                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white text-[#0F172A] font-bold shadow-elegant hover:scale-105 active:scale-[0.98] transition-all duration-300 select-none">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link to="/services" className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl glass-dark text-white font-bold hover:bg-white/20">
+              <Link to="/services" className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl glass-dark text-white font-bold hover:bg-white/20 active:scale-[0.98] transition-all duration-300 select-none">
                 Explore Services
               </Link>
             </div>
@@ -287,7 +287,7 @@ function HomePage() {
             <span className="flex items-center gap-2 text-slate-700"><Globe className="w-4 h-4 text-[#2563EB]" /> Global Presence</span>
             <span className="flex items-center gap-2 text-slate-700"><Users className="w-4 h-4 text-[#2563EB]" /> Yardi Expertise</span>
           </div>
-          <Link to="/about" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:scale-105 transition-transform">
+          <Link to="/about" className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:shadow-glow-hover active:scale-[0.98] transition-all duration-300 hover:-translate-y-0.5 select-none">
             Learn More About Us <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -332,7 +332,7 @@ function HomePage() {
             className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {policies.map((p) => (
               <motion.div key={p.title} variants={fadeUp}
-                className="bg-white rounded-3xl p-7 shadow-elegant card-lift border border-slate-100">
+                className="bg-white rounded-3xl p-7 shadow-elegant card-lift border border-slate-200/60">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] grid place-items-center mb-4">
                   <p.icon className="w-5 h-5" />
                 </div>

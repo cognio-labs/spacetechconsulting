@@ -54,7 +54,7 @@ function Contact() {
       });
       const result = await response.json().catch(() => ({ success: false }));
       if (!response.ok || !result.success) {
-        throw new Error("Contact submission failed");
+        throw new Error(result.error || "Contact submission failed");
       }
       setSent(true);
       setForm({
@@ -66,8 +66,12 @@ function Contact() {
         message: "",
         website: "",
       });
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (error) {
+      if (error && error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     } finally {
       setSubmitting(false);
     }
@@ -143,25 +147,25 @@ function Contact() {
                 />
                 <div className="grid md:grid-cols-2 gap-4">
                   <label className="block">
-                    <span className="mb-1.5 block text-sm font-semibold text-slate-700">First Name</span>
-                    <input required value={form.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="John" className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                    <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">First Name</span>
+                    <input required value={form.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="John" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-sm font-semibold text-slate-700">Last Name</span>
-                    <input required value={form.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Doe" className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                    <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Last Name</span>
+                    <input required value={form.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Doe" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                   </label>
                 </div>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700">Email</span>
-                  <input required type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="john@company.com" className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Email</span>
+                  <input required type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="john@company.com" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                 </label>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700">Phone Number</span>
-                  <input value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-blue-50/45 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none" />
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Phone Number</span>
+                  <input value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                 </label>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700">Service Interested In</span>
-                  <select required value={form.service} onChange={(e) => updateField("service", e.target.value)} className="w-full px-4 py-2 rounded-xl border border-slate-200 bg-white focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none">
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Service Interested In</span>
+                  <select required value={form.service} onChange={(e) => updateField("service", e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-200 text-slate-900 text-sm">
                     <option value="">Select a service</option>
                     {serviceOptions.map((service) => (
                       <option key={service} value={service}>{service}</option>
@@ -169,11 +173,11 @@ function Contact() {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700">Message</span>
-                  <textarea required rows={3} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-2 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-2 focus:ring-blue-100 outline-none resize-none" />
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Message</span>
+                  <textarea required rows={3} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none resize-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                 </label>
                 {error && <p className="text-sm font-semibold text-red-600" role="alert">{error}</p>}
-                <button disabled={submitting} type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-3 rounded-2xl gradient-primary text-white font-bold shadow-glow transition-transform hover:-translate-y-0.5 disabled:opacity-60 disabled:hover:translate-y-0">
+                <button disabled={submitting} type="submit" className="w-full inline-flex items-center justify-center gap-2 px-7 py-3 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:shadow-glow-hover active:scale-[0.98] transition-all duration-300 disabled:opacity-60 disabled:hover:translate-y-0 select-none">
                   {submitting ? "Sending..." : "Send Message"} <Send className="w-4 h-4" />
                 </button>
               </form>

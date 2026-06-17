@@ -15,8 +15,8 @@ const contactSchema = z.object({
   lastName: z.string().trim().min(1).max(80),
   email: z.string().trim().email().max(160),
   phone: z.string().trim().max(40).optional().default(""),
-  service: z.enum(serviceOptions),
-  message: z.string().trim().min(10).max(3000),
+  service: z.string().trim().min(1).max(120),
+  message: z.string().trim().min(3).max(3000),
   website: z.string().trim().max(0).optional().default(""),
 });
 
@@ -141,17 +141,27 @@ export async function handleContactSubmission(request: Request) {
   const ip = forwarded?.split(",")[0]?.trim() || request.headers.get("x-real-ip") || "unknown";
 
   if (!checkRateLimit(ip)) {
-    return Response.json({ success: false }, { status: 429 });
+    return Response.json({ success: false, error: "Too many requests. Please try again later." }, { status: 429 });
   }
 
   try {
-    const parsed = contactSchema.parse(await request.json());
+    const parsed = contactSchema.safeParse(await request.json());
+    if (!parsed.success) {
+      return Response.json(
+        {
+          success: false,
+          error: "Invalid form data.",
+          issues: parsed.error.issues.map((issue) => issue.message),
+        },
+        { status: 400 },
+      );
+    }
 
-    if (parsed.website) {
+    if (parsed.data.website) {
       return Response.json({ success: true });
     }
 
-    const data = normalizeLead(parsed);
+    const data = normalizeLead(parsed.data);
     const submittedAt = new Date().toISOString();
 
     await storeLead(data, submittedAt);
@@ -160,6 +170,12 @@ export async function handleContactSubmission(request: Request) {
     return Response.json({ success: true });
   } catch (error) {
     console.error("Contact submission failed", error);
-    return Response.json({ success: false }, { status: 400 });
+    return Response.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Contact submission failed. Please try again later.",
+      },
+      { status: 500 },
+    );
   }
 }
