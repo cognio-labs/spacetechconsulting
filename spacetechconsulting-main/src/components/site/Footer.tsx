@@ -41,6 +41,9 @@ export function Footer() {
             <div className="min-w-0 leading-none">
               <div className="text-lg font-extrabold tracking-tight text-white">SpaceTech</div>
               <div className="mt-1 text-base font-extrabold tracking-tight text-[#22C55E]">Consulting</div>
+              <div className="relative mt-2 h-px w-full overflow-visible bg-gradient-to-r from-[#8FB7FF] via-[#F2C230] to-[#8FB7FF]">
+                <span className="absolute left-[64%] top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#60A5FA]" />
+              </div>
             </div>
           </div>
           <p className="max-w-xs text-xs leading-5 text-slate-400">

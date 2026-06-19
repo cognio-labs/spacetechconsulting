@@ -44,6 +44,9 @@ export function Nav() {
           <div className="mb-1 min-w-0 leading-none lg:mb-1.5">
             <div className="whitespace-nowrap text-[18px] font-extrabold tracking-tight text-[#0F172A] antialiased lg:text-xl">SpaceTech</div>
             <div className="mt-0.5 whitespace-nowrap text-[15px] font-extrabold tracking-tight text-[#22C55E] antialiased lg:text-[17px]">Consulting</div>
+            <div className="relative mt-1.5 h-px w-full overflow-visible bg-gradient-to-r from-[#0B4FB3] via-[#F2C230] to-[#0B4FB3]">
+              <span className="absolute left-[64%] top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0B4FB3]" />
+            </div>
           </div>
         </Link>
  
