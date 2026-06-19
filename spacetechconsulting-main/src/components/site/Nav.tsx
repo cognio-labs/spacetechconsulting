@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import navLogo from "@/assets/nav-logo.png";
 
 const links = [
   { to: "/", label: "Home" },
@@ -37,7 +38,7 @@ export function Nav() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] lg:h-[90px] py-2 lg:py-3 flex items-center justify-between gap-3">
         <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center group select-none active:opacity-90 transition-opacity">
           <img
-            src="/nav-logo.png"
+            src={navLogo}
             alt="SpaceTech Consulting logo"
             className="h-[52px] w-auto max-w-[210px] shrink-0 object-contain object-left lg:h-[64px] lg:max-w-[280px] [image-rendering: -webkit-optimize-contrast]"
           />
