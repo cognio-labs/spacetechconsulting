@@ -126,7 +126,7 @@
     width: 100%;
     overflow-x: hidden;
     scroll-behavior: smooth;
-    scroll-padding-top: 72px;
+    scroll-padding-top: 74px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -169,7 +169,7 @@
   }
 
   @media (min-width: 1024px) {
-    html { scroll-padding-top: 90px; }
+    html { scroll-padding-top: 92px; }
   }
 }
 

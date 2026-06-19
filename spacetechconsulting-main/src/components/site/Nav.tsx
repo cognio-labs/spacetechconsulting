@@ -35,12 +35,12 @@ export function Nav() {
           : "border-slate-200/50 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.01),0_2px_8px_rgba(15,23,42,0.03)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] lg:h-[90px] py-2 lg:py-3 flex items-center justify-between gap-3">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[74px] lg:h-[92px] py-2 lg:py-3 flex items-center justify-between gap-3 xl:gap-5">
         <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center group select-none active:opacity-90 transition-opacity">
           <img
             src={navLogo}
             alt="SpaceTech Consulting logo"
-            className="h-auto w-[180px] shrink-0 object-contain object-left sm:w-[220px] [image-rendering:-webkit-optimize-contrast]"
+            className="h-auto w-[190px] shrink-0 object-contain object-left drop-shadow-[0_2px_4px_rgba(15,23,42,0.12)] sm:w-[230px] lg:w-[250px] xl:w-[285px] [image-rendering:auto]"
           />
         </Link>
  
@@ -49,8 +49,8 @@ export function Nav() {
             <Link
               key={l.to}
               to={l.to}
-              className="px-3 xl:px-4 py-2 text-sm font-semibold rounded-full transition-colors text-slate-700 hover:text-[#2563EB] active:scale-95 duration-200"
-              activeProps={{ className: "px-3 xl:px-4 py-2 text-sm font-semibold rounded-full text-[#2563EB] bg-[rgba(37,99,235,0.08)] shadow-[inset_0_1px_2px_rgba(37,99,235,0.05)]" }}
+              className="px-2.5 xl:px-4 py-2 text-sm font-semibold rounded-full transition-colors text-slate-700 hover:text-[#2563EB] active:scale-95 duration-200"
+              activeProps={{ className: "px-2.5 xl:px-4 py-2 text-sm font-semibold rounded-full text-[#2563EB] bg-[rgba(37,99,235,0.08)] shadow-[inset_0_1px_2px_rgba(37,99,235,0.05)]" }}
             >
               {l.label}
             </Link>
