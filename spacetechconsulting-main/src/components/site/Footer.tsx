@@ -36,25 +36,25 @@ export function Footer() {
            style={{ background: "radial-gradient(circle at 20% 0%, rgba(37,99,235,0.3), transparent 50%), radial-gradient(circle at 80% 100%, rgba(6,182,212,0.2), transparent 50%)" }} />
       <div className="relative max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
-          <div className="mb-4 flex items-center gap-2">
-            <img src="/space-tech-logo-white.png" alt="SpaceTech Consulting logo" className="h-24 w-36 shrink-0 object-contain object-left drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
-            <div className="-ml-3 min-w-0 leading-none">
-              <div className="text-2xl font-extrabold tracking-tight text-white">SpaceTech</div>
-              <div className="mt-1 text-xl font-extrabold tracking-tight text-[#22C55E]">Consulting</div>
+          <div className="mb-3 flex -translate-y-2 items-center gap-3">
+            <img src="/footer-logo-mark.png" alt="SpaceTech Consulting logo" className="h-24 w-40 shrink-0 object-contain object-left drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
+            <div className="min-w-0 leading-none">
+              <div className="text-lg font-extrabold tracking-tight text-white">SpaceTech</div>
+              <div className="mt-1 text-base font-extrabold tracking-tight text-[#22C55E]">Consulting</div>
             </div>
           </div>
-          <p className="text-sm text-slate-400 max-w-xs">
+          <p className="max-w-xs text-xs leading-5 text-slate-400">
             Enterprise Yardi Consulting Partner. Bringing out the best in Yardi.
           </p>
           <div className="flex gap-2 mt-5">
             {contactDetails.regions.map((r) => (
-              <span key={r} className="px-3 py-1 text-xs rounded-full bg-white/10 text-cyan-300 font-medium">{r}</span>
+              <span key={r} className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-cyan-300">{r}</span>
             ))}
           </div>
         </div>
 
         <div>
-          <h4 className="text-white font-bold mb-4">Services</h4>
+          <h4 className="mb-4 text-base font-bold text-white">Services</h4>
           <ul className="space-y-2 text-sm">
             {footerServices.map((service) => (
               <li key={service.label}><a href={service.href} className="hover:text-cyan-400 transition-colors">{service.label}</a></li>
@@ -63,7 +63,7 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white font-bold mb-4">Company</h4>
+          <h4 className="mb-4 text-base font-bold text-white">Company</h4>
           <ul className="space-y-2 text-sm">
             <li><Link to="/about" className="hover:text-cyan-400">About Us</Link></li>
             <li><Link to="/who-we-serve" className="hover:text-cyan-400">Who We Serve</Link></li>
@@ -72,37 +72,37 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-white font-bold mb-4">Contact</h4>
+          <h4 className="mb-4 text-base font-bold text-white">Contact</h4>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-cyan-400" />
+              <Phone className="h-4 w-4 text-cyan-400" />
               <a href={contactDetails.phoneUsa.href} className="hover:text-cyan-400">{contactDetails.phoneUsa.label}</a>
             </li>
             <li className="flex items-center gap-2">
-              <Phone className="w-4 h-4 text-cyan-400" />
+              <Phone className="h-4 w-4 text-cyan-400" />
               <a href={contactDetails.phoneAustralia.href} className="hover:text-cyan-400">{contactDetails.phoneAustralia.label}</a>
             </li>
-            <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-cyan-400" /> {contactDetails.phoneIndia.label}</li>
+            <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-cyan-400" /> {contactDetails.phoneIndia.label}</li>
             <li className="flex items-center gap-2">
-              <Mail className="w-4 h-4 text-cyan-400" />
+              <Mail className="h-4 w-4 text-cyan-400" />
               <a href={contactDetails.email.href} className="hover:text-cyan-400">{contactDetails.email.label}</a>
             </li>
           </ul>
           <div className="flex gap-2 mt-5">
-            <a href={linkedInUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#0A66C2] grid place-items-center transition-colors">
+            <a href={linkedInUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="grid h-8 w-8 place-items-center rounded-lg bg-white/10 transition-colors hover:bg-[#0A66C2]">
               <LinkedInIcon />
             </a>
-            <a href={contactDetails.phoneAustralia.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-lg bg-[#25D366] text-white hover:bg-[#1EBE5D] grid place-items-center transition-colors">
+            <a href={contactDetails.phoneAustralia.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="grid h-8 w-8 place-items-center rounded-lg bg-[#25D366] text-white transition-colors hover:bg-[#1EBE5D]">
               <WhatsAppIcon />
             </a>
-            <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer" aria-label="Book a call" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#2563EB] grid place-items-center transition-colors">
+            <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer" aria-label="Book a call" className="grid h-8 w-8 place-items-center rounded-lg bg-white/10 transition-colors hover:bg-[#2563EB]">
               <Calendar className="w-4 h-4" />
               </a>
           </div>
         </div>
       </div>
       <div className="relative border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5 text-[11px] text-slate-500">
           <span>(c) 2026 SpaceTech Consulting. All rights reserved.</span>
           <span>Enterprise Yardi Consulting Partner</span>
         </div>
