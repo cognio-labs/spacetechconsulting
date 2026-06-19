@@ -28,8 +28,8 @@ const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 const stats = [
   { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
   { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "1800+ Tickets", label: "Resolved across active engagements" },
-  { icon: ShieldCheck, value: "90%+ SLA", label: "SLA on owned ticket volume" },
+  { icon: BarChart3, value: "2000+ Tickets", label: "Resolved across active engagements" },
+  { icon: ShieldCheck, value: "95%+ SLA", label: "SLA on owned ticket volume" },
 ];
 
 const advantages = [

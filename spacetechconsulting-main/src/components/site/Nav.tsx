@@ -35,19 +35,12 @@ export function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] lg:h-[90px] py-2 lg:py-3 flex items-center justify-between gap-3">
-        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-end gap-2.5 group select-none active:opacity-90 transition-opacity">
+        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center group select-none active:opacity-90 transition-opacity">
           <img
-            src="/space-tech-logo-mark.png"
+            src="/nav-logo.png"
             alt="SpaceTech Consulting logo"
-            className="h-[52px] w-auto shrink-0 -translate-y-1 object-contain lg:h-[58px] [image-rendering: -webkit-optimize-contrast]"
+            className="h-[52px] w-auto max-w-[210px] shrink-0 object-contain object-left lg:h-[64px] lg:max-w-[280px] [image-rendering: -webkit-optimize-contrast]"
           />
-          <div className="mb-1 min-w-0 translate-y-1 leading-none lg:mb-1.5">
-            <div className="whitespace-nowrap text-[16px] font-extrabold tracking-tight text-[#0F172A] antialiased lg:text-lg">SpaceTech</div>
-            <div className="mt-0.5 whitespace-nowrap text-[13px] font-extrabold tracking-tight text-[#22C55E] antialiased lg:text-[15px]">Consulting</div>
-            <div className="relative mt-1.5 h-px w-full overflow-visible bg-gradient-to-r from-[#0B4FB3] via-[#F2C230] to-[#0B4FB3]">
-              <span className="absolute left-[64%] top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0B4FB3]" />
-            </div>
-          </div>
         </Link>
  
         <nav className="hidden lg:flex items-center gap-1 rounded-full border border-slate-200/80 bg-slate-50/90 px-2 py-1.5 shadow-sm backdrop-blur select-none">
