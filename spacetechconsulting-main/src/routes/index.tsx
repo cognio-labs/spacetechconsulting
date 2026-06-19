@@ -89,8 +89,9 @@ function HomePage() {
             <motion.span variants={fadeUp} className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/55 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur-xl sm:px-4 sm:text-xs sm:tracking-widest">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /> Your Trusted Yardi Platform Partner
             </motion.span>
-            <motion.h1 variants={fadeUp} className="mt-6 text-[clamp(2.5rem,8vw,4rem)] lg:text-7xl font-extrabold text-white leading-[0.95] lg:leading-[1.02] tracking-[-0.03em] drop-shadow-[0_18px_38px_rgba(0,0,0,0.45)]">
-              Your Trusted Yardi Platform Partner
+            <motion.h1 variants={fadeUp} className="mt-6 max-w-[62rem] text-[clamp(2.25rem,6.4vw,3.75rem)] font-extrabold leading-[1.05] text-white drop-shadow-[0_18px_38px_rgba(0,0,0,0.45)] lg:text-[4.25rem] xl:text-7xl">
+              Your Trusted Yardi
+              <span className="block">Platform Partner</span>
               <span className="block bg-gradient-to-r from-cyan-300 via-blue-200 to-white bg-clip-text text-transparent">SpaceTech Consulting</span>
             </motion.h1>
             <motion.p variants={fadeUp} className="mt-7 max-w-full text-base leading-[1.8] text-white/85 md:text-xl lg:max-w-3xl lg:leading-relaxed">
