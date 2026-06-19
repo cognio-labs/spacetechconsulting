@@ -1,7 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { Calendar, Phone, Mail, MapPin } from "lucide-react";
+import { contactDetails } from "@/data/contactDetails";
 
-const linkedInUrl = "https://www.linkedin.com/uas/login?session_redirect=%2Fsearch%2Fresults%2Fcompanies%2F%3Fkeywords%3DSpaceTech%2520Consulting&skipRedirect=true";
+const linkedInUrl = "https://www.linkedin.com/company/spacetech-consulting/";
+
+const footerServices = [
+  { label: "Yardi Consulting", href: "/services#yardi-consulting" },
+  { label: "Reporting & BI", href: "/services#reporting-bi" },
+  { label: "System Integrations", href: "/services#system-integrations" },
+  { label: "Automation", href: "/services#automation" },
+  { label: "Managed Support", href: "/services#managed-support" },
+  { label: "Data Migration", href: "/services#data-migration" },
+];
 
 function LinkedInIcon() {
   return (
@@ -26,18 +36,18 @@ export function Footer() {
            style={{ background: "radial-gradient(circle at 20% 0%, rgba(37,99,235,0.3), transparent 50%), radial-gradient(circle at 80% 100%, rgba(6,182,212,0.2), transparent 50%)" }} />
       <div className="relative max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <img src="/space-tech-logo-white.png" alt="SpaceTech Consulting logo" className="h-14 w-24 object-contain drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
-            <div className="leading-tight">
-              <div className="font-extrabold text-lg text-white">SpaceTech</div>
-              <div className="text-[10px] tracking-[0.2em] text-cyan-400 font-semibold -mt-1">CONSULTING</div>
+          <div className="mb-4 flex items-center gap-2">
+            <img src="/space-tech-logo-white.png" alt="SpaceTech Consulting logo" className="h-24 w-36 shrink-0 object-contain object-left drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
+            <div className="-ml-3 min-w-0 leading-none">
+              <div className="text-2xl font-extrabold tracking-tight text-white">SpaceTech</div>
+              <div className="mt-1 text-xl font-extrabold tracking-tight text-[#22C55E]">Consulting</div>
             </div>
           </div>
           <p className="text-sm text-slate-400 max-w-xs">
             Enterprise Yardi Consulting Partner. Bringing out the best in Yardi.
           </p>
           <div className="flex gap-2 mt-5">
-            {["Australia", "India", "USA"].map((r) => (
+            {contactDetails.regions.map((r) => (
               <span key={r} className="px-3 py-1 text-xs rounded-full bg-white/10 text-cyan-300 font-medium">{r}</span>
             ))}
           </div>
@@ -46,8 +56,8 @@ export function Footer() {
         <div>
           <h4 className="text-white font-bold mb-4">Services</h4>
           <ul className="space-y-2 text-sm">
-            {["Yardi Consulting","Reporting & BI","System Integrations","Automation","Managed Support","Data Migration"].map(s => (
-              <li key={s}><Link to="/services" className="hover:text-cyan-400 transition-colors">{s}</Link></li>
+            {footerServices.map((service) => (
+              <li key={service.label}><a href={service.href} className="hover:text-cyan-400 transition-colors">{service.label}</a></li>
             ))}
           </ul>
         </div>
@@ -64,16 +74,25 @@ export function Footer() {
         <div>
           <h4 className="text-white font-bold mb-4">Contact</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-cyan-400" /> +1 (415) 870-8418</li>
-            <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-cyan-400" /> +61 468040481</li>
-            <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-cyan-400" /> India office: phone coming soon</li>
-            <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-cyan-400" /> info@spacetechconsulting.com</li>
+            <li className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-cyan-400" />
+              <a href={contactDetails.phoneUsa.href} className="hover:text-cyan-400">{contactDetails.phoneUsa.label}</a>
+            </li>
+            <li className="flex items-center gap-2">
+              <Phone className="w-4 h-4 text-cyan-400" />
+              <a href={contactDetails.phoneAustralia.href} className="hover:text-cyan-400">{contactDetails.phoneAustralia.label}</a>
+            </li>
+            <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-cyan-400" /> {contactDetails.phoneIndia.label}</li>
+            <li className="flex items-center gap-2">
+              <Mail className="w-4 h-4 text-cyan-400" />
+              <a href={contactDetails.email.href} className="hover:text-cyan-400">{contactDetails.email.label}</a>
+            </li>
           </ul>
           <div className="flex gap-2 mt-5">
             <a href={linkedInUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#0A66C2] grid place-items-center transition-colors">
               <LinkedInIcon />
             </a>
-            <a href="https://wa.me/14158708418" target="_blank" rel="noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-lg bg-[#25D366] text-white hover:bg-[#1EBE5D] grid place-items-center transition-colors">
+            <a href={contactDetails.phoneAustralia.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="w-9 h-9 rounded-lg bg-[#25D366] text-white hover:bg-[#1EBE5D] grid place-items-center transition-colors">
               <WhatsAppIcon />
             </a>
             <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer" aria-label="Book a call" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-[#2563EB] grid place-items-center transition-colors">

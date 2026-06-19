@@ -18,6 +18,7 @@ export type PropertyType = {
   features: Array<{ title: string; items: string[] }>;
   benefits: string[];
   process: string[];
+  visible?: boolean;
 };
 
 export const propertyTypes: PropertyType[] = [
@@ -27,18 +28,19 @@ export const propertyTypes: PropertyType[] = [
     image: propCommercial,
     title: "Commercial",
     eyebrow: "Enterprise lease operations",
-    body: "We run Voyager Commercial for large portfolios. Lease management, CAM recoveries, tenant billing, Deal Manager configuration, and construction job tracking.",
-    overview: "Commercial portfolios need clean lease administration, auditable recoveries, disciplined billing, and reporting that finance and asset teams can trust. SpaceTech helps teams stabilize Voyager Commercial and improve the operating model around it.",
+    body: "We run Voyager Commercial for large portfolios. With hands-on Yardi experience on lease administration, tenant billing, Bank Book, CAM recoveries/Outgoings, Procure to Pay, Construction Manager, Facilities Manager, Deal Manager, SharePoint, and Fixed Assets.",
+    overview: "We run Voyager Commercial for large portfolios. With hands-on Yardi experience on lease administration, tenant billing, Bank Book, CAM recoveries/Outgoings, Procure to Pay, Construction Manager, Facilities Manager, Deal Manager, SharePoint, and Fixed Assets.",
     features: [
       { title: "Lease administration setup", items: ["Automated lease workflows", "Critical date compliance"] },
-      { title: "CAM recovery configuration", items: ["Expense reconciliation", "Recovery audit validation"] },
-      { title: "Tenant billing controls", items: ["Automated invoicing", "Payment reconciliation"] },
+      { title: "CAM recoveries/Outgoings configuration", items: ["Recovery estimates and letters/correspondence", "Recovery reconciliation/washup"] },
+      { title: "Tenant billing controls", items: ["Automated invoicing", "Automated bank reconciliation (bank book)"] },
       { title: "Deal Manager optimization", items: ["Pipeline visibility", "Workflow automation"] },
       { title: "Construction job tracking", items: ["Budget monitoring", "Project milestones"] },
+      { title: "Facility Management", items: ["Reactive Work orders", "Proactive PPM & Inspections", "Connect Tenant, Facility manager & vendor"] },
       { title: "Portfolio reporting", items: ["Real-time dashboards", "Performance forecasting"] },
     ],
     benefits: ["Cleaner billing cycles", "Stronger audit readiness", "Better asset-level visibility", "Reduced manual reconciliation"],
-    process: ["Assess lease, billing, and recovery workflows.", "Prioritize configuration fixes and report gaps.", "Implement changes with testing and release notes.", "Monitor cycle health and continuous improvements."],
+    process: ["Assess lease, billing, and recovery workflows.", "Prioritize configuration fixes and report gaps.", "Implement changes with testing and release notes.", "Monitor system health and continuous improvements."],
   },
   {
     slug: "residential-multifamily",
@@ -77,6 +79,7 @@ export const propertyTypes: PropertyType[] = [
     ],
     benefits: ["Improved compliance confidence", "Fewer manual workarounds", "Clearer audit trails", "Better team handoffs"],
     process: ["Review program rules and current Yardi setup.", "Document compliance gaps and workflow risks.", "Configure controls, reports, and validation steps.", "Support audits, recerts, and continuous governance."],
+    visible: false,
   },
   {
     slug: "military-housing",
@@ -96,6 +99,7 @@ export const propertyTypes: PropertyType[] = [
     ],
     benefits: ["More reliable compliance reporting", "Better maintenance accountability", "Stronger operational transparency", "Reduced reporting cycle stress"],
     process: ["Assess housing rules, data quality, and reporting needs.", "Prioritize compliance and maintenance workflow fixes.", "Deploy configuration changes and dashboards.", "Review KPIs and refine service governance."],
+    visible: false,
   },
   {
     slug: "single-family-rental",
@@ -115,6 +119,7 @@ export const propertyTypes: PropertyType[] = [
     ],
     benefits: ["Cleaner scale operations", "Faster investor reporting", "Better property-level accountability", "Less manual spreadsheet work"],
     process: ["Segment portfolio workflows and stakeholder needs.", "Design scalable accounting, leasing, and maintenance patterns.", "Build reporting and automation with testing.", "Operationalize dashboards and support cadence."],
+    visible: false,
   },
   {
     slug: "mixed-use-properties",
@@ -137,6 +142,8 @@ export const propertyTypes: PropertyType[] = [
   },
 ];
 
+export const visiblePropertyTypes = propertyTypes.filter((property) => property.visible !== false);
+
 export function getPropertyType(slug: string) {
-  return propertyTypes.find((property) => property.slug === slug);
+  return visiblePropertyTypes.find((property) => property.slug === slug);
 }

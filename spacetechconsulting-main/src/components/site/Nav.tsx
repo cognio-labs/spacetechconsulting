@@ -35,15 +35,15 @@ export function Nav() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] lg:h-[90px] py-2 lg:py-3 flex items-center justify-between gap-3">
-        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center gap-2 lg:gap-1.5 group select-none active:opacity-90 transition-opacity">
+        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-end gap-2.5 group select-none active:opacity-90 transition-opacity">
           <img
             src="/space-tech-logo-mark.png"
             alt="SpaceTech Consulting logo"
-            className="h-[46px] w-auto shrink-0 object-contain lg:h-[78px] lg:w-[148px] [image-rendering: -webkit-optimize-contrast]"
+            className="h-[54px] w-auto shrink-0 object-contain lg:h-[62px] [image-rendering: -webkit-optimize-contrast]"
           />
-          <div className="min-w-0 leading-tight block">
-            <div className="truncate text-[16px] font-extrabold text-[#0F172A] lg:text-lg tracking-tight antialiased">SpaceTech</div>
-            <div className="text-[10px] tracking-[0.2em] text-[#22C55E] font-bold -mt-0.5 lg:text-[9px] lg:tracking-[0.24em] antialiased">CONSULTING</div>
+          <div className="mb-1 min-w-0 leading-none lg:mb-1.5">
+            <div className="whitespace-nowrap text-[18px] font-extrabold tracking-tight text-[#0F172A] antialiased lg:text-xl">SpaceTech</div>
+            <div className="mt-0.5 whitespace-nowrap text-[15px] font-extrabold tracking-tight text-[#22C55E] antialiased lg:text-[17px]">Consulting</div>
           </div>
         </Link>
  

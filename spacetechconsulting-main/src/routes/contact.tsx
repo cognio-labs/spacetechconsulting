@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { Phone, Mail, MapPin, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
+import { contactDetails } from "@/data/contactDetails";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -95,14 +96,21 @@ function Contact() {
         <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-5 items-start">
           <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
             <div className="bg-white rounded-2xl p-5 shadow-elegant border border-slate-100">
+              <div className="mb-5 flex items-end gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 p-3">
+                <img src="/space-tech-logo-mark.png" alt="SpaceTech Consulting logo" className="h-12 w-16 shrink-0 object-contain" />
+                <div className="mb-0.5 min-w-0 leading-none">
+                  <p className="text-base font-extrabold tracking-tight text-[#0F172A]">SpaceTech</p>
+                  <p className="mt-0.5 text-sm font-extrabold tracking-tight text-[#22C55E]">Consulting</p>
+                </div>
+              </div>
               <h2 className="text-xl md:text-2xl font-extrabold text-[#0F172A]">Contact Information</h2>
-              <p className="mt-1 text-sm text-slate-600">Reach out to discuss your Yardi platform, support, reporting, or implementation needs.</p>
+              <p className="mt-1 text-sm text-slate-900">Reach out to discuss your Yardi platform, support, reporting, or implementation needs.</p>
               <div className="mt-4 grid gap-2.5">
                 {[
-                  { icon: Phone, title: "Phone (USA)", text: "+1 (415) 870-8418" },
-                  { icon: Phone, title: "Phone (Australia)", text: "+61 468040481" },
-                  { icon: MapPin, title: "Phone (India)", text: "India office: phone coming soon" },
-                  { icon: Mail, title: "Email", text: "info@spacetechconsulting.com" },
+                  { icon: Phone, title: "Phone (USA)", text: contactDetails.phoneUsa.label, href: contactDetails.phoneUsa.href },
+                  { icon: Phone, title: "Phone (Australia)", text: contactDetails.phoneAustralia.label, href: contactDetails.phoneAustralia.href },
+                  { icon: MapPin, title: "Phone (India)", text: contactDetails.phoneIndia.label },
+                  { icon: Mail, title: "Email", text: contactDetails.email.label, href: contactDetails.email.href },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-3">
                     <div className="flex items-center gap-3">
@@ -111,14 +119,18 @@ function Contact() {
                       </div>
                       <div>
                         <h3 className="text-sm font-bold text-[#0F172A]">{item.title}</h3>
-                        <p className="text-sm text-slate-600">{item.text}</p>
+                        {item.href ? (
+                          <a href={item.href} className="text-sm font-medium text-slate-900 hover:text-[#2563EB]">{item.text}</a>
+                        ) : (
+                          <p className="text-sm text-slate-900">{item.text}</p>
+                        )}
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                {["Australia", "India", "USA"].map((region) => (
+                {contactDetails.regions.map((region) => (
                   <span key={region} className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-[#2563EB]">{region}</span>
                 ))}
               </div>
@@ -128,7 +140,7 @@ function Contact() {
           <motion.div id="send-us-a-message-form" initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
             className="bg-white rounded-2xl p-5 md:p-6 shadow-elegant border border-slate-100">
             <h2 className="text-xl md:text-2xl font-extrabold text-[#0F172A]">Send us a message</h2>
-            <p className="mt-1 text-sm text-slate-500">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
+            <p className="mt-1 text-sm text-slate-900">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
             {sent ? (
               <div className="mt-5 p-5 rounded-2xl bg-green-50 border border-green-200 text-green-800" role="status" aria-live="polite">
                 <p className="font-bold">Message sent successfully.</p>
@@ -147,24 +159,24 @@ function Contact() {
                 />
                 <div className="grid md:grid-cols-2 gap-4">
                   <label className="block">
-                    <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">First Name</span>
+                    <span className="mb-1.5 block text-sm font-semibold text-slate-900 antialiased">First Name</span>
                     <input required value={form.firstName} onChange={(e) => updateField("firstName", e.target.value)} placeholder="John" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Last Name</span>
+                    <span className="mb-1.5 block text-sm font-semibold text-slate-900 antialiased">Last Name</span>
                     <input required value={form.lastName} onChange={(e) => updateField("lastName", e.target.value)} placeholder="Doe" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                   </label>
                 </div>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Email</span>
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-900 antialiased">Email</span>
                   <input required type="email" value={form.email} onChange={(e) => updateField("email", e.target.value)} placeholder="john@company.com" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                 </label>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Phone Number</span>
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-900 antialiased">Phone Number</span>
                   <input value={form.phone} onChange={(e) => updateField("phone", e.target.value)} placeholder="+1 (555) 000-0000" className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50/40 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                 </label>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Service Interested In</span>
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-900 antialiased">Service Interested In</span>
                   <select required value={form.service} onChange={(e) => updateField("service", e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-200 text-slate-900 text-sm">
                     <option value="">Select a service</option>
                     {serviceOptions.map((service) => (
@@ -173,7 +185,7 @@ function Contact() {
                   </select>
                 </label>
                 <label className="block">
-                  <span className="mb-1.5 block text-sm font-semibold text-slate-700 antialiased">Message</span>
+                  <span className="mb-1.5 block text-sm font-semibold text-slate-900 antialiased">Message</span>
                   <textarea required rows={3} value={form.message} onChange={(e) => updateField("message", e.target.value)} placeholder="Tell us about your project and how we can help..." className="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-[#2563EB] focus:ring-4 focus:ring-blue-500/10 outline-none resize-none appearance-none transition-all duration-200 text-slate-900 placeholder-slate-400 text-sm" />
                 </label>
                 {error && <p className="text-sm font-semibold text-red-600" role="alert">{error}</p>}

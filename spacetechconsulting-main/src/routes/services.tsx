@@ -17,12 +17,12 @@ export const Route = createFileRoute("/services")({
 });
 
 const services = [
-  { num: "01", title: "Platform Support & Optimization", items: ["Application Help Desk (L1/L2/L3)","System administration & maintenance","Platform upgrades support & testing","Issue tracking & SLA management","Health checks & system audits","Performance tuning & optimization"] },
-  { num: "02", title: "Custom Development", items: ["Custom Reporting (YSR / Columnar)","Custom Financials","Custom Interfaces","Workflow validations & automations","Integrations & RPA"] },
-  { num: "03", title: "Data Migration", items: ["Legacy system data migration (Yardi ETL)","Data cleansing","Data mapping","Data load and validation"] },
-  { num: "04", title: "Implementation & Consulting", items: ["Yardi Voyager / Elevate / Breeze Implementation","Multi-module deployment & configuration","Security model & role restructuring","Go-live support & stabilization"] },
-  { num: "05", title: "Training & Testing", items: ["Role-based training programs","Knowledge base creation","Process documentation","Yardi product testing","Test scenarios & test case creation"] },
-  { num: "06", title: "Data & Analytics", items: ["BI integration / Yardi Data Connect","Data visualization dashboards","Executive reporting packages","KPI tracking & monitoring","Dashboard & analytics setup"] },
+  { id: "yardi-consulting", num: "01", title: "Yardi Consulting", items: ["Yardi Voyager / Elevate / Breeze Implementation","Multi-module deployment & configuration","Security model & role restructuring","Go-live support & stabilization"] },
+  { id: "reporting-bi", num: "02", title: "Reporting & BI", items: ["Custom Reporting (YSR / Columnar)","BI integration / Yardi Data Connect","Executive reporting packages","Dashboard & analytics setup"] },
+  { id: "system-integrations", num: "03", title: "System Integrations", items: ["Custom Interfaces","API and data integrations","SharePoint ecosystem support","Integration testing and monitoring"] },
+  { id: "automation", num: "04", title: "Automation", items: ["Workflow validations & automations","Integrations & RPA","Automated invoicing","Automated bank reconciliation"] },
+  { id: "managed-support", num: "05", title: "Managed Support", items: ["Application Help Desk (L1/L2/L3)","System administration & maintenance","Platform upgrades support & testing","Issue tracking & SLA management"] },
+  { id: "data-migration", num: "06", title: "Data Migration", items: ["Legacy system data migration (Yardi ETL)","Data cleansing","Data mapping","Data load and validation"] },
 ];
 
 function Services() {
@@ -48,15 +48,15 @@ function Services() {
       <section className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s, i) => (
-            <motion.div key={s.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-              className="group relative bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
+            <motion.div id={s.id} key={s.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+              className="group relative scroll-mt-28 bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-100 overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-full -translate-y-16 translate-x-16 group-hover:scale-150 transition-transform duration-700" />
               <div className="relative">
                 <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] font-extrabold text-lg mb-5">{s.num}</div>
                 <h3 className="text-xl font-extrabold text-[#0F172A] mb-5">{s.title}</h3>
                 <ul className="space-y-2.5">
                   {s.items.map((it) => (
-                    <li key={it} className="flex items-start gap-3 text-sm text-slate-600">
+                    <li key={it} className="flex items-start gap-3 text-sm text-slate-900">
                       <CheckCircle2 className="w-4 h-4 text-[#2563EB] shrink-0 mt-0.5" />
                       <span>{it}</span>
                     </li>

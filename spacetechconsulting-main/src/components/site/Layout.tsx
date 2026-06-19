@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Nav } from "./Nav";
 import { Footer } from "./Footer";
+import { contactDetails } from "@/data/contactDetails";
 
 function WhatsAppIcon() {
   return (
@@ -17,7 +18,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <main className="flex-1 pt-[72px] lg:pt-[90px]">{children}</main>
       <Footer />
       <a
-        href="https://wa.me/14158708418"
+        href={contactDetails.phoneAustralia.whatsapp}
         target="_blank"
         rel="noreferrer"
         aria-label="WhatsApp"

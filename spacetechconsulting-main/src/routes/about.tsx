@@ -18,8 +18,8 @@ export const Route = createFileRoute("/about")({
 });
 
 const counters = [
-  { value: "10+", target: 10, suffix: "+", label: "Years of Yardi Experience", icon: Award },
-  { value: "50+", target: 50, suffix: "+", label: "Enterprise Clients Served", icon: Users },
+  { value: "50+", target: 50, suffix: "+", label: "Years of Total Yardi Experience", icon: Award },
+  { value: "1800+", target: 1800, suffix: "+", label: "Tickets Resolved", icon: Users },
   { value: "24/7", target: 24, suffix: "/7", label: "Global Support Coverage", icon: Clock },
   { value: "3", target: 3, suffix: "", label: "Regions of Global Delivery", icon: Globe },
 ];
@@ -124,7 +124,7 @@ function About() {
               <div className="text-4xl font-extrabold text-gradient">
                 <CountUpValue target={c.target} suffix={c.suffix} run={animateStats} fallback={c.value} />
               </div>
-              <div className="mt-2 text-sm text-slate-600 font-medium">{c.label}</div>
+              <div className="mt-2 text-sm text-slate-900 font-medium">{c.label}</div>
             </motion.div>
           ))}
         </div>
@@ -135,10 +135,10 @@ function About() {
           <div className="rounded-3xl bg-white p-8 md:p-10 shadow-elegant border border-slate-100">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Our Mission</span>
             <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">Bringing out the best in Yardi</h2>
-            <p className="mt-5 text-lg leading-relaxed text-slate-600">
+            <p className="mt-5 text-lg leading-relaxed text-slate-900">
               We empower real estate organizations with technology solutions that drive operational excellence, unlock data insights, and accelerate business growth.
             </p>
-            <p className="mt-4 text-lg leading-relaxed text-slate-600">
+            <p className="mt-4 text-lg leading-relaxed text-slate-900">
               We bridge the gap between property management needs and technology capabilities, delivering solutions that are practical, scalable, and aligned with strategic objectives.
             </p>
           </div>
@@ -151,7 +151,7 @@ function About() {
                   </div>
                   <div>
                     <h3 className="text-xl font-extrabold text-[#0F172A]">{item.title}</h3>
-                    <p className="mt-2 text-slate-600">{item.text}</p>
+                    <p className="mt-2 text-slate-900">{item.text}</p>
                   </div>
                 </div>
               </div>
@@ -165,7 +165,7 @@ function About() {
           <div className="text-center max-w-2xl mx-auto">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Global Presence</span>
             <h2 className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">Three Regions, <span className="text-gradient">One Team</span></h2>
-            <p className="mt-5 text-slate-600">Follow-the-sun delivery across Australia, India, and the USA.</p>
+            <p className="mt-5 text-slate-900">Follow-the-sun delivery across Australia, India, and the USA.</p>
           </div>
           <div className="mt-10 grid md:grid-cols-3 gap-5">
             {regions.map((r, i) => (
@@ -175,7 +175,7 @@ function About() {
                 <div className="relative">
                   <Globe className="w-10 h-10 text-[#2563EB] mb-4" />
                   <h3 className="text-2xl font-extrabold text-[#0F172A]">{r.name}</h3>
-                  <p className="mt-3 text-slate-600">{r.desc}</p>
+                  <p className="mt-3 text-slate-900">{r.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -188,8 +188,8 @@ function About() {
           <div className="mb-10 rounded-3xl border border-slate-100 bg-white p-8 shadow-elegant">
             <Award className="mx-auto h-10 w-10 text-[#2563EB]" />
             <h2 className="mt-5 text-4xl font-extrabold text-[#0F172A]">Yardi Specialization</h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Our team brings deep expertise across Voyager, RENTCafe, Yardi Investment Management, and specialized modules for commercial, residential, and affordable housing.
+            <p className="mt-4 text-lg text-slate-900">
+              Our team brings deep expertise across Voyager, Elevate, RENTCafe, and Yardi Investment Management for commercial and residential.
             </p>
           </div>
           <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:scale-105 transition-transform">

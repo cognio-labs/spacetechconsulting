@@ -2,13 +2,13 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { ArrowRight } from "lucide-react";
-import { propertyTypes } from "@/data/propertyTypes";
+import { visiblePropertyTypes } from "@/data/propertyTypes";
 
 export const Route = createFileRoute("/who-we-serve")({
   head: () => ({
     meta: [
       { title: "Who We Serve — Yardi Expertise Across Property Types | SpaceTech" },
-      { name: "description", content: "Yardi expertise across Commercial, Residential, Affordable Housing, Military Housing, Single-Family Rental, and Mixed-Use properties." },
+      { name: "description", content: "Yardi expertise across Commercial, Residential, and Mixed Portfolio property types." },
       { property: "og:title", content: "Who We Serve — Yardi Expertise Across Property Types" },
       { property: "og:description", content: "Hands-on Yardi knowledge across every major real estate asset type." },
     ],
@@ -33,7 +33,7 @@ function WhoWeServe() {
 
       <section className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {propertyTypes.map((p, i) => (
+          {visiblePropertyTypes.map((p, i) => (
             <motion.div key={p.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
               className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white">
               <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">

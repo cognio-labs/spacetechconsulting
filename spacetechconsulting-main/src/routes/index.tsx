@@ -7,7 +7,7 @@ import {
   Globe, FileCheck, Languages, Share2,
 } from "lucide-react";
 import { useState } from "react";
-import { propertyTypes } from "@/data/propertyTypes";
+import { visiblePropertyTypes } from "@/data/propertyTypes";
 import heroSectionBg from "@/assets/hero-section-bg.png";
 
 export const Route = createFileRoute("/")({
@@ -26,10 +26,10 @@ const fadeUp = { hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } };
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 const stats = [
-  { icon: Users, value: "3 regions", label: "Australia, India, and USA delivery coverage" },
-  { icon: Clock, value: "24/7-ready", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "6 service lines", label: "Consulting, support, reporting, data, automation, integrations" },
-  { icon: ShieldCheck, value: "SLA led", label: "Issue tracking, governance, testing, and release discipline" },
+  { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
+  { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
+  { icon: BarChart3, value: "1800+ Tickets", label: "Resolved across active engagements" },
+  { icon: ShieldCheck, value: "90%+ SLA", label: "SLA on owned ticket volume" },
 ];
 
 const advantages = [
@@ -49,10 +49,10 @@ const services = [
 ];
 
 const faqs = [
-  { q: "What Yardi products do you support?", a: "We support the full Yardi suite including Voyager (Commercial, Residential, Affordable, Military), Elevate, Breeze, RentCafe, Yardi Data Connect, and the surrounding integrations and reporting ecosystem." },
+  { q: "What Yardi products do you support?", a: "We support the full Yardi suite across Lease Administration, Accounts Receivable, Bank Book, General Ledger, Fixed Assets, Procure to Pay (P2P), Construction Manager, Facility Manager, Deal Manager, and the surrounding integrations and reporting ecosystem." },
   { q: "Can SpaceTech manage an existing Yardi environment?", a: "Yes. We take ownership of existing Yardi environments — stabilizing operations, improving governance, and running the platform with SLA discipline." },
   { q: "Do you work with teams outside Australia?", a: "Yes. We operate across Australia, India, and the USA with a follow-the-sun delivery model and English-speaking teams." },
-  { q: "Can you help with reporting and data quality?", a: "Yes. We deliver custom reporting (YSR / Columnar), BI integration via Yardi Data Connect, executive dashboards, and end-to-end data quality programs." },
+  { q: "Can you help with reporting and data quality?", a: "Yes. We deliver custom reporting (YSR / Columnar), BI integration via Yardi Data Connect, executive dashboards, and data quality programs covering cleansing, mapping, and validation." },
 ];
 
 const policies = [
@@ -140,7 +140,7 @@ function HomePage() {
             <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">
               Why Choose <span className="text-gradient">SpaceTech Consulting?</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">
+            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-900">
               We're not just consultants — we're your strategic technology partner for the long haul.
             </motion.p>
           </motion.div>
@@ -170,14 +170,14 @@ function HomePage() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
             <motion.span variants={fadeUp} className="inline-block px-4 py-1.5 rounded-full bg-cyan-50 text-cyan-700 text-xs font-bold tracking-widest uppercase">Who We Serve</motion.span>
             <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">Yardi Expertise Across <span className="text-gradient">Property Types</span></motion.h2>
-            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">
+            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-900">
               Every property type runs Yardi differently. We've operated inside these environments at enterprise scale, and we bring that hands-on knowledge to every engagement.
             </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {propertyTypes.map((p) => (
+          {visiblePropertyTypes.map((p) => (
             <motion.div key={p.title} variants={fadeUp}
                 className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white border border-slate-200/60">
               <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
@@ -214,7 +214,7 @@ function HomePage() {
         <div className="max-w-7xl mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
             <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-extrabold text-[#0F172A]">Full-Spectrum <span className="text-gradient">Yardi Services</span></motion.h2>
-            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-600">From implementation to optimization — we cover the complete Yardi lifecycle</motion.p>
+            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-900">From implementation to optimization — we cover the complete Yardi lifecycle</motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
@@ -277,10 +277,10 @@ function HomePage() {
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">About SpaceTech</span>
           <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">Your Strategic Yardi Partner</h2>
-          <p className="mt-6 text-lg text-slate-600">
+          <p className="mt-6 text-lg text-slate-900">
             SpaceTech Consulting is a global consulting firm delivering comprehensive Yardi services across platform ownership, implementation, data migration, integrations, and customizations.
           </p>
-          <p className="mt-4 text-lg text-slate-600">
+          <p className="mt-4 text-lg text-slate-900">
             With presence across Australia, India, and the USA, we provide 24/7 support and scalable delivery to meet your project needs.
           </p>
           <div className="mt-8 flex justify-center gap-8 text-sm font-semibold">
@@ -299,7 +299,7 @@ function HomePage() {
           <div className="text-center">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">FAQs</span>
             <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">Questions Before We Start</h2>
-            <p className="mt-5 text-lg text-slate-600">Clear answers for real estate teams evaluating a Yardi consulting partner.</p>
+            <p className="mt-5 text-lg text-slate-900">Clear answers for real estate teams evaluating a Yardi consulting partner.</p>
           </div>
           <div className="mt-12 space-y-3">
             {faqs.map((f, i) => (
@@ -311,7 +311,7 @@ function HomePage() {
                 </button>
                 <div className={`grid transition-all duration-300 ${openFaq === i ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                   <div className="overflow-hidden">
-                    <p className="px-6 pb-5 text-slate-600 leading-relaxed">{f.a}</p>
+                    <p className="px-6 pb-5 text-slate-900 leading-relaxed">{f.a}</p>
                   </div>
                 </div>
               </div>
@@ -326,7 +326,7 @@ function HomePage() {
           <div className="text-center max-w-3xl mx-auto">
             <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">Legal & Access</span>
             <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">Policies, Regions, and Access</h2>
-            <p className="mt-5 text-lg text-slate-600">Practical governance for clients working across countries, systems, and teams.</p>
+            <p className="mt-5 text-lg text-slate-900">Practical governance for clients working across countries, systems, and teams.</p>
           </div>
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
