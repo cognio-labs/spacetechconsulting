@@ -40,7 +40,7 @@ export function Nav() {
           <img
             src={navLogo}
             alt="SpaceTech Consulting logo"
-            className="h-[66px] w-auto max-w-[280px] shrink-0 object-contain object-left lg:h-[78px] lg:max-w-[360px] [image-rendering: -webkit-optimize-contrast]"
+            className="h-auto w-[180px] shrink-0 object-contain object-left sm:w-[220px] [image-rendering:-webkit-optimize-contrast]"
           />
         </Link>
  
