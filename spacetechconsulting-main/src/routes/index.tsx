@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import {
   ArrowRight, Users, Clock, BarChart3, ShieldCheck, Lock,
@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
-import heroSectionBg from "@/assets/hero-section-bg.png";
 import consultingTeamPhoto from "@/assets/about-team.jpg";
 import caseStudyDashboardGrid from "@/assets/case-study/case-study-page-3.png";
 import caseStudyResolutionChart from "@/assets/case-study/case-study-page-4.png";
@@ -98,10 +97,10 @@ const caseStudyIconStrip = [
 ];
 
 const caseStudyHeroMetrics = [
-  { value: "2,000+", label: "Platform Issues Managed" },
-  { value: "95%+", label: "SLA on owned ticket volume" },
-  { value: "18", label: "Recurring issue patterns resolved" },
-  { value: "<100", label: "Open backlog maintained" },
+  { value: "2,000+", label: "Platform Issues Managed",          target: 2000, prefix: "",  suffix: "+",  comma: true  },
+  { value: "95%+",   label: "SLA on owned ticket volume",       target: 95,   prefix: "",  suffix: "%+", comma: false },
+  { value: "18",     label: "Recurring issue patterns resolved", target: 18,   prefix: "",  suffix: "",   comma: false },
+  { value: "<100",   label: "Open backlog maintained",           target: 100,  prefix: "<", suffix: "",   comma: false },
 ];
 
 const caseStudyChallenges = [
@@ -110,7 +109,7 @@ const caseStudyChallenges = [
   "Lack of module ownership accountability",
   "Difficulty identifying recurring issues and root causes",
   "Reactive support model with limited governance visibility",
-  "Resource attrition impacting service continuity",
+  "Resource attrition",
 ];
 
 const caseStudyBuildCards = [
@@ -190,10 +189,33 @@ const businessOutcomes = [
   "Created real-time operational dashboards for leadership visibility",
   "Implemented named SME ownership across critical business functions",
   "Managed more than 2,000 platform requests",
-  "Delivered 95%+ SLA on owned ticket volume",
-  "Identified and eliminated 18 recurring issue patterns through root-cause fixes",
-  "Moved closures above new ticket intake",
+  "95%+ SLA on owned ticket volume",
+  "18 Recurring issue patterns identified and eliminated through root-cause fixes",
+  "Closures exceeded new ticket intake",
+  "Improved platform health and support transparency",
   "Built a scalable operating model supporting hundreds of business users",
+];
+
+const recurringIssuePatterns = [
+  { label: "Procure to Pay & integrations", count: 12 },
+  { label: "Deal Manager & amendments", count: 4 },
+  { label: "Sales", count: 1 },
+  { label: "Bank Book", count: 1 },
+];
+
+const rootCauseExamples = [
+  {
+    title: "Duplicate billing from overlapping amendments",
+    desc: "Root cause traced to amendment sequencing; resolved with exception reporting plus a permanent product fix",
+  },
+  {
+    title: "Recurring vendor and GL mismatches in payables integration",
+    desc: "Interim data fixes applied while a permanent upstream integration fix was scoped and tracked",
+  },
+  {
+    title: "Invoice register gets stuck in workflow — restart required to progress",
+    desc: "Diagnosed as a workflow configuration issue; resolved by a workflow design change so invoices can no longer be updated once pushed for manager approval",
+  },
 ];
 
 const ctaTrustIndicators = [
@@ -226,38 +248,52 @@ const policies = [
   { icon: Share2, title: "Social Accessibility", body: "Connect with SpaceTech through LinkedIn, email, phone, WhatsApp, or a scheduled discovery call." },
 ];
 
-function AnimatedMetricValue({ target, suffix, run, fallback }: { target: number; suffix: string; run: boolean; fallback: string }) {
+function AnimatedMetricValue({
+  target, prefix = "", suffix, run, fallback, comma = false,
+}: {
+  target: number; prefix?: string; suffix: string; run: boolean; fallback: string; comma?: boolean;
+}) {
   const [value, setValue] = useState(0);
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (!run) return;
 
-    const duration = target > 500 ? 1800 : 1400;
+    const duration = target > 500 ? 1900 : target > 50 ? 1500 : 1000;
     const startedAt = performance.now();
-    const easeOut = (progress: number) => 1 - Math.pow(1 - progress, 3);
+    const easeOut = (p: number) => 1 - Math.pow(1 - p, 3);
 
     const tick = (now: number) => {
       const progress = Math.min((now - startedAt) / duration, 1);
       setValue(Math.round(target * easeOut(progress)));
-
-      if (progress < 1) {
-        frameRef.current = requestAnimationFrame(tick);
-      }
+      if (progress < 1) frameRef.current = requestAnimationFrame(tick);
     };
 
     frameRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
-    };
+    return () => { if (frameRef.current) cancelAnimationFrame(frameRef.current); };
   }, [run, target]);
 
   if (!run) return <>{fallback}</>;
-
-  return <>{value}{suffix}</>;
+  const display = comma ? value.toLocaleString() : value;
+  return <>{prefix}{display}{suffix}</>;
 }
 
 function CaseStudySection() {
+  const [activeTab, setActiveTab] = useState<"challenge" | "approach" | "outcomes">("challenge");
+  const heroMetricsRef = useRef<HTMLDivElement | null>(null);
+  const [heroAnimated, setHeroAnimated] = useState(false);
+
+  useEffect(() => {
+    const node = heroMetricsRef.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHeroAnimated(true); observer.disconnect(); } },
+      { threshold: 0.4 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="case-study" className="relative overflow-hidden bg-[#F8FAFC] px-4 py-16 text-[#0F172A] sm:px-6 md:py-20">
       <div className="absolute inset-0 bg-[linear-gradient(180deg,#F8FAFC_0%,#FFFFFF_42%,#EFF6FF_100%)]" />
@@ -265,6 +301,8 @@ function CaseStudySection() {
 
       <div className="relative mx-auto max-w-7xl">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
+
+          {/* ── Hero ── */}
           <div className="grid bg-[#0F172A] lg:grid-cols-[1.08fr_0.92fr]">
             <div className="p-6 text-white sm:p-8 lg:p-10">
               <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-cyan-100">
@@ -278,13 +316,22 @@ function CaseStudySection() {
                 Leading ASX-Listed Property Group
               </motion.p>
               <motion.p variants={fadeUp} className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg">
-                SpaceTech transformed support operations into measurable business outcomes through platform ownership, operational visibility, and continuous improvement.
+                See how SpaceTech transforms support operations into measurable business outcomes through platform ownership, operational visibility, and continuous improvement.
               </motion.p>
 
-              <motion.div variants={stagger} className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
+              <motion.div ref={heroMetricsRef} variants={stagger} className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
                 {caseStudyHeroMetrics.map((metric) => (
-                  <motion.div key={metric.label} variants={fadeUp} className="rounded-2xl border border-white/10 bg-white/[0.08] p-4">
-                    <div className="text-2xl font-extrabold text-white sm:text-3xl">{metric.value}</div>
+                  <motion.div key={metric.label} variants={fadeUp} whileHover={{ scale: 1.04, y: -2 }} className="cursor-default rounded-2xl border border-white/10 bg-white/[0.08] p-4 transition-colors hover:bg-white/[0.14]">
+                    <div className="text-2xl font-extrabold text-white sm:text-3xl tabular-nums">
+                      <AnimatedMetricValue
+                        target={metric.target}
+                        prefix={metric.prefix}
+                        suffix={metric.suffix}
+                        run={heroAnimated}
+                        fallback={metric.value}
+                        comma={metric.comma}
+                      />
+                    </div>
                     <p className="mt-2 text-xs font-semibold leading-snug text-slate-300">{metric.label}</p>
                   </motion.div>
                 ))}
@@ -295,7 +342,7 @@ function CaseStudySection() {
               <img src={consultingTeamPhoto} alt="Enterprise consulting team in a governance meeting" className="absolute inset-0 h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
-                <p className="text-sm font-bold uppercase tracking-widest text-cyan-100">Enterprise operating model</p>
+                <p className="text-sm font-bold uppercase tracking-widest text-cyan-100">Enterprise Operating Model</p>
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-200">
                   Real-world governance, named ownership, and executive reporting for hundreds of property business users.
                 </p>
@@ -303,9 +350,10 @@ function CaseStudySection() {
             </motion.div>
           </div>
 
+          {/* ── Icon Strip ── */}
           <motion.div variants={stagger} className="grid grid-cols-2 border-b border-slate-200 bg-white sm:grid-cols-3 lg:grid-cols-6">
             {caseStudyIconStrip.map((item) => (
-              <motion.div key={item.label} variants={fadeUp} className="flex items-center gap-3 border-r border-slate-100 px-4 py-4 last:border-r-0">
+              <motion.div key={item.label} variants={fadeUp} whileHover={{ backgroundColor: "#EFF6FF" }} className="flex items-center gap-3 border-r border-slate-100 px-4 py-4 last:border-r-0 transition-colors">
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-[#2563EB]">
                   <item.icon className="h-5 w-5" />
                 </div>
@@ -314,170 +362,316 @@ function CaseStudySection() {
             ))}
           </motion.div>
 
+          {/* ── Tab Navigation ── */}
           <div className="border-b border-slate-200 bg-slate-50 px-5 py-3">
             <div className="flex flex-wrap gap-2">
-              {["Challenge", "Approach", "Outcomes"].map((item) => (
-                <span key={item} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-slate-700">
-                  {item}
-                </span>
+              {(["challenge", "approach", "outcomes"] as const).map((tab) => (
+                <motion.button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.97 }}
+                  className={`rounded-full px-5 py-2 text-xs font-extrabold uppercase tracking-widest transition-all ${
+                    activeTab === tab
+                      ? "bg-[#0F172A] text-white shadow-md"
+                      : "border border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
+                  }`}
+                >
+                  {tab}
+                </motion.button>
               ))}
             </div>
           </div>
 
-          <div className="space-y-12 p-5 sm:p-8 lg:p-10">
-            <motion.div variants={stagger} className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-              <motion.div variants={fadeUp}>
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB]">The Challenge</span>
-                <h3 className="mt-3 text-2xl font-extrabold sm:text-3xl">Limited visibility. Limited accountability. Reactive support.</h3>
-                <p className="mt-4 text-slate-700 leading-relaxed">
-                  The client operated a complex Yardi ecosystem supporting commercial and residential property portfolios across hundreds of business users. Leadership needed clearer visibility into demand, recurring issues, ownership accountability, operational trends, and service performance.
-                </p>
-              </motion.div>
-              <motion.div variants={stagger} className="grid gap-3 sm:grid-cols-2"><h3>key challanges</h3>
-                {caseStudyChallenges.map((challenge) => (
-                  <motion.div key={challenge} variants={fadeUp} className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#2563EB]" />
-                    <span className="text-sm font-semibold leading-relaxed text-slate-700">{challenge}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
+          {/* ── Tab Content ── */}
+          <div className="p-5 sm:p-8 lg:p-10">
+            <AnimatePresence mode="wait">
 
-            <motion.div variants={stagger}>
-              <div className="max-w-3xl">
-                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB]">What SpaceTech Built</span>
-                <h3 className="mt-3 text-2xl font-extrabold sm:text-3xl">A data-driven Yardi support operating model</h3>
-              </div>
-              <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                {caseStudyBuildCards.map((card) => (
-                  <motion.div key={card.title} variants={fadeUp} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#0F172A] text-white">
-                      <card.icon className="h-5 w-5" />
+              {/* CHALLENGE */}
+              {activeTab === "challenge" && (
+                <motion.div key="challenge" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.28 }} className="space-y-8">
+                  <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+                    <div>
+                      <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB]">The Challenge</span>
+                      <h3 className="mt-3 text-2xl font-extrabold sm:text-3xl">Limited visibility. Limited accountability. Reactive support.</h3>
+                      <p className="mt-4 leading-relaxed text-slate-700">
+                        The client operated a complex Yardi ecosystem supporting commercial and residential property portfolios across hundreds of business users. Support requests were being addressed, but leadership lacked visibility into platform demand, recurring issues, ownership accountability, operational trends, and service performance.
+                      </p>
                     </div>
-                    <h4 className="mt-4 text-lg font-extrabold">{card.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{card.body}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div variants={stagger} className="grid gap-6 lg:grid-cols-2">
-              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <div className="flex items-center gap-3">
-                  <Layers3 className="h-5 w-5 text-[#2563EB]" />
-                  <h4 className="text-lg font-extrabold">Module Ownership Model</h4>
-                </div>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {yardiModules.map((module) => (
-                    <span key={module} className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">
-                      {module}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-                <div className="flex items-center gap-3">
-                  <Workflow className="h-5 w-5 text-[#2563EB]" />
-                  <h4 className="text-lg font-extrabold">Operational Categorisation Framework</h4>
-                </div>
-                <div className="mt-5 grid gap-3">
-                  {categorisationFlow.map((step, index) => (
-                    <div key={step} className="flex items-center gap-3 rounded-xl bg-white p-3 text-sm font-bold text-slate-700 shadow-sm">
-                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-blue-50 text-xs text-[#2563EB]">{index + 1}</span>
-                      {step}
+                    <div>
+                      <span className="text-xs font-extrabold uppercase tracking-widest text-slate-500">Key Challenges</span>
+                      <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                        {caseStudyChallenges.map((challenge, i) => (
+                          <motion.div
+                            key={challenge}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.07 }}
+                            whileHover={{ scale: 1.02, boxShadow: "0 4px 16px rgba(37,99,235,0.10)" }}
+                            className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                          >
+                            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#2563EB]" />
+                            <span className="text-sm font-semibold leading-relaxed text-slate-700">{challenge}</span>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
-
-            <motion.div variants={stagger} className="grid gap-7 lg:grid-cols-[1.1fr_0.9fr]">
-              <motion.div variants={fadeUp} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                <div className="border-b border-slate-200 px-5 py-4">
-                  <div className="flex items-center gap-3">
-                    <LayoutDashboard className="h-5 w-5 text-[#2563EB]" />
-                    <h4 className="text-lg font-extrabold">Executive Dashboards & Reporting</h4>
                   </div>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    Operational dashboards made platform demand, stale work, SLA health, and customer-waiting items visible to leadership.
-                  </p>
-                </div>
-                <img src={caseStudyDashboardGrid} alt="Case study dashboard examples showing Yardi support operations" className="w-full bg-slate-100" />
-                <p className="border-t border-slate-200 px-5 py-3 text-xs font-semibold text-slate-500">
-                  Dashboard examples from the case study PDF. Values shown in the source layout are illustrative for presentation.
-                </p>
-              </motion.div>
+                </motion.div>
+              )}
 
-              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-[#0F172A] p-5 text-white shadow-sm">
-                <LineChart className="h-6 w-6 text-cyan-200" />
-                <h4 className="mt-4 text-xl font-extrabold">Real client performance data</h4>
-                <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                  Resolution performance improved steadily over nine months. Average resolution time fell from approximately 33.5 days to 6.4 days, and median resolution time fell from approximately 23.7 days to 4.3 days.
-                </p>
-                <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-white">
-                  <img src={caseStudyResolutionChart} alt="Real client data showing resolution time improvement over nine months" className="w-full" />
-                </div>
-                <div className="mt-5 grid gap-3">
-                  {dashboardCoverage.map((item) => (
-                    <div key={item} className="flex items-center gap-3 rounded-xl bg-white/10 p-3 text-sm font-semibold text-slate-200">
-                      <TrendingDown className="h-4 w-4 shrink-0 text-cyan-200" />
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
+              {/* APPROACH */}
+              {activeTab === "approach" && (
+                <motion.div key="approach" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.28 }} className="space-y-10">
 
-            <motion.div variants={stagger} className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-blue-50 p-6">
-                <Target className="h-6 w-6 text-[#2563EB]" />
-                <h4 className="mt-4 text-xl font-extrabold">Continuous Improvement Governance</h4>
-                <p className="mt-3 text-sm leading-relaxed text-slate-700">
-                  Recurring reviews shifted the function from ticket handling to platform ownership, with repeat problems turned into permanent fixes.
-                </p>
-                <div className="mt-5 grid gap-2">
-                  {governanceCards.map((item) => (
-                    <div key={item} className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700">
-                      <ListChecks className="h-4 w-4 text-[#2563EB]" />
-                      {item}
+                  {/* Build cards */}
+                  <div>
+                    <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB]">What SpaceTech Built</span>
+                    <h3 className="mt-3 text-2xl font-extrabold sm:text-3xl">Building a Data-Driven Yardi Support Operating Model</h3>
+                    <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                      {caseStudyBuildCards.map((card, i) => (
+                        <motion.div
+                          key={card.title}
+                          initial={{ opacity: 0, y: 24 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: i * 0.09 }}
+                          whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(15,23,42,0.14)" }}
+                          className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                        >
+                          <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#0F172A] text-white">
+                            <card.icon className="h-5 w-5" />
+                          </div>
+                          <h4 className="mt-4 text-lg font-extrabold">{card.title}</h4>
+                          <p className="mt-2 text-sm leading-relaxed text-slate-600">{card.body}</p>
+                        </motion.div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </motion.div>
+                  </div>
 
-              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="flex items-center gap-3">
-                  <ClipboardList className="h-6 w-6 text-[#2563EB]" />
-                  <h4 className="text-xl font-extrabold">Business Outcomes</h4>
-                </div>
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {businessOutcomes.map((outcome) => (
-                    <div key={outcome} className="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2563EB]" />
-                      <span className="text-sm font-semibold leading-relaxed text-slate-700">{outcome}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                  {dashboardAchievements.map((achievement) => (
-                    <div key={achievement} className="rounded-xl bg-[#0F172A] px-4 py-3 text-sm font-extrabold text-white">
-                      {achievement}
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            </motion.div>
+                  {/* Module Ownership + Categorisation */}
+                  <div className="grid gap-6 lg:grid-cols-2">
+                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                      <div className="flex items-center gap-3">
+                        <Layers3 className="h-5 w-5 text-[#2563EB]" />
+                        <h4 className="text-lg font-extrabold">Module Ownership Model</h4>
+                      </div>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                        SpaceTech established named primary and backup SMEs across critical Yardi functions, creating clear ownership and accountability across every module aligned with client business processes.
+                      </p>
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {yardiModules.map((module, i) => (
+                          <motion.span
+                            key={module}
+                            initial={{ opacity: 0, scale: 0.88 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.3 + i * 0.04 }}
+                            className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700"
+                          >
+                            {module}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </motion.div>
 
-            <motion.div variants={fadeUp} className="rounded-2xl bg-[#0F172A] p-6 text-white sm:p-8">
-              <p className="text-xs font-extrabold uppercase tracking-widest text-cyan-200">From ticket management to platform ownership</p>
-              <p className="mt-4 max-w-5xl text-xl font-extrabold leading-relaxed sm:text-2xl">
-                SpaceTech helped transform Yardi support operations from a reactive service model into a structured, measurable, continuously improving operating model supporting hundreds of business users.
-              </p>
-              <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300">
-                The root cause program targets the source of recurring issues and turns repeat problems into permanent fixes.
-              </p>
-            </motion.div>
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                      <div className="flex items-center gap-3">
+                        <Workflow className="h-5 w-5 text-[#2563EB]" />
+                        <h4 className="text-lg font-extrabold">Operational Categorisation Framework</h4>
+                      </div>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                        SpaceTech designed a structured Jira taxonomy spanning five layers. For the first time, leadership could understand what issues were occurring, which modules generated demand, and where improvement efforts should focus.
+                      </p>
+                      <div className="mt-4 grid gap-2">
+                        {categorisationFlow.map((step, index) => (
+                          <motion.div
+                            key={step}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.4 + index * 0.07 }}
+                            className="flex items-center gap-3 rounded-xl bg-white p-3 text-sm font-bold text-slate-700 shadow-sm"
+                          >
+                            <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-blue-50 text-xs text-[#2563EB]">{index + 1}</span>
+                            {step}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Dashboards + Resolution chart */}
+                  <div className="grid gap-7 lg:grid-cols-[1.1fr_0.9fr]">
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                      <div className="border-b border-slate-200 px-5 py-4">
+                        <div className="flex items-center gap-3">
+                          <LayoutDashboard className="h-5 w-5 text-[#2563EB]" />
+                          <h4 className="text-lg font-extrabold">Executive Dashboards & Reporting</h4>
+                        </div>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                          SpaceTech developed real-time dashboards covering ticket intake and closures, stale ticket tracking, waiting-for-customer analysis, SLA compliance, and operational category reporting.
+                        </p>
+                      </div>
+                      <img src={caseStudyDashboardGrid} alt="Case study dashboard examples" className="w-full bg-slate-100" />
+                      <p className="border-t border-slate-200 px-5 py-3 text-xs font-semibold text-slate-500">
+                        Illustrative example — values shown for layout purposes.
+                      </p>
+                    </motion.div>
+
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="rounded-2xl border border-slate-200 bg-[#0F172A] p-5 text-white shadow-sm">
+                      <LineChart className="h-6 w-6 text-cyan-200" />
+                      <h4 className="mt-4 text-xl font-extrabold">Real Client Performance Data</h4>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                        Both average and median resolution time fell steadily over nine months — average dropping from ~33.5 to ~6.4 days, median from ~23.7 to ~4.3 days, reflecting sustained process improvements rather than a single one-off fix.
+                      </p>
+                      <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white">
+                        <img src={caseStudyResolutionChart} alt="Real client data: resolution time over nine months" className="w-full" />
+                      </div>
+                      <div className="mt-4 grid gap-2">
+                        {dashboardCoverage.map((item, i) => (
+                          <motion.div
+                            key={item}
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.5 + i * 0.06 }}
+                            className="flex items-center gap-3 rounded-xl bg-white/10 p-3 text-sm font-semibold text-slate-200"
+                          >
+                            <TrendingDown className="h-4 w-4 shrink-0 text-cyan-200" />
+                            {item}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Recurring patterns + root cause examples */}
+                  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                    <div className="mb-6 flex items-center gap-3">
+                      <BarChart3 className="h-5 w-5 text-[#2563EB]" />
+                      <h4 className="text-lg font-extrabold">Recurring Issue Patterns Identified by Module</h4>
+                    </div>
+                    <div className="mb-6 space-y-4">
+                      {recurringIssuePatterns.map((item, i) => (
+                        <div key={item.label}>
+                          <div className="mb-1.5 flex justify-between">
+                            <span className="text-sm font-semibold text-slate-700">{item.label}</span>
+                            <span className="text-sm font-extrabold text-[#2563EB]">{item.count}</span>
+                          </div>
+                          <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+                            <motion.div
+                              className="h-full rounded-full bg-gradient-to-r from-[#0F172A] to-[#2563EB]"
+                              initial={{ width: 0 }}
+                              animate={{ width: `${(item.count / 12) * 100}%` }}
+                              transition={{ delay: 0.6 + i * 0.12, duration: 0.9, ease: "easeOut" }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="grid gap-3">
+                      {rootCauseExamples.map((example, i) => (
+                        <motion.div
+                          key={example.title}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.8 + i * 0.1 }}
+                          className="rounded-xl bg-[#0F172A] p-4"
+                        >
+                          <p className="text-sm font-bold text-white">{example.title}</p>
+                          <p className="mt-1.5 text-xs leading-relaxed text-slate-400">{example.desc}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+
+              {/* OUTCOMES */}
+              {activeTab === "outcomes" && (
+                <motion.div key="outcomes" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} transition={{ duration: 0.28 }} className="space-y-8">
+                  <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+
+                    {/* Governance */}
+                    <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="rounded-2xl border border-slate-200 bg-blue-50 p-6">
+                      <Target className="h-6 w-6 text-[#2563EB]" />
+                      <h4 className="mt-4 text-xl font-extrabold">Continuous Improvement Governance</h4>
+                      <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                        SpaceTech implemented recurring operational reviews focused on backlog reduction, root cause elimination, process optimization, knowledge management, and user enablement.
+                      </p>
+                      <div className="mt-5 grid gap-2">
+                        {governanceCards.map((item, i) => (
+                          <motion.div
+                            key={item}
+                            initial={{ opacity: 0, x: -16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 0.2 + i * 0.08 }}
+                            className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700"
+                          >
+                            <ListChecks className="h-4 w-4 text-[#2563EB]" />
+                            {item}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+
+                    {/* Business Outcomes */}
+                    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                      <div className="flex items-center gap-3">
+                        <ClipboardList className="h-6 w-6 text-[#2563EB]" />
+                        <h4 className="text-xl font-extrabold">Business Outcomes</h4>
+                      </div>
+                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                        {businessOutcomes.map((outcome, i) => (
+                          <motion.div
+                            key={outcome}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 + i * 0.06 }}
+                            whileHover={{ scale: 1.02 }}
+                            className="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3"
+                          >
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2563EB]" />
+                            <span className="text-sm font-semibold leading-relaxed text-slate-700">{outcome}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                        {dashboardAchievements.map((achievement, i) => (
+                          <motion.div
+                            key={achievement}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: 0.7 + i * 0.08 }}
+                            className="rounded-xl bg-[#0F172A] px-4 py-3 text-center text-sm font-extrabold text-white"
+                          >
+                            {achievement}
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
+                  </div>
+
+                  {/* Business Impact Navy Banner */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="overflow-hidden rounded-2xl bg-[#0F172A] p-6 text-white sm:p-8"
+                  >
+                    <p className="text-xs font-extrabold uppercase tracking-widest text-cyan-200">Business Impact</p>
+                    <p className="mt-3 text-2xl font-extrabold uppercase tracking-wide sm:text-3xl">
+                      From Ticket Management to Platform Ownership
+                    </p>
+                    <div className="mt-2 h-1 w-16 rounded-full bg-cyan-400" />
+                    <p className="mt-5 max-w-5xl text-base leading-relaxed text-slate-200 sm:text-lg">
+                      SpaceTech helped transform Yardi support operations from a reactive service model into a structured, measurable, and continuously improving operating model supporting hundreds of business users across a complex enterprise property environment.
+                    </p>
+                    <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300">
+                      Beyond resolving tickets faster, SpaceTech's root cause program targets the <span className="font-semibold text-white">source</span> of recurring issues — turning repeat problems into permanent fixes, so business teams spend less time raising the same ticket twice.
+                    </p>
+                  </motion.div>
+                </motion.div>
+              )}
+
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>
@@ -512,13 +706,17 @@ function HomePage() {
     <Layout>
       {/* HERO */}
       <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
-        <img
-          src={heroSectionBg}
-          alt=""
-          className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center brightness-[0.45] lg:brightness-100"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           aria-hidden="true"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.65))] lg:bg-gradient-to-r lg:from-[#020B1F]/98 lg:via-[#020B1F]/76 lg:to-[#020B1F]/16" />
+          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.85] lg:brightness-95"
+        >
+          <source src="/hero-bg-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(2,11,31,.35),rgba(2,11,31,.50))] lg:bg-gradient-to-r lg:from-[#020B1F]/88 lg:via-[#020B1F]/50 lg:to-[#020B1F]/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
         <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
 
@@ -572,155 +770,174 @@ function HomePage() {
       </section>
 
       {/* WHY SPACETECH */}
-      <section className="relative overflow-hidden bg-white px-6 py-12 text-[#0F172A] md:py-16">
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#F8FAFC_58%,rgba(239,246,255,0.7)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(37,99,235,0.08),transparent_28%),radial-gradient(circle_at_86%_22%,rgba(6,182,212,0.1),transparent_30%)]" />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent" />
+      <section className="relative overflow-hidden bg-white px-6 py-12 md:py-16">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#F8FAFC_60%,rgba(239,246,255,0.6)_100%)] dark:hidden" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(37,99,235,0.06),transparent_35%),radial-gradient(circle_at_85%_20%,rgba(6,182,212,0.07),transparent_35%)] dark:bg-[radial-gradient(circle_at_15%_20%,rgba(37,99,235,0.18),transparent_35%),radial-gradient(circle_at_85%_20%,rgba(6,182,212,0.15),transparent_35%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent dark:via-blue-800" />
+
         <div className="relative mx-auto max-w-7xl">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="mx-auto max-w-4xl text-center">
-            <motion.span variants={fadeUp} className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+
+          {/* ── Section Header ── */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="mx-auto max-w-3xl text-center">
+            <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-500" />
               Why SpaceTech
             </motion.span>
-            <motion.h2 variants={fadeUp} className="mt-5 text-4xl font-bold leading-[1.12] text-[#0F172A] md:text-5xl">
-              Why <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">SpaceTech</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-3xl text-2xl font-semibold leading-[1.25] text-slate-950 md:text-3xl">
+            <motion.h2 variants={fadeUp} className="mt-4 text-3xl font-extrabold leading-[1.1] text-[#0F172A] md:text-4xl">
               Enterprise Engineering DNA.
-              <span className="block bg-gradient-to-r from-[#2563EB] to-[#0891B2] bg-clip-text text-transparent">Property Technology Expertise.</span>
-            </motion.p>
-            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 md:text-lg">
+              <span className="block bg-gradient-to-r from-[#2563EB] to-[#0891B2] bg-clip-text text-transparent">
+                Property Technology Expertise.
+              </span>
+            </motion.h2>
+            <motion.p variants={fadeUp} className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">
               Built on enterprise engineering principles, platform ownership, and continuous improvement — helping property organizations maximize the value of their Yardi investment.
             </motion.p>
           </motion.div>
 
+          {/* ── Credibility Metrics Strip ── */}
           <motion.div ref={whyMetricsRef} initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {whyMetrics.map((metric) => (
               <motion.div key={metric.label} variants={fadeUp}
-                className="group rounded-2xl border border-slate-100 bg-white p-5 text-[#0F172A] shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant-hover">
-                <div className="flex items-start justify-between gap-4">
+                className="group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-100 hover:shadow-md">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/60 to-cyan-50/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative flex items-start justify-between gap-2">
                   <div>
-                    <div className="text-3xl font-extrabold text-[#0F172A]">
+                    <div className="text-2xl font-extrabold text-[#0F172A]">
                       <AnimatedMetricValue target={metric.target} suffix={metric.suffix} run={animateWhyMetrics} fallback={metric.value} />
                     </div>
-                    <p className="mt-2 text-sm font-semibold leading-5 text-slate-700">{metric.label}</p>
+                    <p className="mt-1 text-sm font-medium leading-5 text-slate-500">{metric.label}</p>
                   </div>
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] ring-1 ring-blue-100">
-                    <metric.icon className="h-5 w-5" />
+                  <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 text-white transition-transform duration-300 group-hover:scale-110">
+                    <metric.icon className="h-4 w-4" />
                   </div>
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
+          {/* ── Six Value Cards ── */}
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
             {whyCards.map((card, i) => (
               <motion.article key={card.title} variants={fadeUp}
-                className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-6 shadow-elegant card-lift">
-                <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-gradient-to-br from-blue-50 to-cyan-50 -translate-y-16 translate-x-16 transition-transform duration-700 group-hover:scale-150" />
+                className="group relative overflow-hidden rounded-xl border border-slate-100 bg-white p-5 shadow-sm transition-all duration-500 hover:-translate-y-0.5 hover:border-blue-100 hover:shadow-md">
+                {/* Animated sweep border on hover */}
+                <div className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-[#2563EB] via-cyan-500 to-blue-400 transition-transform duration-500 group-hover:scale-x-100" />
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 <div className="relative">
-                  <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] shadow-sm">
-                    {i + 1 < 10 ? `0${i + 1}` : i + 1}
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="text-3xl font-black text-slate-100 transition-colors duration-300 group-hover:text-blue-50">
+                      {i + 1 < 10 ? `0${i + 1}` : i + 1}
+                    </span>
+                    <div className="grid h-9 w-9 place-items-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-600 text-white transition-transform duration-300 group-hover:scale-110">
+                      <card.icon className="h-4 w-4" />
+                    </div>
                   </div>
-                  <div className="absolute right-0 top-1 grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#2563EB] opacity-90">
-                    <card.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mb-4 pr-12 text-xl font-bold text-[#0F172A]">{card.title}</h3>
-                  <p className="text-sm leading-7 text-slate-700">{card.body}</p>
+                  <h3 className="mb-2 text-base font-bold text-[#0F172A]">{card.title}</h3>
+                  <p className="text-sm leading-6 text-slate-600">{card.body}</p>
                 </div>
               </motion.article>
             ))}
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-5">
+          {/* ── Built From Real Enterprise Operations ── */}
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="mt-4">
             <motion.article variants={fadeUp}
-              className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 text-[#0F172A] shadow-elegant md:p-8">
-              <div className="absolute top-0 right-0 h-40 w-40 rounded-full bg-gradient-to-br from-blue-50 to-cyan-50 -translate-y-20 translate-x-20" />
-              <div className="relative flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+              className="relative overflow-hidden rounded-xl border border-blue-100 bg-blue-50/50 p-5 md:p-6 dark:border-blue-900/50 dark:bg-blue-950/30">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(6,182,212,0.08),transparent_55%)]" />
+              <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="max-w-3xl">
-                  <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
-                    <Building2 className="h-4 w-4" /> Special Feature
-                  </div>
-                  <h3 className="mt-4 text-2xl font-bold uppercase tracking-wide text-[#0F172A]">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+                    <Building2 className="h-3.5 w-3.5" />
                     Built From Real Enterprise Operations
-                  </h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-700 md:text-base">
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
                     Our operating model has been shaped by supporting complex enterprise property environments every day. The result is a practical, proven approach focused on platform stability, accountability, and measurable outcomes.
                   </p>
                 </div>
-                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] ring-1 ring-blue-100">
-                  <ShieldCheck className="h-8 w-8" />
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-600 text-white shadow-md shadow-blue-500/20">
+                  <ShieldCheck className="h-6 w-6" />
                 </div>
               </div>
             </motion.article>
           </motion.div>
 
+          {/* ── Enterprise Proof Banner ── */}
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-6 overflow-hidden rounded-[2rem] border border-slate-100 bg-white text-[#0F172A] shadow-elegant">
-            <motion.div variants={fadeUp} className="grid gap-0 lg:grid-cols-[0.95fr_1.25fr]">
-              <div className="relative overflow-hidden bg-[linear-gradient(135deg,#1E40AF_0%,#2563EB_50%,#06B6D4_100%)] p-8 text-white md:p-10">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.26),transparent_34%),radial-gradient(circle_at_82%_80%,rgba(15,23,42,0.18),transparent_42%)]" />
-                <div className="absolute inset-x-0 bottom-0 h-px bg-white/25" />
+            className="mt-4 overflow-hidden rounded-xl border border-slate-100 shadow-sm">
+            <motion.div variants={fadeUp} className="grid lg:grid-cols-[0.85fr_1.3fr]">
+              <div className="relative overflow-hidden bg-gradient-to-br from-[#1E3A8A] via-[#1D4ED8] to-[#0891B2] p-6 text-white md:p-7">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.15),transparent_45%)]" />
                 <div className="relative">
-                  <span className="text-xs font-bold uppercase tracking-widest text-cyan-200">Enterprise Proof Banner</span>
-                  <h3 className="mt-4 text-2xl font-bold uppercase leading-tight md:text-3xl">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-cyan-200">
+                    <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
+                    Enterprise Proof
+                  </span>
+                  <h3 className="mt-3 text-xl font-extrabold uppercase leading-tight text-white">
                     Proven In Enterprise Property Operations
                   </h3>
-                  <p className="mt-5 text-sm leading-7 text-slate-300">
+                  <p className="mt-2 text-sm leading-6 text-blue-100">
                     Supporting one of Australia's largest listed property groups.
                   </p>
+                  <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5">
+                    <ShieldCheck className="h-4 w-4 text-cyan-200" />
+                    <span className="text-xs font-bold text-cyan-100">ASX-Listed Property Group</span>
+                  </div>
                 </div>
               </div>
-              <div className="grid gap-3 p-6 sm:grid-cols-2 md:p-8">
-                {proofPoints.map((point) => (
-                  <div key={point} className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-slate-50 p-4">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#2563EB]" />
-                    <span className="text-sm font-semibold leading-6 text-slate-800">{point}</span>
-                  </div>
-                ))}
+              <div className="bg-white p-5 dark:bg-slate-900/80 md:p-6">
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {proofPoints.map((point) => (
+                    <div key={point} className="flex items-start gap-2 rounded-lg border border-slate-100 bg-slate-50 p-3 transition-all duration-200 hover:border-blue-100 hover:bg-blue-50/50 dark:border-white/10 dark:bg-white/5 dark:hover:bg-white/10">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2563EB]" />
+                      <span className="text-sm font-semibold leading-6 text-slate-700">{point}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </motion.div>
 
+          {/* ── Call To Action ── */}
           <motion.div id="book-call" initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-6 overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 p-6 text-center shadow-elegant backdrop-blur-xl md:p-10">
-            <motion.div variants={fadeUp} className="mx-auto max-w-4xl">
+            className="mt-4 overflow-hidden rounded-xl border border-slate-100 bg-white/80 p-5 text-center shadow-sm backdrop-blur-sm dark:border-white/10 dark:bg-white/5 md:p-7">
+            <motion.div variants={fadeUp} className="mx-auto max-w-3xl">
               <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
-                Call To Action
+                Get Started
               </span>
-              <h3 className="mt-5 text-3xl font-bold leading-tight text-[#0F172A] md:text-5xl">
-                Ready to Maximize Your <span className="text-gradient">Yardi Investment?</span>
+              <h3 className="mt-4 text-2xl font-extrabold leading-tight text-[#0F172A] md:text-3xl">
+                Ready to Maximize Your{" "}
+                <span className="bg-gradient-to-r from-[#2563EB] to-[#0891B2] bg-clip-text text-transparent">
+                  Yardi Investment?
+                </span>
               </h3>
-              <p className="mx-auto mt-4 max-w-3xl text-base font-semibold leading-7 text-slate-800 md:text-lg">
-                Supporting property organizations with platform ownership, operational excellence, governance, and continuous improvement.
-              </p>
-              <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
+              <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-slate-600">
                 Partner with SpaceTech to improve platform health, increase operational visibility, reduce recurring issues, and unlock greater value from your Yardi platform.
               </p>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <motion.div variants={fadeUp} className="mt-5 flex flex-col items-center justify-center gap-2.5 sm:flex-row">
               <a href="#book-call"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl gradient-primary px-7 py-4 font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-hover active:scale-[0.98] sm:w-auto">
-                Book a Strategy Call <ArrowRight className="h-4 w-4" />
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#0891B2] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30 active:scale-[0.98] sm:w-auto">
+                Book a Strategy Call <ArrowRight className="h-3.5 w-3.5" />
               </a>
               <a href="#services"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 font-bold text-[#0F172A] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] active:scale-[0.98] sm:w-auto">
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-[#0F172A] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-[#2563EB] active:scale-[0.98] dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:border-blue-400/40 sm:w-auto">
                 Explore Yardi Services
               </a>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <motion.div variants={fadeUp} className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
               {ctaTrustIndicators.map((indicator) => (
-                <div key={indicator} className="flex items-center justify-center gap-2 rounded-2xl border border-slate-100 bg-slate-50/90 px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-elegant">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#2563EB]" />
+                <div key={indicator} className="flex items-center justify-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 hover:border-blue-100 hover:bg-blue-50/60 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
+                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#2563EB]" />
                   <span>{indicator}</span>
                 </div>
               ))}
             </motion.div>
           </motion.div>
+
         </div>
       </section>
 

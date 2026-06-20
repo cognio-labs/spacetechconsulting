@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WhoWeServeRouteImport } from './routes/who-we-serve'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as MissionVisionValuesRouteImport } from './routes/mission-vision-values'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -25,6 +26,11 @@ const WhoWeServeRoute = WhoWeServeRouteImport.update({
 const ServicesRoute = ServicesRouteImport.update({
   id: '/services',
   path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissionVisionValuesRoute = MissionVisionValuesRouteImport.update({
+  id: '/mission-vision-values',
+  path: '/mission-vision-values',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/mission-vision-values': typeof MissionVisionValuesRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
   '/api/contact': typeof ApiContactRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/mission-vision-values': typeof MissionVisionValuesRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
   '/api/contact': typeof ApiContactRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/mission-vision-values': typeof MissionVisionValuesRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
   '/api/contact': typeof ApiContactRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/mission-vision-values'
     | '/services'
     | '/who-we-serve'
     | '/api/contact'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/mission-vision-values'
     | '/services'
     | '/who-we-serve'
     | '/api/contact'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/mission-vision-values'
     | '/services'
     | '/who-we-serve'
     | '/api/contact'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  MissionVisionValuesRoute: typeof MissionVisionValuesRoute
   ServicesRoute: typeof ServicesRoute
   WhoWeServeRoute: typeof WhoWeServeRoute
   ApiContactRoute: typeof ApiContactRoute
@@ -135,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/services'
       fullPath: '/services'
       preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mission-vision-values': {
+      id: '/mission-vision-values'
+      path: '/mission-vision-values'
+      fullPath: '/mission-vision-values'
+      preLoaderRoute: typeof MissionVisionValuesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  MissionVisionValuesRoute: MissionVisionValuesRoute,
   ServicesRoute: ServicesRoute,
   WhoWeServeRoute: WhoWeServeRoute,
   ApiContactRoute: ApiContactRoute,
