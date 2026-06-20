@@ -7,7 +7,7 @@ import {
   Globe, FileCheck, Languages, Share2,
   Cpu, Settings2, Database, RefreshCcw, Rocket, Building2, CheckCircle2,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
 import heroSectionBg from "@/assets/hero-section-bg.png";
 
@@ -34,10 +34,10 @@ const stats = [
 ];
 
 const whyMetrics = [
-  { value: "25+", label: "Years Technology Leadership", icon: Cpu },
-  { value: "2000+", label: "Platform Requests Managed", icon: FileCheck },
-  { value: "50+", label: "Years Total Yardi Experience", icon: ShieldCheck },
-  { value: "3", label: "Global Delivery Regions", icon: Globe },
+  { value: "25+", target: 25, suffix: "+", label: "Years Technology Leadership", icon: Cpu },
+  { value: "2000+", target: 2000, suffix: "+", label: "Platform Requests Managed", icon: FileCheck },
+  { value: "50+", target: 50, suffix: "+", label: "Years Total Yardi Experience", icon: ShieldCheck },
+  { value: "3", target: 3, suffix: "", label: "Global Delivery Regions", icon: Globe },
 ];
 
 const whyCards = [
@@ -105,8 +105,60 @@ const policies = [
   { icon: Share2, title: "Social Accessibility", body: "Connect with SpaceTech through LinkedIn, email, phone, WhatsApp, or a scheduled discovery call." },
 ];
 
+function AnimatedMetricValue({ target, suffix, run, fallback }: { target: number; suffix: string; run: boolean; fallback: string }) {
+  const [value, setValue] = useState(0);
+  const frameRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (!run) return;
+
+    const duration = target > 500 ? 1800 : 1400;
+    const startedAt = performance.now();
+    const easeOut = (progress: number) => 1 - Math.pow(1 - progress, 3);
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      setValue(Math.round(target * easeOut(progress)));
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    frameRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, [run, target]);
+
+  if (!run) return <>{fallback}</>;
+
+  return <>{value}{suffix}</>;
+}
+
 function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const whyMetricsRef = useRef<HTMLDivElement | null>(null);
+  const [animateWhyMetrics, setAnimateWhyMetrics] = useState(false);
+
+  useEffect(() => {
+    const node = whyMetricsRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAnimateWhyMetrics(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Layout>
       {/* HERO */}
@@ -198,14 +250,16 @@ function HomePage() {
             </motion.p>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+          <motion.div ref={whyMetricsRef} initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {whyMetrics.map((metric) => (
               <motion.div key={metric.label} variants={fadeUp}
                 className="group rounded-2xl border border-slate-100 bg-white p-5 text-[#0F172A] shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant-hover">
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <div className="text-3xl font-extrabold text-[#0F172A]">{metric.value}</div>
+                    <div className="text-3xl font-extrabold text-[#0F172A]">
+                      <AnimatedMetricValue target={metric.target} suffix={metric.suffix} run={animateWhyMetrics} fallback={metric.value} />
+                    </div>
                     <p className="mt-2 text-sm font-semibold leading-5 text-slate-700">{metric.label}</p>
                   </div>
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] ring-1 ring-blue-100">
@@ -263,7 +317,10 @@ function HomePage() {
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="mt-6 overflow-hidden rounded-[2rem] border border-slate-100 bg-white text-[#0F172A] shadow-elegant">
             <motion.div variants={fadeUp} className="grid gap-0 lg:grid-cols-[0.95fr_1.25fr]">
-              <div className="bg-[#0F172A] p-8 text-white md:p-10">
+              <div className="relative overflow-hidden bg-[linear-gradient(135deg,#1E40AF_0%,#2563EB_50%,#06B6D4_100%)] p-8 text-white md:p-10">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.26),transparent_34%),radial-gradient(circle_at_82%_80%,rgba(15,23,42,0.18),transparent_42%)]" />
+                <div className="absolute inset-x-0 bottom-0 h-px bg-white/25" />
+                <div className="relative">
                 <span className="text-xs font-bold uppercase tracking-widest text-cyan-200">Enterprise Proof Banner</span>
                 <h3 className="mt-4 text-2xl font-extrabold uppercase leading-tight md:text-3xl">
                   Proven In Enterprise Property Operations
@@ -271,6 +328,7 @@ function HomePage() {
                 <p className="mt-5 text-sm leading-7 text-slate-300">
                   Supporting one of Australia's largest listed property groups.
                 </p>
+                </div>
               </div>
               <div className="grid gap-3 p-6 sm:grid-cols-2 md:p-8">
                 {proofPoints.map((point) => (
