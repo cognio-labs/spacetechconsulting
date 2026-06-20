@@ -19,7 +19,7 @@ export const Route = createFileRoute("/about")({
 
 const counters = [
   { value: "50+", target: 50, suffix: "+", label: "Years of Total Yardi Experience", icon: Award },
-  { value: "1800+", target: 1800, suffix: "+", label: "Tickets Resolved", icon: Users },
+  { value: "3000+", target: 3000, suffix: "+", label: "Tickets Resolved", icon: Users },
   { value: "24/7", target: 24, suffix: "/7", label: "Global Support Coverage", icon: Clock },
   { value: "3", target: 3, suffix: "", label: "Regions of Global Delivery", icon: Globe },
 ];
@@ -107,10 +107,10 @@ function About() {
             <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-bold tracking-widest uppercase">About SpaceTech</span>
             <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-[1.05]">Your Strategic <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Yardi Partner</span></h1>
             <p className="mt-6 text-lg text-slate-300 leading-relaxed">
-              SpaceTech Consulting is a global consulting firm delivering comprehensive Yardi services across platform ownership, implementation, data migration, integrations, and customizations.
+              SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable business outcomes across complex property technology environments.
             </p>
             <p className="mt-4 text-lg text-slate-300 leading-relaxed">
-              With presence across Australia, India, and the USA, we provide 24/7 support and scalable delivery to meet your project needs.
+              Built on real enterprise operating principles, SpaceTech brings platform ownership, continuous improvement, and disciplined execution to complex property technology environments. Through our teams across Australia, India, and the United States, we provide scalable delivery, 24/7 support coverage, and trusted long-term partnership for property organizations.
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} className="relative">

@@ -34,13 +34,13 @@ const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 const stats = [
   { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
   { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "2000+ Tickets", label: "Resolved across active engagements" },
+  { icon: BarChart3, value: "3000+ Tickets", label: "Resolved across active engagements" },
   { icon: ShieldCheck, value: "95%+ SLA", label: "SLA on owned ticket volume" },
 ];
 
 const whyMetrics = [
   { value: "25+", target: 25, suffix: "+", label: "Years Technology Leadership", icon: Cpu },
-  { value: "2000+", target: 2000, suffix: "+", label: "Platform Requests Managed", icon: FileCheck },
+  { value: "3000+", target: 3000, suffix: "+", label: "Platform Requests Managed", icon: FileCheck },
   { value: "50+", target: 50, suffix: "+", label: "Years Total Yardi Experience", icon: ShieldCheck },
   { value: "3", target: 3, suffix: "", label: "Global Delivery Regions", icon: Globe },
 ];
@@ -79,7 +79,7 @@ const whyCards = [
 ];
 
 const proofPoints = [
-  "2,000+ Platform Tickets Addressed",
+  "3,000+ Platform Tickets Addressed",
   "95%+ SLA",
   "1000+ Active Business Users Supported",
   "Commercial & Residential Portfolios",
@@ -97,7 +97,7 @@ const caseStudyIconStrip = [
 ];
 
 const caseStudyHeroMetrics = [
-  { value: "2,000+", label: "Platform Issues Managed",          target: 2000, prefix: "",  suffix: "+",  comma: true  },
+  { value: "3,000+", label: "Platform Issues Managed",          target: 3000, prefix: "",  suffix: "+",  comma: true  },
   { value: "95%+",   label: "SLA on owned ticket volume",       target: 95,   prefix: "",  suffix: "%+", comma: false },
   { value: "18",     label: "Recurring issue patterns resolved", target: 18,   prefix: "",  suffix: "",   comma: false },
   { value: "<100",   label: "Open backlog maintained",           target: 100,  prefix: "<", suffix: "",   comma: false },
@@ -188,7 +188,7 @@ const businessOutcomes = [
   "Established enterprise-wide support categorisation and reporting standards",
   "Created real-time operational dashboards for leadership visibility",
   "Implemented named SME ownership across critical business functions",
-  "Managed more than 2,000 platform requests",
+  "Managed more than 3,000 platform requests",
   "95%+ SLA on owned ticket volume",
   "18 Recurring issue patterns identified and eliminated through root-cause fixes",
   "Closures exceeded new ticket intake",
@@ -220,7 +220,7 @@ const rootCauseExamples = [
 
 const ctaTrustIndicators = [
   "50+ Years Total Yardi Experience",
-  "2,000+ Platform Requests Managed",
+  "3,000+ Platform Requests Managed",
   "95%+ SLA Performance",
   "Australia • India • United States",
 ];
@@ -499,7 +499,7 @@ function CaseStudySection() {
                   </div>
 
                   {/* Dashboards + Resolution chart */}
-                  <div className="grid gap-7 lg:grid-cols-[1.1fr_0.9fr]">
+                  <div className="grid gap-7">
                     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
                       <div className="border-b border-slate-200 px-5 py-4">
                         <div className="flex items-center gap-3">
@@ -510,7 +510,7 @@ function CaseStudySection() {
                           SpaceTech developed real-time dashboards covering ticket intake and closures, stale ticket tracking, waiting-for-customer analysis, SLA compliance, and operational category reporting.
                         </p>
                       </div>
-                      <img src={caseStudyDashboardGrid} alt="Case study dashboard examples" className="w-full bg-slate-100" />
+                      <a href={caseStudyDashboardGrid} target="_blank" rel="noreferrer" aria-label="Open case study dashboard examples full size" className="block overflow-x-auto bg-slate-100 p-2 sm:p-4"><img src={caseStudyDashboardGrid} alt="Case study dashboard examples" className="mx-auto min-w-[820px] max-w-none rounded-xl object-contain sm:min-w-0 sm:w-full sm:max-w-7xl" /></a>
                       <p className="border-t border-slate-200 px-5 py-3 text-xs font-semibold text-slate-500">
                         Illustrative example — values shown for layout purposes.
                       </p>
@@ -523,7 +523,7 @@ function CaseStudySection() {
                         Both average and median resolution time fell steadily over nine months — average dropping from ~33.5 to ~6.4 days, median from ~23.7 to ~4.3 days, reflecting sustained process improvements rather than a single one-off fix.
                       </p>
                       <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white">
-                        <img src={caseStudyResolutionChart} alt="Real client data: resolution time over nine months" className="w-full" />
+                        <a href={caseStudyResolutionChart} target="_blank" rel="noreferrer" aria-label="Open resolution time chart full size" className="block overflow-x-auto bg-white p-2 sm:p-4"><img src={caseStudyResolutionChart} alt="Real client data: resolution time over nine months" className="mx-auto min-w-[760px] max-w-none object-contain sm:min-w-0 sm:w-full sm:max-w-6xl" /></a>
                       </div>
                       <div className="mt-4 grid gap-2">
                         {dashboardCoverage.map((item, i) => (

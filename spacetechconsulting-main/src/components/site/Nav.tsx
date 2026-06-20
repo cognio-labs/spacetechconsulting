@@ -45,12 +45,12 @@ export function Nav() {
           : "border-slate-200/50 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.01),0_2px_8px_rgba(15,23,42,0.03)] dark:border-slate-700/40 dark:bg-[#0B1120]/92 dark:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_2px_8px_rgba(0,0,0,0.1)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[56px] lg:h-[62px] py-1 flex items-center justify-between gap-3 xl:gap-5">
-        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center group select-none active:opacity-90 transition-opacity">
+      <div className="mx-auto flex min-h-[54px] max-w-[90rem] items-center justify-between gap-3 px-4 py-1.5 sm:px-6 lg:min-h-[60px] xl:gap-5">
+        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center py-1.5 group select-none active:opacity-90 transition-opacity">
           <img
             src={navLogo}
             alt="SpaceTech Consulting logo"
-            className="h-auto w-[148px] shrink-0 object-contain object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] sm:w-[180px] lg:w-[188px] xl:w-[205px] [image-rendering:auto] dark:brightness-110"
+            className="h-auto w-[134px] shrink-0 object-contain object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] sm:w-[162px] lg:w-[172px] xl:w-[188px] [image-rendering:auto] dark:brightness-110"
           />
         </Link>
 

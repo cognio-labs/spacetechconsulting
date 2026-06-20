@@ -362,7 +362,7 @@ function MissionVisionValues() {
                   {[
                     { val: "ANZ", label: "Primary Focus" },
                     { val: "24/7", label: "Global Support" },
-                    { val: "1800+", label: "Tickets Resolved" },
+                    { val: "3000+", label: "Tickets Resolved" },
                     { val: "3", label: "Delivery Regions" },
                   ].map(({ val, label }) => (
                     <div

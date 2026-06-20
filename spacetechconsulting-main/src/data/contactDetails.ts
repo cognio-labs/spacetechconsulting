@@ -10,7 +10,6 @@ export const contactDetails = {
   phoneIndia: {
     label: "+91 98230 44024",
     href: "tel:+919823044024",
-    officeLabel: "India Office",
   },
   whatsapp: {
     label: "+61 468 040 481",

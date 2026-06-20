@@ -85,7 +85,7 @@ export function Footer() {
             </li>
             <li className="flex items-center gap-2">
               <Phone className="h-4 w-4 text-cyan-400" />
-              <a href={contactDetails.phoneIndia.href} className="hover:text-cyan-400">{contactDetails.phoneIndia.officeLabel}: {contactDetails.phoneIndia.label}</a>
+              <a href={contactDetails.phoneIndia.href} className="hover:text-cyan-400">{contactDetails.phoneIndia.label}</a>
             </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-cyan-400" />
