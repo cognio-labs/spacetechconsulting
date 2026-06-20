@@ -1,0 +1,104 @@
+CLIENT SUCCESS STORY
+Operational Excellence & Platform Visibility Transformation
+Leading ASX-Listed Property Group
+See how SpaceTech transforms support operations into measurable business outcomes through platform ownership, operational
+visibility, and continuous improvement.
+Hero Metrics
+[Display as a 4-card metrics row]
+• 2,000+ – Platform Issues Managed
+• 95%+ – SLA on owned ticket volume
+• 18 – Recurring issue patterns identified and resolved
+• <100 – Open backlog maintained, down from sustained volume
+Challenge
+Limited Visibility. Limited Accountability. Reactive Support.
+The client operated a complex Yardi ecosystem supporting commercial and residential property portfolios across hundreds of
+business users. Support requests were being addressed, but leadership lacked visibility into platform demand, recurring issues,
+ownership accountability, operational trends, and service performance.
+Key challenges:
+• Limited operational reporting and insights
+• Inconsistent ticket categorisation
+• Lack of module ownership accountability
+• Difficulty identifying recurring issues and root causes
+• Reactive support model with limited governance visibility
+• Resource attrition
+What SpaceTech Built
+
+-- 1 of 7 --
+
+[Display as 4 icon cards]
+• SME Ownership — Named module experts with accountability
+• Categorisation — Structured Jira operational taxonomy
+• Dashboards — Real-time operational visibility
+• Governance — Continuous improvement reviews
+Approach: Building a Data-Driven Yardi Support Operating Model
+Module Ownership Model
+SpaceTech established named primary and backup SMEs across critical Yardi functions, including Voyager Property Management &
+Lease Administration, Commercial Cafe, Voyager GL/Finance, Accounts Receivable/Bank Book, Deal Manager, Capex/Construction
+Manager, Procure to Pay, Facility Manager, Investment Manager, Fixed Assets, Reporting, Security, and Integrations. This created
+clear ownership and accountability across every Yardi module aligned with client business processes.
+Operational Categorisation Framework
+SpaceTech designed a structured Jira taxonomy spanning components, operational categories, sub-categories, root cause
+classification, and reporting standards. For the first time, leadership could understand what issues were occurring, which modules
+generated demand, which themes were recurring, and where improvement efforts should focus.
+Executive Dashboards & Reporting
+SpaceTech developed real-time dashboards covering ticket intake and closures, stale ticket tracking, waiting-for-customer analysis,
+SLA compliance, and operational category reporting.
+Real-time operational dashboards transformed support from reactive ticket handling into measurable platform management.
+
+-- 2 of 7 --
+
+
+
+-- 3 of 7 --
+
+Both average and median resolution time fell steadily over nine months, average dropping from ~33.5 to ~6.4 days, median from
+~23.7 to ~4.3 days, reflecting sustained process and capacity improvements rather than a single one-off fix.
+Continuous Improvement Governance
+SpaceTech implemented recurring operational reviews focused on backlog reduction, root cause elimination, process optimization,
+knowledge management, and user enablement.
+
+-- 4 of 7 --
+
+Business Outcomes
+[Display as icon cards]
+• Established enterprise-wide support categorisation and reporting standards
+• Created real-time operational dashboards for leadership visibility
+• Implemented named SME ownership across critical business functions
+• Managed more than 2,000 platform requests
+• 95%+ SLA on owned ticket volume
+• 18 Recurring issue patterns identified and eliminated through root-cause fixes
+• Closures exceeded new ticket intake
+• Improved platform health and support transparency
+• Built a scalable operating model supporting hundreds of business users
+BUSINESS IMPACT — Navy blue banner
+FROM TICKET MANAGEMENT TO PLATFORM OWNERSHIP
+SpaceTech helped transform Yardi support operations from a reactive service model into a structured, measurable, and continuously
+improving operating model supporting hundreds of business users across a complex enterprise property environment. Beyond
+resolving tickets faster, SpaceTech's root cause program targets the source of recurring issues - turning repeat problems into
+permanent fixes, so business teams spend less time raising the same ticket twice.
+
+-- 5 of 7 --
+
+Visual Layout Guide
+Top band: Six icon cards — Visibility, Ownership, Governance, Performance, Platform Health, Continuous Improvement.
+Navigation strip: Challenge | Approach | Outcomes.
+
+-- 6 of 7 --
+
+Metrics strip: 2,000+ Issues Managed / 95%+ SLA / 18 Recurring issue patterns
+Dashboard section, left side: Activity Dashboard, Created vs Resolved, Stale Tickets, SLA Tracking screenshots.
+Dashboard section, right side: Key achievements list — metrics plus Named SME Model, Operational Categorisation Framework,
+Real-Time Executive Dashboards, Continuous Improvement Governance.
+Website Section Placement
+Place immediately after “Why SpaceTech” and before “Industry Focus.” This section serves as proof that SpaceTech delivers
+measurable business outcomes.
+Designer Notes
+• Use six icon cards across the top band.
+• Include a navy blue proof banner for the Business Impact statement.
+• Show metric cards prominently; the same four metrics recur in three places (Hero, Metrics Strip, Visual Layout) by design, to
+reinforce the headline numbers.
+• Consider a blurred or stylized screenshot of operational dashboards as a background visual to reinforce governance, visibility,
+and enterprise operations.
+
+-- 7 of 7 --
+

@@ -35,22 +35,22 @@ export function Nav() {
           : "border-slate-200/50 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.01),0_2px_8px_rgba(15,23,42,0.03)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[72px] lg:h-[84px] py-2 flex items-center justify-between gap-3 xl:gap-5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[56px] lg:h-[62px] py-1 flex items-center justify-between gap-3 xl:gap-5">
         <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center group select-none active:opacity-90 transition-opacity">
           <img
             src={navLogo}
             alt="SpaceTech Consulting logo"
-            className="h-auto w-[174px] shrink-0 object-contain object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] sm:w-[210px] lg:w-[230px] xl:w-[250px] [image-rendering:auto]"
+            className="h-auto w-[148px] shrink-0 object-contain object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] sm:w-[180px] lg:w-[188px] xl:w-[205px] [image-rendering:auto]"
           />
         </Link>
  
-        <nav className="hidden lg:flex items-center gap-1 rounded-full border border-slate-200/80 bg-slate-50/90 px-2 py-1.5 shadow-sm backdrop-blur select-none">
+        <nav className="hidden lg:flex items-center gap-1 rounded-full border border-slate-200/80 bg-slate-50/90 px-1.5 py-1 shadow-sm backdrop-blur select-none">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="px-2.5 xl:px-4 py-2 text-sm font-semibold antialiased rounded-full transition-colors text-slate-700 hover:text-[#2563EB] active:scale-95 duration-200"
-              activeProps={{ className: "px-2.5 xl:px-4 py-2 text-sm font-semibold antialiased rounded-full text-[#2563EB] bg-[rgba(37,99,235,0.08)] shadow-[inset_0_1px_2px_rgba(37,99,235,0.05)]" }}
+              className="px-2.5 xl:px-3.5 py-1.5 text-[13px] font-semibold antialiased rounded-full transition-colors text-slate-700 hover:text-[#2563EB] active:scale-95 duration-200"
+              activeProps={{ className: "px-2.5 xl:px-3.5 py-1.5 text-[13px] font-semibold antialiased rounded-full text-[#2563EB] bg-[rgba(37,99,235,0.08)] shadow-[inset_0_1px_2px_rgba(37,99,235,0.05)]" }}
             >
               {l.label}
             </Link>
@@ -62,12 +62,12 @@ export function Nav() {
             href="https://cal.com/spacetech/30min"
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline-flex items-center gap-2 rounded-[14px] bg-[linear-gradient(135deg,#1E40AF,#2563EB)] px-6 py-3 text-sm font-bold text-white shadow-glow hover:shadow-glow-hover active:scale-[0.98] transition-all duration-300 hover:-translate-y-0.5 select-none"
+            className="hidden sm:inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#1E40AF,#2563EB)] px-4 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(37,99,235,0.22)] ring-1 ring-blue-400/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(37,99,235,0.28)] active:scale-[0.98] select-none"
           >
             Book a Call
           </a>
-          <button onClick={() => setOpen(!open)} className="lg:hidden grid h-11 w-11 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100 active:scale-95 transition-transform" aria-label="Toggle navigation">
-            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button onClick={() => setOpen(!open)} className="lg:hidden grid h-10 w-10 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100 active:scale-95 transition-transform" aria-label="Toggle navigation">
+            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>

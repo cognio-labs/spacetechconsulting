@@ -6,10 +6,15 @@ export const contactDetails = {
   phoneAustralia: {
     label: "+61 468 040 481",
     href: "tel:+61468040481",
-    whatsapp: "https://wa.me/61468040481",
   },
   phoneIndia: {
-    label: "India office: phone coming soon",
+    label: "+91 98230 44024",
+    href: "tel:+919823044024",
+    officeLabel: "India Office",
+  },
+  whatsapp: {
+    label: "+61 468 040 481",
+    href: "https://wa.me/61468040481",
   },
   email: {
     label: "info@spacetechconsulting.com",

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, Send } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { contactDetails } from "@/data/contactDetails";
 
@@ -86,30 +86,23 @@ function Contact() {
         <div className="relative max-w-4xl mx-auto text-center">
           <span className="inline-block px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-bold tracking-widest uppercase">Contact</span>
           <h1 className="mt-3 text-3xl md:text-5xl font-extrabold">Contact <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">Us</span></h1>
-          <p className="mt-3 text-base text-slate-300">
+          <p className="mx-auto mt-3 max-w-[18rem] text-base text-slate-300 sm:max-w-sm md:max-w-none">
             Have questions about our Yardi solutions? We're here to help.
           </p>
         </div>
       </section>
 
       <section className="py-6 md:py-8 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white dark:bg-[#020B1F] dark:from-[#0B1329] dark:to-[#020B1F]">
-        <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-5 items-start">
-          <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
-            <div className="bg-white rounded-2xl p-5 shadow-elegant border border-slate-100">
-              <div className="mb-5 flex items-end gap-3 rounded-2xl border border-blue-100 bg-blue-50/60 p-3">
-                <img src="/space-tech-logo-mark.png" alt="SpaceTech Consulting logo" className="h-12 w-16 shrink-0 object-contain" />
-                <div className="mb-0.5 min-w-0 leading-none">
-                  <p className="text-base font-extrabold tracking-tight text-[#0F172A]">SpaceTech</p>
-                  <p className="mt-0.5 text-sm font-extrabold tracking-tight text-[#22C55E]">Consulting</p>
-                </div>
-              </div>
+        <div className="mr-auto grid w-full max-w-[min(358px,calc(100vw-2rem))] min-w-0 gap-5 items-start sm:mx-auto sm:max-w-[calc(100vw-2rem)] lg:max-w-6xl lg:grid-cols-[0.9fr_1.1fr]">
+          <motion.div className="min-w-0">
+            <div className="w-full max-w-full min-w-0 overflow-hidden bg-white rounded-2xl p-5 shadow-elegant border border-slate-100">
               <h2 className="text-xl md:text-2xl font-extrabold text-[#0F172A]">Contact Information</h2>
-              <p className="mt-1 text-sm text-slate-900">Reach out to discuss your Yardi platform, support, reporting, or implementation needs.</p>
+              <p className="mt-1 break-words text-sm text-slate-900">Reach out to discuss your Yardi platform, support, reporting, or implementation needs.</p>
               <div className="mt-4 grid gap-2.5">
                 {[
                   { icon: Phone, title: "Phone (USA)", text: contactDetails.phoneUsa.label, href: contactDetails.phoneUsa.href },
                   { icon: Phone, title: "Phone (Australia)", text: contactDetails.phoneAustralia.label, href: contactDetails.phoneAustralia.href },
-                  { icon: MapPin, title: "Phone (India)", text: contactDetails.phoneIndia.label },
+                  { icon: Phone, title: contactDetails.phoneIndia.officeLabel, text: contactDetails.phoneIndia.label, href: contactDetails.phoneIndia.href },
                   { icon: Mail, title: "Email", text: contactDetails.email.label, href: contactDetails.email.href },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-3">
@@ -117,12 +110,12 @@ function Contact() {
                       <div className="grid h-9 w-9 place-items-center rounded-xl bg-blue-50 text-[#2563EB]">
                         <item.icon className="h-4 w-4" />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <h3 className="text-sm font-bold text-[#0F172A]">{item.title}</h3>
                         {item.href ? (
-                          <a href={item.href} className="text-sm font-medium text-slate-900 hover:text-[#2563EB]">{item.text}</a>
+                          <a href={item.href} className="break-words text-sm font-medium text-slate-900 hover:text-[#2563EB]">{item.text}</a>
                         ) : (
-                          <p className="text-sm text-slate-900">{item.text}</p>
+                          <p className="break-words text-sm text-slate-900">{item.text}</p>
                         )}
                       </div>
                     </div>
@@ -137,10 +130,10 @@ function Contact() {
             </div>
           </motion.div>
 
-          <motion.div id="send-us-a-message-form" initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
-            className="bg-white rounded-2xl p-5 md:p-6 shadow-elegant border border-slate-100">
+          <motion.div id="send-us-a-message-form"
+            className="w-full max-w-full min-w-0 overflow-hidden bg-white rounded-2xl p-5 md:p-6 shadow-elegant border border-slate-100">
             <h2 className="text-xl md:text-2xl font-extrabold text-[#0F172A]">Send us a message</h2>
-            <p className="mt-1 text-sm text-slate-900">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
+            <p className="mt-1 break-words text-sm text-slate-900">Tell us about your Yardi platform, reporting, support, or implementation needs.</p>
             {sent ? (
               <div className="mt-5 p-5 rounded-2xl bg-green-50 border border-green-200 text-green-800" role="status" aria-live="polite">
                 <p className="font-bold">Message sent successfully.</p>

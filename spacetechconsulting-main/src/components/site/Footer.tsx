@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Calendar, Phone, Mail, MapPin } from "lucide-react";
+import { Calendar, Phone, Mail } from "lucide-react";
 import { contactDetails } from "@/data/contactDetails";
 import footerLogo from "@/assets/footer-logo.png";
 
@@ -83,7 +83,10 @@ export function Footer() {
               <Phone className="h-4 w-4 text-cyan-400" />
               <a href={contactDetails.phoneAustralia.href} className="hover:text-cyan-400">{contactDetails.phoneAustralia.label}</a>
             </li>
-            <li className="flex items-center gap-2"><MapPin className="h-4 w-4 text-cyan-400" /> {contactDetails.phoneIndia.label}</li>
+            <li className="flex items-center gap-2">
+              <Phone className="h-4 w-4 text-cyan-400" />
+              <a href={contactDetails.phoneIndia.href} className="hover:text-cyan-400">{contactDetails.phoneIndia.officeLabel}: {contactDetails.phoneIndia.label}</a>
+            </li>
             <li className="flex items-center gap-2">
               <Mail className="h-4 w-4 text-cyan-400" />
               <a href={contactDetails.email.href} className="hover:text-cyan-400">{contactDetails.email.label}</a>
@@ -93,7 +96,7 @@ export function Footer() {
             <a href={linkedInUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="grid h-8 w-8 place-items-center rounded-lg bg-white/10 transition-colors hover:bg-[#0A66C2]">
               <LinkedInIcon />
             </a>
-            <a href={contactDetails.phoneAustralia.whatsapp} target="_blank" rel="noreferrer" aria-label="WhatsApp" className="grid h-8 w-8 place-items-center rounded-lg bg-[#25D366] text-white transition-colors hover:bg-[#1EBE5D]">
+            <a href={contactDetails.whatsapp.href} target="_blank" rel="noreferrer" aria-label={`WhatsApp ${contactDetails.whatsapp.label}`} className="grid h-8 w-8 place-items-center rounded-lg bg-[#25D366] text-white transition-colors hover:bg-[#1EBE5D]">
               <WhatsAppIcon />
             </a>
             <a href="https://cal.com/spacetech/30min" target="_blank" rel="noreferrer" aria-label="Book a call" className="grid h-8 w-8 place-items-center rounded-lg bg-white/10 transition-colors hover:bg-[#2563EB]">

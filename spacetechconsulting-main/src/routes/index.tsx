@@ -6,10 +6,16 @@ import {
   ChevronDown,
   Globe, FileCheck, Languages, Share2,
   Cpu, Settings2, Database, RefreshCcw, Rocket, Building2, CheckCircle2,
+  Eye, UserCheck, Tags, LayoutDashboard, ClipboardCheck, Layers3, Workflow,
+  Gauge, HeartPulse, Repeat2, LineChart, TrendingDown, ClipboardList,
+  ListChecks, Target, Shield,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
 import heroSectionBg from "@/assets/hero-section-bg.png";
+import consultingTeamPhoto from "@/assets/about-team.jpg";
+import caseStudyDashboardGrid from "@/assets/case-study/case-study-page-3.png";
+import caseStudyResolutionChart from "@/assets/case-study/case-study-page-4.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -82,13 +88,128 @@ const proofPoints = [
   "Platform Health & Operational Visibility Improved",
 ];
 
+const caseStudyIconStrip = [
+  { icon: Eye, label: "Visibility" },
+  { icon: UserCheck, label: "Ownership" },
+  { icon: ShieldCheck, label: "Governance" },
+  { icon: Gauge, label: "Performance" },
+  { icon: HeartPulse, label: "Platform Health" },
+  { icon: Repeat2, label: "Continuous Improvement" },
+];
+
+const caseStudyHeroMetrics = [
+  { value: "2,000+", label: "Platform Issues Managed" },
+  { value: "95%+", label: "SLA on owned ticket volume" },
+  { value: "18", label: "Recurring issue patterns resolved" },
+  { value: "<100", label: "Open backlog maintained" },
+];
+
+const caseStudyChallenges = [
+  "Limited operational reporting and insights",
+  "Inconsistent ticket categorisation",
+  "Lack of module ownership accountability",
+  "Difficulty identifying recurring issues and root causes",
+  "Reactive support model with limited governance visibility",
+  "Resource attrition impacting service continuity",
+];
+
+const caseStudyBuildCards = [
+  {
+    icon: UserCheck,
+    title: "SME Ownership",
+    body: "Named primary and backup module experts with clear accountability across critical Yardi functions.",
+  },
+  {
+    icon: Tags,
+    title: "Categorisation",
+    body: "A structured Jira operational taxonomy for components, categories, root causes, and reporting standards.",
+  },
+  {
+    icon: LayoutDashboard,
+    title: "Dashboards",
+    body: "Real-time operational visibility for ticket intake, closures, stale work, waiting-for-customer items, and SLA compliance.",
+  },
+  {
+    icon: ClipboardCheck,
+    title: "Governance",
+    body: "Recurring continuous improvement reviews focused on root cause elimination and platform health.",
+  },
+];
+
+const yardiModules = [
+  "Voyager Property Management",
+  "Lease Administration",
+  "Commercial Cafe",
+  "Voyager GL / Finance",
+  "Accounts Receivable / Bank Book",
+  "Deal Manager",
+  "Capex / Construction Manager",
+  "Procure to Pay",
+  "Facility Manager",
+  "Investment Manager",
+  "Fixed Assets",
+  "Reporting",
+  "Security",
+  "Integrations",
+];
+
+const categorisationFlow = [
+  "Components",
+  "Operational Categories",
+  "Sub-Categories",
+  "Root Cause Classification",
+  "Reporting Standards",
+];
+
+const dashboardCoverage = [
+  "Ticket intake and closures",
+  "Created vs resolved trends",
+  "Stale ticket tracking",
+  "Waiting-for-customer analysis",
+  "SLA compliance",
+  "Operational category reporting",
+];
+
+const dashboardAchievements = [
+  "Named SME Model",
+  "Operational Categorisation Framework",
+  "Real-Time Executive Dashboards",
+  "Continuous Improvement Governance",
+];
+
+const governanceCards = [
+  "Backlog reduction",
+  "Root cause elimination",
+  "Process optimization",
+  "Knowledge management",
+  "User enablement",
+];
+
+const businessOutcomes = [
+  "Established enterprise-wide support categorisation and reporting standards",
+  "Created real-time operational dashboards for leadership visibility",
+  "Implemented named SME ownership across critical business functions",
+  "Managed more than 2,000 platform requests",
+  "Delivered 95%+ SLA on owned ticket volume",
+  "Identified and eliminated 18 recurring issue patterns through root-cause fixes",
+  "Moved closures above new ticket intake",
+  "Built a scalable operating model supporting hundreds of business users",
+];
+
+const ctaTrustIndicators = [
+  "50+ Years Total Yardi Experience",
+  "2,000+ Platform Requests Managed",
+  "95%+ SLA Performance",
+  "Australia • India • United States",
+];
+
 const services = [
-  { num: "01", title: "Platform Support & Optimization", items: ["Application Help Desk (L1/L2/L3)","System administration & maintenance","Platform upgrades support & testing","Issue tracking & SLA management","Health checks & system audits","Performance tuning & optimization"] },
-  { num: "02", title: "Custom Development", items: ["Custom Reporting (YSR / Columnar)","Custom Financials","Custom Interfaces","Workflow validations & automations","Integrations & RPA"] },
-  { num: "03", title: "Data Migration", items: ["Legacy system data migration (Yardi ETL)","Data cleansing","Data mapping","Data load and validation"] },
-  { num: "04", title: "Implementation & Consulting", items: ["Yardi Voyager / Elevate / Breeze Implementation","Multi-module deployment & configuration","Security model & role restructuring","Go-live support & stabilization"] },
-  { num: "05", title: "Training & Testing", items: ["Role-based training programs","Knowledge base creation","Process documentation","Yardi product testing","Test scenarios & test case creation"] },
-  { num: "06", title: "Data & Analytics", items: ["BI integration / Yardi Data Connect","Data visualization dashboards","Executive reporting packages","KPI tracking & monitoring","Dashboard & analytics setup"] },
+  { num: "01", title: "Platform Support & Optimization", items: ["Application Help Desk (L1/L2/L3)", "System administration & maintenance", "Platform upgrades support & testing", "Issue tracking & SLA management", "Health checks & system audits", "Performance tuning & optimization"] },
+  { num: "02", title: "Custom Development", items: ["Custom Reporting (YSR / Columnar)", "Custom Financials", "Custom Interfaces", "Workflow validations & automations", "Integrations & RPA"] },
+  { num: "03", title: "Data Migration", items: ["Legacy system data migration (Yardi ETL)", "Data cleansing", "Data mapping", "Data load and validation"] },
+  { num: "04", title: "Implementation & Consulting", items: ["Yardi Voyager / Elevate / Breeze Implementation", "Multi-module deployment & configuration", "Security model & role restructuring", "Go-live support & stabilization"] },
+  { num: "05", title: "Training & Testing", items: ["Role-based training programs", "Knowledge base creation", "Process documentation", "Yardi product testing", "Test scenarios & test case creation"] },
+  { num: "06", title: "Data & Analytics", items: ["BI integration / Yardi Data Connect", "Data visualization dashboards", "Executive reporting packages", "KPI tracking & monitoring", "Dashboard & analytics setup"] },
 ];
 
 const faqs = [
@@ -136,6 +257,234 @@ function AnimatedMetricValue({ target, suffix, run, fallback }: { target: number
   return <>{value}{suffix}</>;
 }
 
+function CaseStudySection() {
+  return (
+    <section id="case-study" className="relative overflow-hidden bg-[#F8FAFC] px-4 py-16 text-[#0F172A] sm:px-6 md:py-20">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,#F8FAFC_0%,#FFFFFF_42%,#EFF6FF_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(37,99,235,0.08),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(6,182,212,0.08),transparent_28%)]" />
+
+      <div className="relative mx-auto max-w-7xl">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
+          <div className="grid bg-[#0F172A] lg:grid-cols-[1.08fr_0.92fr]">
+            <div className="p-6 text-white sm:p-8 lg:p-10">
+              <motion.span variants={fadeUp} className="inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-cyan-100">
+                <Shield className="h-4 w-4" />
+                Client Success Story
+              </motion.span>
+              <motion.h2 variants={fadeUp} className="mt-5 text-3xl font-extrabold leading-tight sm:text-4xl lg:text-5xl">
+                Operational Excellence & Platform Visibility Transformation
+              </motion.h2>
+              <motion.p variants={fadeUp} className="mt-4 text-lg font-semibold text-cyan-100">
+                Leading ASX-Listed Property Group
+              </motion.p>
+              <motion.p variants={fadeUp} className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg">
+                SpaceTech transformed support operations into measurable business outcomes through platform ownership, operational visibility, and continuous improvement.
+              </motion.p>
+
+              <motion.div variants={stagger} className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-4">
+                {caseStudyHeroMetrics.map((metric) => (
+                  <motion.div key={metric.label} variants={fadeUp} className="rounded-2xl border border-white/10 bg-white/[0.08] p-4">
+                    <div className="text-2xl font-extrabold text-white sm:text-3xl">{metric.value}</div>
+                    <p className="mt-2 text-xs font-semibold leading-snug text-slate-300">{metric.label}</p>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+
+            <motion.div variants={fadeUp} className="relative min-h-[320px] overflow-hidden border-t border-white/10 lg:border-l lg:border-t-0">
+              <img src={consultingTeamPhoto} alt="Enterprise consulting team in a governance meeting" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
+                <p className="text-sm font-bold uppercase tracking-widest text-cyan-100">Enterprise operating model</p>
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-slate-200">
+                  Real-world governance, named ownership, and executive reporting for hundreds of property business users.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          <motion.div variants={stagger} className="grid grid-cols-2 border-b border-slate-200 bg-white sm:grid-cols-3 lg:grid-cols-6">
+            {caseStudyIconStrip.map((item) => (
+              <motion.div key={item.label} variants={fadeUp} className="flex items-center gap-3 border-r border-slate-100 px-4 py-4 last:border-r-0">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-[#2563EB]">
+                  <item.icon className="h-5 w-5" />
+                </div>
+                <span className="text-sm font-extrabold text-slate-800">{item.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="border-b border-slate-200 bg-slate-50 px-5 py-3">
+            <div className="flex flex-wrap gap-2">
+              {["Challenge", "Approach", "Outcomes"].map((item) => (
+                <span key={item} className="rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-extrabold uppercase tracking-widest text-slate-700">
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-12 p-5 sm:p-8 lg:p-10">
+            <motion.div variants={stagger} className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+              <motion.div variants={fadeUp}>
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB]">The Challenge</span>
+                <h3 className="mt-3 text-2xl font-extrabold sm:text-3xl">Limited visibility. Limited accountability. Reactive support.</h3>
+                <p className="mt-4 text-slate-700 leading-relaxed">
+                  The client operated a complex Yardi ecosystem supporting commercial and residential property portfolios across hundreds of business users. Leadership needed clearer visibility into demand, recurring issues, ownership accountability, operational trends, and service performance.
+                </p>
+              </motion.div>
+              <motion.div variants={stagger} className="grid gap-3 sm:grid-cols-2"><h3>key challanges</h3>
+                {caseStudyChallenges.map((challenge) => (
+                  <motion.div key={challenge} variants={fadeUp} className="flex gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#2563EB]" />
+                    <span className="text-sm font-semibold leading-relaxed text-slate-700">{challenge}</span>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={stagger}>
+              <div className="max-w-3xl">
+                <span className="text-xs font-extrabold uppercase tracking-widest text-[#2563EB]">What SpaceTech Built</span>
+                <h3 className="mt-3 text-2xl font-extrabold sm:text-3xl">A data-driven Yardi support operating model</h3>
+              </div>
+              <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                {caseStudyBuildCards.map((card) => (
+                  <motion.div key={card.title} variants={fadeUp} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl bg-[#0F172A] text-white">
+                      <card.icon className="h-5 w-5" />
+                    </div>
+                    <h4 className="mt-4 text-lg font-extrabold">{card.title}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{card.body}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div variants={stagger} className="grid gap-6 lg:grid-cols-2">
+              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <div className="flex items-center gap-3">
+                  <Layers3 className="h-5 w-5 text-[#2563EB]" />
+                  <h4 className="text-lg font-extrabold">Module Ownership Model</h4>
+                </div>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {yardiModules.map((module) => (
+                    <span key={module} className="rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">
+                      {module}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <div className="flex items-center gap-3">
+                  <Workflow className="h-5 w-5 text-[#2563EB]" />
+                  <h4 className="text-lg font-extrabold">Operational Categorisation Framework</h4>
+                </div>
+                <div className="mt-5 grid gap-3">
+                  {categorisationFlow.map((step, index) => (
+                    <div key={step} className="flex items-center gap-3 rounded-xl bg-white p-3 text-sm font-bold text-slate-700 shadow-sm">
+                      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-blue-50 text-xs text-[#2563EB]">{index + 1}</span>
+                      {step}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={stagger} className="grid gap-7 lg:grid-cols-[1.1fr_0.9fr]">
+              <motion.div variants={fadeUp} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <div className="border-b border-slate-200 px-5 py-4">
+                  <div className="flex items-center gap-3">
+                    <LayoutDashboard className="h-5 w-5 text-[#2563EB]" />
+                    <h4 className="text-lg font-extrabold">Executive Dashboards & Reporting</h4>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    Operational dashboards made platform demand, stale work, SLA health, and customer-waiting items visible to leadership.
+                  </p>
+                </div>
+                <img src={caseStudyDashboardGrid} alt="Case study dashboard examples showing Yardi support operations" className="w-full bg-slate-100" />
+                <p className="border-t border-slate-200 px-5 py-3 text-xs font-semibold text-slate-500">
+                  Dashboard examples from the case study PDF. Values shown in the source layout are illustrative for presentation.
+                </p>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-[#0F172A] p-5 text-white shadow-sm">
+                <LineChart className="h-6 w-6 text-cyan-200" />
+                <h4 className="mt-4 text-xl font-extrabold">Real client performance data</h4>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  Resolution performance improved steadily over nine months. Average resolution time fell from approximately 33.5 days to 6.4 days, and median resolution time fell from approximately 23.7 days to 4.3 days.
+                </p>
+                <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-white">
+                  <img src={caseStudyResolutionChart} alt="Real client data showing resolution time improvement over nine months" className="w-full" />
+                </div>
+                <div className="mt-5 grid gap-3">
+                  {dashboardCoverage.map((item) => (
+                    <div key={item} className="flex items-center gap-3 rounded-xl bg-white/10 p-3 text-sm font-semibold text-slate-200">
+                      <TrendingDown className="h-4 w-4 shrink-0 text-cyan-200" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={stagger} className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-blue-50 p-6">
+                <Target className="h-6 w-6 text-[#2563EB]" />
+                <h4 className="mt-4 text-xl font-extrabold">Continuous Improvement Governance</h4>
+                <p className="mt-3 text-sm leading-relaxed text-slate-700">
+                  Recurring reviews shifted the function from ticket handling to platform ownership, with repeat problems turned into permanent fixes.
+                </p>
+                <div className="mt-5 grid gap-2">
+                  {governanceCards.map((item) => (
+                    <div key={item} className="flex items-center gap-3 rounded-xl bg-white px-4 py-3 text-sm font-bold text-slate-700">
+                      <ListChecks className="h-4 w-4 text-[#2563EB]" />
+                      {item}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div variants={fadeUp} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <ClipboardList className="h-6 w-6 text-[#2563EB]" />
+                  <h4 className="text-xl font-extrabold">Business Outcomes</h4>
+                </div>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {businessOutcomes.map((outcome) => (
+                    <div key={outcome} className="flex gap-3 rounded-xl border border-slate-100 bg-slate-50 p-3">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#2563EB]" />
+                      <span className="text-sm font-semibold leading-relaxed text-slate-700">{outcome}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                  {dashboardAchievements.map((achievement) => (
+                    <div key={achievement} className="rounded-xl bg-[#0F172A] px-4 py-3 text-sm font-extrabold text-white">
+                      {achievement}
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="rounded-2xl bg-[#0F172A] p-6 text-white sm:p-8">
+              <p className="text-xs font-extrabold uppercase tracking-widest text-cyan-200">From ticket management to platform ownership</p>
+              <p className="mt-4 max-w-5xl text-xl font-extrabold leading-relaxed sm:text-2xl">
+                SpaceTech helped transform Yardi support operations from a reactive service model into a structured, measurable, continuously improving operating model supporting hundreds of business users.
+              </p>
+              <p className="mt-4 max-w-4xl text-sm leading-relaxed text-slate-300">
+                The root cause program targets the source of recurring issues and turns repeat problems into permanent fixes.
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const whyMetricsRef = useRef<HTMLDivElement | null>(null);
@@ -163,18 +512,12 @@ function HomePage() {
     <Layout>
       {/* HERO */}
       <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
-        <video
+        <img
+          src={heroSectionBg}
+          alt=""
           className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center brightness-[0.45] lg:brightness-100"
-          poster={heroSectionBg}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
           aria-hidden="true"
-        >
-          <source src="/hero-section-video.mp4" type="video/mp4" />
-        </video>
+        />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.65))] lg:bg-gradient-to-r lg:from-[#020B1F]/98 lg:via-[#020B1F]/76 lg:to-[#020B1F]/16" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
         <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
@@ -235,15 +578,15 @@ function HomePage() {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent" />
         <div className="relative mx-auto max-w-7xl">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="mx-auto max-w-4xl text-center">
-            <motion.span variants={fadeUp} className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+            <motion.span variants={fadeUp} className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
               Why SpaceTech
             </motion.span>
-            <motion.h2 variants={fadeUp} className="mt-4 text-4xl font-extrabold leading-[1.05] text-[#0F172A] md:text-6xl">
-              Why <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">SpaceTech</span>
+            <motion.h2 variants={fadeUp} className="mt-5 text-4xl font-bold leading-[1.12] text-[#0F172A] md:text-5xl">
+              Why <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">SpaceTech</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-4 text-2xl font-extrabold leading-tight text-[#0F172A] md:text-4xl">
+            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-3xl text-2xl font-semibold leading-[1.25] text-slate-950 md:text-3xl">
               Enterprise Engineering DNA.
-              <span className="block bg-gradient-to-r from-[#2563EB] to-[#06B6D4] bg-clip-text text-transparent">Property Technology Expertise.</span>
+              <span className="block bg-gradient-to-r from-[#2563EB] to-[#0891B2] bg-clip-text text-transparent">Property Technology Expertise.</span>
             </motion.p>
             <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 md:text-lg">
               Built on enterprise engineering principles, platform ownership, and continuous improvement — helping property organizations maximize the value of their Yardi investment.
@@ -283,7 +626,7 @@ function HomePage() {
                   <div className="absolute right-0 top-1 grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#2563EB] opacity-90">
                     <card.icon className="h-5 w-5" />
                   </div>
-                  <h3 className="mb-4 pr-12 text-xl font-extrabold text-[#0F172A]">{card.title}</h3>
+                  <h3 className="mb-4 pr-12 text-xl font-bold text-[#0F172A]">{card.title}</h3>
                   <p className="text-sm leading-7 text-slate-700">{card.body}</p>
                 </div>
               </motion.article>
@@ -300,7 +643,7 @@ function HomePage() {
                   <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
                     <Building2 className="h-4 w-4" /> Special Feature
                   </div>
-                  <h3 className="mt-4 text-2xl font-extrabold uppercase tracking-wide text-[#0F172A]">
+                  <h3 className="mt-4 text-2xl font-bold uppercase tracking-wide text-[#0F172A]">
                     Built From Real Enterprise Operations
                   </h3>
                   <p className="mt-4 text-sm leading-7 text-slate-700 md:text-base">
@@ -321,13 +664,13 @@ function HomePage() {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(255,255,255,0.26),transparent_34%),radial-gradient(circle_at_82%_80%,rgba(15,23,42,0.18),transparent_42%)]" />
                 <div className="absolute inset-x-0 bottom-0 h-px bg-white/25" />
                 <div className="relative">
-                <span className="text-xs font-bold uppercase tracking-widest text-cyan-200">Enterprise Proof Banner</span>
-                <h3 className="mt-4 text-2xl font-extrabold uppercase leading-tight md:text-3xl">
-                  Proven In Enterprise Property Operations
-                </h3>
-                <p className="mt-5 text-sm leading-7 text-slate-300">
-                  Supporting one of Australia's largest listed property groups.
-                </p>
+                  <span className="text-xs font-bold uppercase tracking-widest text-cyan-200">Enterprise Proof Banner</span>
+                  <h3 className="mt-4 text-2xl font-bold uppercase leading-tight md:text-3xl">
+                    Proven In Enterprise Property Operations
+                  </h3>
+                  <p className="mt-5 text-sm leading-7 text-slate-300">
+                    Supporting one of Australia's largest listed property groups.
+                  </p>
                 </div>
               </div>
               <div className="grid gap-3 p-6 sm:grid-cols-2 md:p-8">
@@ -341,21 +684,47 @@ function HomePage() {
             </motion.div>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-8 text-center">
-            <motion.div variants={fadeUp} className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link to="/contact#send-us-a-message-form"
+          <motion.div id="book-call" initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="mt-6 overflow-hidden rounded-[2rem] border border-white/70 bg-white/86 p-6 text-center shadow-elegant backdrop-blur-xl md:p-10">
+            <motion.div variants={fadeUp} className="mx-auto max-w-4xl">
+              <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+                Call To Action
+              </span>
+              <h3 className="mt-5 text-3xl font-bold leading-tight text-[#0F172A] md:text-5xl">
+                Ready to Maximize Your <span className="text-gradient">Yardi Investment?</span>
+              </h3>
+              <p className="mx-auto mt-4 max-w-3xl text-base font-semibold leading-7 text-slate-800 md:text-lg">
+                Supporting property organizations with platform ownership, operational excellence, governance, and continuous improvement.
+              </p>
+              <p className="mx-auto mt-3 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
+                Partner with SpaceTech to improve platform health, increase operational visibility, reduce recurring issues, and unlock greater value from your Yardi platform.
+              </p>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href="#book-call"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl gradient-primary px-7 py-4 font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-hover active:scale-[0.98] sm:w-auto">
                 Book a Strategy Call <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link to="/services"
+              </a>
+              <a href="#services"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 font-bold text-[#0F172A] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] active:scale-[0.98] sm:w-auto">
                 Explore Yardi Services
-              </Link>
+              </a>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {ctaTrustIndicators.map((indicator) => (
+                <div key={indicator} className="flex items-center justify-center gap-2 rounded-2xl border border-slate-100 bg-slate-50/90 px-4 py-3 text-sm font-semibold text-slate-800 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:shadow-elegant">
+                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#2563EB]" />
+                  <span>{indicator}</span>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
         </div>
       </section>
+
+      <CaseStudySection />
 
       {/* WHO WE SERVE */}
       <section className="py-16 md:py-20 px-6 bg-gradient-to-b from-white to-slate-50">
@@ -370,30 +739,30 @@ function HomePage() {
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
             className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {visiblePropertyTypes.map((p) => (
-            <motion.div key={p.title} variants={fadeUp}
+            {visiblePropertyTypes.map((p) => (
+              <motion.div key={p.title} variants={fadeUp}
                 className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white border border-slate-200/60">
-              <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
-                <div className="relative h-56 overflow-hidden">
-                  <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl glass-dark grid place-items-center">
-                      <p.icon className="w-5 h-5 text-cyan-300" />
+                <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
+                  <div className="relative h-56 overflow-hidden">
+                    <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
+                    <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
+                      <div className="w-11 h-11 rounded-xl glass-dark grid place-items-center">
+                        <p.icon className="w-5 h-5 text-cyan-300" />
+                      </div>
+                      <h3 className="text-xl font-extrabold text-white drop-shadow-lg">{p.title}</h3>
                     </div>
-                    <h3 className="text-xl font-extrabold text-white drop-shadow-lg">{p.title}</h3>
                   </div>
-                </div>
-                <div className="p-6">
-                  <p className="text-sm text-slate-600 leading-relaxed">{p.body}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#2563EB]">Explore detail <ArrowRight className="w-4 h-4" /></span>
-                </div>
-              </Link>
+                  <div className="p-6">
+                    <p className="text-sm text-slate-600 leading-relaxed">{p.body}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#2563EB]">Explore detail <ArrowRight className="w-4 h-4" /></span>
+                  </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
- 
+
           <div className="mt-10 text-center">
             <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white border border-slate-200/80 text-[#0F172A] font-bold shadow-sm hover:border-[#2563EB] hover:text-[#2563EB] active:scale-[0.98] transition-all duration-300 select-none">
               See How We Help <ArrowRight className="w-4 h-4" />
@@ -403,7 +772,7 @@ function HomePage() {
       </section>
 
       {/* SERVICES */}
-      <section className="py-16 md:py-20 px-6">
+      <section id="services" className="py-16 md:py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
             <motion.h2 variants={fadeUp} className="text-3xl md:text-5xl font-extrabold text-[#0F172A]">Full-Spectrum <span className="text-gradient">Yardi Services</span></motion.h2>
@@ -431,7 +800,7 @@ function HomePage() {
               </motion.div>
             ))}
           </motion.div>
- 
+
           <div className="mt-10 text-center">
             <Link to="/contact" className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:shadow-glow-hover active:scale-[0.98] transition-all duration-300 hover:-translate-y-0.5 select-none">
               Discuss Your Requirements <ArrowRight className="w-4 h-4" />
@@ -446,7 +815,7 @@ function HomePage() {
           <div className="absolute inset-0 bg-[#0F172A]" />
           <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(37,99,235,0.78),rgba(6,182,212,0.25)_48%,rgba(255,255,255,0.08))]" />
           <div className="absolute inset-0 opacity-40"
-               style={{ background: "radial-gradient(circle at 15% 20%, rgba(255,255,255,0.22), transparent 32%), radial-gradient(circle at 80% 20%, rgba(6,182,212,0.5), transparent 46%)" }} />
+            style={{ background: "radial-gradient(circle at 15% 20%, rgba(255,255,255,0.22), transparent 32%), radial-gradient(circle at 80% 20%, rgba(6,182,212,0.5), transparent 46%)" }} />
           <div className="relative p-12 md:p-20 text-center text-white">
             <h2 className="text-4xl md:text-5xl font-extrabold">Let's Optimize Your Yardi Platform</h2>
             <p className="mt-5 text-lg text-blue-100 max-w-2xl mx-auto">
