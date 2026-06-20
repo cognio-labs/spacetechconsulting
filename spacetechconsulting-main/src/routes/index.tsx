@@ -512,9 +512,13 @@ function HomePage() {
     <Layout>
       {/* HERO */}
       <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
-        <img
-          src={heroSectionBg}
-          alt=""
+        <video
+          src="/hero-section-video.mp4"
+          poster={heroSectionBg}
+          autoPlay
+          muted
+          loop
+          playsInline
           className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center brightness-[0.45] lg:brightness-100"
           aria-hidden="true"
         />
