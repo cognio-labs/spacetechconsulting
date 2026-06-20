@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { Calendar, Phone, Mail, MapPin } from "lucide-react";
 import { contactDetails } from "@/data/contactDetails";
+import footerLogo from "@/assets/footer-logo.png";
 
 const linkedInUrl = "https://www.linkedin.com/company/spacetech-consulting/";
 
@@ -34,17 +35,14 @@ export function Footer() {
     <footer className="relative bg-[#0F172A] text-slate-300 overflow-hidden">
       <div className="absolute inset-0 opacity-30 pointer-events-none"
            style={{ background: "radial-gradient(circle at 20% 0%, rgba(37,99,235,0.3), transparent 50%), radial-gradient(circle at 80% 100%, rgba(6,182,212,0.2), transparent 50%)" }} />
-      <div className="relative max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-        <div>
-          <div className="mb-3 flex -translate-y-2 items-center gap-3">
-            <img src="/footer-logo-mark.png" alt="SpaceTech Consulting logo" className="h-20 w-32 shrink-0 object-contain object-left drop-shadow-[0_10px_22px_rgba(6,182,212,0.22)]" />
-            <div className="min-w-0 leading-none">
-              <div className="text-lg font-extrabold tracking-tight text-white">SpaceTech</div>
-              <div className="mt-1 text-base font-extrabold tracking-tight text-[#22C55E]">Consulting</div>
-              <div className="relative mt-2 h-px w-full overflow-visible bg-gradient-to-r from-[#8FB7FF] via-[#F2C230] to-[#8FB7FF]">
-                <span className="absolute left-[64%] top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#60A5FA]" />
-              </div>
-            </div>
+      <div className="relative max-w-7xl mx-auto grid gap-9 px-3 pb-16 pt-8 sm:px-5 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr] lg:gap-8 lg:pt-10 xl:gap-12">
+        <div className="min-w-0">
+          <div className="mb-5 -translate-y-6">
+            <img
+              src={footerLogo}
+              alt="SpaceTech Consulting logo"
+              className="h-auto w-56 max-w-full -translate-x-2 select-none object-contain object-left mix-blend-screen brightness-110 contrast-125 drop-shadow-[0_16px_34px_rgba(6,182,212,0.26)] [image-rendering:auto] sm:w-64 lg:w-52 xl:w-64"
+            />
           </div>
           <p className="max-w-xs text-xs leading-5 text-slate-400">
             Enterprise Yardi Consulting Partner. Bringing out the best in Yardi.
