@@ -1,396 +1,737 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
-import {
-  ArrowRight,
-  Target,
-  Eye,
-  Award,
-  Users,
-  Lightbulb,
-  Quote,
-  Shield,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, Eye, Award, Users, Lightbulb, Shield } from "lucide-react";
+
+// Design read: B2B professional-services about-page for ANZ enterprise property
+// decision-makers. Premium SaaS / trust-first language.
+// Dials: DESIGN_VARIANCE: 8 | MOTION_INTENSITY: 6 | VISUAL_DENSITY: 4
 
 export const Route = createFileRoute("/mission-vision-values")({
   head: () => ({
     meta: [
-      { title: "Mission, Vision & Values — SpaceTech Consulting" },
+      { title: "Mission, Vision & Values - SpaceTech Consulting" },
       {
         name: "description",
         content:
-          "SpaceTech Consulting's mission is delivering enterprise-grade Yardi operations for ANZ property firms — predictable, proactive, and built to last.",
+          "SpaceTech Consulting delivers enterprise-grade Yardi operations for ANZ property firms. Predictable, proactive, and built to last.",
       },
-      {
-        property: "og:title",
-        content: "Mission, Vision & Values — SpaceTech Consulting",
-      },
+      { property: "og:title", content: "Mission, Vision & Values - SpaceTech Consulting" },
       {
         property: "og:description",
-        content:
-          "Become ANZ's trusted Yardi platform partner. Bringing out the best in Yardi.",
+        content: "Become ANZ's trusted Yardi platform partner. Bringing out the best in Yardi.",
       },
     ],
   }),
   component: MissionVisionValues,
 });
 
-const values = [
-  {
-    icon: Shield,
-    title: "Ownership",
-    description:
-      "We treat every client's Yardi platform as our own. Not tickets to close but outcomes to own.",
-    color: "from-blue-500 to-blue-700",
-    glow: "shadow-blue-200",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
-    accent: "text-[#2563EB]",
-  },
-  {
-    icon: Eye,
-    title: "Transparency",
-    description:
-      "We say what the data shows, even when it's uncomfortable. Monthly engagement summary, honest SLA tracking.",
-    color: "from-cyan-500 to-cyan-700",
-    glow: "shadow-cyan-200",
-    bg: "bg-cyan-50",
-    border: "border-cyan-100",
-    accent: "text-cyan-600",
-  },
-  {
-    icon: Award,
-    title: "Excellence",
-    description:
-      "50+ total Yardi experience. Named SMEs per module, and a continuous improvement loop that makes the platform measurably better every month.",
-    color: "from-indigo-500 to-indigo-700",
-    glow: "shadow-indigo-200",
-    bg: "bg-indigo-50",
-    border: "border-indigo-100",
-    accent: "text-indigo-600",
-  },
-  {
-    icon: Users,
-    title: "Partnership",
-    description:
-      "We invest in client's platform, not just the contract. Sharing insights proactively and thinking 12 months ahead.",
-    color: "from-blue-600 to-cyan-600",
-    glow: "shadow-blue-200",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
-    accent: "text-[#2563EB]",
-  },
-  {
-    icon: Lightbulb,
-    title: "Innovation",
-    description:
-      "V8 readiness, Yardi AI toolkit tracking, SpaceTech agentic AI. We bring new capability.",
-    color: "from-cyan-500 to-blue-500",
-    glow: "shadow-cyan-200",
-    bg: "bg-cyan-50",
-    border: "border-cyan-100",
-    accent: "text-cyan-600",
-  },
-];
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.55, ease: [0.22, 1, 0.36, 1] },
-  }),
-};
+const ease = [0.16, 1, 0.3, 1] as const;
 
 function MissionVisionValues() {
+  const reduce = useReducedMotion();
+
+  const up = (delay = 0) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, y: 28 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: { duration: 0.65, delay, ease },
+        };
+
+  const fromLeft = (delay = 0) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, x: -36 },
+          whileInView: { opacity: 1, x: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: { duration: 0.65, delay, ease },
+        };
+
+  const fromRight = (delay = 0) =>
+    reduce
+      ? {}
+      : {
+          initial: { opacity: 0, x: 36 },
+          whileInView: { opacity: 1, x: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: { duration: 0.65, delay, ease },
+        };
+
   return (
     <Layout>
-      {/* ── Hero ── */}
-      <section className="relative py-20 md:py-28 px-6 bg-[#0F172A] text-white overflow-hidden">
+      {/* ─────────────────────────────────────────────────────────────
+          HERO  –  Asymmetric split (text left / quote right)
+          Eyebrow count: 1 of 2 allowed across 5 sections
+      ───────────────────────────────────────────────────────────── */}
+      <section
+        className="relative flex items-center min-h-[100dvh] px-6 overflow-hidden"
+        style={{ background: "#0F172A" }}
+      >
+        {/* Radial glows */}
         <div
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 15% 50%, rgba(37,99,235,0.45), transparent 55%), radial-gradient(circle at 85% 20%, rgba(6,182,212,0.35), transparent 50%), radial-gradient(circle at 60% 90%, rgba(99,102,241,0.2), transparent 40%)",
+              "radial-gradient(ellipse 65% 55% at 8% 30%, rgba(37,99,235,0.24) 0%, transparent 68%), radial-gradient(ellipse 55% 50% at 92% 78%, rgba(6,182,212,0.14) 0%, transparent 65%)",
           }}
         />
-        {/* decorative rings */}
-        <div className="absolute top-10 right-10 w-72 h-72 rounded-full border border-white/5 opacity-60" />
-        <div className="absolute top-16 right-16 w-56 h-56 rounded-full border border-white/5 opacity-40" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full border border-white/5 opacity-30 -translate-x-1/2 translate-y-1/2" />
-
-        <div className="relative max-w-4xl mx-auto text-center">
-          <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 text-cyan-300 text-xs font-bold tracking-widest uppercase backdrop-blur border border-white/10">
-              <Sparkles className="w-3 h-3" /> Who We Are
-            </span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 text-4xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05] tracking-tight"
-          >
-            Mission, Vision{" "}
-            <span className="bg-gradient-to-r from-cyan-300 via-blue-300 to-indigo-300 bg-clip-text text-transparent">
-              & Values
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="mt-6 text-lg md:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto"
-          >
-            The principles that guide every engagement, every decision, and every outcome we deliver for ANZ property firms.
-          </motion.p>
-
-          {/* quote pill */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.35, duration: 0.5 }}
-            className="mt-8 inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-white/8 border border-white/12 backdrop-blur"
-          >
-            <Quote className="w-4 h-4 text-cyan-400 shrink-0" />
-            <span className="text-cyan-200 font-semibold italic text-sm md:text-base">
-              "Bringing out the best in Yardi"
-            </span>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Mission + Vision split ── */}
-      <section className="py-16 md:py-24 px-6 bg-gradient-to-b from-slate-50 to-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-8">
-
-          {/* Mission */}
-          <motion.div
-            initial={{ opacity: 0, x: -28 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-3xl bg-white border border-slate-100 p-8 md:p-10 shadow-elegant"
-          >
-            {/* decorative blob */}
-            <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 opacity-70 blur-2xl" />
-            <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-gradient-to-tr from-indigo-50 to-blue-50 opacity-80 blur-xl -translate-x-1/2 translate-y-1/2" />
-
-            <div className="relative">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100">
-                <Target className="w-3.5 h-3.5 text-[#2563EB]" />
-                <span className="text-[#2563EB] text-xs font-bold tracking-widest uppercase">Our Mission</span>
-              </div>
-
-              <h2 className="mt-6 text-3xl md:text-4xl font-extrabold text-[#0F172A] leading-tight">
-                Delivering enterprise-grade Yardi operations for{" "}
-                <span className="bg-gradient-to-r from-[#2563EB] to-cyan-500 bg-clip-text text-transparent">
-                  ANZ property firms.
-                </span>
-              </h2>
-
-              <p className="mt-5 text-lg text-slate-600 leading-relaxed">
-                Predictable, proactive, and built to last.
-              </p>
-
-              <div className="mt-8 flex flex-col gap-3">
-                {["Predictable delivery every time", "Proactive platform management", "Built for long-term performance"].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="w-5 h-5 rounded-full gradient-primary grid place-items-center shrink-0 shadow-glow">
-                      <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 10 8">
-                        <path d="M1 4l2.5 2.5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </div>
-                    <span className="text-slate-700 font-medium text-sm">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Vision */}
-          <motion.div
-            initial={{ opacity: 0, x: 28 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            className="relative overflow-hidden rounded-3xl bg-[#0F172A] border border-white/10 p-8 md:p-10 shadow-2xl text-white"
-          >
-            {/* glow layer */}
-            <div
-              className="absolute inset-0 opacity-60"
-              style={{
-                background:
-                  "radial-gradient(circle at 80% 20%, rgba(6,182,212,0.3), transparent 55%), radial-gradient(circle at 20% 80%, rgba(37,99,235,0.25), transparent 50%)",
-              }}
-            />
-            <div className="absolute top-6 right-6 w-32 h-32 rounded-full border border-white/8" />
-            <div className="absolute top-10 right-10 w-20 h-20 rounded-full border border-white/6" />
-
-            <div className="relative">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 backdrop-blur">
-                <Eye className="w-3.5 h-3.5 text-cyan-300" />
-                <span className="text-cyan-300 text-xs font-bold tracking-widest uppercase">Our Vision</span>
-              </div>
-
-              <h2 className="mt-6 text-3xl md:text-4xl font-extrabold leading-tight">
-                Become ANZ's trusted{" "}
-                <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                  Yardi platform partner
-                </span>{" "}
-                — where property firms go to keep Yardi performing.
-              </h2>
-
-              <div className="mt-8 p-5 rounded-2xl bg-white/8 border border-white/10 backdrop-blur">
-                <Quote className="w-6 h-6 text-cyan-400 mb-3" />
-                <p className="text-xl font-bold text-cyan-200 italic leading-relaxed">
-                  "Bringing out the best in Yardi"
-                </p>
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["ANZ-focused", "Platform-first", "Always performing"].map((tag) => (
-                  <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-slate-300 text-xs font-semibold">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── Values ── */}
-      <section className="py-16 md:py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100">
-                <Sparkles className="w-3.5 h-3.5 text-[#2563EB]" />
-                <span className="text-[#2563EB] text-xs font-bold tracking-widest uppercase">Our Values</span>
-              </span>
-              <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">
-                What We{" "}
-                <span className="bg-gradient-to-r from-[#2563EB] to-cyan-500 bg-clip-text text-transparent">
-                  Stand For
-                </span>
-              </h2>
-              <p className="mt-4 text-lg text-slate-600 leading-relaxed">
-                Five principles that shape how we show up for every client, every day.
-              </p>
-            </motion.div>
-          </div>
-
-          {/* top row: 3 cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-6">
-            {values.slice(0, 3).map((v, i) => (
-              <motion.div
-                key={v.title}
-                custom={i}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className={`group relative overflow-hidden rounded-3xl bg-white border ${v.border} p-7 shadow-elegant card-lift`}
-              >
-                <div className={`absolute -top-12 -right-12 w-40 h-40 rounded-full ${v.bg} opacity-60 blur-2xl`} />
-                <div className="relative">
-                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${v.color} grid place-items-center shadow-lg ${v.glow} mb-5`}>
-                    <v.icon className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className={`text-xl font-extrabold ${v.accent} mb-3`}>{v.title}</h3>
-                  <p className="text-slate-600 leading-relaxed text-sm">{v.description}</p>
-                </div>
-                {/* hover accent line */}
-                <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${v.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* bottom row: 2 wider cards */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {values.slice(3).map((v, i) => (
-              <motion.div
-                key={v.title}
-                custom={i + 3}
-                variants={fadeUp}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className={`group relative overflow-hidden rounded-3xl bg-white border ${v.border} p-7 md:p-8 shadow-elegant card-lift`}
-              >
-                <div className={`absolute -top-14 -right-14 w-48 h-48 rounded-full ${v.bg} opacity-50 blur-2xl`} />
-                <div className="relative flex gap-5">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${v.color} grid place-items-center shadow-lg ${v.glow} shrink-0`}>
-                    <v.icon className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className={`text-xl font-extrabold ${v.accent} mb-2`}>{v.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{v.description}</p>
-                  </div>
-                </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r ${v.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Texture CTA banner ── */}
-      <section className="py-16 md:py-20 px-6 relative overflow-hidden">
+        {/* Dot grid */}
         <div
-          className="absolute inset-0 bg-[#0F172A]"
+          className="pointer-events-none absolute inset-0"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 25% 40%, rgba(37,99,235,0.4) 0%, transparent 50%), radial-gradient(circle at 75% 70%, rgba(6,182,212,0.3) 0%, transparent 45%), repeating-linear-gradient(45deg, rgba(255,255,255,0.015) 0px, rgba(255,255,255,0.015) 1px, transparent 1px, transparent 60px)",
+            backgroundImage: "radial-gradient(rgba(255,255,255,0.16) 1px, transparent 1px)",
+            backgroundSize: "36px 36px",
+            opacity: 0.22,
           }}
         />
-        {/* animated rings */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[500px] h-[500px] rounded-full border border-white/5 animate-[spin_40s_linear_infinite]" />
-          <div className="absolute w-[350px] h-[350px] rounded-full border border-white/5 animate-[spin_28s_linear_infinite_reverse]" />
-        </div>
 
-        <div className="relative max-w-3xl mx-auto text-center text-white">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-cyan-300 text-xs font-bold tracking-widest uppercase mb-6">
-              <Sparkles className="w-3 h-3" /> Ready to Partner With Us?
-            </span>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Experience Yardi at Its{" "}
-              <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">
-                Very Best
+        <div className="relative z-10 max-w-7xl mx-auto w-full pt-24 pb-20 grid lg:grid-cols-[1.1fr_0.9fr] gap-14 xl:gap-20 items-center">
+          {/* Left: headline block */}
+          <div className="min-w-0">
+            {/* Eyebrow 1/2 */}
+            <motion.span
+              {...(reduce
+                ? {}
+                : {
+                    initial: { opacity: 0, y: -14 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { duration: 0.5, ease },
+                  })}
+              className="inline-block px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-[0.18em]"
+              style={{
+                background: "rgba(37,99,235,0.18)",
+                border: "1px solid rgba(37,99,235,0.36)",
+                color: "#93C5FD",
+              }}
+            >
+              SpaceTech Consulting
+            </motion.span>
+
+            <motion.h1
+              {...(reduce
+                ? {}
+                : {
+                    initial: { opacity: 0, y: 28 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { duration: 0.7, delay: 0.1, ease },
+                  })}
+              className="mt-6 text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.0] text-white"
+            >
+              Mission,
+              <br />
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #60A5FA 0%, #06B6D4 100%)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Vision & Values.
               </span>
-            </h2>
-            <p className="mt-5 text-lg text-slate-300 leading-relaxed">
-              Let's discuss how SpaceTech's mission-driven approach can transform your Yardi platform performance.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4 justify-center">
+            </motion.h1>
+
+            <motion.p
+              {...(reduce
+                ? {}
+                : {
+                    initial: { opacity: 0, y: 20 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { duration: 0.7, delay: 0.2, ease },
+                  })}
+              className="mt-6 text-lg text-slate-400 leading-relaxed max-w-[44ch]"
+            >
+              The principles behind every engagement, every decision, and every outcome we deliver for ANZ property firms.
+            </motion.p>
+
+            <motion.div
+              {...(reduce
+                ? {}
+                : {
+                    initial: { opacity: 0, y: 16 },
+                    animate: { opacity: 1, y: 0 },
+                    transition: { duration: 0.6, delay: 0.3, ease },
+                  })}
+              className="mt-10 flex flex-wrap gap-4"
+            >
               <a
                 href="https://cal.com/spacetech/30min"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl gradient-primary text-white font-bold shadow-glow hover:scale-105 transition-transform"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-white text-sm transition-all duration-200 hover:-translate-y-[2px] active:scale-[0.98]"
+                style={{
+                  background: "linear-gradient(135deg, #1D4ED8, #2563EB)",
+                  boxShadow: "0 8px 28px rgba(37,99,235,0.4)",
+                }}
               >
                 Book a Call <ArrowRight className="w-4 h-4" />
               </a>
               <Link
-                to="/about"
-                className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white/10 border border-white/20 text-white font-bold hover:bg-white/15 transition-colors backdrop-blur"
+                to="/services"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-slate-300 text-sm transition-all duration-200 hover:text-white hover:bg-white/10"
+                style={{ border: "1px solid rgba(255,255,255,0.14)" }}
               >
-                Learn About Us
+                Our Services
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right: quote card */}
+          <motion.div
+            {...(reduce
+              ? {}
+              : {
+                  initial: { opacity: 0, x: 40 },
+                  animate: { opacity: 1, x: 0 },
+                  transition: { duration: 0.75, delay: 0.18, ease },
+                })}
+            className="min-w-0"
+          >
+            <div
+              className="rounded-3xl p-8 md:p-10 relative overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(145deg, rgba(37,99,235,0.16) 0%, rgba(6,182,212,0.08) 100%)",
+                border: "1px solid rgba(6,182,212,0.22)",
+                boxShadow:
+                  "0 0 80px rgba(6,182,212,0.06), inset 0 1px 0 rgba(255,255,255,0.06)",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute top-0 right-0 w-52 h-52 rounded-full blur-[70px] opacity-28"
+                style={{
+                  background: "radial-gradient(circle, #06B6D4, transparent)",
+                  transform: "translate(30%, -30%)",
+                }}
+              />
+
+              <div className="relative">
+                {/* Opening quote glyph */}
+                <div
+                  className="font-black leading-none mb-3"
+                  style={{
+                    fontSize: "96px",
+                    lineHeight: "0.7",
+                    background: "linear-gradient(135deg, #3B82F6, #06B6D4)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    opacity: 0.5,
+                  }}
+                >
+                  &ldquo;
+                </div>
+
+                <blockquote
+                  className="text-2xl md:text-3xl font-black text-white leading-[1.15] italic mt-4 pb-1"
+                >
+                  Bringing out the best in Yardi
+                </blockquote>
+
+                <div className="mt-7 pt-6 border-t border-white/10 flex items-center gap-3">
+                  <div
+                    className="w-9 h-9 rounded-full grid place-items-center shrink-0 text-white font-black text-sm"
+                    style={{
+                      background: "linear-gradient(135deg, #2563EB, #06B6D4)",
+                    }}
+                  >
+                    S
+                  </div>
+                  <div>
+                    <div className="text-white font-bold text-sm">Sambhaji</div>
+                    <div className="text-slate-500 text-xs">
+                      Founder & CEO, SpaceTech Consulting
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          MISSION  –  Left-aligned statement + right stats card
+          Eyebrow count: 2 of 2 allowed  (this is the last one)
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 px-6 bg-white relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-[520px] h-[520px] rounded-full"
+          style={{
+            background: "radial-gradient(circle, rgba(37,99,235,0.06), transparent 70%)",
+            transform: "translate(40%, -40%)",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.05fr_0.95fr] gap-14 xl:gap-20 items-center">
+          <motion.div {...fromLeft()} className="min-w-0">
+            {/* Eyebrow 2/2 */}
+            <span
+              className="inline-block px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-[0.18em] mb-7"
+              style={{
+                background: "rgba(37,99,235,0.07)",
+                border: "1px solid rgba(37,99,235,0.18)",
+                color: "#2563EB",
+              }}
+            >
+              Our Mission
+            </span>
+
+            <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] leading-[1.05] tracking-tight">
+              Delivering enterprise-grade Yardi operations for{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #2563EB, #0891B2)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                ANZ property firms.
+              </span>
+            </h2>
+
+            <p className="mt-5 text-xl text-slate-500 font-semibold leading-relaxed">
+              Predictable, proactive, and built to last.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              {["Predictable delivery", "Proactive platform care", "Built for the long term"].map(
+                (label) => (
+                  <span
+                    key={label}
+                    className="inline-flex items-center gap-2.5 px-4 py-2 rounded-xl text-sm font-semibold"
+                    style={{
+                      background: "rgba(37,99,235,0.07)",
+                      border: "1px solid rgba(37,99,235,0.16)",
+                      color: "#1E40AF",
+                    }}
+                  >
+                    <span
+                      className="w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: "#2563EB" }}
+                    />
+                    {label}
+                  </span>
+                )
+              )}
+            </div>
+          </motion.div>
+
+          {/* Stats card */}
+          <motion.div {...fromRight(0.1)} className="min-w-0">
+            <div
+              className="rounded-3xl p-8 md:p-10 relative overflow-hidden"
+              style={{
+                background: "linear-gradient(150deg, #0F172A 0%, #1A2740 100%)",
+                boxShadow:
+                  "0 24px 64px rgba(0,0,0,0.22), 0 0 0 1px rgba(255,255,255,0.05)",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.55) 0%, transparent 55%)",
+                  opacity: 0.22,
+                }}
+              />
+
+              <div className="relative">
+                <div
+                  className="text-center pb-7 mb-7"
+                  style={{ borderBottom: "1px solid rgba(255,255,255,0.1)" }}
+                >
+                  <div
+                    className="text-7xl font-black"
+                    style={{
+                      background: "linear-gradient(135deg, #60A5FA, #06B6D4)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                    }}
+                  >
+                    50+
+                  </div>
+                  <div className="text-slate-400 text-sm font-semibold uppercase tracking-wider mt-2">
+                    Years of Total Yardi Experience
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { val: "ANZ", label: "Primary Focus" },
+                    { val: "24/7", label: "Global Support" },
+                    { val: "1800+", label: "Tickets Resolved" },
+                    { val: "3", label: "Delivery Regions" },
+                  ].map(({ val, label }) => (
+                    <div
+                      key={label}
+                      className="rounded-2xl px-4 py-4 text-center"
+                      style={{
+                        background: "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.07)",
+                      }}
+                    >
+                      <div className="text-2xl font-black text-white">{val}</div>
+                      <div className="text-slate-500 text-xs mt-1 font-medium">{label}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          VISION  –  Centered manifesto (no eyebrow)
+      ───────────────────────────────────────────────────────────── */}
+      <section
+        className="py-24 md:py-32 px-6 relative overflow-hidden"
+        style={{ background: "#0F172A" }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(6,182,212,0.08) 0%, transparent 68%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+          }}
+        />
+
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          <motion.div {...up()}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.05] tracking-tight">
+              Become ANZ&rsquo;s trusted{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #60A5FA, #06B6D4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                Yardi platform partner
+              </span>{" "}
+              - where property firms go to keep Yardi performing.
+            </h2>
+
+            <div
+              className="mt-10 mx-auto max-w-lg rounded-3xl p-8 relative overflow-hidden"
+              style={{
+                background: "rgba(6,182,212,0.08)",
+                border: "1px solid rgba(6,182,212,0.2)",
+              }}
+            >
+              <div
+                className="font-black text-left mb-3"
+                style={{
+                  fontSize: "80px",
+                  lineHeight: "0.72",
+                  background: "linear-gradient(135deg, #3B82F6, #06B6D4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  opacity: 0.5,
+                }}
+              >
+                &ldquo;
+              </div>
+              <p className="text-2xl md:text-3xl font-black italic text-white leading-[1.15] pb-1">
+                Bringing out the best in Yardi
+              </p>
+              <p className="mt-4 text-slate-400 text-sm font-semibold tracking-wide uppercase">
+                Our guiding promise
+              </p>
+            </div>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              {["ANZ-Focused", "Platform-First", "Always Performing"].map((tag) => (
+                <span
+                  key={tag}
+                  className="px-4 py-2 rounded-full text-sm font-semibold text-slate-400"
+                  style={{
+                    background: "rgba(255,255,255,0.05)",
+                    border: "1px solid rgba(255,255,255,0.09)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          VALUES  –  Bento grid  (5 cells, 2+3, no eyebrow)
+          Backgrounds: dark navy / white / gradient blue / white / dark indigo
+      ───────────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 px-6" style={{ background: "#F1F5F9" }}>
+        <div className="max-w-7xl mx-auto">
+          <motion.div {...up()} className="mb-14">
+            <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight">
+              Five Core Values
+            </h2>
+            <p className="mt-3 text-lg text-slate-500 max-w-[44ch] leading-relaxed">
+              The principles that shape how we show up for every client, every day.
+            </p>
+          </motion.div>
+
+          {/* Row 1: Ownership (col-span-2) + Transparency (col-span-1) */}
+          <div className="grid lg:grid-cols-3 gap-5 mb-5">
+            {/* Ownership - dark, wide */}
+            <motion.div
+              {...up(0.05)}
+              className="lg:col-span-2 relative rounded-3xl p-8 md:p-10 overflow-hidden group"
+              style={{
+                background: "linear-gradient(145deg, #0F172A 0%, #16243A 100%)",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
+                minHeight: "300px",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)",
+                  backgroundSize: "28px 28px",
+                  opacity: 0.28,
+                }}
+              />
+              <div
+                className="pointer-events-none absolute top-1/2 -translate-y-1/2 -right-20 w-80 h-80 rounded-full blur-[100px] opacity-0 group-hover:opacity-18 transition-opacity duration-700"
+                style={{ background: "radial-gradient(circle, #2563EB, transparent)" }}
+              />
+
+              <div className="relative flex flex-col md:flex-row gap-7 h-full">
+                <div className="shrink-0">
+                  <div
+                    className="w-16 h-16 rounded-2xl grid place-items-center"
+                    style={{
+                      background: "linear-gradient(135deg, #2563EB, #1D4ED8)",
+                      boxShadow: "0 8px 28px rgba(37,99,235,0.48)",
+                    }}
+                  >
+                    <Shield className="w-7 h-7 text-white" />
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-2xl md:text-3xl font-black text-white mb-3">
+                    Ownership
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed max-w-lg">
+                    We treat every client's Yardi platform as our own. Not tickets to close but outcomes to own.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Transparency - white */}
+            <motion.div
+              {...up(0.1)}
+              className="relative rounded-3xl p-8 overflow-hidden group bg-white"
+              style={{
+                boxShadow: "0 4px 24px rgba(0,0,0,0.05), 0 0 0 1px rgba(6,182,212,0.1)",
+                minHeight: "300px",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute bottom-0 right-0 w-44 h-44 rounded-full blur-[55px] opacity-10"
+                style={{
+                  background: "#06B6D4",
+                  transform: "translate(30%, 30%)",
+                }}
+              />
+              <div className="relative flex flex-col h-full">
+                <div
+                  className="w-14 h-14 rounded-2xl grid place-items-center mb-6"
+                  style={{
+                    background: "linear-gradient(135deg, #06B6D4, #0891B2)",
+                    boxShadow: "0 8px 24px rgba(6,182,212,0.36)",
+                  }}
+                >
+                  <Eye className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-black text-[#0F172A] mb-3">Transparency</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  We say what the data shows, even when it's uncomfortable. Monthly engagement summary, honest SLA tracking.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Row 2: Excellence (gradient) + Partnership (white) + Innovation (dark indigo) */}
+          <div className="grid lg:grid-cols-3 gap-5">
+            {/* Excellence - full gradient */}
+            <motion.div
+              {...up(0.13)}
+              className="relative rounded-3xl p-8 overflow-hidden group"
+              style={{
+                background:
+                  "linear-gradient(145deg, #1D4ED8 0%, #0284C7 60%, #0891B2 100%)",
+                boxShadow: "0 20px 56px rgba(37,99,235,0.28)",
+                minHeight: "280px",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px)",
+                  backgroundSize: "22px 22px",
+                  opacity: 0.4,
+                }}
+              />
+              <div className="relative flex flex-col h-full">
+                <div
+                  className="w-14 h-14 rounded-2xl grid place-items-center mb-6"
+                  style={{
+                    background: "rgba(255,255,255,0.2)",
+                    border: "1px solid rgba(255,255,255,0.22)",
+                  }}
+                >
+                  <Award className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-black text-white mb-3">Excellence</h3>
+                <p className="text-blue-100 text-sm leading-relaxed">
+                  50+ total Yardi experience. Named SMEs per module, and a continuous improvement loop that makes the platform measurably better every month.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Partnership - white */}
+            <motion.div
+              {...up(0.16)}
+              className="relative rounded-3xl p-8 overflow-hidden group bg-white"
+              style={{
+                boxShadow: "0 4px 24px rgba(0,0,0,0.05), 0 0 0 1px rgba(37,99,235,0.1)",
+                minHeight: "280px",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute top-0 right-0 w-44 h-44 rounded-full blur-[55px] opacity-[0.07]"
+                style={{
+                  background: "#2563EB",
+                  transform: "translate(30%, -30%)",
+                }}
+              />
+              <div className="relative flex flex-col h-full">
+                <div
+                  className="w-14 h-14 rounded-2xl grid place-items-center mb-6"
+                  style={{
+                    background: "linear-gradient(135deg, #3B82F6, #2563EB)",
+                    boxShadow: "0 8px 24px rgba(37,99,235,0.36)",
+                  }}
+                >
+                  <Users className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-black text-[#0F172A] mb-3">Partnership</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">
+                  We invest in client's platform, not just the contract. Sharing insights proactively and thinking 12 months ahead.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Innovation - dark indigo */}
+            <motion.div
+              {...up(0.19)}
+              className="relative rounded-3xl p-8 overflow-hidden group"
+              style={{
+                background: "linear-gradient(145deg, #1E1B4B 0%, #312E81 100%)",
+                boxShadow: "0 20px 56px rgba(79,70,229,0.2)",
+                minHeight: "280px",
+              }}
+            >
+              <div
+                className="pointer-events-none absolute -top-12 -right-12 w-44 h-44 rounded-full blur-[60px] opacity-0 group-hover:opacity-22 transition-opacity duration-700"
+                style={{ background: "radial-gradient(circle, #818CF8, transparent)" }}
+              />
+              <div className="relative flex flex-col h-full">
+                <div
+                  className="w-14 h-14 rounded-2xl grid place-items-center mb-6"
+                  style={{
+                    background: "linear-gradient(135deg, #6366F1, #4F46E5)",
+                    boxShadow: "0 8px 24px rgba(99,102,241,0.42)",
+                  }}
+                >
+                  <Lightbulb className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-black text-white mb-3">Innovation</h3>
+                <p className="text-indigo-200 text-sm leading-relaxed">
+                  V8 readiness, Yardi AI toolkit tracking, SpaceTech agentic AI. We bring new capability.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─────────────────────────────────────────────────────────────
+          CTA BANNER  –  Centered, one intent (no eyebrow)
+      ───────────────────────────────────────────────────────────── */}
+      <section
+        className="py-24 md:py-28 px-6 relative overflow-hidden"
+        style={{ background: "#0F172A" }}
+      >
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 60% 55% at 28% 50%, rgba(37,99,235,0.19) 0%, transparent 62%), radial-gradient(ellipse 55% 50% at 72% 50%, rgba(6,182,212,0.12) 0%, transparent 60%), repeating-linear-gradient(45deg, rgba(255,255,255,0.011) 0px, rgba(255,255,255,0.011) 1px, transparent 1px, transparent 72px)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute top-0 left-0 right-0 h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(37,99,235,0.5), rgba(6,182,212,0.5), transparent)",
+          }}
+        />
+
+        <div className="relative z-10 max-w-3xl mx-auto text-center text-white">
+          <motion.div {...up()}>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
+              Experience Yardi at its{" "}
+              <span
+                style={{
+                  background: "linear-gradient(135deg, #60A5FA, #06B6D4)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                very best.
+              </span>
+            </h2>
+            <p className="mt-5 text-lg text-slate-400 leading-relaxed max-w-[40ch] mx-auto">
+              Let's talk about how SpaceTech's mission-driven approach can transform your platform performance.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-4 justify-center">
+              <a
+                href="https://cal.com/spacetech/30min"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-white text-base transition-all duration-200 hover:-translate-y-[2px] active:scale-[0.98]"
+                style={{
+                  background: "linear-gradient(135deg, #1D4ED8, #2563EB)",
+                  boxShadow: "0 8px 28px rgba(37,99,235,0.4)",
+                }}
+              >
+                Book a Call <ArrowRight className="w-5 h-5" />
+              </a>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-2xl font-bold text-slate-300 text-base transition-all duration-200 hover:text-white hover:bg-white/10"
+                style={{ border: "1px solid rgba(255,255,255,0.14)" }}
+              >
+                Contact Us <ArrowRight className="w-5 h-5" />
               </Link>
             </div>
           </motion.div>

@@ -174,7 +174,7 @@ function About() {
                 He founded SpaceTech Consulting to bring that same engineering discipline, platform ownership, and automation-first mindset to the property technology sector.
               </p>
               <p>
-                Under his leadership, SpaceTech delivers Yardi managed services, platform optimization, integrations, reporting, and operational support for one of Australia's largest listed property groups, helping improve platform health, reduce support backlog, accelerate issue resolution, and drive continuous improvement across commercial and residential portfolios.
+                Under his leadership, SpaceTech delivers Yardi managed services, platform optimization, integrations, reporting, and operational support for One of Australia's largest listed property groups, helping improve platform health, reduce support backlog, accelerate issue resolution, and drive continuous improvement across commercial and residential portfolios.
               </p>
               <p>
                 His focus is helping property organizations maximize the value of their Yardi investment through platform ownership, continuous improvement, operational excellence, and technology-driven innovation.
