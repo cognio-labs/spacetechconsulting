@@ -707,10 +707,19 @@ function HomePage() {
       {/* HERO */}
       <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
         <video
+<<<<<<< HEAD
+=======
+          src="/hero-section-video.mp4"
+          poster={heroSectionBg}
+>>>>>>> 42e7ba643e47a0e8c0c9a5825302ee8c4b903ead
           autoPlay
           muted
           loop
           playsInline
+<<<<<<< HEAD
+=======
+          className="absolute inset-0 h-full w-full scale-[1.04] object-cover object-center brightness-[0.45] lg:brightness-100"
+>>>>>>> 42e7ba643e47a0e8c0c9a5825302ee8c4b903ead
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.85] lg:brightness-95"
         >
