@@ -35,9 +35,9 @@ export function Footer() {
     <footer className="relative bg-[#0F172A] text-slate-300 overflow-hidden">
       <div className="absolute inset-0 opacity-30 pointer-events-none"
            style={{ background: "radial-gradient(circle at 20% 0%, rgba(37,99,235,0.3), transparent 50%), radial-gradient(circle at 80% 100%, rgba(6,182,212,0.2), transparent 50%)" }} />
-      <div className="relative max-w-7xl mx-auto grid gap-9 px-3 pb-16 pt-8 sm:px-5 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr] lg:gap-8 lg:pt-10 xl:gap-12">
+      <div className="relative max-w-7xl mx-auto grid gap-8 px-3 pb-10 pt-7 sm:px-5 sm:pb-14 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr] lg:gap-8 lg:pb-16 lg:pt-10 xl:gap-12">
         <div className="min-w-0">
-          <div className="mb-5 -translate-y-6">
+          <div className="mb-2 -translate-y-3 sm:mb-4 sm:-translate-y-5 lg:mb-5 lg:-translate-y-6">
             <img
               src={footerLogo}
               alt="SpaceTech Consulting logo"

@@ -2,9 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import {
-  ArrowRight, Users, Clock, BarChart3, ShieldCheck, Target, Zap, Lock, Handshake,
+  ArrowRight, Users, Clock, BarChart3, ShieldCheck, Lock,
   ChevronDown,
   Globe, FileCheck, Languages, Share2,
+  Cpu, Settings2, Database, RefreshCcw, Rocket, Building2, CheckCircle2,
 } from "lucide-react";
 import { useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
@@ -32,11 +33,53 @@ const stats = [
   { icon: ShieldCheck, value: "95%+ SLA", label: "SLA on owned ticket volume" },
 ];
 
-const advantages = [
-  { icon: Target, title: "Platform Ownership Mindset", body: "We operate Yardi with a platform-owner mindset — identifying patterns, removing systemic friction, and improving operational stability rather than reacting to individual tickets." },
-  { icon: Zap, title: "Deep Yardi Expertise", body: "Our team brings hands-on functional and technical experience across various Yardi modules and ecosystem integrations, developed through operating complex Yardi enterprise environments." },
-  { icon: BarChart3, title: "Outcome Driven", body: "We measure success by operational efficiency and cost reduction, not just technical implementations or tickets resolved." },
-  { icon: Handshake, title: "Long-Term Partner", body: "We build enduring partnerships by taking long-term accountability for the stability, evolution, and success of your Yardi platform." },
+const whyMetrics = [
+  { value: "25+", label: "Years Technology Leadership", icon: Cpu },
+  { value: "2000+", label: "Platform Requests Managed", icon: FileCheck },
+  { value: "50+", label: "Years Total Yardi Experience", icon: ShieldCheck },
+  { value: "3", label: "Global Delivery Regions", icon: Globe },
+];
+
+const whyCards = [
+  {
+    icon: Cpu,
+    title: "Enterprise Engineering",
+    body: "Built by technology leaders with 25+ years of experience delivering enterprise transformation, cloud modernization, real-time platforms, data engineering, automation, and operational excellence across highly regulated industries.",
+  },
+  {
+    icon: Settings2,
+    title: "Platform Ownership",
+    body: "We focus on platform health, operational efficiency, and business outcomes — not simply closing tickets.",
+  },
+  {
+    icon: Database,
+    title: "Deep Yardi Expertise",
+    body: "Experience across Voyager, Elevate, Investment Management, Data Connect, Reporting, Integrations, and managed services.",
+  },
+  {
+    icon: RefreshCcw,
+    title: "Continuous Improvement",
+    body: "Support should reduce future support demand through trend analysis, automation opportunities, knowledge sharing, and root-cause elimination.",
+  },
+  {
+    icon: Globe,
+    title: "Global Delivery",
+    body: "Australia • India • United States. Local market understanding combined with scalable global capability.",
+  },
+  {
+    icon: Rocket,
+    title: "Future Ready",
+    body: "Cloud, Data, AI, and Automation capabilities helping clients modernize and innovate beyond traditional support models.",
+  },
+];
+
+const proofPoints = [
+  "2,000+ Platform Tickets Addressed",
+  "95%+ SLA",
+  "1000+ Active Business Users Supported",
+  "Commercial & Residential Portfolios",
+  "Named Functional & Technical SMEs",
+  "Platform Health & Operational Visibility Improved",
 ];
 
 const services = [
@@ -133,34 +176,125 @@ function HomePage() {
         </motion.div>
       </section>
 
-      {/* ADVANTAGE */}
-      <section className="py-16 md:py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="text-center max-w-3xl mx-auto">
-            <motion.span variants={fadeUp} className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">The SpaceTech Advantage</motion.span>
-            <motion.h2 variants={fadeUp} className="mt-5 text-3xl md:text-5xl font-extrabold text-[#0F172A]">
-              Why Choose <span className="text-gradient">SpaceTech Consulting?</span>
+      {/* WHY SPACETECH */}
+      <section className="relative overflow-hidden bg-white px-6 py-12 text-[#0F172A] md:py-16">
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#F8FAFC_58%,rgba(239,246,255,0.7)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(37,99,235,0.08),transparent_28%),radial-gradient(circle_at_86%_22%,rgba(6,182,212,0.1),transparent_30%)]" />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200 to-transparent" />
+        <div className="relative mx-auto max-w-7xl">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger} className="mx-auto max-w-4xl text-center">
+            <motion.span variants={fadeUp} className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+              Why SpaceTech
+            </motion.span>
+            <motion.h2 variants={fadeUp} className="mt-4 text-4xl font-extrabold leading-[1.05] text-[#0F172A] md:text-6xl">
+              Why <span className="bg-gradient-to-r from-cyan-300 to-blue-300 bg-clip-text text-transparent">SpaceTech</span>
             </motion.h2>
-            <motion.p variants={fadeUp} className="mt-5 text-lg text-slate-900">
-              We're not just consultants — we're your strategic technology partner for the long haul.
+            <motion.p variants={fadeUp} className="mt-4 text-2xl font-extrabold leading-tight text-[#0F172A] md:text-4xl">
+              Enterprise Engineering DNA.
+              <span className="block bg-gradient-to-r from-[#2563EB] to-[#06B6D4] bg-clip-text text-transparent">Property Technology Expertise.</span>
+            </motion.p>
+            <motion.p variants={fadeUp} className="mx-auto mt-4 max-w-3xl text-base leading-7 text-slate-700 md:text-lg">
+              Built on enterprise engineering principles, platform ownership, and continuous improvement — helping property organizations maximize the value of their Yardi investment.
             </motion.p>
           </motion.div>
 
           <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
-            className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {advantages.map((a) => (
-              <motion.div key={a.title} variants={fadeUp}
-                className="relative group bg-white rounded-2xl p-6 shadow-elegant card-lift border border-slate-200/60 overflow-hidden">
-                <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-gradient-to-br from-blue-100 to-cyan-100 opacity-50 group-hover:scale-150 transition-transform duration-700" />
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl gradient-primary grid place-items-center shadow-glow mb-5">
-                    <a.icon className="w-6 h-6 text-white" />
+            className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {whyMetrics.map((metric) => (
+              <motion.div key={metric.label} variants={fadeUp}
+                className="group rounded-2xl border border-slate-100 bg-white p-5 text-[#0F172A] shadow-elegant transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant-hover">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-3xl font-extrabold text-[#0F172A]">{metric.value}</div>
+                    <p className="mt-2 text-sm font-semibold leading-5 text-slate-700">{metric.label}</p>
                   </div>
-                  <h3 className="text-lg font-extrabold text-[#0F172A] mb-3">{a.title}</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">{a.body}</p>
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] ring-1 ring-blue-100">
+                    <metric.icon className="h-5 w-5" />
+                  </div>
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {whyCards.map((card, i) => (
+              <motion.article key={card.title} variants={fadeUp}
+                className="group relative overflow-hidden rounded-2xl border border-slate-100 bg-white p-6 shadow-elegant card-lift">
+                <div className="absolute top-0 right-0 h-32 w-32 rounded-full bg-gradient-to-br from-blue-50 to-cyan-50 -translate-y-16 translate-x-16 transition-transform duration-700 group-hover:scale-150" />
+                <div className="relative">
+                  <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] shadow-sm">
+                    {i + 1 < 10 ? `0${i + 1}` : i + 1}
+                  </div>
+                  <div className="absolute right-0 top-1 grid h-10 w-10 place-items-center rounded-xl bg-blue-50 text-[#2563EB] opacity-90">
+                    <card.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mb-4 pr-12 text-xl font-extrabold text-[#0F172A]">{card.title}</h3>
+                  <p className="text-sm leading-7 text-slate-700">{card.body}</p>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="mt-5">
+            <motion.article variants={fadeUp}
+              className="relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-7 text-[#0F172A] shadow-elegant md:p-8">
+              <div className="absolute top-0 right-0 h-40 w-40 rounded-full bg-gradient-to-br from-blue-50 to-cyan-50 -translate-y-20 translate-x-20" />
+              <div className="relative flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-3xl">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-[#2563EB] ring-1 ring-blue-100">
+                    <Building2 className="h-4 w-4" /> Special Feature
+                  </div>
+                  <h3 className="mt-4 text-2xl font-extrabold uppercase tracking-wide text-[#0F172A]">
+                    Built From Real Enterprise Operations
+                  </h3>
+                  <p className="mt-4 text-sm leading-7 text-slate-700 md:text-base">
+                    Our operating model has been shaped by supporting complex enterprise property environments every day. The result is a practical, proven approach focused on platform stability, accountability, and measurable outcomes.
+                  </p>
+                </div>
+                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 text-[#2563EB] ring-1 ring-blue-100">
+                  <ShieldCheck className="h-8 w-8" />
+                </div>
+              </div>
+            </motion.article>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="mt-6 overflow-hidden rounded-[2rem] border border-slate-100 bg-white text-[#0F172A] shadow-elegant">
+            <motion.div variants={fadeUp} className="grid gap-0 lg:grid-cols-[0.95fr_1.25fr]">
+              <div className="bg-[#0F172A] p-8 text-white md:p-10">
+                <span className="text-xs font-bold uppercase tracking-widest text-cyan-200">Enterprise Proof Banner</span>
+                <h3 className="mt-4 text-2xl font-extrabold uppercase leading-tight md:text-3xl">
+                  Proven In Enterprise Property Operations
+                </h3>
+                <p className="mt-5 text-sm leading-7 text-slate-300">
+                  Supporting one of Australia's largest listed property groups.
+                </p>
+              </div>
+              <div className="grid gap-3 p-6 sm:grid-cols-2 md:p-8">
+                {proofPoints.map((point) => (
+                  <div key={point} className="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-slate-50 p-4">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#2563EB]" />
+                    <span className="text-sm font-semibold leading-6 text-slate-800">{point}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
+            className="mt-8 text-center">
+            <motion.div variants={fadeUp} className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Link to="/contact#send-us-a-message-form"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl gradient-primary px-7 py-4 font-bold text-white shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:shadow-glow-hover active:scale-[0.98] sm:w-auto">
+                Book a Strategy Call <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link to="/services"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-7 py-4 font-bold text-[#0F172A] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#2563EB] hover:text-[#2563EB] active:scale-[0.98] sm:w-auto">
+                Explore Yardi Services
+              </Link>
+            </motion.div>
           </motion.div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
-import { ArrowRight, Globe, Users, Clock, Award, ShieldCheck, BarChart3, Layers3 } from "lucide-react";
+import { ArrowRight, Globe, Users, Clock, Award, ShieldCheck, BarChart3, Layers3, BrainCircuit, Cloud, Bot, Building2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import aboutTeam from "@/assets/about-team.jpg";
 
@@ -34,6 +34,14 @@ const principles = [
   { icon: ShieldCheck, title: "Governed Delivery", text: "Clear intake, prioritization, testing, release notes, and handover discipline for every engagement." },
   { icon: BarChart3, title: "Measurable Outcomes", text: "We connect configuration, reporting, and support work to operating performance and executive visibility." },
   { icon: Layers3, title: "Full Platform Context", text: "Our team looks across modules, integrations, data quality, and user workflows before recommending changes." },
+];
+
+const founderHighlights = [
+  { icon: Award, label: "25+ Years Experience" },
+  { icon: BrainCircuit, label: "Enterprise Technology Leadership" },
+  { icon: Cloud, label: "Cloud, Data & AI" },
+  { icon: Bot, label: "Intelligent Automation & RPA" },
+  { icon: Building2, label: "Yardi Property Technology" },
 ];
 
 function CountUpValue({ target, suffix, run, fallback }: { target: number; suffix: string; run: boolean; fallback: string }) {
@@ -127,6 +135,52 @@ function About() {
               <div className="mt-2 text-sm text-slate-900 font-medium">{c.label}</div>
             </motion.div>
           ))}
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 md:pb-20">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+          <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="relative overflow-hidden rounded-3xl border border-blue-100 bg-white p-8 shadow-elegant md:p-10">
+            <div className="absolute right-0 top-0 h-40 w-40 rounded-full bg-gradient-to-br from-blue-50 to-cyan-50 -translate-y-20 translate-x-16" />
+            <div className="relative">
+              <span className="inline-block rounded-full bg-blue-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-[#2563EB]">Meet Our Founder</span>
+              <h2 className="mt-6 text-4xl font-extrabold text-[#0F172A]">Sambhaji</h2>
+              <p className="mt-2 text-xl font-bold text-gradient">Founder & CEO</p>
+              <div className="mt-7 grid gap-3">
+                {founderHighlights.map((item) => (
+                  <div key={item.label} className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3">
+                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white text-[#2563EB] shadow-sm">
+                      <item.icon className="h-5 w-5" />
+                    </div>
+                    <span className="font-bold text-slate-800">{item.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.article initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}
+            className="rounded-3xl border border-slate-100 bg-white p-8 shadow-elegant md:p-10">
+            <h3 className="text-3xl font-extrabold text-[#0F172A]">Enterprise Engineering Leadership for Property Technology</h3>
+            <div className="mt-5 space-y-4 text-base leading-8 text-slate-900">
+              <p>
+                Sambhaji is a technology executive who has spent his career leading enterprise transformations and engineering organizations across highly regulated industries, including Fortune 100 financial services.
+              </p>
+              <p>
+                He has modernized mission-critical platforms processing millions of transactions, led large-scale cloud transformation initiatives, and delivered AI, machine learning, and RPA-driven automation programs — improving operational efficiency and reducing costs by double digits.
+              </p>
+              <p>
+                He founded SpaceTech Consulting to bring that same engineering discipline, platform ownership, and automation-first mindset to the property technology sector.
+              </p>
+              <p>
+                Under his leadership, SpaceTech delivers Yardi managed services, platform optimization, integrations, reporting, and operational support for one of Australia's largest listed property groups, helping improve platform health, reduce support backlog, accelerate issue resolution, and drive continuous improvement across commercial and residential portfolios.
+              </p>
+              <p>
+                His focus is helping property organizations maximize the value of their Yardi investment through platform ownership, continuous improvement, operational excellence, and technology-driven innovation.
+              </p>
+            </div>
+          </motion.article>
         </div>
       </section>
 
