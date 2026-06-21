@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { ArrowRight, Globe, Users, Clock, Award, ShieldCheck, BarChart3, Layers3, BrainCircuit, Cloud, Bot, Building2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import aboutTeam from "@/assets/about-team.jpg";
+import aboutTeam from "@/assets/about-section.jpeg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
