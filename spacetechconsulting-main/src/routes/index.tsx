@@ -50,13 +50,13 @@ const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 const stats = [
   { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
   { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "3000+ Tickets", label: "Resolved across active engagements" },
+  { icon: BarChart3, value: "3,000+", label: "Platform Issues Managed" },
   { icon: ShieldCheck, value: "95%+ SLA", label: "SLA on owned ticket volume" },
 ];
 
 const whyMetrics = [
   { value: "25+", target: 25, suffix: "+", label: "Years Technology Leadership", icon: Cpu },
-  { value: "3000+", target: 3000, suffix: "+", label: "Platform Requests Managed", icon: FileCheck },
+  { value: "3,000+", target: 3000, suffix: "+", label: "Platform Issues Managed", icon: FileCheck, comma: true },
   { value: "50+", target: 50, suffix: "+", label: "Years Total Yardi Experience", icon: ShieldCheck },
   { value: "3", target: 3, suffix: "", label: "Global Delivery Regions", icon: Globe },
 ];
@@ -95,7 +95,7 @@ const whyCards = [
 ];
 
 const proofPoints = [
-  "3,000+ Platform Tickets Addressed",
+  "3,000+ Platform Issues Managed",
   "95%+ SLA",
   "1000+ Active Business Users Supported",
   "Commercial & Residential Portfolios",
@@ -195,7 +195,7 @@ const businessOutcomes = [
   "Established enterprise-wide support categorisation and reporting standards",
   "Created real-time operational dashboards for leadership visibility",
   "Implemented named SME ownership across critical business functions",
-  "Managed more than 3,000 platform requests",
+  "3,000+ Platform Issues Managed",
   "95%+ SLA on owned ticket volume",
   "18 Recurring issue patterns identified and eliminated through root-cause fixes",
   "Closures exceeded new ticket intake",
@@ -364,7 +364,7 @@ const complianceChartConfig = {} satisfies ChartConfig;
 
 const ctaTrustIndicators = [
   "50+ Years Total Yardi Experience",
-  "3,000+ Platform Requests Managed",
+  "3,000+ Platform Issues Managed",
   "95%+ SLA Performance",
   "Australia • India • United States",
 ];
@@ -1343,7 +1343,7 @@ function HomePage() {
                 <div className="relative flex items-start justify-between gap-2">
                   <div>
                     <div className="text-2xl font-extrabold text-[#0F172A]">
-                      <AnimatedMetricValue target={metric.target} suffix={metric.suffix} run={animateWhyMetrics} fallback={metric.value} />
+                      <AnimatedMetricValue target={metric.target} suffix={metric.suffix} run={animateWhyMetrics} fallback={metric.value} comma={metric.comma} />
                     </div>
                     <p className="mt-1 text-sm font-medium leading-5 text-slate-500">{metric.label}</p>
                   </div>

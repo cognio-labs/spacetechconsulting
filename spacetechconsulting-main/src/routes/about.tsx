@@ -19,7 +19,7 @@ export const Route = createFileRoute("/about")({
 
 const counters = [
   { value: "50+", target: 50, suffix: "+", label: "Years of Total Yardi Experience", icon: Award },
-  { value: "3000+", target: 3000, suffix: "+", label: "Tickets Resolved", icon: Users },
+  { value: "3,000+", target: 3000, suffix: "+", label: "Platform Issues Managed", icon: Users },
   { value: "24/7", target: 24, suffix: "/7", label: "Global Support Coverage", icon: Clock },
   { value: "3", target: 3, suffix: "", label: "Regions of Global Delivery", icon: Globe },
 ];
@@ -72,7 +72,7 @@ function CountUpValue({ target, suffix, run, fallback }: { target: number; suffi
 
   if (!run) return <>{fallback === "24/7" ? "0/7" : "0"}</>;
 
-  return <>{value}{suffix}</>;
+  return <>{value.toLocaleString()}{suffix}</>;
 }
 
 function About() {
