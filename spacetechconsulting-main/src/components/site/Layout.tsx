@@ -15,7 +15,7 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen w-full overflow-x-hidden flex flex-col bg-[#F8FAFC] dark:bg-[#080D1A] transition-colors duration-300">
       <Nav />
-      <main className="flex-1 pt-[72px] lg:pt-[90px]">{children}</main>
+      <main className="flex-1 pt-[74px] sm:pt-[80px] lg:pt-[86px]">{children}</main>
       <Footer />
       <a
         href={contactDetails.whatsapp.href}

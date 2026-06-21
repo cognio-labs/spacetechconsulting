@@ -713,7 +713,7 @@ function HomePage() {
           playsInline
           poster="/hero-section-bg.png"
           aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.85] lg:brightness-95"
+          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
         >
           <source src="/hero-bg-video.mp4" type="video/mp4" />
         </video>

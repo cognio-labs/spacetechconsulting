@@ -45,22 +45,25 @@ export function Nav() {
           : "border-slate-200/50 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.01),0_2px_8px_rgba(15,23,42,0.03)] dark:border-slate-700/40 dark:bg-[#0B1120]/92 dark:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_2px_8px_rgba(0,0,0,0.1)]"
       }`}
     >
-      <div className="mx-auto flex min-h-[54px] max-w-[90rem] items-center justify-between gap-3 px-4 py-1.5 sm:px-6 lg:min-h-[60px] xl:gap-5">
-        <Link to="/" className="flex min-w-0 max-w-[calc(100vw-88px)] items-center py-1.5 group select-none active:opacity-90 transition-opacity">
+      <div className="mx-auto flex h-[74px] max-w-[90rem] items-center justify-between gap-3 px-4 sm:h-[80px] sm:px-6 lg:h-[86px] xl:gap-5">
+        <Link
+          to="/"
+          className="group flex h-[48px] w-[176px] max-w-[calc(100vw-88px)] items-center transition-opacity active:opacity-90 sm:h-[52px] sm:w-[206px] lg:h-[56px] lg:w-[226px] xl:w-[242px]"
+        >
           <img
             src={navLogo}
             alt="SpaceTech Consulting logo"
-            className="h-auto w-[134px] shrink-0 object-contain object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] sm:w-[162px] lg:w-[172px] xl:w-[188px] [image-rendering:auto] dark:brightness-110"
+            className="h-auto w-[170px] max-w-none shrink-0 object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] [image-rendering:auto] sm:w-[200px] lg:w-[220px] xl:w-[236px]"
           />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1 rounded-full border border-slate-200/80 bg-slate-50/90 px-1.5 py-1 shadow-sm backdrop-blur select-none dark:border-slate-700/60 dark:bg-slate-800/60">
+        <nav className="hidden lg:flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50/90 px-2 py-1.5 shadow-sm backdrop-blur select-none dark:border-slate-700/60 dark:bg-slate-800/60">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="px-2.5 xl:px-3.5 py-1.5 text-[13px] font-semibold antialiased rounded-full transition-colors text-slate-700 hover:text-[#2563EB] active:scale-95 duration-200 dark:text-slate-300 dark:hover:text-cyan-400"
-              activeProps={{ className: "px-2.5 xl:px-3.5 py-1.5 text-[13px] font-semibold antialiased rounded-full text-[#2563EB] bg-[rgba(37,99,235,0.08)] shadow-[inset_0_1px_2px_rgba(37,99,235,0.05)] dark:text-cyan-400 dark:bg-cyan-400/10 dark:shadow-[inset_0_1px_2px_rgba(34,211,238,0.08)]" }}
+              className="px-3.5 py-2 text-sm font-semibold antialiased rounded-full transition-colors text-slate-700 hover:text-[#2563EB] active:scale-95 duration-200 xl:px-4 dark:text-slate-300 dark:hover:text-cyan-400"
+              activeProps={{ className: "px-3.5 py-2 text-sm font-semibold antialiased rounded-full text-[#2563EB] bg-[rgba(37,99,235,0.08)] shadow-[inset_0_1px_2px_rgba(37,99,235,0.05)] xl:px-4 dark:text-cyan-400 dark:bg-cyan-400/10 dark:shadow-[inset_0_1px_2px_rgba(34,211,238,0.08)]" }}
             >
               {l.label}
             </Link>
@@ -72,7 +75,7 @@ export function Nav() {
           <button
             onClick={() => setDark((d) => !d)}
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-slate-500 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-cyan-300 select-none"
+            className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-slate-500 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-cyan-300 select-none"
           >
             <span
               className="absolute inset-0 grid place-items-center transition-all duration-300"
@@ -92,7 +95,7 @@ export function Nav() {
             href="https://cal.com/spacetech/30min"
             target="_blank"
             rel="noreferrer"
-            className="hidden sm:inline-flex h-9 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#1E40AF,#2563EB)] px-4 text-[13px] font-semibold text-white shadow-[0_8px_22px_rgba(37,99,235,0.22)] ring-1 ring-blue-400/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(37,99,235,0.28)] active:scale-[0.98] select-none dark:shadow-[0_8px_22px_rgba(37,99,235,0.18)]"
+            className="hidden sm:inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#1E40AF,#2563EB)] px-5 text-sm font-semibold text-white shadow-[0_8px_22px_rgba(37,99,235,0.22)] ring-1 ring-blue-400/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(37,99,235,0.28)] active:scale-[0.98] select-none dark:shadow-[0_8px_22px_rgba(37,99,235,0.18)]"
           >
             Book a Call
           </a>

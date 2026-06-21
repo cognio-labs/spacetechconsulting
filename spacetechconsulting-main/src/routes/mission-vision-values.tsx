@@ -473,13 +473,17 @@ function MissionVisionValues() {
           VALUES  –  Bento grid  (5 cells, 2+3, no eyebrow)
           Backgrounds: dark navy / white / gradient blue / white / dark indigo
       ───────────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 px-6" style={{ background: "#F1F5F9" }}>
-        <div className="max-w-7xl mx-auto">
-          <motion.div {...up()} className="mb-14">
-            <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight">
+      <section className="relative overflow-hidden bg-[#F1F5F9] px-6 py-24 transition-colors duration-300 dark:bg-[#07111F] md:py-32">
+        <div className="pointer-events-none absolute inset-0 opacity-0 dark:opacity-100">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(37,99,235,0.24),transparent_34%),radial-gradient(circle_at_82%_18%,rgba(6,182,212,0.18),transparent_34%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),transparent_28%,rgba(0,0,0,0.2))]" />
+        </div>
+        <div className="relative max-w-7xl mx-auto">
+          <motion.div {...up()} className="mb-14 max-w-3xl rounded-3xl border border-slate-200/70 bg-white/74 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-xl dark:border-white/12 dark:bg-white/[0.07] dark:shadow-[0_24px_90px_rgba(0,0,0,0.38)] md:p-8">
+            <h2 className="text-4xl md:text-5xl font-black text-[#0F172A] tracking-tight dark:text-white">
               Five Core Values
             </h2>
-            <p className="mt-3 text-lg text-slate-500 max-w-[44ch] leading-relaxed">
+            <p className="mt-3 text-lg text-slate-600 max-w-[44ch] leading-relaxed dark:text-slate-200">
               The principles that shape how we show up for every client, every day.
             </p>
           </motion.div>
