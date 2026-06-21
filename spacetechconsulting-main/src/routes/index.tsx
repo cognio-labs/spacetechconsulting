@@ -125,7 +125,7 @@ const caseStudyChallenges = [
   "Lack of module ownership accountability",
   "Difficulty identifying recurring issues and root causes",
   "Reactive support model with limited governance visibility",
-  "Resource attrition",
+  "Knowledge retention and continuity risk",
 ];
 
 const caseStudyBuildCards = [
@@ -361,13 +361,6 @@ const ticketVolumeChartConfig = {
 } satisfies ChartConfig;
 
 const complianceChartConfig = {} satisfies ChartConfig;
-
-const ctaTrustIndicators = [
-  "50+ Years Total Yardi Experience",
-  "3,000+ Platform Issues Managed",
-  "95%+ SLA Performance",
-  "Australia • India • United States",
-];
 
 const services = [
   { num: "01", title: "Platform Support & Optimization", items: ["Application Help Desk (L1/L2/L3)", "System administration & maintenance", "Platform upgrades support & testing", "Issue tracking & SLA management", "Health checks & system audits", "Performance tuning & optimization"] },
@@ -1467,14 +1460,6 @@ function HomePage() {
               </a>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              {ctaTrustIndicators.map((indicator) => (
-                <div key={indicator} className="flex items-center justify-center gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 hover:border-blue-100 hover:bg-blue-50/60 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">
-                  <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-[#2563EB]" />
-                  <span>{indicator}</span>
-                </div>
-              ))}
-            </motion.div>
           </motion.div>
 
         </div>
