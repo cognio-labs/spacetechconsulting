@@ -45,15 +45,15 @@ export function Nav() {
           : "border-slate-200/50 bg-white/92 shadow-[0_1px_2px_rgba(15,23,42,0.01),0_2px_8px_rgba(15,23,42,0.03)] dark:border-slate-700/40 dark:bg-[#0B1120]/92 dark:shadow-[0_1px_2px_rgba(0,0,0,0.2),0_2px_8px_rgba(0,0,0,0.1)]"
       }`}
     >
-      <div className="mx-auto flex h-[74px] max-w-[90rem] items-center justify-between gap-3 px-4 sm:h-[80px] sm:px-6 lg:h-[86px] xl:gap-5">
+      <div className="mx-auto flex h-[58px] max-w-[90rem] items-center justify-between gap-3 px-4 sm:h-[64px] sm:px-6 lg:h-[72px] xl:gap-5">
         <Link
           to="/"
-          className="group flex h-[48px] w-[176px] max-w-[calc(100vw-88px)] items-center transition-opacity active:opacity-90 sm:h-[52px] sm:w-[206px] lg:h-[56px] lg:w-[226px] xl:w-[242px]"
+          className="group flex h-[42px] w-[152px] max-w-[calc(100vw-92px)] items-center transition-opacity active:opacity-90 sm:h-[46px] sm:w-[174px] lg:h-[50px] lg:w-[204px] xl:w-[218px]"
         >
           <img
             src={navLogo}
             alt="SpaceTech Consulting logo"
-            className="h-auto w-[170px] max-w-none shrink-0 object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] [image-rendering:auto] sm:w-[200px] lg:w-[220px] xl:w-[236px]"
+            className="h-auto w-[148px] max-w-none shrink-0 object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
           />
         </Link>
 
@@ -75,7 +75,7 @@ export function Nav() {
           <button
             onClick={() => setDark((d) => !d)}
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-slate-500 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-cyan-300 select-none"
+            className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-slate-500 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-cyan-300 select-none"
           >
             <span
               className="absolute inset-0 grid place-items-center transition-all duration-300"
@@ -102,7 +102,7 @@ export function Nav() {
 
           <button
             onClick={() => setOpen(!open)}
-            className="lg:hidden grid h-10 w-10 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100 active:scale-95 transition-all dark:text-slate-200 dark:hover:bg-slate-800"
+            className="lg:hidden grid h-9 w-9 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100 active:scale-95 transition-all dark:text-slate-200 dark:hover:bg-slate-800"
             aria-label="Toggle navigation"
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

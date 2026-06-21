@@ -170,9 +170,9 @@ const dashboardCoverage = [
 ];
 
 const dashboardAchievements = [
-  "Named SME Model",
-  "Operational Categorisation Framework",
   "Real-Time Executive Dashboards",
+  "Operational Categorisation Framework",
+  "Named SME Model",
   "Continuous Improvement Governance",
 ];
 
