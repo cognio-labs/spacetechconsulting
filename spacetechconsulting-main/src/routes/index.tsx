@@ -280,8 +280,8 @@ function CaseStudySection() {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,#F8FAFC_0%,#FFFFFF_42%,#EFF6FF_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_12%,rgba(37,99,235,0.08),transparent_28%),radial-gradient(circle_at_82%_18%,rgba(6,182,212,0.08),transparent_28%)]" />
 
-      <div className="relative mx-auto max-w-7xl">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
+      <div className="relative mx-auto max-w-[96rem]">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: "-80px" }} variants={stagger} className="overflow-visible rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
 
           {/* ── Hero ── */}
           <div className="grid bg-[#0F172A] lg:grid-cols-[1.08fr_0.92fr]">
@@ -505,14 +505,14 @@ function CaseStudySection() {
                       </div>
                     </div>
 
-                    <div className="mx-auto mt-6 grid w-full gap-6 lg:w-[120%] lg:max-w-none">
+                    <div className="mx-auto mt-6 grid w-full gap-6">
                       {dashboardScreenshots.map((screenshot, index) => (
                         <motion.figure
                           key={screenshot.title}
                           initial={{ opacity: 0, y: 18 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.4 + index * 0.08 }}
-                          className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.08)]"
+                          className="overflow-visible rounded-xl border border-slate-200 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.08)]"
                         >
                           <figcaption className="border-b border-slate-200 bg-slate-50 px-4 py-3 text-sm font-extrabold text-[#0F172A] sm:px-5">
                             {screenshot.title}
