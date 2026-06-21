@@ -35,8 +35,8 @@ const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 const stats = [
   { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
   { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "3,000+", label: "Platform Issues Managed" },
-  { icon: ShieldCheck, value: "95%+ SLA Performance", label: "On owned ticket volume" },
+  { icon: BarChart3, value: "3000+ Tickets", label: "Resolved across active engagements" },
+  { icon: ShieldCheck, value: "95%+ SLA", label: "On owned ticket volume" },
 ];
 
 const whyMetrics = [
