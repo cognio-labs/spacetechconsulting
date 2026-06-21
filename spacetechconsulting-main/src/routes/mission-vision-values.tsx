@@ -225,10 +225,13 @@ function MissionVisionValues() {
                 </div>
 
                 <blockquote
-                  className="text-2xl md:text-3xl font-black text-white leading-[1.15] italic mt-4 pb-1"
+                  className="text-xl md:text-2xl font-black text-white leading-[1.2] italic mt-4 pb-1"
                 >
                   Bringing out the best in Yardi
                 </blockquote>
+                <p className="mt-3 max-w-[38rem] text-sm md:text-base font-medium leading-relaxed text-slate-400">
+                  Through platform ownership, operational excellence, and continuous improvement.
+                </p>
 
                 <div className="mt-7 pt-6 border-t border-white/10 flex items-center gap-3">
                   <div
@@ -242,7 +245,7 @@ function MissionVisionValues() {
                   <div>
                     <div className="text-white font-bold text-sm">Sambhaji</div>
                     <div className="text-slate-500 text-xs">
-                      Founder & CEO, SpaceTech Consulting
+                      Founder & CEO
                     </div>
                   </div>
                 </div>
@@ -360,7 +363,7 @@ function MissionVisionValues() {
 
                 <div className="grid grid-cols-2 gap-3">
                   {[
-                    { val: "ANZ", label: "Primary Focus" },
+                    { val: "ANZ", label: "Established Presence" },
                     { val: "24/7", label: "Global Support" },
                     { val: "3,000+", label: "Platform Issues Managed" },
                     { val: "3", label: "Delivery Regions" },
