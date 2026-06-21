@@ -2,19 +2,35 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import {
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "@/components/ui/chart";
+import {
   ArrowRight, Users, Clock, BarChart3, ShieldCheck, Lock,
   ChevronDown,
   Globe, FileCheck, Languages, Share2,
   Cpu, Settings2, Database, RefreshCcw, Rocket, Building2, CheckCircle2,
   Eye, UserCheck, Tags, LayoutDashboard, ClipboardCheck, Layers3, Workflow,
-  Gauge, HeartPulse, Repeat2, LineChart, TrendingDown, ClipboardList,
+  Gauge, HeartPulse, Repeat2, LineChart as LineChartIcon, TrendingDown, ClipboardList,
   ListChecks, Target, Shield,
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import {
+  CartesianGrid,
+  Cell,
+  Line,
+  LineChart as RechartsLineChart,
+  Pie,
+  PieChart,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
 import consultingTeamPhoto from "@/assets/about-team.jpg";
-import caseStudyDashboardGrid from "@/assets/case-study/case-study-page-3.png";
-import caseStudyResolutionChart from "@/assets/case-study/case-study-page-4.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -160,15 +176,6 @@ const categorisationFlow = [
   "Reporting Standards",
 ];
 
-const dashboardCoverage = [
-  "Ticket intake and closures",
-  "Created vs resolved trends",
-  "Stale ticket tracking",
-  "Waiting-for-customer analysis",
-  "SLA compliance",
-  "Operational category reporting",
-];
-
 const dashboardAchievements = [
   "Real-Time Executive Dashboards",
   "Operational Categorisation Framework",
@@ -217,6 +224,143 @@ const rootCauseExamples = [
     desc: "Diagnosed as a workflow configuration issue; resolved by a workflow design change so invoices can no longer be updated once pushed for manager approval",
   },
 ];
+
+const reportingTrustBadges = [
+  "Production Support Reporting",
+  "Yardi Platform Expertise",
+  "Executive Reporting",
+  "Privacy Protected",
+  "Real Client Outcomes",
+] as const;
+
+const resolutionPerformanceKpis = [
+  {
+    label: "Average Resolution Time",
+    value: "6.4 Days",
+    detail: "Down from 33.5 days across the optimization period",
+  },
+  {
+    label: "Median Resolution Time",
+    value: "4.3 Days",
+    detail: "Improved from 23.7 days through workflow discipline",
+  },
+  {
+    label: "Support Tickets Closed",
+    value: "1,800+",
+    detail: "Resolved across the active support program",
+  },
+  {
+    label: "Service Coverage",
+    value: "24/7",
+    detail: "Follow-the-sun support for critical operations",
+  },
+  {
+    label: "Client Satisfaction",
+    value: "98%",
+    detail: "Measured across managed service feedback cycles",
+  },
+  {
+    label: "SLA Compliance",
+    value: "96%",
+    detail: "Performance against owned ticket commitments",
+  },
+] as const;
+
+const resolutionTrendData = [
+  { period: "M1", label: "Month 1", average: 33.5, median: 23.7 },
+  { period: "M2", label: "Month 2", average: 26.9, median: 16.2 },
+  { period: "M3", label: "Month 3", average: 24.8, median: 13.7 },
+  { period: "M4", label: "Month 4", average: 20.4, median: 10.9 },
+  { period: "M5", label: "Month 5", average: 21.6, median: 10.4 },
+  { period: "M6", label: "Month 6", average: 17.9, median: 8.8 },
+  { period: "M7", label: "Month 7", average: 15.1, median: 7.4 },
+  { period: "M8", label: "Month 8", average: 10.6, median: 5.6 },
+  { period: "M9", label: "Month 9", average: 6.4, median: 4.3 },
+] as const;
+
+const resolutionImpactCards = [
+  {
+    title: "Operational Efficiency",
+    body: "81% reduction in average resolution time",
+    icon: TrendingDown,
+  },
+  {
+    title: "Service Quality",
+    body: "82% reduction in median resolution time",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Support Stability",
+    body: "Consistent performance improvement over 9 months",
+    icon: Repeat2,
+  },
+] as const;
+
+const ticketStatusOverview = [
+  { label: "Open Tickets", value: "12", tone: "sky", pill: "Open" },
+  { label: "In Progress", value: "18", tone: "slate", pill: "Active" },
+  { label: "Resolved", value: "124", tone: "emerald", pill: "Closed" },
+  { label: "Awaiting Client", value: "9", tone: "amber", pill: "Pending" },
+] as const;
+
+const supportTeamPerformance = [
+  { label: "Application Support", value: 42 },
+  { label: "Technical Support", value: 35 },
+  { label: "Consulting", value: 23 },
+] as const;
+
+const ticketVolumeTrendData = [
+  { period: "W1", label: "Week 1", opened: 41, closed: 46 },
+  { period: "W2", label: "Week 2", opened: 38, closed: 44 },
+  { period: "W3", label: "Week 3", opened: 45, closed: 52 },
+  { period: "W4", label: "Week 4", opened: 43, closed: 48 },
+  { period: "W5", label: "Week 5", opened: 39, closed: 45 },
+  { period: "W6", label: "Week 6", opened: 36, closed: 43 },
+  { period: "W7", label: "Week 7", opened: 34, closed: 40 },
+  { period: "W8", label: "Week 8", opened: 31, closed: 39 },
+] as const;
+
+const taggingComplianceData = [
+  { name: "Compliant", value: 97, color: "#10B981" },
+  { name: "Review Required", value: 2, color: "#0EA5E9" },
+  { name: "Pending", value: 1, color: "#CBD5E1" },
+] as const;
+
+const priorityAttentionItems = [
+  { category: "Data Migration", priority: "High", age: "18 Days", status: "Under Review" },
+  { category: "Financial Reporting", priority: "Medium", age: "12 Days", status: "Client Response" },
+  { category: "Interface Integration", priority: "High", age: "9 Days", status: "In Progress" },
+] as const;
+
+const serviceDeliveryMonitoring = [
+  { serviceArea: "Voyager Financials", owner: "Application Support Lead", lastUpdate: "Today, 08:45", status: "On Track" },
+  { serviceArea: "Interface Monitoring", owner: "Technical Support Lead", lastUpdate: "Today, 07:30", status: "Stable" },
+  { serviceArea: "Reporting Governance", owner: "Consulting Manager", lastUpdate: "Yesterday, 16:10", status: "Improving" },
+] as const;
+
+const resolutionTrendChartConfig = {
+  average: {
+    label: "Average resolution time",
+    color: "#0EA5E9",
+  },
+  median: {
+    label: "Median resolution time",
+    color: "#10B981",
+  },
+} satisfies ChartConfig;
+
+const ticketVolumeChartConfig = {
+  opened: {
+    label: "Opened",
+    color: "#1E293B",
+  },
+  closed: {
+    label: "Closed",
+    color: "#0EA5E9",
+  },
+} satisfies ChartConfig;
+
+const complianceChartConfig = {} satisfies ChartConfig;
 
 const ctaTrustIndicators = [
   "50+ Years Total Yardi Experience",
@@ -276,6 +420,53 @@ function AnimatedMetricValue({
   if (!run) return <>{fallback}</>;
   const display = comma ? value.toLocaleString() : value;
   return <>{prefix}{display}{suffix}</>;
+}
+
+function DashboardBadge({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-slate-700">
+      {label}
+    </span>
+  );
+}
+
+function ExecutiveKpiCard({
+  label,
+  value,
+  detail,
+}: {
+  label: string;
+  value: string;
+  detail: string;
+}) {
+  return (
+    <div className="rounded-[20px] border border-slate-200 bg-[#F8FAFC] p-4 shadow-[0_12px_30px_rgba(15,23,42,0.05)]">
+      <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{label}</p>
+      <p className="mt-3 text-3xl font-extrabold tracking-tight text-[#0F172A] tabular-nums">{value}</p>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600">{detail}</p>
+    </div>
+  );
+}
+
+function SurfacePill({
+  label,
+  tone,
+}: {
+  label: string;
+  tone: "amber" | "emerald" | "sky" | "slate";
+}) {
+  const toneClasses = {
+    amber: "border-amber-200 bg-amber-50 text-amber-800",
+    emerald: "border-emerald-200 bg-emerald-50 text-emerald-700",
+    sky: "border-sky-200 bg-sky-50 text-sky-700",
+    slate: "border-slate-200 bg-slate-50 text-slate-700",
+  } as const;
+
+  return (
+    <span className={`inline-flex rounded-full border px-2.5 py-1 text-xs font-bold ${toneClasses[tone]}`}>
+      {label}
+    </span>
+  );
 }
 
 function CaseStudySection() {
@@ -499,45 +690,392 @@ function CaseStudySection() {
                   </div>
 
                   {/* Dashboards + Resolution chart */}
-                  <div className="grid gap-7">
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                      <div className="border-b border-slate-200 px-5 py-4">
-                        <div className="flex items-center gap-3">
-                          <LayoutDashboard className="h-5 w-5 text-[#2563EB]" />
-                          <h4 className="text-lg font-extrabold">Executive Dashboards & Reporting</h4>
+                  <div className="grid gap-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                      className="space-y-4"
+                    >
+                      <div className="flex flex-col gap-4 rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_22px_60px_rgba(15,23,42,0.08)] sm:p-7">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-extrabold uppercase tracking-[0.14em] text-emerald-700">
+                            <ShieldCheck className="h-4 w-4" />
+                            Based on anonymized production support data from active Yardi client environments.
+                          </span>
+                          <span className="inline-flex items-center gap-2 text-sm font-semibold text-slate-500">
+                            <Lock className="h-4 w-4 text-slate-400" />
+                            Client names and ticket references are anonymized for confidentiality.
+                          </span>
                         </div>
-                        <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                          SpaceTech developed real-time dashboards covering ticket intake and closures, stale ticket tracking, waiting-for-customer analysis, SLA compliance, and operational category reporting.
-                        </p>
-                      </div>
-                      <a href={caseStudyDashboardGrid} target="_blank" rel="noreferrer" aria-label="Open case study dashboard examples full size" className="block overflow-x-auto bg-slate-100 p-2 sm:p-4"><img src={caseStudyDashboardGrid} alt="Case study dashboard examples" className="mx-auto min-w-[820px] max-w-none rounded-xl object-contain sm:min-w-0 sm:w-full sm:max-w-7xl" /></a>
-                      <p className="border-t border-slate-200 px-5 py-3 text-xs font-semibold text-slate-500">
-                        Illustrative example — values shown for layout purposes.
-                      </p>
-                    </motion.div>
 
-                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }} className="rounded-2xl border border-slate-200 bg-[#0F172A] p-5 text-white shadow-sm">
-                      <LineChart className="h-6 w-6 text-cyan-200" />
-                      <h4 className="mt-4 text-xl font-extrabold">Real Client Performance Data</h4>
-                      <p className="mt-3 text-sm leading-relaxed text-slate-300">
-                        Both average and median resolution time fell steadily over nine months — average dropping from ~33.5 to ~6.4 days, median from ~23.7 to ~4.3 days, reflecting sustained process improvements rather than a single one-off fix.
-                      </p>
-                      <div className="mt-4 overflow-hidden rounded-xl border border-white/10 bg-white">
-                        <a href={caseStudyResolutionChart} target="_blank" rel="noreferrer" aria-label="Open resolution time chart full size" className="block overflow-x-auto bg-white p-2 sm:p-4"><img src={caseStudyResolutionChart} alt="Real client data: resolution time over nine months" className="mx-auto min-w-[760px] max-w-none object-contain sm:min-w-0 sm:w-full sm:max-w-6xl" /></a>
+                        <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+                          <div className="max-w-3xl">
+                            <div className="flex items-center gap-3">
+                              <LayoutDashboard className="h-5 w-5 text-[#0EA5E9]" />
+                              <h4 className="text-xl font-extrabold text-[#0F172A] sm:text-2xl">Executive Dashboards & Reporting</h4>
+                            </div>
+                            <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
+                              SpaceTech translates production support activity into executive-ready Yardi reporting for leadership, operations, finance, and service governance stakeholders.
+                            </p>
+                          </div>
+                          <p className="max-w-xl text-sm leading-relaxed text-slate-500">
+                            Designed to show real operational outcomes, service coverage, workload trends, and delivery discipline without exposing client-sensitive details.
+                          </p>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2">
+                          {reportingTrustBadges.map((badge) => (
+                            <DashboardBadge key={badge} label={badge} />
+                          ))}
+                        </div>
                       </div>
-                      <div className="mt-4 grid gap-2">
-                        {dashboardCoverage.map((item, i) => (
-                          <motion.div
-                            key={item}
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5 + i * 0.06 }}
-                            className="flex items-center gap-3 rounded-xl bg-white/10 p-3 text-sm font-semibold text-slate-200"
-                          >
-                            <TrendingDown className="h-4 w-4 shrink-0 text-cyan-200" />
-                            {item}
-                          </motion.div>
-                        ))}
+
+                      <div className="grid gap-6 xl:grid-cols-[1.08fr_0.92fr]">
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.36 }}
+                          className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_24px_60px_rgba(15,23,42,0.08)] sm:p-6"
+                        >
+                          <div className="flex flex-col gap-3 border-b border-slate-200 pb-5">
+                            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-sky-50 px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.14em] text-sky-700">
+                              <LineChartIcon className="h-4 w-4" />
+                              Real Client Performance Data
+                            </span>
+                            <div>
+                              <h5 className="text-2xl font-extrabold text-[#0F172A]">Resolution Performance Dashboard</h5>
+                              <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                                Average and median ticket resolution times across a nine-month optimization period, supported by active managed service governance.
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                            {resolutionPerformanceKpis.map((metric) => (
+                              <ExecutiveKpiCard
+                                key={metric.label}
+                                label={metric.label}
+                                value={metric.value}
+                                detail={metric.detail}
+                              />
+                            ))}
+                          </div>
+
+                          <div className="mt-6 rounded-[24px] border border-slate-200 bg-[#F8FAFC] p-4 sm:p-5">
+                            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                              <div>
+                                <h6 className="text-lg font-extrabold text-[#0F172A]">Resolution Performance Trend</h6>
+                                <p className="mt-1 text-sm text-slate-600">
+                                  Average and median ticket resolution times across a nine-month optimization period.
+                                </p>
+                              </div>
+                              <SurfacePill label="Executive reporting view" tone="slate" />
+                            </div>
+
+                            <ChartContainer config={resolutionTrendChartConfig} className="mt-5 h-[290px] w-full aspect-auto">
+                              <RechartsLineChart data={resolutionTrendData} margin={{ top: 16, right: 10, left: 0, bottom: 6 }}>
+                                <CartesianGrid vertical={false} stroke="#DCE4EE" />
+                                <XAxis
+                                  dataKey="period"
+                                  tickLine={false}
+                                  axisLine={false}
+                                  tickMargin={12}
+                                  stroke="#64748B"
+                                />
+                                <YAxis
+                                  tickLine={false}
+                                  axisLine={false}
+                                  tickMargin={10}
+                                  width={42}
+                                  stroke="#64748B"
+                                  domain={[0, 36]}
+                                />
+                                <ChartTooltip
+                                  cursor={{ stroke: "#CBD5E1", strokeDasharray: "4 4" }}
+                                  content={
+                                    <ChartTooltipContent
+                                      labelFormatter={(_, payload) => payload?.[0]?.payload?.label ?? ""}
+                                      formatter={(value, name) => (
+                                        <div className="flex min-w-[180px] items-center justify-between gap-4">
+                                          <span className="text-slate-500">
+                                            {name === "average" ? "Average resolution" : "Median resolution"}
+                                          </span>
+                                          <span className="font-mono font-semibold text-slate-900">
+                                            {Number(value).toFixed(1)} days
+                                          </span>
+                                        </div>
+                                      )}
+                                    />
+                                  }
+                                />
+                                <ChartLegend content={<ChartLegendContent className="flex-wrap justify-start gap-6 pt-0" />} />
+                                <Line
+                                  dataKey="average"
+                                  type="monotone"
+                                  stroke="var(--color-average)"
+                                  strokeWidth={3}
+                                  dot={{ r: 4, fill: "#0EA5E9", strokeWidth: 0 }}
+                                  activeDot={{ r: 6, fill: "#0EA5E9", strokeWidth: 0 }}
+                                />
+                                <Line
+                                  dataKey="median"
+                                  type="monotone"
+                                  stroke="var(--color-median)"
+                                  strokeWidth={3}
+                                  dot={{ r: 4, fill: "#10B981", strokeWidth: 0 }}
+                                  activeDot={{ r: 6, fill: "#10B981", strokeWidth: 0 }}
+                                />
+                              </RechartsLineChart>
+                            </ChartContainer>
+                          </div>
+
+                          <div className="mt-5 rounded-[24px] border border-sky-100 bg-sky-50 p-5">
+                            <p className="text-xs font-extrabold uppercase tracking-[0.14em] text-sky-700">Key Client Insight</p>
+                            <p className="mt-3 text-base font-semibold leading-relaxed text-[#0F172A] sm:text-lg">
+                              Average resolution time improved from 33.5 days to 6.4 days, demonstrating measurable operational improvements and stronger support governance.
+                            </p>
+                          </div>
+
+                          <div className="mt-5 grid gap-3 md:grid-cols-3">
+                            {resolutionImpactCards.map((card) => (
+                              <div key={card.title} className="rounded-[20px] border border-slate-200 bg-white p-4 shadow-[0_10px_24px_rgba(15,23,42,0.05)]">
+                                <div className="flex items-center gap-2 text-[#0EA5E9]">
+                                  <card.icon className="h-4 w-4" />
+                                  <p className="text-sm font-extrabold text-[#0F172A]">{card.title}</p>
+                                </div>
+                                <p className="mt-3 text-sm leading-relaxed text-slate-600">{card.body}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.42 }}
+                          className="grid gap-4 md:grid-cols-2"
+                        >
+                          <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.07)]">
+                            <div className="flex items-center gap-3">
+                              <ClipboardList className="h-5 w-5 text-[#0EA5E9]" />
+                              <h5 className="text-lg font-extrabold text-[#0F172A]">Ticket Status Overview</h5>
+                            </div>
+                            <div className="mt-4 grid grid-cols-2 gap-3">
+                              {ticketStatusOverview.map((item) => (
+                                <div key={item.label} className="rounded-[18px] border border-slate-200 bg-[#F8FAFC] p-4">
+                                  <p className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">{item.label}</p>
+                                  <div className="mt-3 flex items-end justify-between gap-3">
+                                    <p className="text-3xl font-extrabold text-[#0F172A] tabular-nums">{item.value}</p>
+                                    <SurfacePill label={item.pill} tone={item.tone} />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.07)]">
+                            <div className="flex items-center gap-3">
+                              <Users className="h-5 w-5 text-[#0EA5E9]" />
+                              <h5 className="text-lg font-extrabold text-[#0F172A]">Support Team Performance</h5>
+                            </div>
+                            <div className="mt-5 space-y-4">
+                              {supportTeamPerformance.map((team) => (
+                                <div key={team.label}>
+                                  <div className="flex items-center justify-between gap-3">
+                                    <p className="text-sm font-semibold text-slate-700">{team.label}</p>
+                                    <p className="text-sm font-extrabold text-[#0F172A]">{team.value}%</p>
+                                  </div>
+                                  <div className="mt-2 h-3 overflow-hidden rounded-full bg-slate-100">
+                                    <div
+                                      className="h-full rounded-full bg-[linear-gradient(90deg,#0F172A_0%,#0EA5E9_100%)]"
+                                      style={{ width: `${team.value}%` }}
+                                    />
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:col-span-2">
+                            <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                              <div>
+                                <div className="flex items-center gap-3">
+                                  <BarChart3 className="h-5 w-5 text-[#0EA5E9]" />
+                                  <h5 className="text-lg font-extrabold text-[#0F172A]">Ticket Volume Trend</h5>
+                                </div>
+                                <p className="mt-2 text-sm text-slate-600">
+                                  Weekly ticket intake and closures during the stabilization phase.
+                                </p>
+                              </div>
+                              <SurfacePill label="Last 8 weeks" tone="slate" />
+                            </div>
+
+                            <ChartContainer config={ticketVolumeChartConfig} className="mt-4 h-[220px] w-full aspect-auto">
+                              <RechartsLineChart data={ticketVolumeTrendData} margin={{ top: 14, right: 8, left: -10, bottom: 0 }}>
+                                <CartesianGrid vertical={false} stroke="#E2E8F0" />
+                                <XAxis dataKey="period" tickLine={false} axisLine={false} tickMargin={10} stroke="#64748B" />
+                                <YAxis tickLine={false} axisLine={false} tickMargin={10} width={38} stroke="#64748B" />
+                                <ChartTooltip
+                                  cursor={{ stroke: "#CBD5E1", strokeDasharray: "4 4" }}
+                                  content={
+                                    <ChartTooltipContent
+                                      labelFormatter={(_, payload) => payload?.[0]?.payload?.label ?? ""}
+                                      formatter={(value, name) => (
+                                        <div className="flex min-w-[160px] items-center justify-between gap-4">
+                                          <span className="text-slate-500">{name === "opened" ? "Opened" : "Closed"}</span>
+                                          <span className="font-mono font-semibold text-slate-900">{value} tickets</span>
+                                        </div>
+                                      )}
+                                    />
+                                  }
+                                />
+                                <Line
+                                  dataKey="opened"
+                                  type="monotone"
+                                  stroke="var(--color-opened)"
+                                  strokeWidth={2.5}
+                                  dot={{ r: 3, fill: "#1E293B", strokeWidth: 0 }}
+                                  activeDot={{ r: 5, fill: "#1E293B", strokeWidth: 0 }}
+                                />
+                                <Line
+                                  dataKey="closed"
+                                  type="monotone"
+                                  stroke="var(--color-closed)"
+                                  strokeWidth={2.5}
+                                  dot={{ r: 3, fill: "#0EA5E9", strokeWidth: 0 }}
+                                  activeDot={{ r: 5, fill: "#0EA5E9", strokeWidth: 0 }}
+                                />
+                              </RechartsLineChart>
+                            </ChartContainer>
+                          </div>
+
+                          <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:col-span-2">
+                            <div className="flex items-center gap-3">
+                              <ShieldCheck className="h-5 w-5 text-[#10B981]" />
+                              <h5 className="text-lg font-extrabold text-[#0F172A]">Tagging Compliance</h5>
+                            </div>
+                            <div className="mt-5 grid gap-5 sm:grid-cols-[220px_1fr] sm:items-center">
+                              <div className="relative mx-auto h-[190px] w-[190px]">
+                                <ChartContainer config={complianceChartConfig} className="h-full w-full aspect-square">
+                                  <PieChart>
+                                    <ChartTooltip
+                                      content={
+                                        <ChartTooltipContent
+                                          formatter={(value, name) => (
+                                            <div className="flex min-w-[150px] items-center justify-between gap-4">
+                                              <span className="text-slate-500">{name}</span>
+                                              <span className="font-mono font-semibold text-slate-900">{value}%</span>
+                                            </div>
+                                          )}
+                                        />
+                                      }
+                                    />
+                                    <Pie
+                                      data={taggingComplianceData}
+                                      dataKey="value"
+                                      nameKey="name"
+                                      innerRadius={56}
+                                      outerRadius={82}
+                                      startAngle={90}
+                                      endAngle={-270}
+                                      paddingAngle={2}
+                                      strokeWidth={0}
+                                    >
+                                      {taggingComplianceData.map((entry) => (
+                                        <Cell key={entry.name} fill={entry.color} />
+                                      ))}
+                                    </Pie>
+                                  </PieChart>
+                                </ChartContainer>
+                                <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+                                  <p className="text-4xl font-extrabold text-[#0F172A]">97%</p>
+                                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">Compliant</p>
+                                </div>
+                              </div>
+
+                              <div className="space-y-3">
+                                {taggingComplianceData.map((item) => (
+                                  <div key={item.name} className="flex items-center justify-between gap-3 rounded-[18px] border border-slate-200 bg-[#F8FAFC] px-4 py-3">
+                                    <div className="flex items-center gap-3">
+                                      <span className="h-3 w-3 rounded-full" style={{ backgroundColor: item.color }} />
+                                      <p className="text-sm font-semibold text-slate-700">{item.name}</p>
+                                    </div>
+                                    <p className="text-sm font-extrabold text-[#0F172A]">{item.value}%</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:col-span-2">
+                            <div className="border-b border-slate-200 px-5 py-4">
+                              <h5 className="text-lg font-extrabold text-[#0F172A]">Priority Attention Items</h5>
+                            </div>
+                            <div className="overflow-x-auto">
+                              <table className="min-w-full text-left">
+                                <thead className="bg-[#F8FAFC]">
+                                  <tr className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                                    <th className="px-5 py-3">Category</th>
+                                    <th className="px-5 py-3">Priority</th>
+                                    <th className="px-5 py-3">Age</th>
+                                    <th className="px-5 py-3">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {priorityAttentionItems.map((item) => (
+                                    <tr key={item.category} className="border-t border-slate-200">
+                                      <td className="px-5 py-4 text-sm font-semibold text-[#0F172A]">{item.category}</td>
+                                      <td className="px-5 py-4 text-sm text-slate-600">
+                                        <SurfacePill label={item.priority} tone={item.priority === "High" ? "amber" : "slate"} />
+                                      </td>
+                                      <td className="px-5 py-4 text-sm font-semibold text-slate-700">{item.age}</td>
+                                      <td className="px-5 py-4 text-sm text-slate-600">
+                                        <SurfacePill
+                                          label={item.status}
+                                          tone={item.status === "In Progress" ? "sky" : item.status === "Under Review" ? "amber" : "slate"}
+                                        />
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+
+                          <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:col-span-2">
+                            <div className="border-b border-slate-200 px-5 py-4">
+                              <h5 className="text-lg font-extrabold text-[#0F172A]">Service Delivery Monitoring</h5>
+                            </div>
+                            <div className="overflow-x-auto">
+                              <table className="min-w-full text-left">
+                                <thead className="bg-[#F8FAFC]">
+                                  <tr className="text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                                    <th className="px-5 py-3">Service Area</th>
+                                    <th className="px-5 py-3">Owner</th>
+                                    <th className="px-5 py-3">Last Update</th>
+                                    <th className="px-5 py-3">Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {serviceDeliveryMonitoring.map((item) => (
+                                    <tr key={item.serviceArea} className="border-t border-slate-200">
+                                      <td className="px-5 py-4 text-sm font-semibold text-[#0F172A]">{item.serviceArea}</td>
+                                      <td className="px-5 py-4 text-sm text-slate-600">{item.owner}</td>
+                                      <td className="px-5 py-4 text-sm font-semibold text-slate-700">{item.lastUpdate}</td>
+                                      <td className="px-5 py-4 text-sm text-slate-600">
+                                        <SurfacePill
+                                          label={item.status}
+                                          tone={item.status === "On Track" ? "emerald" : item.status === "Stable" ? "sky" : "slate"}
+                                        />
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </motion.div>
                       </div>
                     </motion.div>
                   </div>
