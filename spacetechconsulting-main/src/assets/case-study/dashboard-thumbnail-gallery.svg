@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160" role="img" aria-labelledby="title desc">
+  <title id="title">Executive dashboard thumbnail gallery</title>
+  <desc id="desc">Six dashboard thumbnails showing activity, stale tickets, created versus resolved tickets, tagging compliance, waiting on customer, and pending ticket views.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+    <style>
+      text{font-family:Inter,Arial,sans-serif;letter-spacing:0}
+      .title{font-size:40px;font-weight:850;fill:#13213a}
+      .body{font-size:28px;font-weight:650;fill:#334155}
+      .muted{font-size:24px;font-weight:650;fill:#64748b}
+      .num{font-size:28px;font-weight:850;fill:#0f172a}
+      .card{fill:#fff;stroke:#dbe4ef;stroke-width:3;filter:url(#shadow)}
+      .grid{stroke:#e8eef5;stroke-width:3}
+      .blue{fill:#0866d9}
+      .green{fill:#34b981}
+      .sky{fill:#7db7ff}
+      .orange{fill:#f97316}
+      .gray{fill:#94a3b8}
+    </style>
+  </defs>
+  <rect width="3840" height="2160" fill="#f8fafc"/>
+  <text x="300" y="92" class="muted">Illustrative example - values shown for layout purposes</text>
+
+  <g transform="translate(300 150)">
+    <rect class="card" width="1540" height="560" rx="14"/>
+    <text x="60" y="82" class="title">Activity dashboard (last 7 days)</text>
+    <text x="60" y="150" class="muted">Status</text>
+    <text x="820" y="150" class="muted">User A</text>
+    <text x="1010" y="150" class="muted">User B</text>
+    <text x="1200" y="150" class="muted">User C</text>
+    <text x="1430" y="150" class="muted" text-anchor="end">Total</text>
+    <line x1="60" y1="180" x2="1480" y2="180" class="grid"/>
+    <g transform="translate(60 225)">
+      <rect width="18" height="18" rx="4" class="blue"/><text x="36" y="20" class="body">In progress</text><text x="870" y="20" class="num">2</text><text x="1060" y="20" class="num">1</text><text x="1250" y="20" class="num">0</text><text x="1370" y="20" class="num">3</text>
+      <line x1="0" y1="42" x2="1420" y2="42" class="grid"/>
+      <rect y="72" width="18" height="18" rx="4" class="green"/><text x="36" y="92" class="body">Resolved</text><text x="870" y="92" class="num">9</text><text x="1060" y="92" class="num">8</text><text x="1250" y="92" class="num">7</text><text x="1370" y="92" class="num">24</text>
+      <line x1="0" y1="114" x2="1420" y2="114" class="grid"/>
+      <rect y="144" width="18" height="18" rx="4" class="sky"/><text x="36" y="164" class="body">Waiting (support)</text><text x="870" y="164" class="num">4</text><text x="1060" y="164" class="num">3</text><text x="1250" y="164" class="num">2</text><text x="1370" y="164" class="num">9</text>
+      <line x1="0" y1="186" x2="1420" y2="186" class="grid"/>
+      <rect y="216" width="18" height="18" rx="4" fill="#bfdbfe"/><text x="36" y="236" class="body">Waiting (customer)</text><text x="870" y="236" class="num">5</text><text x="1060" y="236" class="num">4</text><text x="1250" y="236" class="num">3</text><text x="1370" y="236" class="num">12</text>
+      <line x1="0" y1="258" x2="1420" y2="258" class="grid"/>
+      <rect y="288" width="18" height="18" rx="4" class="gray"/><text x="36" y="308" class="body">Cancelled</text><text x="870" y="308" class="num">1</text><text x="1060" y="308" class="num">1</text><text x="1250" y="308" class="num">0</text><text x="1370" y="308" class="num">2</text>
+      <line x1="0" y1="330" x2="1420" y2="330" class="grid"/>
+      <text x="0" y="382" class="body" font-weight="850">Total unique issues</text><text x="870" y="382" class="num">21</text><text x="1060" y="382" class="num">17</text><text x="1250" y="382" class="num">12</text><text x="1370" y="382" class="num">50</text>
+    </g>
+  </g>
+
+  <g transform="translate(2000 150)">
+    <rect class="card" width="1540" height="560" rx="14"/>
+    <text x="60" y="82" class="title">Stale tickets (last 7 days)</text>
+    <g transform="translate(60 145)">
+      <text x="0" y="0" class="body">User A</text><text x="1400" y="0" class="num" text-anchor="end">18 (78%)</text>
+      <rect y="28" width="1320" height="18" rx="9" fill="#eef2f7"/><rect y="28" width="1080" height="18" rx="9" class="blue"/>
+      <text x="0" y="116" class="body">User B</text><text x="1400" y="116" class="num" text-anchor="end">3 (13%)</text>
+      <rect y="144" width="1320" height="18" rx="9" fill="#eef2f7"/><rect y="144" width="210" height="18" rx="9" class="blue"/>
+      <text x="0" y="232" class="body">User C</text><text x="1400" y="232" class="num" text-anchor="end">2 (9%)</text>
+      <rect y="260" width="1320" height="18" rx="9" fill="#eef2f7"/><rect y="260" width="140" height="18" rx="9" class="blue"/>
+      <text x="0" y="392" class="muted">Total stale: 23</text>
+    </g>
+  </g>
+
+  <g transform="translate(300 800)">
+    <rect class="card" width="1540" height="610" rx="14"/>
+    <text x="60" y="82" class="title">Tickets created vs resolved</text>
+    <circle cx="70" cy="132" r="10" class="orange"/><text x="92" y="142" class="muted">Created</text>
+    <circle cx="280" cy="132" r="10" class="green"/><text x="302" y="142" class="muted">Resolved</text>
+    <g transform="translate(150 195)">
+      <line x1="0" y1="0" x2="1210" y2="0" class="grid"/><line x1="0" y1="90" x2="1210" y2="90" class="grid"/><line x1="0" y1="180" x2="1210" y2="180" class="grid"/><line x1="0" y1="270" x2="1210" y2="270" class="grid"/>
+      <polyline points="0,250 110,120 220,90 330,118 440,160 550,112 660,96 770,145 880,84 990,102 1100,42 1210,115" fill="none" stroke="#f04b23" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="0,300 110,150 220,105 330,112 440,150 550,170 660,132 770,162 880,102 990,116 1100,26 1210,84" fill="none" stroke="#34b981" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+      <g class="muted" font-size="20" transform="translate(0 335)">
+        <text x="0" y="0" transform="rotate(45)">M1</text><text x="110" y="0" transform="rotate(45 110 0)">M2</text><text x="220" y="0" transform="rotate(45 220 0)">M3</text><text x="330" y="0" transform="rotate(45 330 0)">M4</text><text x="440" y="0" transform="rotate(45 440 0)">M5</text><text x="550" y="0" transform="rotate(45 550 0)">M6</text><text x="660" y="0" transform="rotate(45 660 0)">M7</text><text x="770" y="0" transform="rotate(45 770 0)">M8</text><text x="880" y="0" transform="rotate(45 880 0)">M9</text><text x="990" y="0" transform="rotate(45 990 0)">M10</text><text x="1100" y="0" transform="rotate(45 1100 0)">M11</text><text x="1210" y="0" transform="rotate(45 1210 0)">M12</text>
+      </g>
+    </g>
+  </g>
+
+  <g transform="translate(2000 800)">
+    <rect class="card" width="1540" height="610" rx="14"/>
+    <circle cx="430" cy="310" r="150" fill="none" stroke="#e8eef5" stroke-width="62"/>
+    <circle cx="430" cy="310" r="150" fill="none" stroke="#34b981" stroke-width="62" stroke-dasharray="914 950" transform="rotate(-90 430 310)"/>
+    <circle cx="430" cy="310" r="150" fill="none" stroke="#f97316" stroke-width="62" stroke-dasharray="20 950" stroke-dashoffset="-914" transform="rotate(-90 430 310)"/>
+    <text x="760" y="250" class="title">Tagging compliance (14 days)</text>
+    <rect x="760" y="305" width="22" height="22" rx="5" class="green"/><text x="800" y="326" class="body">Compliant 97%</text>
+    <rect x="760" y="375" width="22" height="22" rx="5" class="orange"/><text x="800" y="396" class="body">Non-compliant 2%</text>
+    <rect x="760" y="445" width="22" height="22" rx="5" fill="#cbd5e1"/><text x="800" y="466" class="body">Not tagged 1%</text>
+  </g>
+
+  <g transform="translate(300 1500)">
+    <rect class="card" width="1540" height="500" rx="14"/>
+    <text x="60" y="82" class="title">Tickets waiting on customer (14+ days)</text>
+    <text x="60" y="162" class="muted">Key</text><text x="700" y="162" class="muted">Assignee</text><text x="1420" y="162" class="muted" text-anchor="end">Days</text>
+    <line x1="60" y1="195" x2="1480" y2="195" class="grid"/>
+    <g class="body" transform="translate(60 250)">
+      <text x="0" y="0" fill="#0866d9" font-weight="850">TKT-1001</text><text x="640" y="0">User A</text><text x="1360" y="0" text-anchor="end">19</text>
+      <line x1="0" y1="42" x2="1420" y2="42" class="grid"/>
+      <text x="0" y="78" fill="#0866d9" font-weight="850">TKT-1002</text><text x="640" y="78">User B</text><text x="1360" y="78" text-anchor="end">16</text>
+      <line x1="0" y1="120" x2="1420" y2="120" class="grid"/>
+      <text x="0" y="156" fill="#0866d9" font-weight="850">TKT-1003</text><text x="640" y="156">User A</text><text x="1360" y="156" text-anchor="end">19</text>
+      <line x1="0" y1="198" x2="1420" y2="198" class="grid"/>
+      <text x="0" y="234" fill="#0866d9" font-weight="850">TKT-1004</text><text x="640" y="234">User C</text><text x="1360" y="234" text-anchor="end">16</text>
+    </g>
+  </g>
+
+  <g transform="translate(2000 1500)">
+    <rect class="card" width="1540" height="500" rx="14"/>
+    <text x="60" y="82" class="title">Tickets stuck in pending (14+ days)</text>
+    <text x="60" y="162" class="muted">Key</text><text x="700" y="162" class="muted">Assignee</text><text x="1420" y="162" class="muted" text-anchor="end">Last viewed</text>
+    <line x1="60" y1="195" x2="1480" y2="195" class="grid"/>
+    <g class="body" transform="translate(60 250)">
+      <text x="0" y="0" fill="#0866d9" font-weight="850">TKT-2001</text><text x="640" y="0">User A</text><text x="1360" y="0" text-anchor="end">18d ago</text>
+      <line x1="0" y1="42" x2="1420" y2="42" class="grid"/>
+      <text x="0" y="78" fill="#0866d9" font-weight="850">TKT-2002</text><text x="640" y="78">User C</text><text x="1360" y="78" text-anchor="end">22d ago</text>
+      <line x1="0" y1="120" x2="1420" y2="120" class="grid"/>
+      <text x="0" y="156" fill="#0866d9" font-weight="850">TKT-2003</text><text x="640" y="156">User D</text><text x="1360" y="156" text-anchor="end">22d ago</text>
+      <line x1="0" y1="198" x2="1420" y2="198" class="grid"/>
+      <text x="0" y="234" fill="#0866d9" font-weight="850">TKT-2004</text><text x="640" y="234">User C</text><text x="1360" y="234" text-anchor="end">21d ago</text>
+    </g>
+  </g>
+</svg>

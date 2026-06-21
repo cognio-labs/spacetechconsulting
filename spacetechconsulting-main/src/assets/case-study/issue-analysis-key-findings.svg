@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160" role="img" aria-labelledby="title desc">
+  <title id="title">Issue analysis and key findings dashboard</title>
+  <desc id="desc">A key findings dashboard showing recurring issue patterns by module and three root cause issue cards.</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      text{font-family:Inter,Arial,sans-serif;letter-spacing:0}
+      .title{font-size:48px;font-weight:850;fill:#13213a}
+      .label{font-size:34px;font-weight:700;fill:#52525b}
+      .axis{font-size:30px;font-weight:650;fill:#64748b}
+      .cardTitle{font-size:36px;font-weight:850;fill:#fff}
+      .cardBody{font-size:30px;font-weight:600;fill:#d1d5db}
+      .grid{stroke:#e8eef5;stroke-width:3}
+    </style>
+  </defs>
+  <rect width="3840" height="2160" fill="#fff"/>
+  <text x="250" y="260" class="title">Recurring issue patterns identified by module</text>
+  <g transform="translate(900 380)">
+    <line x1="0" y1="0" x2="2350" y2="0" class="grid"/><line x1="0" y1="185" x2="2350" y2="185" class="grid"/><line x1="0" y1="370" x2="2350" y2="370" class="grid"/><line x1="0" y1="555" x2="2350" y2="555" class="grid"/><line x1="0" y1="740" x2="2350" y2="740" class="grid"/>
+    <rect y="34" width="2130" height="118" rx="10" fill="#14785f"/>
+    <rect y="219" width="710" height="118" rx="10" fill="#14785f"/>
+    <rect y="404" width="180" height="118" rx="10" fill="#14785f"/>
+    <rect y="589" width="180" height="118" rx="10" fill="#14785f"/>
+    <g class="axis" text-anchor="middle">
+      <text x="0" y="820">0</text><text x="355" y="820">2</text><text x="710" y="820">4</text><text x="1065" y="820">6</text><text x="1420" y="820">8</text><text x="1775" y="820">10</text><text x="2130" y="820">12</text>
+    </g>
+  </g>
+  <g class="label" text-anchor="end">
+    <text x="850" y="470">Procure to Pay &amp; integrations</text>
+    <text x="850" y="655">Deal Manager &amp; amendments</text>
+    <text x="850" y="840">Sales</text>
+    <text x="850" y="1025">Bank Book</text>
+  </g>
+
+  <g transform="translate(250 1280)">
+    <rect width="3020" height="230" rx="22" fill="#242620" filter="url(#shadow)"/>
+    <text x="60" y="80" class="cardTitle">Duplicate billing from overlapping amendments</text>
+    <text x="60" y="140" class="cardBody">Root cause traced to amendment sequencing; resolved with exception reporting plus a permanent product fix</text>
+  </g>
+  <g transform="translate(250 1560)">
+    <rect width="3020" height="230" rx="22" fill="#242620" filter="url(#shadow)"/>
+    <text x="60" y="80" class="cardTitle">Recurring vendor and GL mismatches in payables integration</text>
+    <text x="60" y="140" class="cardBody">Interim data fixes applied while a permanent upstream integration fix was scoped and tracked</text>
+  </g>
+  <g transform="translate(250 1840)">
+    <rect width="3020" height="230" rx="22" fill="#242620" filter="url(#shadow)"/>
+    <text x="60" y="80" class="cardTitle">Invoice register stuck in workflow - restart required to progress</text>
+    <text x="60" y="140" class="cardBody">Diagnosed as a workflow configuration issue; resolved by a workflow design change so invoices can no longer be updated once pushed for manager approval</text>
+  </g>
+</svg>
