@@ -7,11 +7,11 @@
     </filter>
     <style>
       text{font-family:Inter,Arial,sans-serif;letter-spacing:0}
-      .title{font-size:48px;font-weight:850;fill:#13213a}
-      .label{font-size:34px;font-weight:700;fill:#52525b}
-      .axis{font-size:30px;font-weight:650;fill:#64748b}
-      .cardTitle{font-size:36px;font-weight:850;fill:#fff}
-      .cardBody{font-size:30px;font-weight:600;fill:#d1d5db}
+      .title{font-size:62px;font-weight:850;fill:#13213a}
+      .label{font-size:44px;font-weight:700;fill:#52525b}
+      .axis{font-size:39px;font-weight:650;fill:#64748b}
+      .cardTitle{font-size:47px;font-weight:850;fill:#fff}
+      .cardBody{font-size:39px;font-weight:600;fill:#d1d5db}
       .grid{stroke:#e8eef5;stroke-width:3}
     </style>
   </defs>

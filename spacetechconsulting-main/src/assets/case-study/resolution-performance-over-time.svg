@@ -7,9 +7,9 @@
     </filter>
     <style>
       text{font-family:Inter,Arial,sans-serif;letter-spacing:0}
-      .title{font-size:58px;font-weight:850;fill:#13213a}
-      .label{font-size:36px;font-weight:700;fill:#64748b}
-      .axis{font-size:32px;font-weight:760;fill:#7b8799}
+      .title{font-size:75px;font-weight:850;fill:#13213a}
+      .label{font-size:47px;font-weight:700;fill:#64748b}
+      .axis{font-size:42px;font-weight:760;fill:#7b8799}
       .card{fill:#fff;stroke:#dbe4ef;stroke-width:4;filter:url(#shadow)}
       .grid{stroke:#e8eef5;stroke-width:3}
     </style>
@@ -18,7 +18,7 @@
   <g transform="translate(260 210)">
     <rect width="580" height="110" rx="8" fill="#dff8ec"/>
     <circle cx="88" cy="55" r="14" fill="#0f9f6e"/>
-    <text x="140" y="70" fill="#047857" font-size="36" font-weight="850">Real client data</text>
+    <text x="140" y="70" fill="#047857" font-size="47" font-weight="850">Real client data</text>
   </g>
   <rect x="260" y="430" width="3320" height="1520" rx="8" class="card"/>
   <text x="340" y="580" class="title">Resolution performance over time</text>
