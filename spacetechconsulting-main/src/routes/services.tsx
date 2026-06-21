@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import servicesDashboard from "@/assets/services-dashboard.jpg";
+import servicesDashboard from "@/assets/yadri-services.png";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
