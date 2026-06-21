@@ -102,7 +102,7 @@ function Contact() {
                 {[
                   { icon: Phone, title: "Phone (USA)", text: contactDetails.phoneUsa.label, href: contactDetails.phoneUsa.href },
                   { icon: Phone, title: "Phone (Australia)", text: contactDetails.phoneAustralia.label, href: contactDetails.phoneAustralia.href },
-                  { icon: Phone, title: contactDetails.phoneIndia.officeLabel, text: contactDetails.phoneIndia.label, href: contactDetails.phoneIndia.href },
+                  { icon: Phone, title: "Phone (India)", text: contactDetails.phoneIndia.label, href: contactDetails.phoneIndia.href },
                   { icon: Mail, title: "Email", text: contactDetails.email.label, href: contactDetails.email.href },
                 ].map((item) => (
                   <div key={item.title} className="rounded-2xl border border-slate-100 bg-slate-50/70 p-3">
