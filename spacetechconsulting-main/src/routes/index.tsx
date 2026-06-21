@@ -50,8 +50,8 @@ const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 const stats = [
   { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
   { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "3,000+", label: "Platform Issues Managed" },
-  { icon: ShieldCheck, value: "95%+ SLA", label: "SLA on owned ticket volume" },
+  { icon: BarChart3, value: "18+", label: "Recurring Issue Patterns Identified & Resolved" },
+  { icon: ShieldCheck, value: "95%+", label: "SLA Performance on owned ticket volume" },
 ];
 
 const whyMetrics = [
@@ -96,7 +96,7 @@ const whyCards = [
 
 const proofPoints = [
   "3,000+ Platform Issues Managed",
-  "95%+ SLA",
+  "95%+ SLA Performance",
   "1000+ Active Business Users Supported",
   "Commercial & Residential Portfolios",
   "Named Functional & Technical SMEs",
@@ -114,8 +114,8 @@ const caseStudyIconStrip = [
 
 const caseStudyHeroMetrics = [
   { value: "3,000+", label: "Platform Issues Managed",          target: 3000, prefix: "",  suffix: "+",  comma: true  },
-  { value: "95%+",   label: "SLA on owned ticket volume",       target: 95,   prefix: "",  suffix: "%+", comma: false },
-  { value: "18",     label: "Recurring issue patterns resolved", target: 18,   prefix: "",  suffix: "",   comma: false },
+  { value: "95%+",   label: "SLA Performance on owned ticket volume", target: 95,   prefix: "",  suffix: "%+", comma: false },
+  { value: "18+",    label: "Recurring Issue Patterns Identified & Resolved", target: 18,   prefix: "",  suffix: "+",   comma: false },
   { value: "<100",   label: "Open backlog maintained",           target: 100,  prefix: "<", suffix: "",   comma: false },
 ];
 
@@ -196,8 +196,8 @@ const businessOutcomes = [
   "Created real-time operational dashboards for leadership visibility",
   "Implemented named SME ownership across critical business functions",
   "3,000+ Platform Issues Managed",
-  "95%+ SLA on owned ticket volume",
-  "18 Recurring issue patterns identified and eliminated through root-cause fixes",
+  "95%+ SLA Performance on owned ticket volume",
+  "18+ Recurring Issue Patterns Identified & Resolved",
   "Closures exceeded new ticket intake",
   "Improved platform health and support transparency",
   "Built a scalable operating model supporting hundreds of business users",
