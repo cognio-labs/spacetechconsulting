@@ -75,21 +75,21 @@ export function Footer() {
         <div>
           <h4 className="mb-4 text-base font-bold text-white">Contact</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-cyan-400" />
-              <a href={contactDetails.phoneUsa.href} className="hover:text-cyan-400">{contactDetails.phoneUsa.label}</a>
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+              <a href={contactDetails.phoneUsa.href} className="min-w-0 break-words leading-5 hover:text-cyan-400">{contactDetails.phoneUsa.label}</a>
             </li>
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-cyan-400" />
-              <a href={contactDetails.phoneAustralia.href} className="hover:text-cyan-400">{contactDetails.phoneAustralia.label}</a>
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+              <a href={contactDetails.phoneAustralia.href} className="min-w-0 break-words leading-5 hover:text-cyan-400">{contactDetails.phoneAustralia.label}</a>
             </li>
-            <li className="flex items-center gap-2">
-              <Phone className="h-4 w-4 text-cyan-400" />
-              <a href={contactDetails.phoneIndia.href} className="hover:text-cyan-400">{contactDetails.phoneIndia.label}</a>
+            <li className="flex items-start gap-2">
+              <Phone className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+              <a href={contactDetails.phoneIndia.href} className="min-w-0 break-words leading-5 hover:text-cyan-400">{contactDetails.phoneIndia.label}</a>
             </li>
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 text-cyan-400" />
-              <a href={contactDetails.email.href} className="hover:text-cyan-400">{contactDetails.email.label}</a>
+            <li className="flex items-start gap-2">
+              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-cyan-400" />
+              <a href={contactDetails.email.href} className="min-w-0 break-words leading-5 hover:text-cyan-400">{contactDetails.email.label}</a>
             </li>
           </ul>
           <div className="flex gap-2 mt-5">

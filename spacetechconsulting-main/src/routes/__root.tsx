@@ -16,7 +16,7 @@ const SITE_URL = "https://www.spacetechconsulting.com";
 const SITE_TITLE = "SpaceTech Consulting | Enterprise Yardi Platform Partner";
 const SITE_DESCRIPTION =
   "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence.";
-const SITE_LOGO_URL = `${SITE_URL}/assets/nav-logo-CRp-hMq5.png`;
+const SOCIAL_PREVIEW_URL = `${SITE_URL}/social-preview.png`;
 
 function NotFoundComponent() {
   return (
@@ -88,20 +88,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "SpaceTech Consulting" },
       { property: "og:title", content: SITE_TITLE },
       { property: "og:description", content: SITE_DESCRIPTION },
-      { property: "og:image", content: SITE_LOGO_URL },
+      { property: "og:image", content: SOCIAL_PREVIEW_URL },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
       { property: "og:type", content: "website" },
       { property: "og:url", content: SITE_URL },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: SITE_TITLE },
       { name: "twitter:description", content: SITE_DESCRIPTION },
-      { name: "twitter:image", content: SITE_LOGO_URL },
+      { name: "twitter:image", content: SOCIAL_PREVIEW_URL },
+      { name: "twitter:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", type: "image/png", href: SITE_LOGO_URL },
-      { rel: "apple-touch-icon", href: SITE_LOGO_URL },
+      { rel: "icon", href: "/favicon.ico" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" },

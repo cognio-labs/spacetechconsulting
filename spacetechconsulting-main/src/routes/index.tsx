@@ -14,8 +14,8 @@ import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
 import consultingTeamPhoto from "@/assets/about-team.jpg";
 import dashboardThumbnailGallery from "@/assets/case-study/dashboard-thumbnail-gallery.svg";
-import resolutionPerformanceOverTime from "@/assets/case-study/resolution-performance-over-time.svg";
-import issueAnalysisKeyFindings from "@/assets/case-study/issue-analysis-key-findings.svg";
+import caseStudyPage3 from "@/assets/case-study/case-study-page-3.png";
+import caseStudyPage4 from "@/assets/case-study/case-study-page-4.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,7 +37,7 @@ const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 const stats = [
   { icon: Users, value: "3 Regions", label: "Follow-the-sun coverage across Australia, India, and USA" },
   { icon: Clock, value: "24/7 coverage", label: "Support model for critical platform operations" },
-  { icon: BarChart3, value: "3000+ Tickets", label: "Resolved across active engagements" },
+  { icon: BarChart3, value: "3,000+ Tickets", label: "Resolved across active engagements" },
   { icon: ShieldCheck, value: "95%+ SLA", label: "On owned ticket volume" },
 ];
 
@@ -197,14 +197,14 @@ const dashboardScreenshots = [
     alt: "Six executive dashboard thumbnails showing activity, stale tickets, created versus resolved tickets, tagging compliance, waiting on customer, and pending ticket views.",
   },
   {
-    title: "Resolution Performance Over Time",
-    image: resolutionPerformanceOverTime,
-    alt: "Resolution performance chart showing average days to resolve and median days to resolve over nine months.",
+    title: "Executive Dashboard Page",
+    image: caseStudyPage3,
+    alt: "Executive dashboard page showing Yardi support performance and operational reporting.",
   },
   {
-    title: "Issue Analysis / Key Findings",
-    image: issueAnalysisKeyFindings,
-    alt: "Issue analysis dashboard showing recurring issue patterns by module and root cause finding cards.",
+    title: "Dashboard Detail Page",
+    image: caseStudyPage4,
+    alt: "Dashboard detail page showing Yardi support findings and operational insights.",
   },
 ] as const;
 
