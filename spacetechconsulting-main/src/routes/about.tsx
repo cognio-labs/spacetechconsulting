@@ -135,20 +135,20 @@ const products = [
 const regions = [
   {
     name: "Australia",
-    x: "80%",
-    y: "72%",
+    x: "82%",
+    y: "80%",
     text: "Client delivery, regional operations, and local continuity.",
   },
   {
     name: "India",
     x: "64%",
-    y: "58%",
+    y: "68%",
     text: "Engineering, reporting, automation, managed support, and extended coverage.",
   },
   {
     name: "USA",
     x: "24%",
-    y: "60%",
+    y: "72%",
     text: "Advisory, program coordination, partnership coverage, and client success.",
   },
 ];
@@ -692,7 +692,7 @@ function About() {
       h(
         "section",
         {
-          className: "relative overflow-hidden bg-white px-6 py-16 md:py-24",
+          className: "relative overflow-hidden bg-[radial-gradient(circle_at_18%_8%,rgba(37,99,235,0.10),transparent_34%),linear-gradient(180deg,#FFFFFF_0%,#F7FAFF_100%)] px-6 py-16 md:py-24",
         },
         h(
           "div",
@@ -711,14 +711,14 @@ function About() {
               initial: "hidden",
               whileInView: "visible",
               viewport: { once: true },
-              className: "mt-12 grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-stretch",
+              className: "mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch",
             },
             h(
               motion.div,
               {
                 variants: fade,
                 className:
-                  "relative min-h-[520px] overflow-hidden rounded-[32px] border border-white/80 bg-white/75 p-6 shadow-[0_30px_90px_rgba(15,23,42,0.12)] backdrop-blur-xl md:p-8",
+                  "relative min-h-[560px] overflow-hidden rounded-[34px] border border-blue-100/80 bg-white p-0 shadow-[0_30px_90px_rgba(15,23,42,0.12)]",
               },
               h("div", {
                 className:
@@ -726,13 +726,13 @@ function About() {
               }),
               h("div", {
                 className:
-                  "absolute inset-8 rounded-[28px] border border-blue-100/70 bg-gradient-to-br from-white/70 to-blue-50/35",
+                  "absolute inset-5 rounded-[28px] border border-blue-100/70 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/40",
               }),
               h(
                 "div",
                 {
                   className:
-                    "absolute left-6 top-6 z-20 flex items-center gap-3 rounded-2xl border border-blue-100 bg-white/85 px-4 py-3 text-sm font-extrabold text-[#0F172A] shadow-lg backdrop-blur",
+                    "absolute right-7 top-7 z-30 flex items-center gap-3 rounded-full border border-emerald-100 bg-white/90 px-4 py-2.5 text-xs font-extrabold text-[#0F172A] shadow-[0_14px_35px_rgba(16,185,129,0.18)] backdrop-blur",
                 },
                 h(
                   "span",
@@ -749,14 +749,14 @@ function About() {
               ),
               h(
                 "div",
-                { className: "absolute bottom-8 left-8 right-8 z-20 flex flex-wrap gap-2" },
+                { className: "absolute bottom-7 left-7 right-7 z-30 flex flex-wrap gap-2" },
                 ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(function (chip) {
                   return h(
                     "span",
                     {
                       key: chip,
                       className:
-                        "rounded-full border border-blue-100 bg-white/85 px-3 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur",
+                        "rounded-full border border-blue-100 bg-white/90 px-3.5 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur",
                     },
                     chip,
                   );
@@ -771,14 +771,14 @@ function About() {
                   preserveAspectRatio: "none",
                 },
                 h("path", {
-                  d: "M182 260 C320 180 420 190 486 250",
+                  d: "M165 310 C305 235 430 242 520 310",
                   stroke: "url(#globalPath)",
                   strokeWidth: "2",
                   strokeDasharray: "8 10",
                   className: "animate-pulse",
                 }),
                 h("path", {
-                  d: "M486 250 C560 288 618 318 642 340",
+                  d: "M520 310 C584 335 632 368 674 404",
                   stroke: "url(#globalPath)",
                   strokeWidth: "2",
                   strokeDasharray: "8 10",
@@ -837,7 +837,7 @@ function About() {
                 "div",
                 {
                   className:
-                    "relative z-20 mt-24 max-w-[360px] rounded-3xl border border-blue-100 bg-white/90 p-5 shadow-lg backdrop-blur",
+                    "absolute left-7 top-7 z-20 max-w-[430px] rounded-3xl border border-blue-100 bg-white/92 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.10)] backdrop-blur",
                 },
                 h(
                   "p",
@@ -850,7 +850,7 @@ function About() {
                   "h3",
                   {
                     className:
-                      "mt-3 text-2xl font-extrabold leading-tight tracking-tight text-[#0F172A] md:text-3xl",
+                      "mt-3 text-[28px] font-extrabold leading-[1.08] tracking-tight text-[#0F172A] md:text-4xl",
                   },
                   "Follow-the-sun support for operating continuity.",
                 ),
@@ -858,14 +858,9 @@ function About() {
             ),
             h(
               motion.div,
-              { variants: group, className: "grid auto-rows-fr gap-5 lg:grid-cols-2" },
-              regions.map(function (r, index) {
-                const flag =
-                  r.name === "Australia"
-                    ? String.fromCodePoint(0x1f1e6, 0x1f1fa)
-                    : r.name === "India"
-                      ? String.fromCodePoint(0x1f1ee, 0x1f1f3)
-                      : String.fromCodePoint(0x1f1fa, 0x1f1f8);
+              { variants: group, className: "grid gap-5" },
+              regions.map(function (r) {
+                const flag = r.name === "Australia" ? "AUS" : r.name === "India" ? "IND" : "USA";
                 const Icon =
                   r.name === "Australia" ? Handshake : r.name === "India" ? Workflow : Globe2;
                 return h(
@@ -875,14 +870,13 @@ function About() {
                     variants: fade,
                     whileHover: { y: -8 },
                     className:
-                      "rounded-[24px] bg-gradient-to-br from-blue-200/70 via-white to-indigo-200/70 p-px shadow-[0_18px_55px_rgba(15,23,42,0.08)] " +
-                      (index === 0 ? "lg:col-span-2 " : ""),
+                      "rounded-[24px] bg-gradient-to-br from-blue-200/70 via-white to-indigo-200/70 p-px shadow-[0_18px_55px_rgba(15,23,42,0.08)] transition-shadow hover:shadow-[0_26px_70px_rgba(37,99,235,0.16)]",
                   },
                   h(
                     "div",
                     {
                       className:
-                        "h-full min-h-[210px] rounded-[23px] border border-white/80 bg-white/85 p-7 backdrop-blur-xl",
+                        "h-full rounded-[23px] border border-white/80 bg-white/90 p-6 backdrop-blur-xl",
                     },
                     h(
                       "div",
@@ -890,10 +884,17 @@ function About() {
                       h(
                         "div",
                         null,
-                        h("div", { className: "text-3xl" }, flag),
+                        h(
+                          "div",
+                          {
+                            className:
+                              "grid h-11 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[#0F172A] to-[#2563EB] text-xs font-extrabold tracking-[0.16em] text-white shadow-[0_12px_28px_rgba(37,99,235,0.22)]",
+                          },
+                          flag,
+                        ),
                         h(
                           "h3",
-                          { className: "mt-4 text-2xl font-extrabold text-[#0F172A]" },
+                          { className: "mt-3 text-2xl font-extrabold text-[#0F172A]" },
                           r.name,
                         ),
                         h(
@@ -914,7 +915,7 @@ function About() {
                         h(Icon, { className: "h-6 w-6" }),
                       ),
                     ),
-                    h("p", { className: "mt-6 text-base leading-8 text-slate-700" }, r.text),
+                    h("p", { className: "mt-5 text-base leading-7 text-slate-700" }, r.text),
                   ),
                 );
               }),
