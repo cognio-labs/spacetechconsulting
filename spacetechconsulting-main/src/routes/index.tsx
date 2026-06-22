@@ -20,10 +20,12 @@ import issueAnalysisKeyFindings from "@/assets/case-study/issue-analysis-key-fin
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SpaceTech Consulting — Enterprise Yardi Platform Partner" },
-      { name: "description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence across Australia, India, and the USA." },
-      { property: "og:title", content: "SpaceTech Consulting — Enterprise Yardi Platform Partner" },
+      { title: "SpaceTech Consulting | Enterprise Yardi Platform Partner" },
+      { name: "description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
+      { property: "og:title", content: "SpaceTech Consulting | Enterprise Yardi Platform Partner" },
       { property: "og:description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
+      { name: "twitter:title", content: "SpaceTech Consulting | Enterprise Yardi Platform Partner" },
+      { name: "twitter:description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
     ],
   }),
   component: HomePage,
@@ -667,6 +669,7 @@ function HomePage() {
         </video>
         <div className="absolute inset-0 bg-[linear-gradient(rgba(2,11,31,.35),rgba(2,11,31,.50))] lg:bg-gradient-to-r lg:from-[#020B1F]/88 lg:via-[#020B1F]/50 lg:to-[#020B1F]/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
+        <div className="absolute right-0 top-0 h-40 w-80 bg-[radial-gradient(ellipse_at_top_right,#020B1F_0%,rgba(2,11,31,0.96)_24%,rgba(2,11,31,0.66)_42%,rgba(2,11,31,0.26)_58%,transparent_74%)] sm:w-[30rem] lg:h-52 lg:w-[42rem]" />
         <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
 
         <div className="relative max-w-[86rem] mx-auto w-full px-6 py-12 pt-[90px] sm:px-6 md:py-24">

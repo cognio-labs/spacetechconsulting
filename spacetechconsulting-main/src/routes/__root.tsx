@@ -12,6 +12,12 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
+const SITE_URL = "https://www.spacetechconsulting.com";
+const SITE_TITLE = "SpaceTech Consulting | Enterprise Yardi Platform Partner";
+const SITE_DESCRIPTION =
+  "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence.";
+const SITE_LOGO_URL = `${SITE_URL}/assets/nav-logo-CRp-hMq5.png`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -77,21 +83,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" },
-      { title: "spacetechconsulting" },
-      { name: "description", content: "SpaceTech Redesigned modernizes the SpaceTech Consulting website with premium, enterprise-grade design." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "spacetechconsulting" },
-      { property: "og:description", content: "SpaceTech Redesigned modernizes the SpaceTech Consulting website with premium, enterprise-grade design." },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "author", content: "SpaceTech Consulting" },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { property: "og:image", content: SITE_LOGO_URL },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "spacetechconsulting" },
-      { name: "twitter:description", content: "SpaceTech Redesigned modernizes the SpaceTech Consulting website with premium, enterprise-grade design." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c09b3d39-3a33-4802-b156-5f70603e6625/id-preview-3828014f--9440269c-e7f5-4daa-9c5b-226f8e7b3470.lovable.app-1781257692827.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/c09b3d39-3a33-4802-b156-5f70603e6625/id-preview-3828014f--9440269c-e7f5-4daa-9c5b-226f8e7b3470.lovable.app-1781257692827.png" },
+      { property: "og:url", content: SITE_URL },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: SITE_LOGO_URL },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: SITE_LOGO_URL },
+      { rel: "apple-touch-icon", href: SITE_LOGO_URL },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
