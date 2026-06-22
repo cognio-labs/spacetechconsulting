@@ -101,7 +101,7 @@ const caseStudyIconStrip = [
 
 const caseStudyHeroMetrics = [
   { value: "3,000+", label: "Platform Issues Managed",          target: 3000, prefix: "",  suffix: "+",  comma: true  },
-  { value: "95+",       label: "SLA Performance on owned ticket volume", target: 95,   prefix: "",  suffix: "",   comma: false },
+  { value: "95+",       label: "SLA Performance on owned ticket volume", target: 95,   prefix: "",  suffix: "+",  comma: false },
   { value: "18+",    label: "Recurring Issue Patterns Identified & Resolved", target: 18,   prefix: "",  suffix: "+",   comma: false },
   { value: "<100",   label: "Open backlog maintained",           target: 100,  prefix: "<", suffix: "",   comma: false },
 ];
