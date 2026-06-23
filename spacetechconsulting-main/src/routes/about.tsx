@@ -181,9 +181,7 @@ const regions = [
   {
     name: "Australia",
     hubCode: "AUS",
-    hubTitle: "LOGISTICS OPERATIONS HUB",
-    hubText: "Supply chain management, warehousing optimization, and local delivery coordination for Australia.",
-    hubIcon: "logistics",
+    icon: Handshake,
     badge: "CLIENT DELIVERY REGION",
     visual: "Sydney skyline",
     x: "82%",
@@ -195,9 +193,7 @@ const regions = [
   {
     name: "India",
     hubCode: "IND",
-    hubTitle: "TECH DEVELOPMENT CENTER",
-    hubText: "Software engineering, data analytics, and cloud infrastructure management for India.",
-    hubIcon: "technology",
+    icon: Network,
     badge: "ENGINEERING HUB",
     visual: "Monochrome city",
     x: "64%",
@@ -209,9 +205,7 @@ const regions = [
   {
     name: "USA",
     hubCode: "USA",
-    hubTitle: "CLIENT SUPPORT PORTAL",
-    hubText: "Multi-channel client communications, personalized outreach, and strategic partnership management for the USA.",
-    hubIcon: "support",
+    icon: Globe2,
     badge: "STRATEGIC LEADERSHIP REGION",
     x: "24%",
     y: "72%",
@@ -1441,67 +1435,63 @@ function About() {
               {
                 variants: group,
                 className:
-                  "grid gap-4 rounded-[36px] border border-white/30 dark:border-white/5 bg-white/20 dark:bg-slate-950/10 p-4 shadow-lg backdrop-blur-xl",
+                  "grid gap-3",
               },
               h(
                 "p",
                 { className: "px-2 pt-1 text-xs font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400" },
-                "GLOBAL HUB SPECIFICS",
+                "REGIONAL OPERATIONS",
               ),
-              regions.map(function (region, index) {
-                const HubIcon = region.hubIcon === "logistics" ? renderForkliftIcon : region.hubIcon === "technology" ? renderCircuitIcon : renderSupportIcon;
+              regions.map(function (region) {
+                const Icon = region.icon;
                 return h(
                   motion.article,
                   {
                     key: region.name,
                     variants: fade,
-                    whileHover: { y: -5, scale: 1.01 },
+                    whileHover: { y: -2 },
                     className:
-                      "relative overflow-hidden rounded-[28px] backdrop-blur-lg bg-white/70 dark:bg-slate-900/60 border border-white/40 dark:border-white/10 shadow-lg p-6 transition-all hover:shadow-xl hover:border-blue-400/40 dark:hover:border-blue-500/30",
+                      "relative rounded-lg border border-slate-200 bg-white p-5 transition-colors hover:border-slate-300 dark:border-slate-800 dark:bg-slate-950",
                   },
                   h(
                     "div",
                     { className: "flex items-start justify-between gap-4" },
                     h(
-                      "div",
-                      { className: "flex items-start gap-4" },
-                      h(
-                        "span",
-                        {
-                          className:
-                            "flex h-12 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-extrabold text-sm shadow-md",
-                        },
-                        region.hubCode,
-                      ),
-                      h(
-                        "div",
-                        null,
-                        h(
-                          "h4",
-                          { className: "text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400" },
-                          region.name
-                        ),
-                        h(
-                          "h3",
-                          { className: "text-lg font-extrabold leading-tight text-slate-900 dark:text-white mt-0.5" },
-                          region.hubTitle,
-                        ),
-                      )
-                    ),
-                    h(
-                      "div",
+                      "span",
                       {
                         className:
-                          "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 dark:bg-slate-800/80 text-blue-600 dark:text-blue-400 border border-blue-100/50 dark:border-slate-700/50 shadow-inner",
+                          "inline-flex h-7 items-center rounded-full bg-[#1a2f6b] px-3 text-xs font-bold leading-none text-white",
                       },
-                      h(HubIcon, null)
-                    )
+                      region.hubCode,
+                    ),
+                    h(
+                      "span",
+                      {
+                        className:
+                          "flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-[#1a2f6b] dark:border-slate-700 dark:bg-slate-800 dark:text-blue-200",
+                        "aria-hidden": "true",
+                      },
+                      h(Icon, { className: "h-5 w-5", strokeWidth: 1.8 }),
+                    ),
+                  ),
+                  h(
+                    "h3",
+                    { className: "mt-4 text-lg font-bold leading-tight text-slate-950 dark:text-white" },
+                    region.name,
+                  ),
+                  h(
+                    "span",
+                    {
+                      className:
+                        "mt-2 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-[#1a2f6b] dark:bg-blue-950/50 dark:text-blue-200",
+                    },
+                    region.name,
                   ),
                   h(
                     "p",
-                    { className: "mt-4 text-sm leading-relaxed text-slate-650 dark:text-slate-350" },
-                    region.hubText
-                  )
+                    { className: "mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300" },
+                    region.text,
+                  ),
                 );
               }),
             ),
@@ -1605,4 +1595,6 @@ function About() {
     ),
   );
 }
+
+
 
