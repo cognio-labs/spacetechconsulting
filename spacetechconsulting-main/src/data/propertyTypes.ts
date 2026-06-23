@@ -1,16 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import { Building2, Home, Landmark, TrendingUp, Cpu, Building } from "lucide-react";
-import propCommercial from "@/assets/prop-commercial.jpg";
-import propResidential from "@/assets/prop-residential.jpg";
-import propAffordable from "@/assets/prop-affordable.jpg";
-import propMilitary from "@/assets/prop-military.jpg";
-import propSfr from "@/assets/prop-sfr.jpg";
-import propMixed from "@/assets/prop-mixed.jpg";
 
 export type PropertyType = {
   slug: string;
   icon: LucideIcon;
   image: string;
+  imageSrcSet: string;
   title: string;
   eyebrow: string;
   body: string;
@@ -21,11 +16,16 @@ export type PropertyType = {
   visible?: boolean;
 };
 
+const optimizedImage = (name: string) => ({
+  image: "/optimized/" + name + "-768.webp",
+  imageSrcSet: "/optimized/" + name + "-480.webp 480w, /optimized/" + name + "-768.webp 768w, /optimized/" + name + "-1024.webp 1024w",
+});
+
 export const propertyTypes: PropertyType[] = [
   {
     slug: "commercial",
     icon: Building2,
-    image: propCommercial,
+    ...optimizedImage("prop-commercial"),
     title: "Commercial",
     eyebrow: "Enterprise lease operations",
     body: "We run Voyager Commercial for large portfolios. With hands-on Yardi experience on lease administration, tenant billing, Bank Book, CAM recoveries/Outgoings, Procure to Pay, Construction Manager, Facilities Manager, Deal Manager, SharePoint, and Fixed Assets.",
@@ -45,7 +45,7 @@ export const propertyTypes: PropertyType[] = [
   {
     slug: "residential-multifamily",
     icon: Home,
-    image: propResidential,
+    ...optimizedImage("prop-residential"),
     title: "Residential",
     eyebrow: "Resident lifecycle performance",
     body: "Voyager Residential and RentCafe, set up end to end. Lead-to-lease workflows, resident portals, maintenance dispatch, budgeting, and revenue tracking.",
@@ -64,7 +64,7 @@ export const propertyTypes: PropertyType[] = [
   {
     slug: "affordable-housing",
     icon: Landmark,
-    image: propAffordable,
+    ...optimizedImage("prop-affordable"),
     title: "Affordable Housing",
     eyebrow: "Compliance-ready housing systems",
     body: "LIHTC, HUD, state programs. We configure Voyager Affordable Housing for certifications, recerts, waiting lists, and audit-ready compliance reporting.",
@@ -84,7 +84,7 @@ export const propertyTypes: PropertyType[] = [
   {
     slug: "military-housing",
     icon: TrendingUp,
-    image: propMilitary,
+    ...optimizedImage("prop-military"),
     title: "Military Housing",
     eyebrow: "Specialized privatized housing",
     body: "Privatized military housing runs on different rules. We configure Yardi for BAH tracking, occupancy reporting, work order management, and government compliance.",
@@ -104,7 +104,7 @@ export const propertyTypes: PropertyType[] = [
   {
     slug: "single-family-rental",
     icon: Cpu,
-    image: propSfr,
+    ...optimizedImage("prop-sfr"),
     title: "Single Family Rental (SFR)",
     eyebrow: "Scalable distributed portfolios",
     body: "SFR at scale needs a different Yardi setup. We build it for leasing automation, maintenance dispatch, owner distributions, property-level P&Ls, and investor reporting.",
@@ -124,7 +124,7 @@ export const propertyTypes: PropertyType[] = [
   {
     slug: "mixed-use-properties",
     icon: Building,
-    image: propMixed,
+    ...optimizedImage("prop-mixed"),
     title: "Mixed Portfolio",
     eyebrow: "Unified residential and commercial",
     body: "Residential and commercial under one roof means one Yardi environment. We get the modules working together with shared GL structures and consolidated reporting across asset types.",

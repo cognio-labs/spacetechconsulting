@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Calendar, Phone, Mail } from "lucide-react";
 import { contactDetails } from "@/data/contactDetails";
-import footerLogo from "@/assets/footer-logo.png";
 
 const linkedInUrl = "https://www.linkedin.com/company/spacetech-consulting/";
 
@@ -39,8 +38,12 @@ export function Footer() {
         <div className="min-w-0">
           <div className="mb-2 -translate-y-3 sm:mb-4 sm:-translate-y-5 lg:mb-5 lg:-translate-y-6">
             <img
-              src={footerLogo}
+              src="/optimized/footer-logo-260.webp"
               alt="SpaceTech Consulting logo"
+              width={260}
+              height={78}
+              loading="lazy"
+              decoding="async"
               className="h-auto w-56 max-w-full -translate-x-2 select-none object-contain object-left mix-blend-screen brightness-110 contrast-125 drop-shadow-[0_16px_34px_rgba(6,182,212,0.26)] [image-rendering:auto] sm:w-64 lg:w-52 xl:w-64"
             />
           </div>

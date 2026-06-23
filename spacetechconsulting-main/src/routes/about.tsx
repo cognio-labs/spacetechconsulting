@@ -26,7 +26,6 @@ import {
 } from "lucide-react";
 import { createElement as h, useEffect, useState } from "react";
 import { Layout } from "@/components/site/Layout";
-import aboutTeam from "@/assets/about-section.jpeg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -512,8 +511,15 @@ function About() {
                   "relative overflow-hidden rounded-[28px] border border-white bg-white shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:border-white/15 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm",
               },
               h("img", {
-                src: aboutTeam,
+                src: "/optimized/about-section-768.webp",
+                srcSet: "/optimized/about-section-480.webp 480w, /optimized/about-section-768.webp 768w, /optimized/about-section-1024.webp 1024w",
+                sizes: "(min-width: 1024px) 45vw, 100vw",
                 alt: "Enterprise consulting team",
+                width: 1024,
+                height: 768,
+                loading: "eager",
+                fetchPriority: "high",
+                decoding: "async",
                 className: "h-[420px] w-full object-cover",
               }),
               h(

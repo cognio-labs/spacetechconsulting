@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
-import servicesDashboard from "@/assets/yadri-services.png";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -52,7 +51,7 @@ function Services() {
           </div>
           <div className="relative">
             <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-400/22 via-blue-500/18 to-white/8 blur-2xl" />
-            <img src={servicesDashboard} alt="SpaceTech Yardi services meeting" loading="lazy" width={1536} height={960} className="relative rounded-3xl border border-white/10 shadow-2xl" />
+            <img src="/optimized/services-dashboard-1024.webp" srcSet="/optimized/services-dashboard-640.webp 640w, /optimized/services-dashboard-1024.webp 1024w, /optimized/services-dashboard-1536.webp 1536w" sizes="(min-width: 1024px) 50vw, 100vw" alt="SpaceTech Yardi services meeting" loading="eager" fetchPriority="high" decoding="async" width={1536} height={960} className="relative rounded-3xl border border-white/10 shadow-2xl" />
           </div>
         </div>
       </section>

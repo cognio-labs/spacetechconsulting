@@ -12,10 +12,8 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
-import consultingTeamPhoto from "@/assets/about-team.jpg";
-
-import caseStudyPage3 from "@/assets/case-study/case-study-page-3.png";
-import caseStudyPage4 from "@/assets/case-study/case-study-page-4.png";
+const HERO_IMAGE = "/optimized/hero-section-bg-1440.webp";
+const HERO_IMAGE_SRC_SET = "/optimized/hero-section-bg-640.webp 640w, /optimized/hero-section-bg-1024.webp 1024w, /optimized/hero-section-bg-1440.webp 1440w, /optimized/hero-section-bg-1672.webp 1672w";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,6 +34,16 @@ export const Route = createFileRoute("/")({
       { name: "twitter:description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
       { name: "twitter:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
       { name: "twitter:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
+    ],
+    links: [
+      {
+        rel: "preload",
+        as: "image",
+        href: HERO_IMAGE,
+        imageSrcSet: HERO_IMAGE_SRC_SET,
+        imageSizes: "100vw",
+        fetchPriority: "high",
+      },
     ],
   }),
   component: HomePage,
@@ -203,12 +211,14 @@ const businessOutcomes = [
 const dashboardScreenshots = [
   {
     title: "Executive Dashboard Page",
-    image: caseStudyPage3,
+    image: "/optimized/case-study-page-3-960.webp",
+    srcSet: "/optimized/case-study-page-3-640.webp 640w, /optimized/case-study-page-3-960.webp 960w, /optimized/case-study-page-3-1280.webp 1280w",
     alt: "Executive dashboard page showing Yardi support performance and operational reporting.",
   },
   {
     title: "Dashboard Detail Page",
-    image: caseStudyPage4,
+    image: "/optimized/case-study-page-4-960.webp",
+    srcSet: "/optimized/case-study-page-4-640.webp 640w, /optimized/case-study-page-4-960.webp 960w, /optimized/case-study-page-4-1280.webp 1280w",
     alt: "Dashboard detail page showing Yardi support findings and operational insights.",
   },
 ] as const;
@@ -329,7 +339,7 @@ function CaseStudySection() {
             </div>
 
             <motion.div variants={fadeUp} className="relative min-h-[320px] overflow-hidden border-t border-white/10 lg:border-l lg:border-t-0">
-              <img src={consultingTeamPhoto} alt="Enterprise consulting team in a governance meeting" className="absolute inset-0 h-full w-full object-cover" />
+              <img src="/optimized/about-team-768.webp" srcSet="/optimized/about-team-480.webp 480w, /optimized/about-team-768.webp 768w, /optimized/about-team-1024.webp 1024w" sizes="(min-width: 1024px) 45vw, 100vw" alt="Enterprise consulting team in a governance meeting" loading="lazy" decoding="async" width={1536} height={1024} className="absolute inset-0 h-full w-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white sm:p-8">
                 <p className="text-sm font-bold uppercase tracking-widest text-cyan-100">Enterprise Operating Model</p>
@@ -528,8 +538,11 @@ function CaseStudySection() {
                           </figcaption>
                           <img
                             src={screenshot.image}
+                            srcSet={screenshot.srcSet}
+                            sizes="(min-width: 1024px) 70vw, 100vw"
                             alt={screenshot.alt}
                             loading="lazy"
+                            decoding="async"
                             width={3840}
                             height={2160}
                             className="block h-auto w-full bg-white"
@@ -636,6 +649,52 @@ function CaseStudySection() {
   );
 }
 
+function HeroMedia() {
+  const [loadVideo, setLoadVideo] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const timer = window.setTimeout(() => setLoadVideo(true), 250);
+    return () => window.clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <picture>
+        <source srcSet={HERO_IMAGE_SRC_SET} sizes="100vw" type="image/webp" />
+        <img
+          src={HERO_IMAGE}
+          srcSet={HERO_IMAGE_SRC_SET}
+          sizes="100vw"
+          alt=""
+          width={1672}
+          height={941}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
+        />
+      </picture>
+      {loadVideo && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="none"
+          poster={HERO_IMAGE}
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
+        >
+          <source src="/optimized/hero-bg-video-optimized.mp4" type="video/mp4" />
+        </video>
+      )}
+    </>
+  );
+}
+
 function HomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const whyMetricsRef = useRef<HTMLDivElement | null>(null);
@@ -663,17 +722,7 @@ function HomePage() {
     <Layout>
       {/* HERO */}
       <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/hero-section-bg.png"
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
-        >
-          <source src="/hero-bg-video.mp4" type="video/mp4" />
-        </video>
+        <HeroMedia />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(2,11,31,.35),rgba(2,11,31,.50))] lg:bg-gradient-to-r lg:from-[#020B1F]/88 lg:via-[#020B1F]/50 lg:to-[#020B1F]/10" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
         <div className="absolute right-0 top-0 h-40 w-80 bg-[radial-gradient(ellipse_at_top_right,#020B1F_0%,rgba(2,11,31,0.96)_24%,rgba(2,11,31,0.66)_42%,rgba(2,11,31,0.26)_58%,transparent_74%)] sm:w-[30rem] lg:h-52 lg:w-[42rem]" />
@@ -912,7 +961,7 @@ function HomePage() {
                 className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white border border-slate-200/60">
                 <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
                   <div className="relative h-56 overflow-hidden">
-                    <img src={p.image} alt={p.title} loading="lazy" width={1024} height={768}
+                    <img src={p.image} srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">

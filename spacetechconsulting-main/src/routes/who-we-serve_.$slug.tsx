@@ -40,7 +40,7 @@ function PropertyTypeDetail() {
   return (
     <Layout>
       <section className="relative min-h-[60vh] overflow-hidden px-6 py-16 md:py-20 text-white">
-        <img src={property.image} alt={property.title} className="absolute inset-0 h-full w-full object-cover" />
+        <img src={property.image} srcSet={property.imageSrcSet} sizes="100vw" alt={property.title} width={1024} height={768} decoding="async" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0F172A] via-[#0F172A]/78 to-[#0F172A]/35" />
         <div className="absolute inset-0" style={{ background: "radial-gradient(circle at 72% 25%, rgba(6,182,212,0.28), transparent 38%)" }} />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
@@ -61,7 +61,7 @@ function PropertyTypeDetail() {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="hidden lg:block">
             <div className="rounded-3xl border border-white/15 bg-white/10 p-6 shadow-2xl backdrop-blur-xl">
-              <img src={property.image} alt="" className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl" />
+              <img src={property.image} srcSet={property.imageSrcSet} sizes="45vw" alt="" loading="lazy" decoding="async" width={1024} height={768} className="aspect-[4/3] w-full rounded-2xl object-cover shadow-2xl" />
             </div>
           </motion.div>
         </div>
