@@ -835,14 +835,14 @@ function About() {
               initial: "hidden",
               whileInView: "visible",
               viewport: { once: true },
-              className: "mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch",
+              className: "mt-12 grid min-w-0 gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch",
             },
             h(
               motion.div,
               {
                 variants: fade,
                 className:
-                  "relative min-h-[560px] overflow-hidden rounded-[34px] border border-blue-100 bg-white p-0 shadow-lg dark:border-white/10 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm",
+                  "relative min-h-[520px] rounded-[34px] border border-blue-100 bg-white p-0 shadow-lg dark:border-white/10 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm overflow-hidden",
               },
               h("div", {
                 className: "absolute inset-0",
@@ -964,7 +964,7 @@ function About() {
                 "div",
                 {
                   className:
-                    "absolute left-7 top-7 z-20 max-w-[430px] rounded-3xl border border-blue-100 bg-white/92 p-5 shadow-lg backdrop-blur dark:border-blue-500/25 dark:bg-black/60 dark:shadow-[0_18px_45px_rgba(0,0,0,0.5)]",
+                    "absolute left-7 top-7 z-20 w-[calc(100%-3.5rem)] max-w-[400px] rounded-3xl border border-blue-100 bg-white/92 p-5 shadow-lg backdrop-blur dark:border-blue-500/25 dark:bg-black/60 dark:shadow-[0_18px_45px_rgba(0,0,0,0.5)]",
                 },
                 h(
                   "p",
@@ -977,7 +977,7 @@ function About() {
                   "h3",
                   {
                     className:
-                      "mt-3 text-[28px] font-extrabold leading-[1.08] tracking-tight text-[#0F172A] dark:text-white md:text-4xl",
+                      "mt-3 text-[22px] font-extrabold leading-[1.1] tracking-tight text-[#0F172A] dark:text-white md:text-[28px]",
                   },
                   "Follow-the-sun support for operating continuity.",
                 ),
@@ -985,7 +985,7 @@ function About() {
             ),
             h(
               motion.div,
-              { variants: group, className: "grid gap-5" },
+              { variants: group, className: "grid min-w-0 gap-5" },
               regions.map(function (r) {
                 const flag = r.name === "Australia" ? "AUS" : r.name === "India" ? "IND" : "USA";
                 const Icon =
@@ -997,7 +997,7 @@ function About() {
                     variants: fade,
                     whileHover: { y: -8 },
                     className:
-                      "rounded-[24px] border border-slate-100 bg-white shadow-md p-px dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
+                      "min-w-0 rounded-[24px] border border-slate-100 bg-white shadow-md p-px dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
                   },
                   h(
                     "div",
