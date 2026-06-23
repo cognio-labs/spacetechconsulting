@@ -16,7 +16,7 @@ const SITE_URL = "https://www.spacetechconsulting.com";
 const SITE_TITLE = "SpaceTech Consulting | Enterprise Yardi Platform Partner";
 const SITE_DESCRIPTION =
   "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence.";
-const SOCIAL_PREVIEW_URL = `${SITE_URL}/social-preview.png`;
+const SOCIAL_PREVIEW_URL = `${SITE_URL}/social-preview.jpg`;
 
 function NotFoundComponent() {
   return (

@@ -29,7 +29,29 @@ import { createElement as h, useEffect, useState } from "react";
 import { Layout } from "@/components/site/Layout";
 import aboutTeam from "@/assets/about-section.jpeg";
 
-export const Route = createFileRoute("/about")({ component: About });
+export const Route = createFileRoute("/about")({
+  head: () => ({
+    meta: [
+      { title: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting" },
+      { name: "description", content: "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable outcomes." },
+      { name: "author", content: "SpaceTech Consulting" },
+      { property: "og:title", content: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting" },
+      { property: "og:description", content: "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership." },
+      { property: "og:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.spacetechconsulting.com/about" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting" },
+      { name: "twitter:description", content: "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership." },
+      { name: "twitter:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
+      { name: "twitter:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
+    ],
+  }),
+  component: About,
+});
 
 const stats = [
   { value: "50+", target: 50, suffix: "+", label: "Years Combined Experience", icon: Award },

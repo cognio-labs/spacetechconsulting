@@ -13,7 +13,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
 import consultingTeamPhoto from "@/assets/about-team.jpg";
-import dashboardThumbnailGallery from "@/assets/case-study/dashboard-thumbnail-gallery.svg";
+
 import caseStudyPage3 from "@/assets/case-study/case-study-page-3.png";
 import caseStudyPage4 from "@/assets/case-study/case-study-page-4.png";
 
@@ -22,10 +22,20 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "SpaceTech Consulting | Enterprise Yardi Platform Partner" },
       { name: "description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
+      { name: "author", content: "SpaceTech Consulting" },
       { property: "og:title", content: "SpaceTech Consulting | Enterprise Yardi Platform Partner" },
       { property: "og:description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
+      { property: "og:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://www.spacetechconsulting.com" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "SpaceTech Consulting | Enterprise Yardi Platform Partner" },
       { name: "twitter:description", content: "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence." },
+      { name: "twitter:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
+      { name: "twitter:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
     ],
   }),
   component: HomePage,
@@ -191,11 +201,6 @@ const businessOutcomes = [
 ];
 
 const dashboardScreenshots = [
-  {
-    title: "Dashboard Thumbnail Gallery",
-    image: dashboardThumbnailGallery,
-    alt: "Six executive dashboard thumbnails showing activity, stale tickets, created versus resolved tickets, tagging compliance, waiting on customer, and pending ticket views.",
-  },
   {
     title: "Executive Dashboard Page",
     image: caseStudyPage3,
@@ -1003,10 +1008,10 @@ function HomePage() {
           <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-[#2563EB] text-xs font-bold tracking-widest uppercase">About SpaceTech</span>
           <h2 className="mt-5 text-4xl md:text-5xl font-extrabold text-[#0F172A]">Your Strategic Yardi Partner</h2>
           <p className="mt-6 text-lg text-slate-900">
-            SpaceTech Consulting is a global consulting firm delivering comprehensive Yardi services across platform ownership, implementation, data migration, integrations, and customizations.
+            SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable business outcomes across complex property technology environments.
           </p>
           <p className="mt-4 text-lg text-slate-900">
-            With presence across Australia, India, and the USA, we provide 24/7 support and scalable delivery to meet your project needs.
+            Built on real enterprise operating principles, SpaceTech brings continuous improvement and disciplined execution—helping property organizations maximize the value of their Yardi investment through stronger governance, operational visibility, and accountability.
           </p>
           <div className="mt-8 flex justify-center gap-8 text-sm font-semibold">
             <span className="flex items-center gap-2 text-slate-700"><Globe className="w-4 h-4 text-[#2563EB]" /> Global Presence</span>
