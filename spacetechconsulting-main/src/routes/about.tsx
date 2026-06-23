@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { createElement as h, useEffect, useState } from "react";
 import { Layout } from "@/components/site/Layout";
+import { worldMapShapes, worldMapConfig } from "@/data/worldMap";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -393,6 +394,211 @@ function Stats() {
     stats.map(function (stat) {
       return h(Counter, { key: stat.label, stat: stat });
     }),
+  );
+}
+
+const renderForkliftIcon = () =>
+  h(
+    "svg",
+    {
+      viewBox: "0 0 24 24",
+      className: "h-6 w-6",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+    },
+    h("path", { d: "M16 2v17" }),
+    h("path", { d: "M16 16h5v2h-5" }),
+    h("path", { d: "M2 18h12v-5H8l-3 3H2z" }),
+    h("path", { d: "M7 13V8h5v5" }),
+    h("circle", { cx: "5", cy: "18", r: "2" }),
+    h("circle", { cx: "11", cy: "18", r: "2" }),
+  );
+
+const renderCircuitIcon = () =>
+  h(
+    "svg",
+    {
+      viewBox: "0 0 24 24",
+      className: "h-6 w-6",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+    },
+    h("rect", { x: "4", y: "14", width: "16", height: "6", rx: "1" }),
+    h("path", { d: "M8 17h.01M12 17h.01" }),
+    h("path", { d: "M17.5 14a4 4 0 0 0-1.8-7.6 5 5 0 0 0-9.4 1 4 4 0 0 0-.8 6.6" }),
+    h("path", { d: "M12 7.5V11" }),
+  );
+
+const renderSupportIcon = () =>
+  h(
+    "svg",
+    {
+      viewBox: "0 0 24 24",
+      className: "h-6 w-6",
+      fill: "none",
+      stroke: "currentColor",
+      strokeWidth: "1.5",
+      strokeLinecap: "round",
+      strokeLinejoin: "round",
+    },
+    h("path", { d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" }),
+    h("circle", { cx: "9", cy: "7", r: "4" }),
+    h("path", { d: "M22 21v-2a4 4 0 0 0-3-3.87" }),
+    h("path", { d: "M16 3.13a4 4 0 0 1 0 7.75" }),
+    h("path", { d: "M18 10l2 2 4-4", stroke: "#10B981", strokeWidth: "2" }),
+  );
+
+function renderFlag(country: string, cx: number, cy: number) {
+  const fy = cy - 46;
+  const fx = cx + 1.5;
+  const fw = 32;
+  const fh = 20;
+
+  if (country === "USA") {
+    return h(
+      "g",
+      { key: "usa-flag" },
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#ffffff", rx: 1.5 }),
+      [0, 2, 4, 6, 8, 10, 12].map((i) =>
+        h("rect", {
+          key: i,
+          x: fx,
+          y: fy + (i * fh) / 13,
+          width: fw,
+          height: fh / 13,
+          fill: "#b22234",
+        })
+      ),
+      h("rect", { x: fx, y: fy, width: fw * 0.45, height: fh * (7 / 13), fill: "#3c3b6e" }),
+      h("circle", { cx: fx + 4, cy: fy + 3, r: 0.6, fill: "#ffffff" }),
+      h("circle", { cx: fx + 10, cy: fy + 3, r: 0.6, fill: "#ffffff" }),
+      h("circle", { cx: fx + 7, cy: fy + 5, r: 0.6, fill: "#ffffff" }),
+      h("circle", { cx: fx + 4, cy: fy + 7, r: 0.6, fill: "#ffffff" }),
+      h("circle", { cx: fx + 10, cy: fy + 7, r: 0.6, fill: "#ffffff" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "#e2e8f0", strokeWidth: "0.5", rx: 1.5 })
+    );
+  } else if (country === "India") {
+    return h(
+      "g",
+      { key: "india-flag" },
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#ffffff", rx: 1.5 }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh / 3, fill: "#ff9933" }),
+      h("rect", { x: fx, y: fy + (2 * fh) / 3, width: fw, height: fh / 3, fill: "#138808" }),
+      h("circle", {
+        cx: fx + fw / 2,
+        cy: fy + fh / 2,
+        r: fh / 6,
+        fill: "none",
+        stroke: "#000080",
+        strokeWidth: "1",
+      }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "#e2e8f0", strokeWidth: "0.5", rx: 1.5 })
+    );
+  } else if (country === "Australia") {
+    return h(
+      "g",
+      { key: "australia-flag" },
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#00008B", rx: 1.5 }),
+      h("path", {
+        d: `M ${fx} ${fy} L ${fx + fw * 0.45} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.5} L ${fx + fw * 0.45} ${fy}`,
+        stroke: "#ffffff",
+        strokeWidth: "1.5",
+      }),
+      h("path", {
+        d: `M ${fx + (fw * 0.45) / 2} ${fy} L ${fx + (fw * 0.45) / 2} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.25} L ${fx + fw * 0.45} ${fy + fh * 0.25}`,
+        stroke: "#ffffff",
+        strokeWidth: "2",
+      }),
+      h("path", {
+        d: `M ${fx + (fw * 0.45) / 2} ${fy} L ${fx + (fw * 0.45) / 2} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.25} L ${fx + fw * 0.45} ${fy + fh * 0.25}`,
+        stroke: "#ff0000",
+        strokeWidth: "0.8",
+      }),
+      h("circle", { cx: fx + fw * 0.75, cy: fy + fh * 0.25, r: 1, fill: "#ffffff" }),
+      h("circle", { cx: fx + fw * 0.85, cy: fy + fh * 0.45, r: 1, fill: "#ffffff" }),
+      h("circle", { cx: fx + fw * 0.75, cy: fy + fh * 0.75, r: 1.2, fill: "#ffffff" }),
+      h("circle", { cx: fx + fw * 0.65, cy: fy + fh * 0.55, r: 1, fill: "#ffffff" }),
+      h("circle", { cx: fx + fw * 0.8, cy: fy + fh * 0.6, r: 0.7, fill: "#ffffff" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "#e2e8f0", strokeWidth: "0.5", rx: 1.5 })
+    );
+  }
+  return null;
+}
+
+function renderPodium(cx: number, cy: number, country: string, label: string) {
+  return h(
+    "g",
+    { key: country, className: "podium-group" },
+    h("ellipse", { cx: cx, cy: cy + 14, rx: 38, ry: 13, fill: "rgba(0,0,0,0.12)", filter: "url(#dropShadow)" }),
+    h("path", {
+      d: `M ${cx - 35} ${cy + 8} A 35 12 0 0 0 ${cx + 35} ${cy + 8} L ${cx + 35} ${cy + 15} A 35 12 0 0 1 ${cx - 35} ${cy + 15} Z`,
+      className: "fill-slate-300 dark:fill-slate-700",
+    }),
+    h("ellipse", {
+      cx: cx,
+      cy: cy + 8,
+      rx: 35,
+      ry: 12,
+      className: "fill-slate-200 dark:fill-slate-600",
+    }),
+    h("path", {
+      d: `M ${cx - 25} ${cy} A 25 9 0 0 0 ${cx + 25} ${cy} L ${cx + 25} ${cy + 8} A 25 9 0 0 1 ${cx - 25} ${cy + 8} Z`,
+      className: "fill-slate-400 dark:fill-slate-600",
+    }),
+    h("ellipse", {
+      cx: cx,
+      cy: cy,
+      rx: 25,
+      ry: 9,
+      className: "fill-slate-100 dark:fill-slate-500",
+    }),
+    h("ellipse", {
+      cx: cx,
+      cy: cy,
+      rx: 22,
+      ry: 8,
+      fill: "none",
+      stroke: "#60a5fa",
+      strokeWidth: "2",
+      className: "animate-pulse",
+    }),
+    h("line", {
+      x1: cx,
+      y1: cy,
+      x2: cx,
+      y2: cy - 50,
+      stroke: "#94a3b8",
+      strokeWidth: "3",
+      strokeLinecap: "round",
+    }),
+    h("circle", { cx: cx, cy: cy - 50, r: "4.5", fill: "#fbbf24" }),
+    renderFlag(country, cx, cy),
+    h("g", null,
+      h("rect", {
+        x: cx - 40,
+        y: cy + 24,
+        width: 80,
+        height: 22,
+        rx: 11,
+        className: "fill-slate-900/90 dark:fill-slate-950/90 stroke-white/10",
+        strokeWidth: "1",
+      }),
+      h("text", {
+        x: cx,
+        y: cy + 39,
+        textAnchor: "middle",
+        fill: "#ffffff",
+        fontSize: "10",
+        fontWeight: "800",
+        letterSpacing: "0.08em",
+      }, label)
+    )
   );
 }
 
@@ -961,7 +1167,7 @@ function About() {
         ),
       ),
 
-      /* ── GLOBAL PRESENCE ── */
+       /* ── GLOBAL PRESENCE ── */
       h(
         "section",
         {
@@ -993,35 +1199,38 @@ function About() {
               whileInView: "visible",
               viewport: { once: true },
               className:
-                "mt-12 grid min-w-0 gap-6 rounded-[36px] border border-white/70 bg-white/45 p-5 shadow-[0_28px_90px_rgba(15,23,42,0.12)] backdrop-blur-2xl lg:grid-cols-[1.2fr_0.78fr] lg:items-stretch",
+                "mt-12 grid min-w-0 gap-6 rounded-[36px] border border-white/40 dark:border-white/10 bg-white/30 dark:bg-slate-950/20 p-5 shadow-[0_28px_90px_rgba(15,23,42,0.12)] dark:shadow-[0_28px_90px_rgba(0,0,0,0.5)] backdrop-blur-2xl lg:grid-cols-[1.26fr_0.74fr] lg:items-stretch",
+              style: {
+                backgroundImage: "linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px)",
+                backgroundSize: "40px 40px"
+              }
             },
             h(
               motion.article,
               {
                 variants: fade,
                 className:
-                  "relative overflow-hidden rounded-[30px] border border-slate-200 bg-white/85 p-6 shadow-[0_28px_80px_rgba(15,23,42,0.12)] backdrop-blur-3xl transition-all hover:translate-y-[-2px] sm:p-8",
-                whileHover: { y: -3 },
+                  "relative overflow-hidden rounded-[30px] border border-white/40 dark:border-white/10 bg-white/70 dark:bg-slate-900/60 p-6 shadow-xl backdrop-blur-lg sm:p-8 transition-all duration-300",
               },
               h(
                 "div",
                 {
                   className:
-                    "absolute -right-24 -top-24 h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,_rgba(37,99,235,0.26),_transparent_70%)] blur-sm",
+                    "absolute -right-24 -top-24 h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,_rgba(37,99,235,0.26),_transparent_70%)] blur-sm pointer-events-none",
                 },
               ),
               h(
                 "div",
                 {
                   className:
-                    "absolute -left-20 -bottom-20 h-[240px] w-[240px] rounded-full bg-[radial-gradient(circle,_rgba(14,165,233,0.2),_transparent_72%)] blur-sm",
+                    "absolute -left-20 -bottom-20 h-[240px] w-[240px] rounded-full bg-[radial-gradient(circle,_rgba(14,165,233,0.2),_transparent_72%)] blur-sm pointer-events-none",
                 },
               ),
               h(
                 "div",
                 {
                   className:
-                    "absolute right-6 top-6 z-10 flex items-center gap-2 rounded-full border border-emerald-200/70 bg-white/95 px-4 py-2 text-[11px] font-extrabold tracking-wide text-[#0F172A] shadow-[0_12px_30px_rgba(15,23,42,0.14)]",
+                    "absolute right-6 top-6 z-10 flex items-center gap-2 rounded-full border border-emerald-250/30 dark:border-emerald-500/20 bg-white/90 dark:bg-slate-800/90 px-4 py-2 text-[11px] font-extrabold tracking-wide text-slate-800 dark:text-emerald-350 shadow-[0_12px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_12px_30px_rgba(0,0,0,0.3)]",
                 },
                 h(
                   "span",
@@ -1034,12 +1243,12 @@ function About() {
               ),
               h(
                 "div",
-                { className: "relative z-20 mx-auto w-full max-w-[620px]" },
+                { className: "relative z-20 mx-auto w-full" },
                 h(
                   "p",
                   {
                     className:
-                      "text-sm font-extrabold uppercase tracking-[0.22em] text-[#1D4ED8]",
+                      "text-xs font-black uppercase tracking-[0.22em] text-[#1D4ED8] dark:text-blue-400",
                   },
                   "GLOBAL OPERATIONS DASHBOARD",
                 ),
@@ -1047,198 +1256,183 @@ function About() {
                   "h3",
                   {
                     className:
-                      "mt-2 text-[clamp(1.6rem,3vw,2.6rem)] font-extrabold leading-tight tracking-tight text-[#0F172A]",
+                      "mt-2 text-[clamp(1.6rem,3vw,2.6rem)] font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white",
                   },
                   "Follow-the-sun support for operating continuity.",
                 ),
                 h(
                   "div",
-                    {
-                        className:
-                          "relative mt-7 overflow-hidden rounded-[24px] border border-slate-200 bg-gradient-to-br from-[#0B1220]/6 via-[#EEF2FF] to-[#F8FAFF] p-2 aspect-[760/395]",
-                      },
-                  h(
-                    "div",
-                    {
-                      className:
-                        "absolute inset-0 rounded-[22px] border border-blue-100/70 bg-[radial-gradient(circle_at_20%_35%,rgba(37,99,235,0.20),transparent_42%),radial-gradient(circle_at_80%_70%,rgba(14,165,233,0.18),transparent_56%)]",
-                    },
-                  ),
+                  {
+                    className:
+                      "relative mt-7 overflow-hidden rounded-[24px] border border-slate-200/50 dark:border-slate-800/40 bg-gradient-to-br from-slate-100/50 via-slate-50/30 to-slate-100/50 dark:from-slate-950/50 dark:via-slate-900/30 dark:to-slate-950/50 p-2 aspect-[2000/1001] w-full shadow-inner",
+                  },
                   h(
                     "svg",
                     {
-                      className: "relative z-10 h-full w-full",
-                      viewBox: "0 0 760 395",
+                      className: "relative z-10 h-full w-full select-none",
+                      viewBox: worldMapConfig.viewBox,
                       fill: "none",
                       xmlns: "http://www.w3.org/2000/svg",
                       preserveAspectRatio: "xMidYMid meet",
                     },
                     h("defs", null,
                       h(
+                        "radialGradient",
+                        { id: "mapGlow", cx: "50%", cy: "50%", r: "50%" },
+                        h("stop", { offset: "0%", stopColor: "#3b82f6", stopOpacity: "0.15" }),
+                        h("stop", { offset: "100%", stopColor: "#3b82f6", stopOpacity: "0" })
+                      ),
+                      h(
                         "linearGradient",
                         {
-                          id: "routeGlow",
-                          x1: "170",
-                          y1: "220",
-                          x2: "660",
-                          y2: "360",
-                          gradientUnits: "userSpaceOnUse",
+                          id: "activeRoute",
+                          x1: "0%",
+                          y1: "0%",
+                          x2: "100%",
+                          y2: "100%",
                         },
-                        h("stop", { key: "route-start", stopColor: "#2563EB", stopOpacity: "0" }),
-                        h("stop", { key: "route-mid", offset: "0.2", stopColor: "#2563EB" }),
-                        h("stop", { key: "route-end", offset: "1", stopColor: "#06B6D4" }),
+                        h("stop", { stopColor: "#2563EB", stopOpacity: "0.2" }),
+                        h("stop", { offset: "0.5", stopColor: "#3b82f6", stopOpacity: "1" }),
+                        h("stop", { offset: "1", stopColor: "#0ea5e9", stopOpacity: "0.2" }),
                       ),
+                      h(
+                        "filter",
+                        { id: "dropShadow", x: "-20%", y: "-20%", width: "140%", height: "140%" },
+                        h("feDropShadow", { dx: "0", dy: "4", stdDeviation: "3", floodOpacity: "0.15" })
+                      ),
+                      h(
+                        "filter",
+                        { id: "flagShadow", x: "-10%", y: "-10%", width: "120%", height: "120%" },
+                        h("feDropShadow", { dx: "0", dy: "2", stdDeviation: "1.5", floodOpacity: "0.1" })
+                      )
                     ),
-                    h("g", { opacity: "0.82" },
-                      h("path", {
-                        d: "M130 205 C190 135 260 105 340 125 C445 148 498 205 575 235 C640 260 705 265 745 225",
-                        stroke: "#CBD5E1",
-                        strokeWidth: "1.8",
-                        strokeLinecap: "round",
-                        strokeLinejoin: "round",
-                      }),
-                      h("path", {
-                        d: "M76 276 C146 245 196 250 240 290 C296 336 356 326 418 318 C475 311 534 286 592 244 C650 206 730 176 755 176",
-                        stroke: "#CBD5E1",
-                        strokeWidth: "1.4",
-                        strokeLinecap: "round",
-                        strokeLinejoin: "round",
-                      }),
-                      h("path", {
-                        d: "M72 255 C120 250 170 258 220 265 C286 275 358 279 430 278 C500 277 572 271 650 270 C715 269 744 266 744 266",
-                        stroke: "#E2E8F0",
-                        strokeWidth: "0.9",
-                        strokeDasharray: "6 10",
-                        strokeLinecap: "round",
-                        strokeLinejoin: "round",
-                      }),
-                    ),
+                    h("rect", { width: "2000", height: "1001", fill: "url(#mapGlow)" }),
                     h(
                       "g",
-                      {
-                        fill: "none",
-                        stroke: "url(#routeGlow)",
-                        strokeWidth: "3.2",
-                        strokeDasharray: "8 10",
-                      },
-                      dashboardRoute.map(function (route) {
-                        return h(motion.path, {
-                          key: route.d,
-                          d: route.d,
-                          strokeLinecap: "round",
-                          strokeLinejoin: "round",
-                          initial: { strokeDashoffset: 130 },
-                          animate: { strokeDashoffset: [130, 0] },
-                          transition: {
-                            duration: 2.4,
-                            repeat: Infinity,
-                            ease: "linear",
-                            delay: route.delay,
-                          },
+                      { className: "countries" },
+                      worldMapShapes.map(function (shape) {
+                        return h("path", {
+                          key: shape.id,
+                          d: shape.d,
+                          className:
+                            "fill-slate-200/60 dark:fill-slate-800/40 stroke-slate-350/40 dark:stroke-slate-750/30 transition-colors duration-500 hover:fill-blue-500/10 dark:hover:fill-blue-400/10",
+                          strokeWidth: "0.8",
                         });
-                      }),
+                      })
+                    ),
+                    h("path", {
+                      d: "M 380 380 Q 904 150 1428 434",
+                      fill: "none",
+                      stroke: "#94a3b8",
+                      strokeWidth: "2",
+                      strokeDasharray: "6 8",
+                      opacity: "0.4",
+                    }),
+                    h("path", {
+                      d: "M 1428 434 Q 1600 520 1700 745",
+                      fill: "none",
+                      stroke: "#94a3b8",
+                      strokeWidth: "2",
+                      strokeDasharray: "6 8",
+                      opacity: "0.4",
+                    }),
+                    h(motion.path, {
+                      d: "M 380 380 Q 904 150 1428 434",
+                      fill: "none",
+                      stroke: "url(#activeRoute)",
+                      strokeWidth: "3.5",
+                      strokeDasharray: "10 15",
+                      strokeLinecap: "round",
+                      initial: { strokeDashoffset: 200 },
+                      animate: { strokeDashoffset: [200, 0] },
+                      transition: {
+                        duration: 8,
+                        repeat: Infinity,
+                        ease: "linear",
+                      },
+                    }),
+                    h(
+                      motion.g,
+                      {
+                        style: {
+                          offsetPath: "path('M 380 380 Q 904 150 1428 434')",
+                        },
+                        animate: {
+                          offsetDistance: ["0%", "100%"],
+                        },
+                        transition: {
+                          duration: 12,
+                          repeat: Infinity,
+                          ease: "linear",
+                        },
+                      },
+                      h("circle", { cx: 0, cy: 0, r: 16, fill: "#fbbf24", opacity: "0.2" }),
+                      h("circle", { cx: 0, cy: 0, r: 8, fill: "#fbbf24", filter: "url(#dropShadow)" }),
+                      h(motion.circle, {
+                        cx: 0,
+                        cy: 0,
+                        r: 11,
+                        fill: "none",
+                        stroke: "#d97706",
+                        strokeWidth: "2",
+                        strokeDasharray: "3 3",
+                        animate: { rotate: 360 },
+                        transition: { repeat: Infinity, duration: 20, ease: "linear" }
+                      })
                     ),
                     h(
-                      "g",
-                      null,
-                      dashboardNodes.map(function (node) {
-                        return h("g", { key: node.key },
-                          h("circle", {
-                            cx: node.cx,
-                            cy: node.cy,
-                            r: 19,
-                            fill: "rgba(15,23,42,0.08)",
-                          }),
-                          h("circle", {
-                            cx: node.cx,
-                            cy: node.cy,
-                            r: 8,
-                            fill: node.core,
-                            stroke: "white",
-                            strokeWidth: "3",
-                          }),
-                          h("circle", { key: "pin-dot", cx: node.cx, cy: node.cy - 2, r: "3.2", fill: "white" }),
-                          h(
-                            "text",
-                            {
-                              x: node.cx,
-                              y: node.cy + 28,
-                              textAnchor: "middle",
-                              fill: "#0F172A",
-                              fontSize: "10",
-                              fontWeight: "700",
-                              letterSpacing: "0.06em",
-                            },
-                            node.label,
-                          ),
-                          h("circle", {
-                            cx: node.cx,
-                            cy: node.cy,
-                            r: "11.8",
-                            fill: "none",
-                            stroke: node.glow,
-                            strokeWidth: "1.5",
-                            className: node.active ? "animate-pulse" : "",
-                          }),
-                        );
-                      }),
+                      motion.g,
+                      {
+                        style: {
+                          offsetPath: "path('M 1428 434 Q 1600 520 1700 745')",
+                        },
+                        animate: {
+                          offsetDistance: ["0%", "100%"],
+                        },
+                        transition: {
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear",
+                          delay: 2,
+                        },
+                      },
+                      h("circle", { cx: 0, cy: 0, r: 10, fill: "#3b82f6", opacity: "0.2" }),
+                      h("circle", { cx: 0, cy: 0, r: 5, fill: "#3b82f6", filter: "url(#dropShadow)" }),
+                      h("circle", { cx: 0, cy: 0, r: 8, fill: "none", stroke: "#2563eb", strokeWidth: "1.5", className: "animate-ping" })
                     ),
+                    renderPodium(380, 380, "USA", "USA"),
+                    renderPodium(1428, 434, "India", "IND"),
+                    renderPodium(1700, 745, "Australia", "AUS")
                   ),
-                  h("div", { className: "hidden" }, [
-                    dashboardNodes.map(function (node) {
-                      return h(
+                ),
+                h(
+                  "div",
+                  { className: "relative z-10 mt-6 grid gap-4 md:grid-cols-3" },
+                  dashboardMetrics.map(function (metric) {
+                    const Icon = metric.icon;
+                    return h(
+                      motion.div,
+                      {
+                        key: metric.title,
+                        whileHover: { y: -3 },
+                        className:
+                          "inline-flex min-h-12 items-center justify-center gap-2.5 rounded-2xl border border-white/40 dark:border-white/10 bg-white/60 dark:bg-slate-800/40 px-5 py-2.5 shadow-md backdrop-blur-md transition-all hover:border-blue-400/40 hover:bg-white/80 dark:hover:bg-slate-800/60 text-blue-600 dark:text-blue-400 font-extrabold text-sm hover:shadow-lg hover:translate-y-[-2px]",
+                      },
+                      h(
                         "div",
                         {
-                          key: `node-label-${node.key}`,
                           className:
-                            "rounded-2xl border border-slate-200 bg-white/90 p-3 shadow-sm backdrop-blur-sm",
+                            "inline-flex h-6 w-6 items-center justify-center text-[#1D4ED8] dark:text-blue-400",
                         },
-                        h(
-                          "p",
-                          { className: "text-xs font-black uppercase tracking-[0.18em] text-[#1D4ED8]" },
-                          node.title,
-                        ),
-                        h(
-                          "p",
-                          {
-                            className:
-                              "mt-1.5 text-[13px] font-semibold leading-5 text-slate-700",
-                          },
-                          node.subtitle,
-                        ),
-                      );
-                    }),
-                  ]),
-                  h(
-                    "div",
-                    { className: "relative z-10 mt-6 grid gap-4 md:grid-cols-3" },
-                    dashboardMetrics.map(function (metric) {
-                      const Icon = metric.icon;
-                      return h(
-                        motion.div,
-                        {
-                          key: metric.title,
-                          whileHover: { y: -6 },
-                          className:
-                            "inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-blue-200 bg-white px-6 py-3 shadow-[0_10px_26px_rgba(37,99,235,0.08)] backdrop-blur-sm transition-all hover:border-[#2563EB]/45 hover:bg-white hover:shadow-[0_16px_34px_rgba(37,99,235,0.14)]",
-                        },
-                        h(
-                          "div",
-                          {
-                            className:
-                              "inline-flex h-6 w-6 items-center justify-center text-[#1D4ED8]",
-                          },
-                          h(Icon, { className: "h-4 w-4" }),
-                        ),
-                        h(
-                          "p",
-                          { className: "text-base font-extrabold text-[#1D4ED8]" },
-                          metric.title,
-                        ),
-                        null,
-                      );
-                    }),
-                  ),
+                        h(Icon, { className: "h-4 w-4" }),
+                      ),
+                      h(
+                        "p",
+                        { className: "text-sm font-extrabold text-slate-800 dark:text-slate-200" },
+                        metric.title,
+                      ),
+                    );
+                  }),
                 ),
               ),
             ),
@@ -1247,109 +1441,67 @@ function About() {
               {
                 variants: group,
                 className:
-                  "grid gap-4 rounded-[30px] border border-white/70 bg-white/45 p-3 shadow-[0_22px_70px_rgba(15,23,42,0.12)] backdrop-blur-2xl",
+                  "grid gap-4 rounded-[36px] border border-white/30 dark:border-white/5 bg-white/20 dark:bg-slate-950/10 p-4 shadow-lg backdrop-blur-xl",
               },
               h(
                 "p",
-                { className: "px-2 pt-1 text-sm font-black uppercase tracking-[0.16em] text-slate-700" },
+                { className: "px-2 pt-1 text-xs font-black uppercase tracking-[0.2em] text-slate-500 dark:text-slate-400" },
                 "GLOBAL HUB SPECIFICS",
               ),
               regions.map(function (region, index) {
-                const skylineOffset = index * 4;
-                const HubIcon = region.hubIcon === "logistics" ? Workflow : region.hubIcon === "technology" ? BrainCircuit : Users;
+                const HubIcon = region.hubIcon === "logistics" ? renderForkliftIcon : region.hubIcon === "technology" ? renderCircuitIcon : renderSupportIcon;
                 return h(
                   motion.article,
                   {
                     key: region.name,
                     variants: fade,
-                    whileHover: { y: -8 },
+                    whileHover: { y: -5, scale: 1.01 },
                     className:
-                      "relative min-h-[206px] overflow-hidden rounded-[30px] border border-slate-200 bg-white p-0 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-all hover:border-blue-200 hover:shadow-[0_34px_90px_rgba(37,99,235,0.18)]",
+                      "relative overflow-hidden rounded-[28px] backdrop-blur-lg bg-white/70 dark:bg-slate-900/60 border border-white/40 dark:border-white/10 shadow-lg p-6 transition-all hover:shadow-xl hover:border-blue-400/40 dark:hover:border-blue-500/30",
                   },
                   h(
                     "div",
-                    {
-                      className:
-                        "relative flex min-h-[118px] items-start gap-6 overflow-hidden border-b-0 bg-white p-7 text-[#0F172A] sm:p-8",
-                      style: {
-                        backgroundImage:
-                          "linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,251,255,0.92))",
-                      },
-                    },
+                    { className: "flex items-start justify-between gap-4" },
                     h(
                       "div",
-                      { className: "hidden" },
+                      { className: "flex items-start gap-4" },
                       h(
-                        "svg",
+                        "span",
                         {
-                          viewBox: "0 0 280 72",
-                          fill: "none",
                           className:
-                            "absolute inset-x-0 bottom-0 h-full w-full",
-                          preserveAspectRatio: "xMidYMax meet",
+                            "flex h-12 w-16 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-extrabold text-sm shadow-md",
                         },
-                        miniCityBars.map(function (bar, barIndex) {
-                          return h("rect", {
-                            key: barIndex,
-                            x: barIndex * 19,
-                            y: 68 - (miniCityBars[(barIndex + skylineOffset) % miniCityBars.length] / 1.2),
-                            width: 12,
-                            height: miniCityBars[(barIndex + skylineOffset) % miniCityBars.length] / 1.2 + 4,
-                            rx: 6,
-                            fill: "rgba(255,255,255,0.2)",
-                          });
-                        }),
+                        region.hubCode,
                       ),
-                    ),
-                    h(
-                      "span",
-                      {
-                        className:
-                          "relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-[22px] bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] text-3xl font-black tracking-tight text-white shadow-[0_18px_36px_rgba(37,99,235,0.34)]",
-                      },
-                      region.hubCode,
-                    ),
-                    h(
-                      "h3",
-                      { className: "relative z-10 mt-2 max-w-[18rem] text-[1.55rem] font-black uppercase leading-tight tracking-tight text-[#0F172A]" },
-                      region.hubTitle,
-                    ),
-                    h(
-                      "p",
-                      { className: "hidden" },
-                      region.name,
+                      h(
+                        "div",
+                        null,
+                        h(
+                          "h4",
+                          { className: "text-xs font-bold uppercase tracking-widest text-slate-500 dark:text-slate-400" },
+                          region.name
+                        ),
+                        h(
+                          "h3",
+                          { className: "text-lg font-extrabold leading-tight text-slate-900 dark:text-white mt-0.5" },
+                          region.hubTitle,
+                        ),
+                      )
                     ),
                     h(
                       "div",
                       {
                         className:
-                          "absolute right-8 top-8 flex h-16 w-16 items-center justify-center rounded-full border border-blue-100 bg-blue-50/80 p-0 text-[#1D4ED8] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]",
+                          "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 dark:bg-slate-800/80 text-blue-600 dark:text-blue-400 border border-blue-100/50 dark:border-slate-700/50 shadow-inner",
                       },
-                      h("p", { className: "hidden" }, region.visual),
-                      h(HubIcon, { className: "h-8 w-8" })
-                      ),
-                    ),
-                  h(
-                    "div",
-                    { className: "px-8 pb-8 pt-3" },
-                    h("p", { className: "text-[15px] leading-7 text-slate-700" }, region.hubText),
-                    h(
-                      "div",
-                      { className: "hidden" },
-                      region.features.map(function (feature) {
-                        return h(
-                          "span",
-                          {
-                            key: feature,
-                            className:
-                              "inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700",
-                          },
-                          h(CheckCircle2, { className: "h-3.5 w-3.5 text-emerald-500" }),
-                          feature,
-                        );
-                      }),
-                    ),
+                      h(HubIcon, null)
+                    )
                   ),
+                  h(
+                    "p",
+                    { className: "mt-4 text-sm leading-relaxed text-slate-650 dark:text-slate-350" },
+                    region.hubText
+                  )
                 );
               }),
             ),
