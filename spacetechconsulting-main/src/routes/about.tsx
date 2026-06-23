@@ -33,21 +33,45 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting" },
-      { name: "description", content: "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable outcomes." },
+      {
+        name: "description",
+        content:
+          "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable outcomes.",
+      },
       { name: "author", content: "SpaceTech Consulting" },
-      { property: "og:title", content: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting" },
-      { property: "og:description", content: "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership." },
+      {
+        property: "og:title",
+        content: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting",
+      },
+      {
+        property: "og:description",
+        content:
+          "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership.",
+      },
       { property: "og:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
+      {
+        property: "og:image:alt",
+        content: "SpaceTech Consulting enterprise Yardi platform partner social preview",
+      },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "https://www.spacetechconsulting.com/about" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting" },
-      { name: "twitter:description", content: "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership." },
+      {
+        name: "twitter:title",
+        content: "About Us — Yardi Platform Ownership & Governance | SpaceTech Consulting",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership.",
+      },
       { name: "twitter:image", content: "https://www.spacetechconsulting.com/social-preview.jpg" },
-      { name: "twitter:image:alt", content: "SpaceTech Consulting enterprise Yardi platform partner social preview" },
+      {
+        name: "twitter:image:alt",
+        content: "SpaceTech Consulting enterprise Yardi platform partner social preview",
+      },
     ],
   }),
   component: About,
@@ -219,7 +243,11 @@ function Counter(props: any) {
       value.toLocaleString(),
       stat.suffix,
     ),
-    h("p", { className: "mt-2 text-sm font-semibold text-slate-600 dark:text-blue-200" }, stat.label),
+    h(
+      "p",
+      { className: "mt-2 text-sm font-semibold text-slate-600 dark:text-blue-200" },
+      stat.label,
+    ),
   );
 }
 
@@ -241,7 +269,11 @@ function Card(props: any) {
       },
       h(Icon, { className: "h-6 w-6" }),
     ),
-    h("h3", { className: "mt-5 text-xl font-extrabold text-[#0F172A] dark:text-white" }, props.item.title),
+    h(
+      "h3",
+      { className: "mt-5 text-xl font-extrabold text-[#0F172A] dark:text-white" },
+      props.item.title,
+    ),
     h("p", { className: "mt-3 leading-7 text-slate-600 dark:text-slate-300" }, props.item.text),
   );
 }
@@ -266,11 +298,18 @@ function Intro(props: any) {
     ),
     h(
       "h2",
-      { className: "mt-5 text-3xl font-extrabold tracking-tight text-[#0F172A] dark:text-white md:text-5xl" },
+      {
+        className:
+          "mt-5 text-3xl font-extrabold tracking-tight text-[#0F172A] dark:text-white md:text-5xl",
+      },
       props.title,
     ),
     props.text
-      ? h("p", { className: "mt-5 text-lg leading-8 text-slate-700 dark:text-slate-350" }, props.text)
+      ? h(
+          "p",
+          { className: "mt-5 text-lg leading-8 text-slate-700 dark:text-slate-350" },
+          props.text,
+        )
       : null,
   );
 }
@@ -297,7 +336,10 @@ function About() {
     null,
     h(
       "main",
-      { className: "bg-white text-[#0F172A] dark:bg-[#060D1F] dark:text-white transition-colors duration-300" },
+      {
+        className:
+          "bg-white text-[#0F172A] dark:bg-[#060D1F] dark:text-white transition-colors duration-300",
+      },
 
       /* ── HERO SECTION ── */
       h(
@@ -348,18 +390,29 @@ function About() {
                   "mt-6 text-4xl font-extrabold leading-tight tracking-tight text-[#0F172A] dark:text-white md:text-6xl",
               },
               "Your Strategic ",
-              h("span", {
-                className: "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400",
-              }, "Yardi Partner"),
+              h(
+                "span",
+                {
+                  className:
+                    "text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 dark:from-blue-400 dark:to-cyan-400",
+                },
+                "Yardi Partner",
+              ),
             ),
             h(
               "p",
-              { className: "mt-6 max-w-2xl text-lg leading-8 text-slate-700 dark:text-slate-300 md:text-xl" },
+              {
+                className:
+                  "mt-6 max-w-2xl text-lg leading-8 text-slate-700 dark:text-slate-300 md:text-xl",
+              },
               "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable business outcomes across complex property technology environments.",
             ),
             h(
               "p",
-              { className: "mt-4 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg" },
+              {
+                className:
+                  "mt-4 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg",
+              },
               "Built on real enterprise operating principles, SpaceTech brings continuous improvement and disciplined execution\u2014helping property organizations maximize the value of their Yardi investment through stronger governance, operational visibility, and accountability.",
             ),
             h(
@@ -469,8 +522,16 @@ function About() {
               },
               "Meet Our Founder",
             ),
-            h("h2", { className: "mt-8 text-4xl font-extrabold text-[#0F172A] dark:text-white" }, "Sambhaji"),
-            h("p", { className: "mt-1 text-lg font-bold text-[#1D4ED8] dark:text-blue-400" }, "Founder and CEO"),
+            h(
+              "h2",
+              { className: "mt-8 text-4xl font-extrabold text-[#0F172A] dark:text-white" },
+              "Sambhaji",
+            ),
+            h(
+              "p",
+              { className: "mt-1 text-lg font-bold text-[#1D4ED8] dark:text-blue-400" },
+              "Founder and CEO",
+            ),
             h(
               "div",
               { className: "mt-8 grid gap-3" },
@@ -501,7 +562,10 @@ function About() {
             },
             h(
               "h2",
-              { className: "text-3xl font-extrabold tracking-tight text-[#0F172A] dark:text-white md:text-5xl" },
+              {
+                className:
+                  "text-3xl font-extrabold tracking-tight text-[#0F172A] dark:text-white md:text-5xl",
+              },
               "Enterprise Engineering Leadership for Property Technology",
             ),
             h(
@@ -525,7 +589,10 @@ function About() {
             ),
             h(
               "div",
-              { className: "mt-8 grid gap-3 border-t border-slate-100 pt-6 sm:grid-cols-2 dark:border-white/10" },
+              {
+                className:
+                  "mt-8 grid gap-3 border-t border-slate-100 pt-6 sm:grid-cols-2 dark:border-white/10",
+              },
               timeline.map(function (t) {
                 return h(
                   "div",
@@ -534,7 +601,9 @@ function About() {
                     className:
                       "flex gap-3 rounded-2xl bg-slate-50 p-4 text-sm font-semibold text-slate-800 dark:bg-white/5 dark:text-slate-200 border border-transparent dark:border-white/5",
                   },
-                  h(CheckCircle2, { className: "h-5 w-5 shrink-0 text-[#1D4ED8] dark:text-blue-400" }),
+                  h(CheckCircle2, {
+                    className: "h-5 w-5 shrink-0 text-[#1D4ED8] dark:text-blue-400",
+                  }),
                   t,
                 );
               }),
@@ -564,7 +633,10 @@ function About() {
           }),
           h(
             "p",
-            { className: "mx-auto mt-5 max-w-4xl text-center text-lg leading-8 text-slate-700 dark:text-slate-400" },
+            {
+              className:
+                "mx-auto mt-5 max-w-4xl text-center text-lg leading-8 text-slate-700 dark:text-slate-400",
+            },
             "Rather than operating through isolated support queues, the YTeam combines platform knowledge, operational visibility, governance, and continuous improvement practices to help clients achieve better business outcomes from their Yardi investment.",
           ),
           h(
@@ -602,8 +674,16 @@ function About() {
                       "rounded-[22px] border border-slate-100 bg-gradient-to-b from-white to-slate-50 p-5 text-center shadow-lg dark:border-white/10 dark:bg-white/5 backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:bg-white/10",
                   },
                   h(Icon, { className: "mx-auto h-8 w-8 text-[#1D4ED8] dark:text-blue-400" }),
-                  h("h3", { className: "mt-4 text-lg font-extrabold text-[#0F172A] dark:text-white" }, item.title),
-                  h("p", { className: "mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400" }, item.text),
+                  h(
+                    "h3",
+                    { className: "mt-4 text-lg font-extrabold text-[#0F172A] dark:text-white" },
+                    item.title,
+                  ),
+                  h(
+                    "p",
+                    { className: "mt-3 text-sm leading-6 text-slate-600 dark:text-slate-400" },
+                    item.text,
+                  ),
                 );
               }),
             ),
@@ -627,7 +707,11 @@ function About() {
                 className:
                   "rounded-[28px] bg-gradient-to-br from-[#0F172A] via-[#1D4ED8] to-[#0891B2] p-8 text-white shadow-xl dark:from-blue-700 dark:via-blue-600 dark:to-cyan-600 dark:shadow-[0_0_40px_rgba(37,99,235,0.4)]",
               },
-              h("h3", { className: "text-3xl font-extrabold text-white" }, "One Team. Shared Ownership."),
+              h(
+                "h3",
+                { className: "text-3xl font-extrabold text-white" },
+                "One Team. Shared Ownership.",
+              ),
               h(
                 "p",
                 { className: "mt-5 leading-8 text-blue-50 dark:text-blue-100" },
@@ -662,7 +746,10 @@ function About() {
               h(Quote, { className: "h-12 w-12 text-[#1D4ED8] dark:text-blue-400" }),
               h(
                 "blockquote",
-                { className: "mt-5 text-2xl font-extrabold text-[#0F172A] dark:text-white md:text-4xl" },
+                {
+                  className:
+                    "mt-5 text-2xl font-extrabold text-[#0F172A] dark:text-white md:text-4xl",
+                },
                 "Great platform outcomes come from combining deep product expertise with disciplined operational execution.",
               ),
               h(
@@ -721,7 +808,8 @@ function About() {
         { className: "relative px-6 py-16 md:py-20" },
         /* Light background gradient */
         h("div", {
-          className: "absolute inset-0 bg-gradient-to-b from-[#F8FBFF] to-white dark:opacity-0 transition-opacity duration-300",
+          className:
+            "absolute inset-0 bg-gradient-to-b from-[#F8FBFF] to-white dark:opacity-0 transition-opacity duration-300",
         }),
         /* Dark background gradient */
         h("div", {
@@ -804,11 +892,12 @@ function About() {
       h(
         "section",
         {
-          className: "relative overflow-hidden px-6 py-16 md:py-24",
+          className: "relative px-6 py-16 md:py-24",
         },
         /* Light background */
         h("div", {
-          className: "absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(37,99,235,0.10),transparent_34%),linear-gradient(180deg,#FFFFFF_0%,#F7FAFF_100%)] dark:opacity-0 transition-opacity duration-300",
+          className:
+            "absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(37,99,235,0.10),transparent_34%),linear-gradient(180deg,#FFFFFF_0%,#F7FAFF_100%)] dark:opacity-0 transition-opacity duration-300",
         }),
         /* Dark background */
         h("div", {
@@ -835,14 +924,15 @@ function About() {
               initial: "hidden",
               whileInView: "visible",
               viewport: { once: true },
-              className: "mt-12 grid min-w-0 gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch",
+              className:
+                "mt-12 grid min-w-0 items-start gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch",
             },
             h(
               motion.div,
               {
                 variants: fade,
                 className:
-                  "relative min-h-[520px] rounded-[34px] border border-blue-100 bg-white p-0 shadow-lg dark:border-white/10 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm overflow-hidden",
+                  "relative min-h-[640px] rounded-[34px] border border-blue-100 bg-white p-0 shadow-lg dark:border-white/10 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm overflow-hidden lg:min-h-[680px]",
               },
               h("div", {
                 className: "absolute inset-0",
@@ -876,7 +966,7 @@ function About() {
               ),
               h(
                 "div",
-                { className: "absolute bottom-7 left-7 right-7 z-30 flex flex-wrap gap-2" },
+                { className: "hidden" },
                 ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(function (chip) {
                   return h(
                     "span",
@@ -964,12 +1054,13 @@ function About() {
                 "div",
                 {
                   className:
-                    "absolute left-7 top-7 z-20 w-[calc(100%-3.5rem)] max-w-[400px] rounded-3xl border border-blue-100 bg-white/92 p-5 shadow-lg backdrop-blur dark:border-blue-500/25 dark:bg-black/60 dark:shadow-[0_18px_45px_rgba(0,0,0,0.5)]",
+                    "relative z-20 m-7 mt-24 w-[calc(100%-3.5rem)] max-w-[400px] rounded-3xl border border-blue-100 bg-white/92 p-5 shadow-lg backdrop-blur dark:border-blue-500/25 dark:bg-black/60 dark:shadow-[0_18px_45px_rgba(0,0,0,0.5)] sm:p-6",
                 },
                 h(
                   "p",
                   {
-                    className: "text-sm font-extrabold uppercase tracking-[0.24em] text-[#1D4ED8] dark:text-blue-400",
+                    className:
+                      "text-sm font-extrabold uppercase tracking-[0.24em] text-[#1D4ED8] dark:text-blue-400",
                   },
                   "Global operations dashboard",
                 ),
@@ -986,7 +1077,7 @@ function About() {
                   "div",
                   {
                     className:
-                      "relative w-full overflow-hidden rounded-[20px] border border-blue-100/60 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40 dark:border-white/10 dark:from-blue-950/40 dark:via-slate-900/30 dark:to-indigo-950/40",
+                      "relative mt-6 w-full overflow-hidden rounded-[20px] border border-blue-100/60 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40 dark:border-white/10 dark:from-blue-950/40 dark:via-slate-900/30 dark:to-indigo-950/40",
                     style: { paddingBottom: "52%" },
                   },
                   h(
@@ -997,13 +1088,17 @@ function About() {
                       fill: "none",
                       preserveAspectRatio: "xMidYMid meet",
                     },
-                    h("defs", null,
+                    h(
+                      "defs",
+                      null,
                       h(
                         "linearGradient",
                         {
                           id: "globalPath2",
-                          x1: "120", y1: "120",
-                          x2: "650", y2: "330",
+                          x1: "120",
+                          y1: "120",
+                          x2: "650",
+                          y2: "330",
                           gradientUnits: "userSpaceOnUse",
                         },
                         h("stop", { stopColor: "#2563EB" }),
@@ -1016,7 +1111,13 @@ function About() {
                         h("stop", { offset: "100%", stopColor: "rgba(37,99,235,0)" }),
                       ),
                     ),
-                    h("ellipse", { cx: "380", cy: "197", rx: "360", ry: "185", fill: "url(#bgGlow2)" }),
+                    h("ellipse", {
+                      cx: "380",
+                      cy: "197",
+                      rx: "360",
+                      ry: "185",
+                      fill: "url(#bgGlow2)",
+                    }),
                     /* Connection paths */
                     h("path", {
                       d: "M175 285 C290 215 420 220 510 285",
@@ -1035,38 +1136,130 @@ function About() {
                     /* USA pin */
                     h("circle", { cx: "175", cy: "285", r: "18", fill: "rgba(37,99,235,0.15)" }),
                     h("circle", { cx: "175", cy: "285", r: "12", fill: "#2563EB" }),
-                    h("text", { x: "175", y: "289", textAnchor: "middle", fill: "white", fontSize: "8", fontWeight: "800" }, "USA"),
-                    h("rect", { x: "140", y: "305", width: "70", height: "20", rx: "10", fill: "white", fillOpacity: "0.92" }),
-                    h("text", { x: "175", y: "319", textAnchor: "middle", fill: "#0F172A", fontSize: "9.5", fontWeight: "700" }, "United States"),
+                    h(
+                      "text",
+                      {
+                        x: "175",
+                        y: "289",
+                        textAnchor: "middle",
+                        fill: "white",
+                        fontSize: "8",
+                        fontWeight: "800",
+                      },
+                      "USA",
+                    ),
+                    h("rect", {
+                      x: "140",
+                      y: "305",
+                      width: "70",
+                      height: "20",
+                      rx: "10",
+                      fill: "white",
+                      fillOpacity: "0.92",
+                    }),
+                    h(
+                      "text",
+                      {
+                        x: "175",
+                        y: "319",
+                        textAnchor: "middle",
+                        fill: "#0F172A",
+                        fontSize: "9.5",
+                        fontWeight: "700",
+                      },
+                      "United States",
+                    ),
                     /* India pin */
                     h("circle", { cx: "510", cy: "285", r: "18", fill: "rgba(37,99,235,0.15)" }),
                     h("circle", { cx: "510", cy: "285", r: "12", fill: "#2563EB" }),
-                    h("text", { x: "510", y: "289", textAnchor: "middle", fill: "white", fontSize: "8", fontWeight: "800" }, "IND"),
-                    h("rect", { x: "482", y: "305", width: "56", height: "20", rx: "10", fill: "white", fillOpacity: "0.92" }),
-                    h("text", { x: "510", y: "319", textAnchor: "middle", fill: "#0F172A", fontSize: "9.5", fontWeight: "700" }, "India"),
+                    h(
+                      "text",
+                      {
+                        x: "510",
+                        y: "289",
+                        textAnchor: "middle",
+                        fill: "white",
+                        fontSize: "8",
+                        fontWeight: "800",
+                      },
+                      "IND",
+                    ),
+                    h("rect", {
+                      x: "482",
+                      y: "305",
+                      width: "56",
+                      height: "20",
+                      rx: "10",
+                      fill: "white",
+                      fillOpacity: "0.92",
+                    }),
+                    h(
+                      "text",
+                      {
+                        x: "510",
+                        y: "319",
+                        textAnchor: "middle",
+                        fill: "#0F172A",
+                        fontSize: "9.5",
+                        fontWeight: "700",
+                      },
+                      "India",
+                    ),
                     /* Australia pin */
                     h("circle", { cx: "655", cy: "375", r: "18", fill: "rgba(37,99,235,0.15)" }),
                     h("circle", { cx: "655", cy: "375", r: "12", fill: "#1D4ED8" }),
-                    h("text", { x: "655", y: "379", textAnchor: "middle", fill: "white", fontSize: "8", fontWeight: "800" }, "AUS"),
-                    h("rect", { x: "614", y: "330", width: "82", height: "20", rx: "10", fill: "white", fillOpacity: "0.92" }),
-                    h("text", { x: "655", y: "344", textAnchor: "middle", fill: "#0F172A", fontSize: "9.5", fontWeight: "700" }, "Australia"),
+                    h(
+                      "text",
+                      {
+                        x: "655",
+                        y: "379",
+                        textAnchor: "middle",
+                        fill: "white",
+                        fontSize: "8",
+                        fontWeight: "800",
+                      },
+                      "AUS",
+                    ),
+                    h("rect", {
+                      x: "614",
+                      y: "330",
+                      width: "82",
+                      height: "20",
+                      rx: "10",
+                      fill: "white",
+                      fillOpacity: "0.92",
+                    }),
+                    h(
+                      "text",
+                      {
+                        x: "655",
+                        y: "344",
+                        textAnchor: "middle",
+                        fill: "#0F172A",
+                        fontSize: "9.5",
+                        fontWeight: "700",
+                      },
+                      "Australia",
+                    ),
                   ),
                 ),
                 /* Bottom chips */
                 h(
                   "div",
                   { className: "flex flex-wrap gap-2" },
-                  ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(function (chip) {
-                    return h(
-                      "span",
-                      {
-                        key: chip,
-                        className:
-                          "rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur dark:border-blue-500/30 dark:bg-black/50 dark:text-blue-300",
-                      },
-                      chip,
-                    );
-                  }),
+                  ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(
+                    function (chip) {
+                      return h(
+                        "span",
+                        {
+                          key: chip,
+                          className:
+                            "rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur dark:border-blue-500/30 dark:bg-black/50 dark:text-blue-300",
+                        },
+                        chip,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
@@ -1085,7 +1278,7 @@ function About() {
                     variants: fade,
                     whileHover: { y: -6 },
                     className:
-                      "rounded-[22px] border border-slate-100 bg-white shadow-md dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
+                      "h-full rounded-[22px] border border-slate-100 bg-white shadow-md dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
                   },
                   h(
                     "div",
@@ -1106,7 +1299,9 @@ function About() {
                         ),
                         h(
                           "h3",
-                          { className: "mt-3 text-xl font-extrabold text-[#0F172A] dark:text-white" },
+                          {
+                            className: "mt-3 text-xl font-extrabold text-[#0F172A] dark:text-white",
+                          },
                           r.name,
                         ),
                         h(
@@ -1127,7 +1322,11 @@ function About() {
                         h(Icon, { className: "h-5 w-5" }),
                       ),
                     ),
-                    h("p", { className: "mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300" }, r.text),
+                    h(
+                      "p",
+                      { className: "mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300" },
+                      r.text,
+                    ),
                   ),
                 );
               }),
@@ -1232,3 +1431,4 @@ function About() {
     ),
   );
 }
+
