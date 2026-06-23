@@ -449,149 +449,121 @@ const renderSupportIcon = () =>
   );
 
 function renderFlag(country: string, cx: number, cy: number) {
-  const fy = cy - 46;
-  const fx = cx + 1.5;
-  const fw = 32;
-  const fh = 20;
+  const fw = 48;
+  const fh = 30;
+  const fx = cx + 2;
+  const fy = cy - 78;
 
   if (country === "USA") {
     return h(
       "g",
       { key: "usa-flag" },
-      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#ffffff", rx: 1.5 }),
+      h("rect", { x: fx + 2, y: fy + 2, width: fw, height: fh, rx: 3, fill: "rgba(0,0,0,0.2)" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#ffffff", rx: 3 }),
       [0, 2, 4, 6, 8, 10, 12].map((i) =>
-        h("rect", {
-          key: i,
-          x: fx,
-          y: fy + (i * fh) / 13,
-          width: fw,
-          height: fh / 13,
-          fill: "#b22234",
-        })
+        h("rect", { key: i, x: fx, y: fy + (i * fh) / 13, width: fw, height: fh / 13, fill: "#B22234" })
       ),
-      h("rect", { x: fx, y: fy, width: fw * 0.45, height: fh * (7 / 13), fill: "#3c3b6e" }),
-      h("circle", { cx: fx + 4, cy: fy + 3, r: 0.6, fill: "#ffffff" }),
-      h("circle", { cx: fx + 10, cy: fy + 3, r: 0.6, fill: "#ffffff" }),
-      h("circle", { cx: fx + 7, cy: fy + 5, r: 0.6, fill: "#ffffff" }),
-      h("circle", { cx: fx + 4, cy: fy + 7, r: 0.6, fill: "#ffffff" }),
-      h("circle", { cx: fx + 10, cy: fy + 7, r: 0.6, fill: "#ffffff" }),
-      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "#e2e8f0", strokeWidth: "0.5", rx: 1.5 })
+      h("rect", { x: fx, y: fy, width: fw * 0.42, height: fh * (7 / 13), fill: "#3C3B6E" }),
+      h("circle", { cx: fx + 5, cy: fy + 4, r: 1.1, fill: "#fff" }),
+      h("circle", { cx: fx + 11, cy: fy + 4, r: 1.1, fill: "#fff" }),
+      h("circle", { cx: fx + 17, cy: fy + 4, r: 1.1, fill: "#fff" }),
+      h("circle", { cx: fx + 8, cy: fy + 8, r: 1.1, fill: "#fff" }),
+      h("circle", { cx: fx + 14, cy: fy + 8, r: 1.1, fill: "#fff" }),
+      h("circle", { cx: fx + 5, cy: fy + 12, r: 1.1, fill: "#fff" }),
+      h("circle", { cx: fx + 11, cy: fy + 12, r: 1.1, fill: "#fff" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "rgba(0,0,0,0.12)", strokeWidth: "1", rx: 3 })
     );
   } else if (country === "India") {
     return h(
       "g",
       { key: "india-flag" },
-      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#ffffff", rx: 1.5 }),
-      h("rect", { x: fx, y: fy, width: fw, height: fh / 3, fill: "#ff9933" }),
-      h("rect", { x: fx, y: fy + (2 * fh) / 3, width: fw, height: fh / 3, fill: "#138808" }),
-      h("circle", {
-        cx: fx + fw / 2,
-        cy: fy + fh / 2,
-        r: fh / 6,
-        fill: "none",
-        stroke: "#000080",
-        strokeWidth: "1",
-      }),
-      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "#e2e8f0", strokeWidth: "0.5", rx: 1.5 })
+      h("rect", { x: fx + 2, y: fy + 2, width: fw, height: fh, rx: 3, fill: "rgba(0,0,0,0.2)" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#ffffff", rx: 3 }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh / 3, fill: "#FF9933", rx: 3 }),
+      h("rect", { x: fx, y: fy + fh - fh / 3, width: fw, height: fh / 3, fill: "#138808", rx: 1 }),
+      h("circle", { cx: fx + fw / 2, cy: fy + fh / 2, r: fh / 5.5, fill: "none", stroke: "#000080", strokeWidth: "1.5" }),
+      h("circle", { cx: fx + fw / 2, cy: fy + fh / 2, r: 2.5, fill: "#000080" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "rgba(0,0,0,0.12)", strokeWidth: "1", rx: 3 })
     );
   } else if (country === "Australia") {
     return h(
       "g",
       { key: "australia-flag" },
-      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#00008B", rx: 1.5 }),
-      h("path", {
-        d: `M ${fx} ${fy} L ${fx + fw * 0.45} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.5} L ${fx + fw * 0.45} ${fy}`,
-        stroke: "#ffffff",
-        strokeWidth: "1.5",
-      }),
-      h("path", {
-        d: `M ${fx + (fw * 0.45) / 2} ${fy} L ${fx + (fw * 0.45) / 2} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.25} L ${fx + fw * 0.45} ${fy + fh * 0.25}`,
-        stroke: "#ffffff",
-        strokeWidth: "2",
-      }),
-      h("path", {
-        d: `M ${fx + (fw * 0.45) / 2} ${fy} L ${fx + (fw * 0.45) / 2} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.25} L ${fx + fw * 0.45} ${fy + fh * 0.25}`,
-        stroke: "#ff0000",
-        strokeWidth: "0.8",
-      }),
-      h("circle", { cx: fx + fw * 0.75, cy: fy + fh * 0.25, r: 1, fill: "#ffffff" }),
-      h("circle", { cx: fx + fw * 0.85, cy: fy + fh * 0.45, r: 1, fill: "#ffffff" }),
-      h("circle", { cx: fx + fw * 0.75, cy: fy + fh * 0.75, r: 1.2, fill: "#ffffff" }),
-      h("circle", { cx: fx + fw * 0.65, cy: fy + fh * 0.55, r: 1, fill: "#ffffff" }),
-      h("circle", { cx: fx + fw * 0.8, cy: fy + fh * 0.6, r: 0.7, fill: "#ffffff" }),
-      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "#e2e8f0", strokeWidth: "0.5", rx: 1.5 })
+      h("rect", { x: fx + 2, y: fy + 2, width: fw, height: fh, rx: 3, fill: "rgba(0,0,0,0.2)" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "#003087", rx: 3 }),
+      h("path", { d: `M ${fx} ${fy} L ${fx + fw * 0.44} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.5} L ${fx + fw * 0.44} ${fy}`, stroke: "#fff", strokeWidth: "3" }),
+      h("path", { d: `M ${fx} ${fy} L ${fx + fw * 0.44} ${fy + fh * 0.5} M ${fx} ${fy + fh * 0.5} L ${fx + fw * 0.44} ${fy}`, stroke: "#cc0000", strokeWidth: "1.2" }),
+      h("line", { x1: fx + fw * 0.22, y1: fy, x2: fx + fw * 0.22, y2: fy + fh * 0.5, stroke: "#fff", strokeWidth: "3.5" }),
+      h("line", { x1: fx, y1: fy + fh * 0.25, x2: fx + fw * 0.44, y2: fy + fh * 0.25, stroke: "#fff", strokeWidth: "3.5" }),
+      h("line", { x1: fx + fw * 0.22, y1: fy, x2: fx + fw * 0.22, y2: fy + fh * 0.5, stroke: "#cc0000", strokeWidth: "1.2" }),
+      h("line", { x1: fx, y1: fy + fh * 0.25, x2: fx + fw * 0.44, y2: fy + fh * 0.25, stroke: "#cc0000", strokeWidth: "1.2" }),
+      h("circle", { cx: fx + fw * 0.72, cy: fy + fh * 0.22, r: 1.8, fill: "#fff" }),
+      h("circle", { cx: fx + fw * 0.86, cy: fy + fh * 0.40, r: 1.8, fill: "#fff" }),
+      h("circle", { cx: fx + fw * 0.72, cy: fy + fh * 0.72, r: 2.2, fill: "#fff" }),
+      h("circle", { cx: fx + fw * 0.58, cy: fy + fh * 0.52, r: 1.8, fill: "#fff" }),
+      h("circle", { cx: fx + fw * 0.78, cy: fy + fh * 0.56, r: 1.2, fill: "#fff" }),
+      h("rect", { x: fx, y: fy, width: fw, height: fh, fill: "none", stroke: "rgba(0,0,0,0.12)", strokeWidth: "1", rx: 3 })
     );
   }
   return null;
 }
 
-function renderPodium(cx: number, cy: number, country: string, label: string) {
+function renderPodium(cx: number, cy: number, country: string, _label: string) {
+  const fullName: Record<string, string> = {
+    USA: "United States",
+    India: "India",
+    Australia: "Australia",
+  };
+  const displayName = fullName[country] ?? country;
+  const pillW = displayName.length * 7.4 + 22;
+
   return h(
     "g",
     { key: country, className: "podium-group" },
-    h("ellipse", { cx: cx, cy: cy + 14, rx: 38, ry: 13, fill: "rgba(0,0,0,0.12)", filter: "url(#dropShadow)" }),
+    /* Drop shadow */
+    h("ellipse", { cx: cx, cy: cy + 22, rx: 54, ry: 15, fill: "rgba(0,0,0,0.14)", filter: "url(#dropShadow)" }),
+    /* Outer platform side (3D cylinder) */
     h("path", {
-      d: `M ${cx - 35} ${cy + 8} A 35 12 0 0 0 ${cx + 35} ${cy + 8} L ${cx + 35} ${cy + 15} A 35 12 0 0 1 ${cx - 35} ${cy + 15} Z`,
-      className: "fill-slate-300 dark:fill-slate-700",
+      d: `M ${cx - 50} ${cy + 12} A 50 15 0 0 0 ${cx + 50} ${cy + 12} L ${cx + 50} ${cy + 22} A 50 15 0 0 1 ${cx - 50} ${cy + 22} Z`,
+      fill: "url(#podiumSide)",
     }),
-    h("ellipse", {
-      cx: cx,
-      cy: cy + 8,
-      rx: 35,
-      ry: 12,
-      className: "fill-slate-200 dark:fill-slate-600",
-    }),
+    h("ellipse", { cx: cx, cy: cy + 12, rx: 50, ry: 15, fill: "url(#podiumTop)" }),
+    /* Inner raised tier */
     h("path", {
-      d: `M ${cx - 25} ${cy} A 25 9 0 0 0 ${cx + 25} ${cy} L ${cx + 25} ${cy + 8} A 25 9 0 0 1 ${cx - 25} ${cy + 8} Z`,
-      className: "fill-slate-400 dark:fill-slate-600",
+      d: `M ${cx - 34} ${cy} A 34 11 0 0 0 ${cx + 34} ${cy} L ${cx + 34} ${cy + 12} A 34 11 0 0 1 ${cx - 34} ${cy + 12} Z`,
+      fill: "url(#podiumInnerSide)",
     }),
+    h("ellipse", { cx: cx, cy: cy, rx: 34, ry: 11, fill: "url(#podiumInnerTop)" }),
+    /* Animated glow ring */
     h("ellipse", {
-      cx: cx,
-      cy: cy,
-      rx: 25,
-      ry: 9,
-      className: "fill-slate-100 dark:fill-slate-500",
-    }),
-    h("ellipse", {
-      cx: cx,
-      cy: cy,
-      rx: 22,
-      ry: 8,
-      fill: "none",
-      stroke: "#60a5fa",
-      strokeWidth: "2",
+      cx: cx, cy: cy, rx: 30, ry: 9,
+      fill: "none", stroke: "#60a5fa", strokeWidth: "2.5", opacity: "0.8",
       className: "animate-pulse",
     }),
+    /* Flagpole */
     h("line", {
-      x1: cx,
-      y1: cy,
-      x2: cx,
-      y2: cy - 50,
-      stroke: "#94a3b8",
-      strokeWidth: "3",
-      strokeLinecap: "round",
+      x1: cx, y1: cy,
+      x2: cx, y2: cy - 82,
+      stroke: "url(#poleGrad)", strokeWidth: "4", strokeLinecap: "round",
     }),
-    h("circle", { cx: cx, cy: cy - 50, r: "4.5", fill: "#fbbf24" }),
+    /* Gold tip */
+    h("circle", { cx: cx, cy: cy - 82, r: 6, fill: "url(#goldTip)" }),
+    h("circle", { cx: cx - 1.8, cy: cy - 83.8, r: 2.2, fill: "rgba(255,255,255,0.65)" }),
+    /* Flag */
     renderFlag(country, cx, cy),
+    /* Country name pill */
     h("g", null,
-      h("rect", {
-        x: cx - 40,
-        y: cy + 24,
-        width: 80,
-        height: 22,
-        rx: 11,
-        className: "fill-slate-900/90 dark:fill-slate-950/90 stroke-white/10",
-        strokeWidth: "1",
-      }),
+      h("rect", { x: cx - pillW / 2 + 2, y: cy + 30, width: pillW, height: 24, rx: 12, fill: "rgba(0,0,0,0.28)" }),
+      h("rect", { x: cx - pillW / 2, y: cy + 28, width: pillW, height: 24, rx: 12, fill: "#0f172a", stroke: "rgba(148,163,184,0.25)", strokeWidth: "1" }),
       h("text", {
-        x: cx,
-        y: cy + 39,
+        x: cx, y: cy + 44.5,
         textAnchor: "middle",
-        fill: "#ffffff",
-        fontSize: "10",
-        fontWeight: "800",
-        letterSpacing: "0.08em",
-      }, label)
+        fill: "#e2e8f0",
+        fontSize: "12",
+        fontWeight: "700",
+        letterSpacing: "0.04em",
+        fontFamily: "Inter, system-ui, sans-serif",
+      }, displayName)
     )
   );
 }
@@ -1298,6 +1270,32 @@ function About() {
                         "filter",
                         { id: "flagShadow", x: "-10%", y: "-10%", width: "120%", height: "120%" },
                         h("feDropShadow", { dx: "0", dy: "2", stdDeviation: "1.5", floodOpacity: "0.1" })
+                      ),
+                      h("linearGradient", { id: "podiumTop", x1: "0%", y1: "0%", x2: "0%", y2: "100%" },
+                        h("stop", { offset: "0%", stopColor: "#e2e8f0" }),
+                        h("stop", { offset: "100%", stopColor: "#cbd5e1" })
+                      ),
+                      h("linearGradient", { id: "podiumSide", x1: "0%", y1: "0%", x2: "0%", y2: "100%" },
+                        h("stop", { offset: "0%", stopColor: "#cbd5e1" }),
+                        h("stop", { offset: "100%", stopColor: "#94a3b8" })
+                      ),
+                      h("linearGradient", { id: "podiumInnerTop", x1: "0%", y1: "0%", x2: "0%", y2: "100%" },
+                        h("stop", { offset: "0%", stopColor: "#f8fafc" }),
+                        h("stop", { offset: "100%", stopColor: "#e2e8f0" })
+                      ),
+                      h("linearGradient", { id: "podiumInnerSide", x1: "0%", y1: "0%", x2: "0%", y2: "100%" },
+                        h("stop", { offset: "0%", stopColor: "#e2e8f0" }),
+                        h("stop", { offset: "100%", stopColor: "#94a3b8" })
+                      ),
+                      h("linearGradient", { id: "poleGrad", x1: "0%", y1: "0%", x2: "100%", y2: "0%" },
+                        h("stop", { offset: "0%", stopColor: "#94a3b8" }),
+                        h("stop", { offset: "50%", stopColor: "#e2e8f0" }),
+                        h("stop", { offset: "100%", stopColor: "#94a3b8" })
+                      ),
+                      h("radialGradient", { id: "goldTip", cx: "35%", cy: "35%", r: "65%" },
+                        h("stop", { offset: "0%", stopColor: "#fef08a" }),
+                        h("stop", { offset: "60%", stopColor: "#f59e0b" }),
+                        h("stop", { offset: "100%", stopColor: "#b45309" })
                       )
                     ),
                     h("rect", { width: "2000", height: "1001", fill: "url(#mapGlow)" }),
