@@ -17,7 +17,6 @@ import {
   Globe2,
   Handshake,
   Layers3,
-  MapPin,
   Network,
   Quote,
   ShieldCheck,
@@ -980,77 +979,6 @@ function About() {
                 }),
               ),
               h(
-                "svg",
-                {
-                  className: "absolute inset-0 z-10 h-full w-full",
-                  viewBox: "0 0 760 430",
-                  fill: "none",
-                  preserveAspectRatio: "none",
-                },
-                h("path", {
-                  d: "M165 310 C305 235 430 242 520 310",
-                  stroke: "url(#globalPath)",
-                  strokeWidth: "2",
-                  strokeDasharray: "8 10",
-                  className: "animate-pulse",
-                }),
-                h("path", {
-                  d: "M520 310 C584 335 632 368 674 404",
-                  stroke: "url(#globalPath)",
-                  strokeWidth: "2",
-                  strokeDasharray: "8 10",
-                  className: "animate-pulse",
-                }),
-                h(
-                  "defs",
-                  null,
-                  h(
-                    "linearGradient",
-                    {
-                      id: "globalPath",
-                      x1: "120",
-                      y1: "120",
-                      x2: "650",
-                      y2: "330",
-                      gradientUnits: "userSpaceOnUse",
-                    },
-                    h("stop", { stopColor: "#2563EB" }),
-                    h("stop", { offset: "1", stopColor: "#4F46E5" }),
-                  ),
-                ),
-              ),
-              regions.map(function (r) {
-                return h(
-                  motion.div,
-                  {
-                    key: r.name,
-                    whileHover: { y: -6, scale: 1.03 },
-                    className: "absolute z-20",
-                    style: { left: r.x, top: r.y },
-                  },
-                  h("span", {
-                    className:
-                      "absolute -left-5 -top-5 h-10 w-10 animate-ping rounded-full bg-blue-400/20",
-                  }),
-                  h(
-                    "span",
-                    {
-                      className:
-                        "relative flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-white text-[#1D4ED8] shadow-md backdrop-blur dark:border-blue-500/40 dark:bg-blue-900/80 dark:text-blue-300 dark:shadow-[0_0_28px_rgba(37,99,235,0.5)]",
-                    },
-                    h(MapPin, { className: "h-6 w-6" }),
-                  ),
-                  h(
-                    "div",
-                    {
-                      className:
-                        "mt-1 w-32 -translate-x-1/2 rounded-2xl border border-blue-100 bg-white/85 px-3 py-2 text-center text-xs font-extrabold text-[#0F172A] shadow-lg backdrop-blur dark:border-blue-500/30 dark:bg-black/70 dark:text-white",
-                    },
-                    r.name,
-                  ),
-                );
-              }),
-              h(
                 "div",
                 {
                   className:
@@ -1431,4 +1359,3 @@ function About() {
     ),
   );
 }
-
