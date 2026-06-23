@@ -333,12 +333,12 @@ function About() {
             h(
               "p",
               { className: "mt-6 max-w-2xl text-lg leading-8 text-slate-700 dark:text-slate-300 md:text-xl" },
-              "SpaceTech Consulting helps property organizations strengthen Yardi performance through platform ownership, enterprise engineering discipline, operational governance, and global delivery capability.",
+              "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable business outcomes across complex property technology environments.",
             ),
             h(
               "p",
               { className: "mt-4 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg" },
-              "We combine functional consulting, technical delivery, reporting expertise, and 24/7 support coverage so clients can move faster and create more reliable outcomes from their Yardi investment.",
+              "Built on real enterprise operating principles, SpaceTech brings continuous improvement and disciplined execution\u2014helping property organizations maximize the value of their Yardi investment through stronger governance, operational visibility, and accountability.",
             ),
             h(
               "div",
