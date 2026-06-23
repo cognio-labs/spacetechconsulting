@@ -1055,7 +1055,7 @@ function About() {
                       xmlns: "http://www.w3.org/2000/svg",
                       preserveAspectRatio: "xMidYMid meet",
                     },
-                    h("defs", null, [
+                    h("defs", null,
                       h(
                         "linearGradient",
                         {
@@ -1066,12 +1066,12 @@ function About() {
                           y2: "360",
                           gradientUnits: "userSpaceOnUse",
                         },
-                        h("stop", { stopColor: "#2563EB", stopOpacity: "0" }),
-                        h("stop", { offset: "0.2", stopColor: "#2563EB" }),
-                        h("stop", { offset: "1", stopColor: "#06B6D4" }),
+                        h("stop", { key: "route-start", stopColor: "#2563EB", stopOpacity: "0" }),
+                        h("stop", { key: "route-mid", offset: "0.2", stopColor: "#2563EB" }),
+                        h("stop", { key: "route-end", offset: "1", stopColor: "#06B6D4" }),
                       ),
-                    ]),
-                    h("g", { opacity: "0.82" }, [
+                    ),
+                    h("g", { opacity: "0.82" },
                       h("path", {
                         d: "M130 205 C190 135 260 105 340 125 C445 148 498 205 575 235 C640 260 705 265 745 225",
                         stroke: "#CBD5E1",
@@ -1094,7 +1094,7 @@ function About() {
                         strokeLinecap: "round",
                         strokeLinejoin: "round",
                       }),
-                    ]),
+                    ),
                     h(
                       "g",
                       {
@@ -1124,7 +1124,7 @@ function About() {
                       "g",
                       null,
                       dashboardNodes.map(function (node) {
-                        return h("g", { key: node.key }, [
+                        return h("g", { key: node.key },
                           h("circle", {
                             cx: node.cx,
                             cy: node.cy,
@@ -1139,7 +1139,7 @@ function About() {
                             stroke: "white",
                             strokeWidth: "3",
                           }),
-                          h("circle", { cx: node.cx, cy: node.cy - 2, r: "3.2", fill: "white" }),
+                          h("circle", { key: "pin-dot", cx: node.cx, cy: node.cy - 2, r: "3.2", fill: "white" }),
                           h(
                             "text",
                             {
@@ -1162,7 +1162,7 @@ function About() {
                             strokeWidth: "1.5",
                             className: node.active ? "animate-pulse" : "",
                           }),
-                        ]);
+                        );
                       }),
                     ),
                   ),
