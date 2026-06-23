@@ -1050,15 +1050,19 @@ function About() {
                     h("path", {
                       d: "M175 285 C290 215 420 220 510 285",
                       stroke: "url(#globalPath2)",
-                      strokeWidth: "2",
+                      strokeWidth: "2.6",
                       strokeDasharray: "8 10",
+                      strokeLinecap: "round",
+                      strokeLinejoin: "round",
                       className: "animate-pulse",
                     }),
                     h("path", {
                       d: "M510 285 C565 315 615 348 655 375",
                       stroke: "url(#globalPath2)",
-                      strokeWidth: "2",
+                      strokeWidth: "2.6",
                       strokeDasharray: "8 10",
+                      strokeLinecap: "round",
+                      strokeLinejoin: "round",
                       className: "animate-pulse",
                     }),
                     /* USA pin */
