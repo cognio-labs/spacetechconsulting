@@ -1240,7 +1240,7 @@ function About() {
             ),
             h(
               motion.div,
-              { variants: group, className: "grid gap-4" },
+              { variants: group, className: "grid gap-6" },
               regions.map(function (region, index) {
                 const skylineOffset = index * 4;
                 return h(
@@ -1250,21 +1250,21 @@ function About() {
                     variants: fade,
                     whileHover: { y: -8 },
                     className:
-                      "overflow-hidden rounded-[24px] border border-slate-100 bg-white p-0 shadow-[0_18px_48px_rgba(15,23,42,0.09)] backdrop-blur-sm transition-all hover:shadow-[0_24px_65px_rgba(37,99,235,0.15)]",
+                      "relative min-h-[206px] overflow-hidden rounded-[30px] border border-slate-200 bg-white p-0 shadow-[0_24px_70px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-all hover:border-blue-200 hover:shadow-[0_34px_90px_rgba(37,99,235,0.18)]",
                   },
                   h(
                     "div",
                     {
                       className:
-                        "relative overflow-hidden border-b border-slate-100 bg-slate-900/90 p-5 text-white",
+                        "relative flex min-h-[118px] items-start gap-6 overflow-hidden border-b-0 bg-white p-7 text-[#0F172A] sm:p-8",
                       style: {
                         backgroundImage:
-                          "linear-gradient(115deg, rgba(15,23,42,0.95), rgba(37,99,235,0.95)), repeating-linear-gradient(90deg,rgba(255,255,255,0.05)_0 5px,transparent 5px 30px)",
+                          "linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,251,255,0.92))",
                       },
                     },
                     h(
                       "div",
-                      { className: "absolute inset-0 opacity-20" },
+                      { className: "hidden" },
                       h(
                         "svg",
                         {
@@ -1291,7 +1291,7 @@ function About() {
                       "span",
                       {
                         className:
-                          "relative z-10 inline-flex h-9 w-16 items-center justify-center rounded-md border border-white/20 bg-white/15 text-[10px] font-extrabold tracking-[0.18em]",
+                          "relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-[22px] bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] text-3xl font-black tracking-tight text-white shadow-[0_18px_36px_rgba(37,99,235,0.34)]",
                       },
                       region.name === "Australia"
                         ? "AUS"
@@ -1301,23 +1301,23 @@ function About() {
                     ),
                     h(
                       "h3",
-                      { className: "relative z-10 mt-3 text-2xl font-black" },
+                      { className: "relative z-10 mt-2 text-4xl font-black tracking-tight text-[#0F172A]" },
                       region.name,
                     ),
                     h(
                       "p",
-                      { className: "relative z-10 mt-2 text-xs font-black uppercase tracking-[0.18em]" },
-                      region.badge,
+                      { className: "absolute left-[132px] top-[74px] z-10 inline-flex rounded-full bg-blue-50 px-5 py-2 text-base font-extrabold normal-case tracking-normal text-[#1D4ED8]" },
+                      region.name,
                     ),
                     h(
                       "div",
                       {
                         className:
-                          "absolute right-3 top-3 rounded-xl border border-white/20 bg-white/10 p-2 backdrop-blur-sm",
+                          "absolute right-8 top-8 flex h-16 w-16 items-center justify-center rounded-full border border-blue-100 bg-blue-50/80 p-0 text-[#1D4ED8] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]",
                       },
                       h(
                         "p",
-                        { className: "text-[9px] font-black uppercase tracking-[0.18em] text-white/80" },
+                        { className: "hidden" },
                         region.visual,
                       ),
                       h(
@@ -1325,7 +1325,7 @@ function About() {
                         {
                           viewBox: "0 0 120 60",
                           fill: "none",
-                          className: "mt-2 h-10 w-20 text-white",
+                          className: "h-8 w-8 text-[#1D4ED8]",
                         },
                         h("path", {
                           d: "M4 44 C24 24 45 31 68 26 C80 23 96 18 112 25",
@@ -1348,11 +1348,11 @@ function About() {
                   ),
                   h(
                     "div",
-                    { className: "p-5" },
-                    h("p", { className: "text-sm leading-7 text-slate-700" }, region.text),
+                    { className: "px-8 pb-8 pt-3" },
+                    h("p", { className: "text-xl leading-8 text-slate-600" }, region.text),
                     h(
                       "div",
-                      { className: "mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3" },
+                      { className: "hidden" },
                       region.features.map(function (feature) {
                         return h(
                           "span",
