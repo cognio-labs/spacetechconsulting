@@ -977,15 +977,103 @@ function About() {
                   "h3",
                   {
                     className:
-                      "mt-3 text-[22px] font-extrabold leading-[1.1] tracking-tight text-[#0F172A] dark:text-white md:text-[28px]",
+                      "text-[26px] font-extrabold leading-[1.1] tracking-tight text-[#0F172A] dark:text-white sm:text-[30px] lg:text-[34px]",
                   },
                   "Follow-the-sun support for operating continuity.",
                 ),
+                /* SVG Map visual — fully contained, no absolute overflow */
+                h(
+                  "div",
+                  {
+                    className:
+                      "relative w-full overflow-hidden rounded-[20px] border border-blue-100/60 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40 dark:border-white/10 dark:from-blue-950/40 dark:via-slate-900/30 dark:to-indigo-950/40",
+                    style: { paddingBottom: "52%" },
+                  },
+                  h(
+                    "svg",
+                    {
+                      className: "absolute inset-0 h-full w-full",
+                      viewBox: "0 0 760 395",
+                      fill: "none",
+                      preserveAspectRatio: "xMidYMid meet",
+                    },
+                    h("defs", null,
+                      h(
+                        "linearGradient",
+                        {
+                          id: "globalPath2",
+                          x1: "120", y1: "120",
+                          x2: "650", y2: "330",
+                          gradientUnits: "userSpaceOnUse",
+                        },
+                        h("stop", { stopColor: "#2563EB" }),
+                        h("stop", { offset: "1", stopColor: "#4F46E5" }),
+                      ),
+                      h(
+                        "radialGradient",
+                        { id: "bgGlow2", cx: "50%", cy: "50%", r: "50%" },
+                        h("stop", { offset: "0%", stopColor: "rgba(37,99,235,0.08)" }),
+                        h("stop", { offset: "100%", stopColor: "rgba(37,99,235,0)" }),
+                      ),
+                    ),
+                    h("ellipse", { cx: "380", cy: "197", rx: "360", ry: "185", fill: "url(#bgGlow2)" }),
+                    /* Connection paths */
+                    h("path", {
+                      d: "M175 285 C290 215 420 220 510 285",
+                      stroke: "url(#globalPath2)",
+                      strokeWidth: "2",
+                      strokeDasharray: "8 10",
+                      className: "animate-pulse",
+                    }),
+                    h("path", {
+                      d: "M510 285 C565 315 615 348 655 375",
+                      stroke: "url(#globalPath2)",
+                      strokeWidth: "2",
+                      strokeDasharray: "8 10",
+                      className: "animate-pulse",
+                    }),
+                    /* USA pin */
+                    h("circle", { cx: "175", cy: "285", r: "18", fill: "rgba(37,99,235,0.15)" }),
+                    h("circle", { cx: "175", cy: "285", r: "12", fill: "#2563EB" }),
+                    h("text", { x: "175", y: "289", textAnchor: "middle", fill: "white", fontSize: "8", fontWeight: "800" }, "USA"),
+                    h("rect", { x: "140", y: "305", width: "70", height: "20", rx: "10", fill: "white", fillOpacity: "0.92" }),
+                    h("text", { x: "175", y: "319", textAnchor: "middle", fill: "#0F172A", fontSize: "9.5", fontWeight: "700" }, "United States"),
+                    /* India pin */
+                    h("circle", { cx: "510", cy: "285", r: "18", fill: "rgba(37,99,235,0.15)" }),
+                    h("circle", { cx: "510", cy: "285", r: "12", fill: "#2563EB" }),
+                    h("text", { x: "510", y: "289", textAnchor: "middle", fill: "white", fontSize: "8", fontWeight: "800" }, "IND"),
+                    h("rect", { x: "482", y: "305", width: "56", height: "20", rx: "10", fill: "white", fillOpacity: "0.92" }),
+                    h("text", { x: "510", y: "319", textAnchor: "middle", fill: "#0F172A", fontSize: "9.5", fontWeight: "700" }, "India"),
+                    /* Australia pin */
+                    h("circle", { cx: "655", cy: "375", r: "18", fill: "rgba(37,99,235,0.15)" }),
+                    h("circle", { cx: "655", cy: "375", r: "12", fill: "#1D4ED8" }),
+                    h("text", { x: "655", y: "379", textAnchor: "middle", fill: "white", fontSize: "8", fontWeight: "800" }, "AUS"),
+                    h("rect", { x: "614", y: "330", width: "82", height: "20", rx: "10", fill: "white", fillOpacity: "0.92" }),
+                    h("text", { x: "655", y: "344", textAnchor: "middle", fill: "#0F172A", fontSize: "9.5", fontWeight: "700" }, "Australia"),
+                  ),
+                ),
+                /* Bottom chips */
+                h(
+                  "div",
+                  { className: "flex flex-wrap gap-2" },
+                  ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(function (chip) {
+                    return h(
+                      "span",
+                      {
+                        key: chip,
+                        className:
+                          "rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur dark:border-blue-500/30 dark:bg-black/50 dark:text-blue-300",
+                      },
+                      chip,
+                    );
+                  }),
+                ),
               ),
             ),
+            /* ── RIGHT: Region cards ── */
             h(
               motion.div,
-              { variants: group, className: "grid min-w-0 gap-5" },
+              { variants: group, className: "grid gap-5" },
               regions.map(function (r) {
                 const flag = r.name === "Australia" ? "AUS" : r.name === "India" ? "IND" : "USA";
                 const Icon =
@@ -995,40 +1083,37 @@ function About() {
                   {
                     key: r.name,
                     variants: fade,
-                    whileHover: { y: -8 },
+                    whileHover: { y: -6 },
                     className:
-                      "min-w-0 rounded-[24px] border border-slate-100 bg-white shadow-md p-px dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
+                      "rounded-[22px] border border-slate-100 bg-white shadow-md dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
                   },
                   h(
                     "div",
-                    {
-                      className:
-                        "h-full rounded-[23px] bg-transparent p-6",
-                    },
+                    { className: "p-6" },
                     h(
                       "div",
                       { className: "flex items-start justify-between gap-4" },
                       h(
                         "div",
-                        null,
+                        { className: "flex-1 min-w-0" },
                         h(
                           "div",
                           {
                             className:
-                              "grid h-11 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[#0F172A] to-[#2563EB] text-xs font-extrabold tracking-[0.16em] text-white shadow-sm dark:from-blue-700 dark:to-blue-500 dark:shadow-[0_0_20px_rgba(37,99,235,0.4)]",
+                              "inline-grid h-10 w-14 place-items-center rounded-xl bg-gradient-to-br from-[#0F172A] to-[#2563EB] text-[11px] font-extrabold tracking-[0.16em] text-white shadow-sm dark:from-blue-700 dark:to-blue-500",
                           },
                           flag,
                         ),
                         h(
                           "h3",
-                          { className: "mt-3 text-2xl font-extrabold text-[#0F172A] dark:text-white" },
+                          { className: "mt-3 text-xl font-extrabold text-[#0F172A] dark:text-white" },
                           r.name,
                         ),
                         h(
-                          "p",
+                          "span",
                           {
                             className:
-                              "mt-1 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-extrabold text-[#1D4ED8] dark:bg-blue-500/20 dark:text-blue-300",
+                              "mt-1.5 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-extrabold text-[#1D4ED8] dark:bg-blue-500/20 dark:text-blue-300",
                           },
                           r.name,
                         ),
@@ -1037,12 +1122,12 @@ function About() {
                         "span",
                         {
                           className:
-                            "flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-[#1D4ED8] dark:bg-blue-500/15 dark:text-blue-400",
+                            "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1D4ED8] dark:bg-blue-500/15 dark:text-blue-400",
                         },
-                        h(Icon, { className: "h-6 w-6" }),
+                        h(Icon, { className: "h-5 w-5" }),
                       ),
                     ),
-                    h("p", { className: "mt-5 text-base leading-7 text-slate-700 dark:text-slate-300" }, r.text),
+                    h("p", { className: "mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300" }, r.text),
                   ),
                 );
               }),
