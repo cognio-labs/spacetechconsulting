@@ -180,22 +180,92 @@ const products = [
 const regions = [
   {
     name: "Australia",
+    badge: "CLIENT DELIVERY REGION",
+    visual: "Sydney skyline",
     x: "82%",
     y: "80%",
     text: "Client delivery, regional operations, and local continuity.",
+    features: ["Client Delivery", "Regional Operations", "Business Continuity"],
+    iconTone: "from-[#0F172A] to-[#1D4ED8]",
   },
   {
     name: "India",
+    badge: "ENGINEERING HUB",
+    visual: "Monochrome city",
     x: "64%",
     y: "68%",
     text: "Engineering, reporting, automation, managed support, and extended coverage.",
+    features: ["Engineering", "Automation", "Managed Support"],
+    iconTone: "from-[#0F172A] to-[#0EA5E9]",
   },
   {
     name: "USA",
+    badge: "STRATEGIC LEADERSHIP REGION",
     x: "24%",
     y: "72%",
     text: "Advisory, program coordination, partnership coverage, and client success.",
+    features: ["Strategic Alignment", "Governance", "Platform Leadership"],
+    iconTone: "from-[#1D4ED8] to-[#06B6D4]",
   },
+];
+const dashboardMetrics = [
+  { title: "3 Regions", subtitle: "Global Delivery Network", icon: Building2 },
+  { title: "Follow-the-Sun", subtitle: "Continuous Support", icon: Clock },
+  {
+    title: "Operational Continuity",
+    subtitle: "Always On",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Platform Governance",
+    subtitle: "Reliability & Control",
+    icon: DatabaseZap,
+  },
+  {
+    title: "Unified Team",
+    subtitle: "One Goal. One Standard.",
+    icon: Users,
+  },
+];
+const dashboardNodes = [
+  {
+    key: "USA",
+    label: "USA",
+    title: "United States",
+    subtitle: "Strategic Leadership & Platform Governance",
+    cx: 175,
+    cy: 285,
+    glow: "#2563EB",
+    core: "#1D4ED8",
+    active: true,
+  },
+  {
+    key: "India",
+    label: "IND",
+    title: "India",
+    subtitle: "Engineering Excellence & Managed Support",
+    cx: 510,
+    cy: 285,
+    glow: "#2563EB",
+    core: "#1D4ED8",
+    active: true,
+  },
+  {
+    key: "Australia",
+    label: "AUS",
+    title: "Australia",
+    subtitle: "Client Delivery & Regional Operations",
+    cx: 655,
+    cy: 375,
+    glow: "#1D4ED8",
+    core: "#1E40AF",
+    active: true,
+  },
+];
+const miniCityBars = [22, 34, 18, 46, 28, 40, 26, 30, 14, 36, 24, 20, 42, 28];
+const dashboardRoute = [
+  { d: "M175 285 C290 215 420 220 510 285", delay: 0 },
+  { d: "M510 285 C565 315 615 348 655 375", delay: 1.2 },
 ];
 const fade = { hidden: { opacity: 0, y: 26 }, visible: { opacity: 1, y: 0 } };
 const group = { visible: { transition: { staggerChildren: 0.08 } } };
@@ -891,20 +961,15 @@ function About() {
       h(
         "section",
         {
-          className: "relative px-6 py-16 md:py-24",
+          className: "relative overflow-hidden px-6 py-16 md:py-24",
         },
-        /* Light background */
         h("div", {
           className:
-            "absolute inset-0 bg-[radial-gradient(circle_at_18%_8%,rgba(37,99,235,0.10),transparent_34%),linear-gradient(180deg,#FFFFFF_0%,#F7FAFF_100%)] dark:opacity-0 transition-opacity duration-300",
+            "pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(37,99,235,0.14),transparent_38%),linear-gradient(180deg,#FFFFFF_0%,#F8FAFF_54%,#FFFFFF_100%)] dark:opacity-0",
         }),
-        /* Dark background */
         h("div", {
-          className: "absolute inset-0 opacity-0 dark:opacity-100 transition-opacity duration-300",
-          style: {
-            background:
-              "radial-gradient(ellipse 70% 50% at 20% 20%, rgba(37,99,235,0.18) 0%, transparent 50%), radial-gradient(ellipse 50% 40% at 80% 70%, rgba(8,145,178,0.12) 0%, transparent 50%), linear-gradient(180deg, #060D1F 0%, #0A1628 50%, #060D1F 100%)",
-          },
+          className:
+            "pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_72%_50%_at_80%_85%,rgba(14,165,233,0.1),transparent_52%)] dark:opacity-0",
         }),
         h(
           "div",
@@ -924,71 +989,53 @@ function About() {
               whileInView: "visible",
               viewport: { once: true },
               className:
-                "mt-12 grid min-w-0 items-start gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch",
+                "mt-12 grid min-w-0 gap-6 lg:grid-cols-[1.2fr_0.78fr] lg:items-stretch",
             },
             h(
-              motion.div,
+              motion.article,
               {
                 variants: fade,
                 className:
-                  "relative min-h-[640px] rounded-[34px] border border-blue-100 bg-white p-0 shadow-lg dark:border-white/10 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm overflow-hidden lg:min-h-[680px]",
+                  "relative overflow-hidden rounded-[30px] border border-slate-200 bg-white/85 p-6 shadow-[0_28px_80px_rgba(15,23,42,0.12)] backdrop-blur-3xl transition-all hover:translate-y-[-2px] sm:p-8",
+                whileHover: { y: -3 },
               },
-              h("div", {
-                className: "absolute inset-0",
-                style: {
-                  background:
-                    "radial-gradient(circle at 18% 26%, rgba(37,99,235,0.16) 0%, transparent 28%), radial-gradient(circle at 72% 52%, rgba(79,70,229,0.14) 0%, transparent 30%)",
-                },
-              }),
-              h("div", {
-                className:
-                  "absolute inset-5 rounded-[28px] border border-blue-100/70 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/40 dark:border-white/10 dark:from-blue-950/40 dark:via-slate-900/30 dark:to-indigo-950/40",
-              }),
               h(
                 "div",
                 {
                   className:
-                    "absolute right-7 top-7 z-30 flex items-center gap-3 rounded-full border border-emerald-100 bg-white/90 px-4 py-2.5 text-xs font-extrabold text-[#0F172A] shadow-md dark:border-emerald-500/30 dark:bg-black/50 dark:text-white backdrop-blur",
+                    "absolute -right-24 -top-24 h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,_rgba(37,99,235,0.26),_transparent_70%)] blur-sm",
+                },
+              ),
+              h(
+                "div",
+                {
+                  className:
+                    "absolute -left-20 -bottom-20 h-[240px] w-[240px] rounded-full bg-[radial-gradient(circle,_rgba(14,165,233,0.2),_transparent_72%)] blur-sm",
+                },
+              ),
+              h(
+                "div",
+                {
+                  className:
+                    "absolute right-6 top-6 z-10 flex items-center gap-2 rounded-full border border-emerald-200/70 bg-white/95 px-4 py-2 text-[11px] font-extrabold tracking-wide text-[#0F172A] shadow-[0_12px_30px_rgba(15,23,42,0.14)]",
                 },
                 h(
                   "span",
-                  { className: "relative flex h-3 w-3" },
-                  h("span", {
+                  {
                     className:
-                      "absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75",
-                  }),
-                  h("span", {
-                    className: "relative inline-flex h-3 w-3 rounded-full bg-emerald-500",
-                  }),
+                      "relative h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-500 before:absolute before:-inset-1 before:rounded-full before:bg-emerald-500 before:opacity-40 before:animate-ping",
+                  },
                 ),
                 "24/7 Global Coverage",
               ),
               h(
                 "div",
-                { className: "hidden" },
-                ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(function (chip) {
-                  return h(
-                    "span",
-                    {
-                      key: chip,
-                      className:
-                        "rounded-full border border-blue-100 bg-white/90 px-3.5 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur dark:border-blue-500/30 dark:bg-black/50 dark:text-blue-300",
-                    },
-                    chip,
-                  );
-                }),
-              ),
-              h(
-                "div",
-                {
-                  className:
-                    "relative z-20 m-7 mt-24 w-[calc(100%-3.5rem)] max-w-[400px] rounded-3xl border border-blue-100 bg-white/92 p-5 shadow-lg backdrop-blur dark:border-blue-500/25 dark:bg-black/60 dark:shadow-[0_18px_45px_rgba(0,0,0,0.5)] sm:p-6",
-                },
+                { className: "relative z-20 mx-auto w-full max-w-[620px]" },
                 h(
                   "p",
                   {
                     className:
-                      "text-sm font-extrabold uppercase tracking-[0.24em] text-[#1D4ED8] dark:text-blue-400",
+                      "text-sm font-extrabold uppercase tracking-[0.22em] text-[#1D4ED8]",
                   },
                   "Global operations dashboard",
                 ),
@@ -996,298 +1043,328 @@ function About() {
                   "h3",
                   {
                     className:
-                      "text-[26px] font-extrabold leading-[1.1] tracking-tight text-[#0F172A] dark:text-white sm:text-[30px] lg:text-[34px]",
+                      "mt-2 text-[clamp(1.6rem,3vw,2.6rem)] font-extrabold leading-tight tracking-tight text-[#0F172A]",
                   },
                   "Follow-the-sun support for operating continuity.",
                 ),
-                /* SVG Map visual — fully contained, no absolute overflow */
                 h(
                   "div",
-                  {
-                    className:
-                      "relative mt-6 w-full overflow-hidden rounded-[20px] border border-blue-100/60 bg-gradient-to-br from-blue-50/60 via-white to-indigo-50/40 dark:border-white/10 dark:from-blue-950/40 dark:via-slate-900/30 dark:to-indigo-950/40",
-                    style: { paddingBottom: "52%" },
-                  },
+                    {
+                        className:
+                          "relative mt-7 overflow-hidden rounded-[24px] border border-slate-200 bg-gradient-to-br from-[#0B1220]/6 via-[#EEF2FF] to-[#F8FAFF] p-2 aspect-[760/395]",
+                      },
+                  h(
+                    "div",
+                    {
+                      className:
+                        "absolute inset-0 rounded-[22px] border border-blue-100/70 bg-[radial-gradient(circle_at_20%_35%,rgba(37,99,235,0.20),transparent_42%),radial-gradient(circle_at_80%_70%,rgba(14,165,233,0.18),transparent_56%)]",
+                    },
+                  ),
                   h(
                     "svg",
                     {
-                      className: "absolute inset-0 h-full w-full",
+                      className: "relative z-10 h-full w-full",
                       viewBox: "0 0 760 395",
                       fill: "none",
+                      xmlns: "http://www.w3.org/2000/svg",
                       preserveAspectRatio: "xMidYMid meet",
                     },
-                    h(
-                      "defs",
-                      null,
+                    h("defs", null, [
                       h(
                         "linearGradient",
                         {
-                          id: "globalPath2",
-                          x1: "120",
-                          y1: "120",
-                          x2: "650",
-                          y2: "330",
+                          id: "routeGlow",
+                          x1: "170",
+                          y1: "220",
+                          x2: "660",
+                          y2: "360",
                           gradientUnits: "userSpaceOnUse",
                         },
-                        h("stop", { stopColor: "#2563EB" }),
-                        h("stop", { offset: "1", stopColor: "#4F46E5" }),
+                        h("stop", { stopColor: "#2563EB", stopOpacity: "0" }),
+                        h("stop", { offset: "0.2", stopColor: "#2563EB" }),
+                        h("stop", { offset: "1", stopColor: "#06B6D4" }),
                       ),
-                      h(
-                        "radialGradient",
-                        { id: "bgGlow2", cx: "50%", cy: "50%", r: "50%" },
-                        h("stop", { offset: "0%", stopColor: "rgba(37,99,235,0.08)" }),
-                        h("stop", { offset: "100%", stopColor: "rgba(37,99,235,0)" }),
-                      ),
-                    ),
-                    h("ellipse", {
-                      cx: "380",
-                      cy: "197",
-                      rx: "360",
-                      ry: "185",
-                      fill: "url(#bgGlow2)",
-                    }),
-                    /* Connection paths */
-                    h("path", {
-                      d: "M175 285 C290 215 420 220 510 285",
-                      stroke: "url(#globalPath2)",
-                      strokeWidth: "2.6",
-                      strokeDasharray: "8 10",
-                      strokeLinecap: "round",
-                      strokeLinejoin: "round",
-                      className: "animate-pulse",
-                    }),
-                    h("path", {
-                      d: "M510 285 C565 315 615 348 655 375",
-                      stroke: "url(#globalPath2)",
-                      strokeWidth: "2.6",
-                      strokeDasharray: "8 10",
-                      strokeLinecap: "round",
-                      strokeLinejoin: "round",
-                      className: "animate-pulse",
-                    }),
-                    /* USA pin */
-                    h("circle", { cx: "175", cy: "285", r: "24", fill: "rgba(37,99,235,0.2)" }),
-                    h("circle", {
-                      cx: "175",
-                      cy: "285",
-                      r: "12",
-                      fill: "#2563EB",
-                      stroke: "white",
-                      strokeWidth: "3",
-                    }),
-                    h("circle", { cx: "175", cy: "281", r: "4", fill: "white" }),
+                    ]),
+                    h("g", { opacity: "0.82" }, [
+                      h("path", {
+                        d: "M130 205 C190 135 260 105 340 125 C445 148 498 205 575 235 C640 260 705 265 745 225",
+                        stroke: "#CBD5E1",
+                        strokeWidth: "1.8",
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                      }),
+                      h("path", {
+                        d: "M76 276 C146 245 196 250 240 290 C296 336 356 326 418 318 C475 311 534 286 592 244 C650 206 730 176 755 176",
+                        stroke: "#CBD5E1",
+                        strokeWidth: "1.4",
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                      }),
+                      h("path", {
+                        d: "M72 255 C120 250 170 258 220 265 C286 275 358 279 430 278 C500 277 572 271 650 270 C715 269 744 266 744 266",
+                        stroke: "#E2E8F0",
+                        strokeWidth: "0.9",
+                        strokeDasharray: "6 10",
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                      }),
+                    ]),
                     h(
-                      "text",
+                      "g",
                       {
-                        x: "175",
-                        y: "289",
-                        textAnchor: "middle",
-                        fill: "white",
-                        fontSize: "8",
-                        fontWeight: "800",
+                        fill: "none",
+                        stroke: "url(#routeGlow)",
+                        strokeWidth: "3.2",
+                        strokeDasharray: "8 10",
                       },
-                      "USA",
+                      dashboardRoute.map(function (route) {
+                        return h(motion.path, {
+                          key: route.d,
+                          d: route.d,
+                          strokeLinecap: "round",
+                          strokeLinejoin: "round",
+                          initial: { strokeDashoffset: 130 },
+                          animate: { strokeDashoffset: [130, 0] },
+                          transition: {
+                            duration: 2.4,
+                            repeat: Infinity,
+                            ease: "linear",
+                            delay: route.delay,
+                          },
+                        });
+                      }),
                     ),
-                    h("rect", {
-                      x: "137",
-                      y: "306",
-                      width: "76",
-                      height: "24",
-                      rx: "12",
-                      fill: "#0F172A",
-                      fillOpacity: "0.9",
-                      stroke: "white",
-                      strokeWidth: "1.4",
-                    }),
                     h(
-                      "text",
-                      {
-                        x: "175",
-                        y: "322",
-                        textAnchor: "middle",
-                        fill: "white",
-                        fontSize: "9.8",
-                        fontWeight: "700",
-                      },
-                      "United States",
-                    ),
-                    /* India pin */
-                    h("circle", { cx: "510", cy: "285", r: "24", fill: "rgba(37,99,235,0.2)" }),
-                    h("circle", {
-                      cx: "510",
-                      cy: "285",
-                      r: "12",
-                      fill: "#2563EB",
-                      stroke: "white",
-                      strokeWidth: "3",
-                    }),
-                    h("circle", { cx: "510", cy: "281", r: "4", fill: "white" }),
-                    h(
-                      "text",
-                      {
-                        x: "510",
-                        y: "289",
-                        textAnchor: "middle",
-                        fill: "white",
-                        fontSize: "8",
-                        fontWeight: "800",
-                      },
-                      "IND",
-                    ),
-                    h("rect", {
-                      x: "480",
-                      y: "306",
-                      width: "60",
-                      height: "24",
-                      rx: "12",
-                      fill: "#0F172A",
-                      fillOpacity: "0.9",
-                      stroke: "white",
-                      strokeWidth: "1.4",
-                    }),
-                    h(
-                      "text",
-                      {
-                        x: "510",
-                        y: "322",
-                        textAnchor: "middle",
-                        fill: "white",
-                        fontSize: "9.8",
-                        fontWeight: "700",
-                      },
-                      "India",
-                    ),
-                    /* Australia pin */
-                    h("circle", { cx: "655", cy: "375", r: "24", fill: "rgba(29,78,216,0.2)" }),
-                    h("circle", {
-                      cx: "655",
-                      cy: "375",
-                      r: "12",
-                      fill: "#1D4ED8",
-                      stroke: "white",
-                      strokeWidth: "3",
-                    }),
-                    h("circle", { cx: "655", cy: "371", r: "4", fill: "white" }),
-                    h(
-                      "text",
-                      {
-                        x: "655",
-                        y: "379",
-                        textAnchor: "middle",
-                        fill: "white",
-                        fontSize: "8",
-                        fontWeight: "800",
-                      },
-                      "AUS",
-                    ),
-                    h("rect", {
-                      x: "616",
-                      y: "332",
-                      width: "78",
-                      height: "24",
-                      rx: "12",
-                      fill: "#0F172A",
-                      fillOpacity: "0.9",
-                      stroke: "white",
-                      strokeWidth: "1.4",
-                    }),
-                    h(
-                      "text",
-                      {
-                        x: "655",
-                        y: "348",
-                        textAnchor: "middle",
-                        fill: "white",
-                        fontSize: "9.8",
-                        fontWeight: "700",
-                      },
-                      "Australia",
+                      "g",
+                      null,
+                      dashboardNodes.map(function (node) {
+                        return h("g", { key: node.key }, [
+                          h("circle", {
+                            cx: node.cx,
+                            cy: node.cy,
+                            r: 19,
+                            fill: "rgba(15,23,42,0.08)",
+                          }),
+                          h("circle", {
+                            cx: node.cx,
+                            cy: node.cy,
+                            r: 8,
+                            fill: node.core,
+                            stroke: "white",
+                            strokeWidth: "3",
+                          }),
+                          h("circle", { cx: node.cx, cy: node.cy - 2, r: "3.2", fill: "white" }),
+                          h(
+                            "text",
+                            {
+                              x: node.cx,
+                              y: node.cy + 28,
+                              textAnchor: "middle",
+                              fill: "#0F172A",
+                              fontSize: "10",
+                              fontWeight: "700",
+                              letterSpacing: "0.06em",
+                            },
+                            node.label,
+                          ),
+                          h("circle", {
+                            cx: node.cx,
+                            cy: node.cy,
+                            r: "11.8",
+                            fill: "none",
+                            stroke: node.glow,
+                            strokeWidth: "1.5",
+                            className: node.active ? "animate-pulse" : "",
+                          }),
+                        ]);
+                      }),
                     ),
                   ),
-                ),
-                /* Bottom chips */
-                h(
-                  "div",
-                  { className: "flex flex-wrap gap-2" },
-                  ["3 Regions", "Follow-the-Sun Support", "Continuous Coverage"].map(
-                    function (chip) {
+                  h("div", { className: "relative z-10 mt-4 grid gap-3 sm:grid-cols-3" }, [
+                    dashboardNodes.map(function (node) {
                       return h(
-                        "span",
+                        "div",
                         {
-                          key: chip,
+                          key: `node-label-${node.key}`,
                           className:
-                            "rounded-full border border-blue-100 bg-white/90 px-4 py-2 text-xs font-extrabold text-[#1D4ED8] shadow-sm backdrop-blur dark:border-blue-500/30 dark:bg-black/50 dark:text-blue-300",
+                            "rounded-2xl border border-slate-200 bg-white/90 p-3 shadow-sm backdrop-blur-sm",
                         },
-                        chip,
+                        h(
+                          "p",
+                          { className: "text-xs font-black uppercase tracking-[0.18em] text-[#1D4ED8]" },
+                          node.title,
+                        ),
+                        h(
+                          "p",
+                          {
+                            className:
+                              "mt-1.5 text-[13px] font-semibold leading-5 text-slate-700",
+                          },
+                          node.subtitle,
+                        ),
                       );
-                    },
-                  ),
-                ),
-              ),
-            ),
-            /* ── RIGHT: Region cards ── */
-            h(
-              motion.div,
-              { variants: group, className: "grid gap-5" },
-              regions.map(function (r) {
-                const flag = r.name === "Australia" ? "AUS" : r.name === "India" ? "IND" : "USA";
-                const Icon =
-                  r.name === "Australia" ? Handshake : r.name === "India" ? Workflow : Globe2;
-                return h(
-                  motion.article,
-                  {
-                    key: r.name,
-                    variants: fade,
-                    whileHover: { y: -6 },
-                    className:
-                      "h-full rounded-[22px] border border-slate-100 bg-white shadow-md dark:border-white/10 dark:bg-white/5 dark:shadow-[0_18px_55px_rgba(0,0,0,0.35)] backdrop-blur-sm transition-all dark:hover:border-blue-500/30 dark:hover:shadow-[0_26px_70px_rgba(37,99,235,0.2)]",
-                  },
+                    }),
+                  ]),
                   h(
                     "div",
-                    { className: "p-6" },
-                    h(
-                      "div",
-                      { className: "flex items-start justify-between gap-4" },
-                      h(
-                        "div",
-                        { className: "flex-1 min-w-0" },
+                    { className: "relative z-10 mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5" },
+                    dashboardMetrics.map(function (metric) {
+                      const Icon = metric.icon;
+                      return h(
+                        motion.div,
+                        {
+                          key: metric.title,
+                          whileHover: { y: -6 },
+                          className:
+                            "rounded-2xl border border-slate-200 bg-white/90 p-3.5 shadow-[0_12px_32px_rgba(15,23,42,0.08)] backdrop-blur-sm transition-all hover:border-[#2563EB]/50 hover:bg-white",
+                        },
                         h(
                           "div",
                           {
                             className:
-                              "inline-grid h-10 w-14 place-items-center rounded-xl bg-gradient-to-br from-[#0F172A] to-[#2563EB] text-[11px] font-extrabold tracking-[0.16em] text-white shadow-sm dark:from-blue-700 dark:to-blue-500",
+                              "mb-2 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#1D4ED8]/10 text-[#1D4ED8]",
                           },
-                          flag,
+                          h(Icon, { className: "h-4 w-4" }),
                         ),
                         h(
-                          "h3",
-                          {
-                            className: "mt-3 text-xl font-extrabold text-[#0F172A] dark:text-white",
-                          },
-                          r.name,
+                          "p",
+                          { className: "text-sm font-extrabold text-[#0F172A]" },
+                          metric.title,
                         ),
-                        h(
-                          "span",
-                          {
-                            className:
-                              "mt-1.5 inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-extrabold text-[#1D4ED8] dark:bg-blue-500/20 dark:text-blue-300",
-                          },
-                          r.name,
-                        ),
-                      ),
+                        h("p", { className: "mt-1 text-xs text-slate-600" }, metric.subtitle),
+                      );
+                    }),
+                  ),
+                ),
+              ),
+            ),
+            h(
+              motion.div,
+              { variants: group, className: "grid gap-4" },
+              regions.map(function (region, index) {
+                const skylineOffset = index * 4;
+                return h(
+                  motion.article,
+                  {
+                    key: region.name,
+                    variants: fade,
+                    whileHover: { y: -8 },
+                    className:
+                      "overflow-hidden rounded-[24px] border border-slate-100 bg-white p-0 shadow-[0_18px_48px_rgba(15,23,42,0.09)] backdrop-blur-sm transition-all hover:shadow-[0_24px_65px_rgba(37,99,235,0.15)]",
+                  },
+                  h(
+                    "div",
+                    {
+                      className:
+                        "relative overflow-hidden border-b border-slate-100 bg-slate-900/90 p-5 text-white",
+                      style: {
+                        backgroundImage:
+                          "linear-gradient(115deg, rgba(15,23,42,0.95), rgba(37,99,235,0.95)), repeating-linear-gradient(90deg,rgba(255,255,255,0.05)_0 5px,transparent 5px 30px)",
+                      },
+                    },
+                    h(
+                      "div",
+                      { className: "absolute inset-0 opacity-20" },
                       h(
-                        "span",
+                        "svg",
                         {
+                          viewBox: "0 0 280 72",
+                          fill: "none",
                           className:
-                            "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-[#1D4ED8] dark:bg-blue-500/15 dark:text-blue-400",
+                            "absolute inset-x-0 bottom-0 h-full w-full",
+                          preserveAspectRatio: "xMidYMax meet",
                         },
-                        h(Icon, { className: "h-5 w-5" }),
+                        miniCityBars.map(function (bar, barIndex) {
+                          return h("rect", {
+                            key: barIndex,
+                            x: barIndex * 19,
+                            y: 68 - (miniCityBars[(barIndex + skylineOffset) % miniCityBars.length] / 1.2),
+                            width: 12,
+                            height: miniCityBars[(barIndex + skylineOffset) % miniCityBars.length] / 1.2 + 4,
+                            rx: 6,
+                            fill: "rgba(255,255,255,0.2)",
+                          });
+                        }),
                       ),
                     ),
                     h(
+                      "span",
+                      {
+                        className:
+                          "relative z-10 inline-flex h-9 w-16 items-center justify-center rounded-md border border-white/20 bg-white/15 text-[10px] font-extrabold tracking-[0.18em]",
+                      },
+                      region.name === "Australia"
+                        ? "AUS"
+                        : region.name === "India"
+                          ? "IND"
+                          : "USA",
+                    ),
+                    h(
+                      "h3",
+                      { className: "relative z-10 mt-3 text-2xl font-black" },
+                      region.name,
+                    ),
+                    h(
                       "p",
-                      { className: "mt-4 text-sm leading-7 text-slate-600 dark:text-slate-300" },
-                      r.text,
+                      { className: "relative z-10 mt-2 text-xs font-black uppercase tracking-[0.18em]" },
+                      region.badge,
+                    ),
+                    h(
+                      "div",
+                      {
+                        className:
+                          "absolute right-3 top-3 rounded-xl border border-white/20 bg-white/10 p-2 backdrop-blur-sm",
+                      },
+                      h(
+                        "p",
+                        { className: "text-[9px] font-black uppercase tracking-[0.18em] text-white/80" },
+                        region.visual,
+                      ),
+                      h(
+                        "svg",
+                        {
+                          viewBox: "0 0 120 60",
+                          fill: "none",
+                          className: "mt-2 h-10 w-20 text-white",
+                        },
+                        h("path", {
+                          d: "M4 44 C24 24 45 31 68 26 C80 23 96 18 112 25",
+                          stroke: "rgba(255,255,255,0.85)",
+                          strokeWidth: "1.2",
+                          strokeLinecap: "round",
+                        }),
+                        h("path", {
+                          d: "M8 48 C20 42 32 40 42 44 C56 49 72 50 86 45",
+                          stroke: "rgba(255,255,255,0.5)",
+                          strokeWidth: "1",
+                          strokeDasharray: "2 3",
+                          strokeLinecap: "round",
+                        }),
+                        h("circle", { cx: "22", cy: "28", r: "2", fill: "rgba(255,255,255,0.9)" }),
+                        h("circle", { cx: "70", cy: "27", r: "2", fill: "rgba(255,255,255,0.9)" }),
+                        h("circle", { cx: "110", cy: "38", r: "2", fill: "rgba(255,255,255,0.9)" }),
+                      ),
+                    ),
+                  ),
+                  h(
+                    "div",
+                    { className: "p-5" },
+                    h("p", { className: "text-sm leading-7 text-slate-700" }, region.text),
+                    h(
+                      "div",
+                      { className: "mt-4 grid grid-cols-1 gap-2 sm:grid-cols-3" },
+                      region.features.map(function (feature) {
+                        return h(
+                          "span",
+                          {
+                            key: feature,
+                            className:
+                              "inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700",
+                          },
+                          h(CheckCircle2, { className: "h-3.5 w-3.5 text-emerald-500" }),
+                          feature,
+                        );
+                      }),
                     ),
                   ),
                 );
