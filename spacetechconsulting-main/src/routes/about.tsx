@@ -179,6 +179,10 @@ const products = [
 const regions = [
   {
     name: "Australia",
+    hubCode: "AUS",
+    hubTitle: "LOGISTICS OPERATIONS HUB",
+    hubText: "Supply chain management, warehousing optimization, and local delivery coordination for Australia.",
+    hubIcon: "logistics",
     badge: "CLIENT DELIVERY REGION",
     visual: "Sydney skyline",
     x: "82%",
@@ -189,6 +193,10 @@ const regions = [
   },
   {
     name: "India",
+    hubCode: "IND",
+    hubTitle: "TECH DEVELOPMENT CENTER",
+    hubText: "Software engineering, data analytics, and cloud infrastructure management for India.",
+    hubIcon: "technology",
     badge: "ENGINEERING HUB",
     visual: "Monochrome city",
     x: "64%",
@@ -199,6 +207,10 @@ const regions = [
   },
   {
     name: "USA",
+    hubCode: "USA",
+    hubTitle: "CLIENT SUPPORT PORTAL",
+    hubText: "Multi-channel client communications, personalized outreach, and strategic partnership management for the USA.",
+    hubIcon: "support",
     badge: "STRATEGIC LEADERSHIP REGION",
     x: "24%",
     y: "72%",
@@ -981,7 +993,7 @@ function About() {
               whileInView: "visible",
               viewport: { once: true },
               className:
-                "mt-12 grid min-w-0 gap-6 lg:grid-cols-[1.2fr_0.78fr] lg:items-stretch",
+                "mt-12 grid min-w-0 gap-6 rounded-[36px] border border-white/70 bg-white/45 p-5 shadow-[0_28px_90px_rgba(15,23,42,0.12)] backdrop-blur-2xl lg:grid-cols-[1.2fr_0.78fr] lg:items-stretch",
             },
             h(
               motion.article,
@@ -1029,7 +1041,7 @@ function About() {
                     className:
                       "text-sm font-extrabold uppercase tracking-[0.22em] text-[#1D4ED8]",
                   },
-                  "Global operations dashboard",
+                  "GLOBAL OPERATIONS DASHBOARD",
                 ),
                 h(
                   "h3",
@@ -1232,9 +1244,19 @@ function About() {
             ),
             h(
               motion.div,
-              { variants: group, className: "grid gap-6" },
+              {
+                variants: group,
+                className:
+                  "grid gap-4 rounded-[30px] border border-white/70 bg-white/45 p-3 shadow-[0_22px_70px_rgba(15,23,42,0.12)] backdrop-blur-2xl",
+              },
+              h(
+                "p",
+                { className: "px-2 pt-1 text-sm font-black uppercase tracking-[0.16em] text-slate-700" },
+                "GLOBAL HUB SPECIFICS",
+              ),
               regions.map(function (region, index) {
                 const skylineOffset = index * 4;
+                const HubIcon = region.hubIcon === "logistics" ? Workflow : region.hubIcon === "technology" ? BrainCircuit : Users;
                 return h(
                   motion.article,
                   {
@@ -1285,20 +1307,16 @@ function About() {
                         className:
                           "relative z-10 flex h-20 w-20 shrink-0 items-center justify-center rounded-[22px] bg-gradient-to-br from-[#2563EB] to-[#1D4ED8] text-3xl font-black tracking-tight text-white shadow-[0_18px_36px_rgba(37,99,235,0.34)]",
                       },
-                      region.name === "Australia"
-                        ? "AUS"
-                        : region.name === "India"
-                          ? "IND"
-                          : "USA",
+                      region.hubCode,
                     ),
                     h(
                       "h3",
-                      { className: "relative z-10 mt-2 text-4xl font-black tracking-tight text-[#0F172A]" },
-                      region.name,
+                      { className: "relative z-10 mt-2 max-w-[18rem] text-[1.55rem] font-black uppercase leading-tight tracking-tight text-[#0F172A]" },
+                      region.hubTitle,
                     ),
                     h(
                       "p",
-                      { className: "absolute left-[132px] top-[74px] z-10 inline-flex rounded-full bg-blue-50 px-5 py-2 text-base font-extrabold normal-case tracking-normal text-[#1D4ED8]" },
+                      { className: "hidden" },
                       region.name,
                     ),
                     h(
@@ -1307,41 +1325,14 @@ function About() {
                         className:
                           "absolute right-8 top-8 flex h-16 w-16 items-center justify-center rounded-full border border-blue-100 bg-blue-50/80 p-0 text-[#1D4ED8] shadow-[inset_0_1px_0_rgba(255,255,255,0.8)]",
                       },
-                      h(
-                        "p",
-                        { className: "hidden" },
-                        region.visual,
-                      ),
-                      h(
-                        "svg",
-                        {
-                          viewBox: "0 0 120 60",
-                          fill: "none",
-                          className: "h-8 w-8 text-[#1D4ED8]",
-                        },
-                        h("path", {
-                          d: "M4 44 C24 24 45 31 68 26 C80 23 96 18 112 25",
-                          stroke: "rgba(255,255,255,0.85)",
-                          strokeWidth: "1.2",
-                          strokeLinecap: "round",
-                        }),
-                        h("path", {
-                          d: "M8 48 C20 42 32 40 42 44 C56 49 72 50 86 45",
-                          stroke: "rgba(255,255,255,0.5)",
-                          strokeWidth: "1",
-                          strokeDasharray: "2 3",
-                          strokeLinecap: "round",
-                        }),
-                        h("circle", { cx: "22", cy: "28", r: "2", fill: "rgba(255,255,255,0.9)" }),
-                        h("circle", { cx: "70", cy: "27", r: "2", fill: "rgba(255,255,255,0.9)" }),
-                        h("circle", { cx: "110", cy: "38", r: "2", fill: "rgba(255,255,255,0.9)" }),
+                      h("p", { className: "hidden" }, region.visual),
+                      h(HubIcon, { className: "h-8 w-8" })
                       ),
                     ),
-                  ),
                   h(
                     "div",
                     { className: "px-8 pb-8 pt-3" },
-                    h("p", { className: "text-xl leading-8 text-slate-600" }, region.text),
+                    h("p", { className: "text-[15px] leading-7 text-slate-700" }, region.hubText),
                     h(
                       "div",
                       { className: "hidden" },
