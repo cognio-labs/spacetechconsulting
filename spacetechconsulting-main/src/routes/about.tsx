@@ -209,23 +209,9 @@ const regions = [
   },
 ];
 const dashboardMetrics = [
-  { title: "3 Regions", subtitle: "Global Delivery Network", icon: Building2 },
-  { title: "Follow-the-Sun", subtitle: "Continuous Support", icon: Clock },
-  {
-    title: "Operational Continuity",
-    subtitle: "Always On",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Platform Governance",
-    subtitle: "Reliability & Control",
-    icon: DatabaseZap,
-  },
-  {
-    title: "Unified Team",
-    subtitle: "One Goal. One Standard.",
-    icon: Users,
-  },
+  { title: "3 Regions", subtitle: "", icon: Globe2 },
+  { title: "Follow-the-Sun Support", subtitle: "", icon: Clock },
+  { title: "Continuous Coverage", subtitle: "", icon: ShieldCheck },
 ];
 const dashboardNodes = [
   {
@@ -1180,7 +1166,7 @@ function About() {
                       }),
                     ),
                   ),
-                  h("div", { className: "relative z-10 mt-4 grid gap-3 sm:grid-cols-3" }, [
+                  h("div", { className: "hidden" }, [
                     dashboardNodes.map(function (node) {
                       return h(
                         "div",
@@ -1207,7 +1193,7 @@ function About() {
                   ]),
                   h(
                     "div",
-                    { className: "relative z-10 mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-5" },
+                    { className: "relative z-10 mt-6 grid gap-4 md:grid-cols-3" },
                     dashboardMetrics.map(function (metric) {
                       const Icon = metric.icon;
                       return h(
@@ -1216,22 +1202,22 @@ function About() {
                           key: metric.title,
                           whileHover: { y: -6 },
                           className:
-                            "rounded-2xl border border-slate-200 bg-white/90 p-3.5 shadow-[0_12px_32px_rgba(15,23,42,0.08)] backdrop-blur-sm transition-all hover:border-[#2563EB]/50 hover:bg-white",
+                            "inline-flex min-h-14 items-center justify-center gap-3 rounded-2xl border border-blue-200 bg-white px-6 py-3 shadow-[0_10px_26px_rgba(37,99,235,0.08)] backdrop-blur-sm transition-all hover:border-[#2563EB]/45 hover:bg-white hover:shadow-[0_16px_34px_rgba(37,99,235,0.14)]",
                         },
                         h(
                           "div",
                           {
                             className:
-                              "mb-2 inline-flex h-9 w-9 items-center justify-center rounded-lg bg-[#1D4ED8]/10 text-[#1D4ED8]",
+                              "inline-flex h-6 w-6 items-center justify-center text-[#1D4ED8]",
                           },
                           h(Icon, { className: "h-4 w-4" }),
                         ),
                         h(
                           "p",
-                          { className: "text-sm font-extrabold text-[#0F172A]" },
+                          { className: "text-base font-extrabold text-[#1D4ED8]" },
                           metric.title,
                         ),
-                        h("p", { className: "mt-1 text-xs text-slate-600" }, metric.subtitle),
+                        null,
                       );
                     }),
                   ),
