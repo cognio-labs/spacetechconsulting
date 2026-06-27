@@ -585,7 +585,7 @@ function CaseStudySection() {
                     {/* Business Outcomes */}
                     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.1 }} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                       <div className="flex items-center gap-3">
-                        <ClipboardList className="h-6 w-6 text-[#2563EB]" />
+                        <ClipboardCheck className="h-6 w-6 text-[#2563EB]" />
                         <h4 className="text-xl font-extrabold">Business Outcomes</h4>
                       </div>
                       <div className="mt-5 grid gap-3 sm:grid-cols-2">
@@ -742,7 +742,7 @@ function HomePage() {
               Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence for real estate teams across Australia, India, and the USA.
             </motion.p>
             <motion.div variants={fadeUp} className="mt-9 flex w-full max-w-[360px] flex-col gap-3 md:max-w-none md:flex-row md:flex-wrap md:gap-4 select-none">
-              <Link to="/contact#send-us-a-message-form"
+              <Link to="/contact" hash="send-us-a-message-form"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-7 py-4 font-bold text-[#0F172A] shadow-[0_4px_12px_rgba(255,255,255,0.12),0_12px_32px_rgba(255,255,255,0.18)] ring-1 ring-black/5 hover:scale-105 active:scale-[0.98] transition-all duration-300 md:w-auto">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
               </Link>
@@ -1039,7 +1039,7 @@ function HomePage() {
               Ready to transform your Yardi ecosystem? Let's discuss how we can help you.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
-              <Link to="/contact#send-us-a-message-form"
+              <Link to="/contact" hash="send-us-a-message-form"
                 className="inline-flex items-center gap-2 px-7 py-4 rounded-2xl bg-white text-[#0F172A] font-bold shadow-elegant hover:scale-105 active:scale-[0.98] transition-all duration-300 select-none">
                 Book a Strategy Call <ArrowRight className="w-4 h-4" />
               </Link>

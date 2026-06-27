@@ -34,17 +34,17 @@ export function Footer() {
     <footer className="relative bg-[#0F172A] text-slate-300 overflow-hidden">
       <div className="absolute inset-0 opacity-30 pointer-events-none"
            style={{ background: "radial-gradient(circle at 20% 0%, rgba(37,99,235,0.3), transparent 50%), radial-gradient(circle at 80% 100%, rgba(6,182,212,0.2), transparent 50%)" }} />
-      <div className="relative max-w-7xl mx-auto grid gap-8 px-3 pb-10 pt-7 sm:px-5 sm:pb-14 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr] lg:gap-8 lg:pb-16 lg:pt-10 xl:gap-12">
+      <div className="relative max-w-[90rem] mx-auto grid gap-8 px-4 pb-10 pt-7 sm:px-6 sm:pb-14 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr] lg:gap-8 lg:pb-16 lg:pt-10 xl:gap-12">
         <div className="min-w-0">
-          <div className="mb-2 -translate-y-3 sm:mb-4 sm:-translate-y-5 lg:mb-5 lg:-translate-y-6">
+          <div className="mb-4 flex items-center overflow-hidden w-fit max-w-full">
             <img
-              src="/optimized/footer-logo-260.webp"
+              src="/optimized/footer-logo-600.webp"
               alt="SpaceTech Consulting logo"
-              width={260}
-              height={78}
+              width={220}
+              height={58}
               loading="lazy"
               decoding="async"
-              className="h-auto w-56 max-w-full -translate-x-2 select-none object-contain object-left mix-blend-screen brightness-110 contrast-125 drop-shadow-[0_16px_34px_rgba(6,182,212,0.26)] [image-rendering:auto] sm:w-64 lg:w-52 xl:w-64"
+              className="block h-auto w-[148px] max-w-full shrink-0 object-contain object-left [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
             />
           </div>
           <p className="max-w-xs text-xs leading-5 text-slate-400">
@@ -109,7 +109,7 @@ export function Footer() {
         </div>
       </div>
       <div className="relative border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-6 py-5 text-[11px] text-slate-500">
+        <div className="mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-5 text-[11px] text-slate-500">
           <span>(c) 2026 SpaceTech Consulting. All rights reserved.</span>
           <span>Enterprise Yardi Consulting Partner</span>
         </div>
