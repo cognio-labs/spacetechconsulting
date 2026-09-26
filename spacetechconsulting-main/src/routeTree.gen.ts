@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as YascRouteImport } from './routes/yasc'
 import { Route as WhoWeServeRouteImport } from './routes/who-we-serve'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as MissionVisionValuesRouteImport } from './routes/mission-vision-values'
@@ -18,6 +19,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WhoWeServeSlugRouteImport } from './routes/who-we-serve_.$slug'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
 
+const YascRoute = YascRouteImport.update({
+  id: '/yasc',
+  path: '/yasc',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WhoWeServeRoute = WhoWeServeRouteImport.update({
   id: '/who-we-serve',
   path: '/who-we-serve',
@@ -66,6 +72,7 @@ export interface FileRoutesByFullPath {
   '/mission-vision-values': typeof MissionVisionValuesRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/yasc': typeof YascRoute
   '/api/contact': typeof ApiContactRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
 }
@@ -76,6 +83,7 @@ export interface FileRoutesByTo {
   '/mission-vision-values': typeof MissionVisionValuesRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/yasc': typeof YascRoute
   '/api/contact': typeof ApiContactRoute
   '/who-we-serve/$slug': typeof WhoWeServeSlugRoute
 }
@@ -87,6 +95,7 @@ export interface FileRoutesById {
   '/mission-vision-values': typeof MissionVisionValuesRoute
   '/services': typeof ServicesRoute
   '/who-we-serve': typeof WhoWeServeRoute
+  '/yasc': typeof YascRoute
   '/api/contact': typeof ApiContactRoute
   '/who-we-serve_/$slug': typeof WhoWeServeSlugRoute
 }
@@ -99,6 +108,7 @@ export interface FileRouteTypes {
     | '/mission-vision-values'
     | '/services'
     | '/who-we-serve'
+    | '/yasc'
     | '/api/contact'
     | '/who-we-serve/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -109,6 +119,7 @@ export interface FileRouteTypes {
     | '/mission-vision-values'
     | '/services'
     | '/who-we-serve'
+    | '/yasc'
     | '/api/contact'
     | '/who-we-serve/$slug'
   id:
@@ -119,6 +130,7 @@ export interface FileRouteTypes {
     | '/mission-vision-values'
     | '/services'
     | '/who-we-serve'
+    | '/yasc'
     | '/api/contact'
     | '/who-we-serve_/$slug'
   fileRoutesById: FileRoutesById
@@ -130,12 +142,20 @@ export interface RootRouteChildren {
   MissionVisionValuesRoute: typeof MissionVisionValuesRoute
   ServicesRoute: typeof ServicesRoute
   WhoWeServeRoute: typeof WhoWeServeRoute
+  YascRoute: typeof YascRoute
   ApiContactRoute: typeof ApiContactRoute
   WhoWeServeSlugRoute: typeof WhoWeServeSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/yasc': {
+      id: '/yasc'
+      path: '/yasc'
+      fullPath: '/yasc'
+      preLoaderRoute: typeof YascRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/who-we-serve': {
       id: '/who-we-serve'
       path: '/who-we-serve'
@@ -202,6 +222,7 @@ const rootRouteChildren: RootRouteChildren = {
   MissionVisionValuesRoute: MissionVisionValuesRoute,
   ServicesRoute: ServicesRoute,
   WhoWeServeRoute: WhoWeServeRoute,
+  YascRoute: YascRoute,
   ApiContactRoute: ApiContactRoute,
   WhoWeServeSlugRoute: WhoWeServeSlugRoute,
 }

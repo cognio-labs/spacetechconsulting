@@ -1,0 +1,13 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Biradar;Sambhaji;;;
+FN:Sambhaji Biradar
+ORG:SpaceTech Consulting Pty Ltd
+TITLE:Founder and Chief Executive Officer
+EMAIL;TYPE=INTERNET,WORK,PREF:sambhaji@spacetechconsulting.com
+TEL;TYPE=WORK,VOICE:+61468040481
+TEL;TYPE=WORK,VOICE:+14158708418
+URL:https://www.spacetechconsulting.com
+X-SOCIALPROFILE;TYPE=linkedin:https://www.linkedin.com/company/spacetech-consulting/
+NOTE:Enterprise Yardi consulting partner.
+END:VCARD

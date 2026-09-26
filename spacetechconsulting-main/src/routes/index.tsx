@@ -760,6 +760,49 @@ function HomePage() {
         </div>
       </section>
 
+      {/* YASC CONFERENCE CTA */}
+      <section className="relative z-20 px-6 pt-8 pb-2 md:pt-10 md:pb-4">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          variants={fadeUp}
+          className="max-w-7xl mx-auto"
+        >
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#16233F] via-[#1E3155] to-[#17467B] p-6 sm:p-8 md:p-10 shadow-[0_12px_40px_rgba(23,70,123,0.18)] border border-cyan-500/25">
+            {/* Subtle decorative glow */}
+            <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-cyan-400/15 blur-3xl" />
+            <div className="pointer-events-none absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-blue-600/15 blur-3xl" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[3px] bg-gradient-to-r from-[#028090] via-[#21B5C4] to-[#E3B23C]" />
+
+            <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 md:gap-8">
+              <div className="max-w-3xl">
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-950/40 px-3.5 py-1 text-xs font-extrabold uppercase tracking-[0.16em] text-cyan-300 backdrop-blur-md mb-3.5">
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  YASC CONFERENCE
+                </div>
+                <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                  Meet SpaceTech Consulting at YASC
+                </h2>
+                <p className="mt-3 text-sm md:text-base text-slate-200/90 leading-relaxed font-normal">
+                  Explore our YASC conference page and discover how SpaceTech Consulting supports Yardi platform ownership, managed support, integrations, automation, reporting and data intelligence.
+                </p>
+              </div>
+
+              <div className="flex-shrink-0 flex items-center">
+                <Link
+                  to="/yasc"
+                  className="group inline-flex w-full sm:w-auto items-center justify-center gap-2.5 rounded-full bg-[#028090] hover:bg-[#016B78] active:scale-[0.98] px-7 py-3.5 text-sm md:text-base font-bold text-white shadow-[0_4px_16px_rgba(2,128,144,0.35)] transition-all duration-200 whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-cyan-300 focus:ring-offset-2 focus:ring-offset-[#16233F]"
+                >
+                  Explore YASC Conference
+                  <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
       {/* STATS */}
       <section className="relative z-10 px-6 pt-8 pb-10 md:pt-10 md:pb-14">
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={stagger}
