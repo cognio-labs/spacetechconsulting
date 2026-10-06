@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
-const HERO_IMAGE = "/optimized/hero-section-bg-1440.webp";
-const HERO_IMAGE_SRC_SET = "/optimized/hero-section-bg-640.webp 640w, /optimized/hero-section-bg-1024.webp 1024w, /optimized/hero-section-bg-1440.webp 1440w, /optimized/hero-section-bg-1672.webp 1672w";
+const HERO_IMAGE = "/optimized/hero-section-bg-clean-1440.webp";
+const HERO_IMAGE_SRC_SET = "/optimized/hero-section-bg-clean-640.webp 640w, /optimized/hero-section-bg-clean-1024.webp 1024w, /optimized/hero-section-bg-clean-1440.webp 1440w, /optimized/hero-section-bg-clean-1672.webp 1672w";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -650,49 +650,23 @@ function CaseStudySection() {
 }
 
 function HeroMedia() {
-  const [loadVideo, setLoadVideo] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const timer = window.setTimeout(() => setLoadVideo(true), 250);
-    return () => window.clearTimeout(timer);
-  }, []);
-
   return (
-    <>
-      <picture>
-        <source srcSet={HERO_IMAGE_SRC_SET} sizes="100vw" type="image/webp" />
-        <img
-          src={HERO_IMAGE}
-          srcSet={HERO_IMAGE_SRC_SET}
-          sizes="100vw"
-          alt=""
-          width={1672}
-          height={941}
-          loading="eager"
-          fetchPriority="high"
-          decoding="async"
-          style={{ willChange: "transform" }}
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
-        />
-      </picture>
-      {loadVideo && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="none"
-          poster={HERO_IMAGE}
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
-        >
-          <source src="/optimized/hero-bg-video-optimized.mp4" type="video/mp4" />
-        </video>
-      )}
-    </>
+    <picture>
+      <source srcSet={HERO_IMAGE_SRC_SET} sizes="100vw" type="image/webp" />
+      <img
+        src={HERO_IMAGE}
+        srcSet={HERO_IMAGE_SRC_SET}
+        sizes="100vw"
+        alt=""
+        width={1672}
+        height={941}
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
+        style={{ willChange: "transform" }}
+        className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
+      />
+    </picture>
   );
 }
 
