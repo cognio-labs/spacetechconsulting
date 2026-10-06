@@ -8,7 +8,8 @@ export const Route = createFileRoute("/who-we-serve_/$slug")({
   loader: ({ params }) => {
     const property = getPropertyType(params.slug);
     if (!property) throw notFound();
-    return { property };
+    const { icon: _icon, ...serializableProperty } = property;
+    return { property: serializableProperty, slug: params.slug };
   },
   head: ({ loaderData }) => ({
     meta: [
@@ -34,7 +35,9 @@ export const Route = createFileRoute("/who-we-serve_/$slug")({
 });
 
 function PropertyTypeDetail() {
-  const { property } = Route.useLoaderData();
+  const { slug } = Route.useParams();
+  const property = getPropertyType(slug);
+  if (!property) return null;
   const Icon = property.icon;
 
   return (
