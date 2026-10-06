@@ -13,7 +13,7 @@ function WhatsAppIcon() {
 
 export function Layout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen w-full overflow-x-hidden flex flex-col bg-[#F8FAFC] dark:bg-[#080D1A] transition-colors duration-300">
+    <div className="theme-shell min-h-screen w-full overflow-x-hidden flex flex-col bg-[#F8FAFC] text-slate-900 dark:bg-[#080D1A] dark:text-slate-100 transition-colors duration-300">
       <Nav />
       <main className="flex-1 pt-[58px] sm:pt-[64px] lg:pt-[72px]">{children}</main>
       <Footer />

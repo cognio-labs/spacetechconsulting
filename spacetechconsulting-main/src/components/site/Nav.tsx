@@ -2,6 +2,18 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 
+const THEME_STORAGE_KEY = "spacetech-theme";
+
+function getInitialTheme() {
+  if (typeof window === "undefined") return false;
+
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
+  if (savedTheme === "dark") return true;
+  if (savedTheme === "light") return false;
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+}
+
 const links = [
   { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
@@ -14,26 +26,30 @@ const links = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [dark, setDark] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return localStorage.getItem("spacetech-theme") === "dark";
-  });
+  const [dark, setDark] = useState(getInitialTheme);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    if (dark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("spacetech-theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("spacetech-theme", "light");
-    }
+    const theme = dark ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
   }, [dark]);
 
   return (
@@ -54,6 +70,8 @@ export function Nav() {
             alt="SpaceTech Consulting logo"
             width={220}
             height={58}
+            loading="eager"
+            fetchPriority="high"
             decoding="async"
             className="h-auto w-[148px] max-w-none shrink-0 object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
           />
@@ -75,21 +93,25 @@ export function Nav() {
         <div className="flex items-center gap-2">
           {/* Theme toggle */}
           <button
+            type="button"
             onClick={() => setDark((d) => !d)}
             aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-slate-500 shadow-sm transition-all duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-800 active:scale-95 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:border-slate-600 dark:hover:bg-slate-700 dark:hover:text-cyan-300 select-none"
+            aria-pressed={dark}
+            title={dark ? "Use light theme" : "Use dark theme"}
+            data-theme-toggle
+            className="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border border-slate-200 bg-slate-50 text-slate-600 shadow-sm transition-[background-color,border-color,color,box-shadow,transform] duration-200 hover:border-slate-300 hover:bg-white hover:text-slate-900 hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:border-slate-600/80 dark:bg-slate-800 dark:text-cyan-200 dark:hover:border-cyan-400/50 dark:hover:bg-slate-700 dark:hover:text-cyan-100 dark:focus-visible:ring-cyan-400 dark:focus-visible:ring-offset-slate-950 select-none"
           >
             <span
               className="absolute inset-0 grid place-items-center transition-all duration-300"
               style={{ opacity: dark ? 0 : 1, transform: dark ? "rotate(90deg) scale(0.5)" : "rotate(0deg) scale(1)" }}
             >
-              <Moon className="h-[15px] w-[15px]" />
+              <Moon className="h-[17px] w-[17px]" />
             </span>
             <span
               className="absolute inset-0 grid place-items-center transition-all duration-300"
               style={{ opacity: dark ? 1 : 0, transform: dark ? "rotate(0deg) scale(1)" : "rotate(-90deg) scale(0.5)" }}
             >
-              <Sun className="h-[15px] w-[15px]" />
+              <Sun className="h-[17px] w-[17px]" />
             </span>
           </button>
 
@@ -103,8 +125,9 @@ export function Nav() {
           </a>
 
           <button
+            type="button"
             onClick={() => setOpen(!open)}
-            className="lg:hidden grid h-9 w-9 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100 active:scale-95 transition-all dark:text-slate-200 dark:hover:bg-slate-800"
+            className="lg:hidden grid h-10 w-10 shrink-0 place-items-center rounded-xl text-slate-800 hover:bg-slate-100 active:scale-95 transition-all dark:text-slate-200 dark:hover:bg-slate-800"
             aria-label="Toggle navigation"
           >
             {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

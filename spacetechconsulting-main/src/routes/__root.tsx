@@ -17,6 +17,17 @@ const SITE_TITLE = "SpaceTech Consulting | Enterprise Yardi Platform Partner";
 const SITE_DESCRIPTION =
   "Enterprise Yardi platform ownership, proactive support, implementation, integrations, automation, and data intelligence.";
 const SOCIAL_PREVIEW_URL = `${SITE_URL}/social-preview.jpg`;
+const THEME_BOOTSTRAP_SCRIPT = `
+  (() => {
+    try {
+      const saved = localStorage.getItem("spacetech-theme");
+      const dark = saved === "dark" || (saved !== "light" && matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.classList.toggle("dark", dark);
+      document.documentElement.dataset.theme = dark ? "dark" : "light";
+      document.documentElement.style.colorScheme = dark ? "dark" : "light";
+    } catch (_) {}
+  })();
+`;
 
 function NotFoundComponent() {
   return (
@@ -105,7 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -118,6 +129,7 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP_SCRIPT }} />
         <HeadContent />
       </head>
       <body>

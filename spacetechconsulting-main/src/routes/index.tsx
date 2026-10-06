@@ -674,6 +674,7 @@ function HeroMedia() {
           loading="eager"
           fetchPriority="high"
           decoding="async"
+          style={{ willChange: "transform" }}
           className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
         />
       </picture>
@@ -721,19 +722,19 @@ function HomePage() {
   return (
     <Layout>
       {/* HERO */}
-      <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]">
+      <section className="relative min-h-[100svh] lg:min-h-[78vh] flex items-center overflow-hidden bg-[#020B1F]" style={{ contain: "layout style" }}>
         <HeroMedia />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(2,11,31,.35),rgba(2,11,31,.50))] lg:bg-gradient-to-r lg:from-[#020B1F]/88 lg:via-[#020B1F]/50 lg:to-[#020B1F]/10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.13),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.14),transparent_38%)]" />
-        <div className="absolute right-0 top-0 h-40 w-80 bg-[radial-gradient(ellipse_at_top_right,#020B1F_0%,rgba(2,11,31,0.96)_24%,rgba(2,11,31,0.66)_42%,rgba(2,11,31,0.26)_58%,transparent_74%)] sm:w-[30rem] lg:h-52 lg:w-[42rem]" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(8,36,74,.22),rgba(2,24,58,.38))] transition-colors duration-300 dark:bg-[linear-gradient(rgba(2,11,31,.48),rgba(2,11,31,.66))] lg:bg-gradient-to-r lg:from-[#08284A]/72 lg:via-[#073366]/38 lg:to-[#062751]/5 lg:dark:from-[#020B1F]/92 lg:dark:via-[#020B1F]/62 lg:dark:to-[#020B1F]/16" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_44%,rgba(88,225,255,0.20),transparent_30%),radial-gradient(circle_at_78%_54%,rgba(0,174,239,0.20),transparent_38%)] transition-opacity duration-300 dark:opacity-70" />
+        <div className="absolute right-0 top-0 h-40 w-80 bg-[radial-gradient(ellipse_at_top_right,rgba(8,40,74,0.82)_0%,rgba(8,40,74,0.64)_28%,rgba(8,40,74,0.22)_56%,transparent_74%)] transition-colors duration-300 dark:bg-[radial-gradient(ellipse_at_top_right,#020B1F_0%,rgba(2,11,31,0.96)_24%,rgba(2,11,31,0.66)_42%,rgba(2,11,31,0.26)_58%,transparent_74%)] sm:w-[30rem] lg:h-52 lg:w-[42rem]" />
         <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
 
         <div className="relative max-w-[86rem] mx-auto w-full px-6 py-12 pt-[90px] sm:px-6 md:py-24">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-full lg:max-w-4xl">
-            <motion.span variants={fadeUp} className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/55 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)] backdrop-blur-xl sm:px-4 sm:text-xs sm:tracking-widest">
+          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-full lg:max-w-4xl" style={{ isolation: "isolate", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
+            <motion.span variants={fadeUp} className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/65 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)] sm:backdrop-blur-md sm:px-4 sm:text-xs sm:tracking-widest">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /> Your Trusted Yardi Platform Partner
             </motion.span>
-            <motion.h1 variants={fadeUp} className="mt-6 max-w-[62rem] text-[clamp(2.25rem,6.4vw,3.75rem)] font-extrabold leading-[1.05] text-white drop-shadow-[0_18px_38px_rgba(0,0,0,0.45)] lg:text-[4.25rem] xl:text-7xl">
+            <motion.h1 variants={fadeUp} className="mt-6 max-w-[62rem] text-[clamp(2.25rem,6.4vw,3.75rem)] font-extrabold leading-[1.05] text-white lg:text-[4.25rem] xl:text-7xl" style={{ textShadow: "0 2px 12px rgba(0,0,0,0.45)", WebkitFontSmoothing: "antialiased", MozOsxFontSmoothing: "grayscale" }}>
               Your Trusted Yardi
               <span className="block">Platform Partner</span>
               <span className="block bg-gradient-to-r from-cyan-300 via-blue-200 to-white bg-clip-text text-transparent">SpaceTech Consulting</span>

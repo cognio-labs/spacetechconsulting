@@ -2,11 +2,11 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, ui-sans-serif, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -141,6 +141,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition: background-color 300ms ease, color 300ms ease;
   }
   section,
   .container {
@@ -149,8 +150,6 @@
   img,
   video {
     max-width: 100%;
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
     backface-visibility: hidden;
   }
   h1, h2, h3, h4 { 
@@ -204,13 +203,13 @@
   /* High definition card hover effects with GPU acceleration to prevent font blurring */
   .card-lift { 
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-    will-change: transform, box-shadow;
     transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
   }
   .card-lift:hover { 
     transform: translateY(-6px) translate3d(0, 0, 0); 
     box-shadow: var(--shadow-elegant-hover); 
+    will-change: transform;
   }
   .dark .card-lift:hover {
     box-shadow:
@@ -250,6 +249,60 @@
   .dark input::placeholder,
   .dark textarea::placeholder { color: rgb(148 163 184); }
 
+  /* Map the site's shared light surfaces to one coherent dark palette. */
+  .dark .theme-shell .bg-white,
+  .dark .theme-shell .bg-white\/80,
+  .dark .theme-shell .bg-white\/90,
+  .dark .theme-shell .bg-white\/95,
+  .dark .theme-shell .bg-white\/98,
+  .dark .theme-shell .bg-\[\#FFFFFF\] { background-color: rgb(15 23 42 / 0.94); }
+  .dark .theme-shell .bg-slate-50,
+  .dark .theme-shell .bg-slate-50\/50,
+  .dark .theme-shell .bg-slate-50\/70,
+  .dark .theme-shell .bg-\[\#F8FAFC\],
+  .dark .theme-shell .bg-\[\#F1F5F9\] { background-color: rgb(2 6 23); }
+  .dark .theme-shell .bg-blue-50,
+  .dark .theme-shell .bg-blue-50\/40,
+  .dark .theme-shell .bg-blue-50\/50,
+  .dark .theme-shell .bg-cyan-50,
+  .dark .theme-shell .bg-cyan-50\/50,
+  .dark .theme-shell .bg-emerald-50,
+  .dark .theme-shell .bg-green-50 { background-color: rgb(30 41 59 / 0.82); }
+  .dark .theme-shell .from-slate-50,
+  .dark .theme-shell .from-white {
+    --tw-gradient-from: rgb(15 23 42) var(--tw-gradient-from-position);
+    --tw-gradient-to: rgb(15 23 42 / 0) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+  }
+  .dark .theme-shell .to-white,
+  .dark .theme-shell .to-slate-50,
+  .dark .theme-shell .to-blue-50\/40 { --tw-gradient-to: rgb(2 6 23) var(--tw-gradient-to-position); }
+  .dark .theme-shell .text-black,
+  .dark .theme-shell .text-\[\#0F172A\],
+  .dark .theme-shell .text-slate-950,
+  .dark .theme-shell .text-slate-900,
+  .dark .theme-shell .text-slate-800 { color: rgb(248 250 252); }
+  .dark .theme-shell .text-slate-700 { color: rgb(226 232 240); }
+  .dark .theme-shell .text-slate-600 { color: rgb(203 213 225); }
+  .dark .theme-shell .text-slate-500 { color: rgb(148 163 184); }
+  .dark .theme-shell .border-slate-100,
+  .dark .theme-shell .border-slate-200,
+  .dark .theme-shell .border-slate-200\/60,
+  .dark .theme-shell .border-slate-200\/70,
+  .dark .theme-shell .border-slate-200\/80,
+  .dark .theme-shell .border-blue-100,
+  .dark .theme-shell .border-cyan-100 { border-color: rgb(148 163 184 / 0.18); }
+  .dark .theme-shell input,
+  .dark .theme-shell textarea,
+  .dark .theme-shell select {
+    background-color: rgb(15 23 42);
+    border-color: rgb(148 163 184 / 0.24);
+    color: rgb(248 250 252);
+  }
+  .dark .theme-shell input:focus,
+  .dark .theme-shell textarea:focus,
+  .dark .theme-shell select:focus { border-color: rgb(34 211 238 / 0.65); }
+
   @media (max-width: 767px) {
     .card-lift {
       min-height: 100%;
@@ -259,6 +312,17 @@
     .card-lift li,
     .card-lift span {
       overflow-wrap: anywhere;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
