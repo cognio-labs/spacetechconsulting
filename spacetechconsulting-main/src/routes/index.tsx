@@ -650,23 +650,64 @@ function CaseStudySection() {
 }
 
 function HeroMedia() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.muted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch(() => {
+          // Autoplay policy or power-saving fallback
+        });
+    }
+  }, []);
+
   return (
-    <picture>
-      <source srcSet={HERO_IMAGE_SRC_SET} sizes="100vw" type="image/webp" />
-      <img
-        src={HERO_IMAGE}
-        srcSet={HERO_IMAGE_SRC_SET}
-        sizes="100vw"
-        alt=""
-        width={1672}
-        height={941}
-        loading="eager"
-        fetchPriority="high"
-        decoding="async"
-        style={{ willChange: "transform" }}
-        className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
-      />
-    </picture>
+    <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
+      <picture>
+        <source srcSet={HERO_IMAGE_SRC_SET} sizes="100vw" type="image/webp" />
+        <img
+          src={HERO_IMAGE}
+          srcSet={HERO_IMAGE_SRC_SET}
+          sizes="100vw"
+          alt=""
+          width={1672}
+          height={941}
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
+          style={{ willChange: "transform" }}
+          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
+        />
+      </picture>
+      <video
+        ref={videoRef}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onPlaying={() => setIsPlaying(true)}
+        aria-hidden="true"
+        style={{ willChange: "opacity, transform" }}
+        className={`absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95 transition-opacity duration-1000 ${
+          isPlaying ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <source src="/optimized/hero-bg-video-clean.mp4" type="video/mp4" />
+      </video>
+    </div>
   );
 }
 
