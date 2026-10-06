@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Layout } from "@/components/site/Layout";
-import { Phone, Mail, Send } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { Phone, Mail, Send, Calendar } from "lucide-react";
+import { useState, useEffect, type FormEvent } from "react";
 import { contactDetails } from "@/data/contactDetails";
 
 export const Route = createFileRoute("/contact")({
@@ -50,6 +50,18 @@ function Contact() {
     message: "",
     website: "",
   });
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const id = window.location.hash.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 150);
+      }
+    }
+  }, []);
 
   const updateField = (field: keyof typeof form, value: string) => {
     setForm((current) => ({ ...current, [field]: value }));
@@ -138,6 +150,16 @@ function Contact() {
                 {contactDetails.regions.map((region) => (
                   <span key={region} className="rounded-full bg-blue-50 px-3 py-1.5 text-xs font-bold text-[#2563EB]">{region}</span>
                 ))}
+              </div>
+              <div className="mt-5 pt-4 border-t border-slate-100">
+                <a
+                  href="https://cal.com/spacetech/30min"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#0891B2] px-5 py-3 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30 active:scale-[0.98]"
+                >
+                  <Calendar className="h-4 w-4" /> Book a 30-Min Strategy Call
+                </a>
               </div>
             </div>
           </motion.div>

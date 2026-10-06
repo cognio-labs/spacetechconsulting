@@ -944,14 +944,14 @@ function HomePage() {
             </motion.div>
 
             <motion.div variants={fadeUp} className="mt-5 flex flex-col items-center justify-center gap-2.5 sm:flex-row">
-              <a href="#book-call"
+              <Link to="/contact" hash="send-us-a-message-form"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#0891B2] px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/30 active:scale-[0.98] sm:w-auto">
                 Book a Strategy Call <ArrowRight className="h-3.5 w-3.5" />
-              </a>
-              <a href="#services"
+              </Link>
+              <Link to="/services"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-[#0F172A] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-200 hover:text-[#2563EB] active:scale-[0.98] dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:border-blue-400/40 sm:w-auto">
                 Explore Yardi Services
-              </a>
+              </Link>
             </motion.div>
 
           </motion.div>

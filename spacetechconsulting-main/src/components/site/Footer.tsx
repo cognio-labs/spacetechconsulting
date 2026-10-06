@@ -61,7 +61,7 @@ export function Footer() {
           <h4 className="mb-4 text-base font-bold text-white">Services</h4>
           <ul className="space-y-2 text-sm">
             {footerServices.map((service) => (
-              <li key={service.label}><a href={service.href} className="hover:text-cyan-400 transition-colors">{service.label}</a></li>
+              <li key={service.label}><Link to={service.href} className="hover:text-cyan-400 transition-colors">{service.label}</Link></li>
             ))}
           </ul>
         </div>
