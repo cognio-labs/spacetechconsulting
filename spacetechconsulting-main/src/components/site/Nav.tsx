@@ -65,16 +65,22 @@ export function Nav() {
           to="/"
           className="group flex h-[42px] w-[152px] max-w-[calc(100vw-92px)] items-center transition-opacity active:opacity-90 sm:h-[46px] sm:w-[174px] lg:h-[50px] lg:w-[204px] xl:w-[218px]"
         >
-          <img
-            src="/optimized/nav-logo-600.webp"
-            alt="SpaceTech Consulting logo"
-            width={220}
-            height={58}
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            className="h-auto w-[148px] max-w-none shrink-0 object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
-          />
+          <picture>
+            <source srcSet="/optimized/nav-logo-400.avif 400w, /optimized/nav-logo-600.avif 600w" type="image/avif" />
+            <source srcSet="/optimized/nav-logo-400.webp 400w, /optimized/nav-logo-600.webp 600w" type="image/webp" />
+            <img
+              src="/optimized/nav-logo-600.webp"
+              srcSet="/optimized/nav-logo-400.webp 400w, /optimized/nav-logo-600.webp 600w"
+              sizes="(min-width: 1280px) 212px, (min-width: 1024px) 198px, (min-width: 640px) 168px, 148px"
+              alt="SpaceTech Consulting logo"
+              width={220}
+              height={58}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="h-auto w-[148px] max-w-none shrink-0 object-left drop-shadow-[0_2px_3px_rgba(15,23,42,0.1)] [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
+            />
+          </picture>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1.5 rounded-full border border-slate-200/80 bg-slate-50/90 px-2 py-1.5 shadow-sm backdrop-blur select-none dark:border-slate-700/60 dark:bg-slate-800/60">

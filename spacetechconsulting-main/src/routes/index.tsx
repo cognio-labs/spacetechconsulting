@@ -12,8 +12,10 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { visiblePropertyTypes } from "@/data/propertyTypes";
-const HERO_IMAGE = "/optimized/hero-section-bg-clean-1440.webp";
-const HERO_IMAGE_SRC_SET = "/optimized/hero-section-bg-clean-640.webp 640w, /optimized/hero-section-bg-clean-1024.webp 1024w, /optimized/hero-section-bg-clean-1440.webp 1440w, /optimized/hero-section-bg-clean-1672.webp 1672w";
+const HERO_IMAGE_AVIF = "/optimized/hero-section-bg-clean-1600.avif";
+const HERO_IMAGE_WEBP = "/optimized/hero-section-bg-clean-1600.webp";
+const HERO_AVIF_SRC_SET = "/optimized/hero-section-bg-clean-640.avif 640w, /optimized/hero-section-bg-clean-960.avif 960w, /optimized/hero-section-bg-clean-1280.avif 1280w, /optimized/hero-section-bg-clean-1600.avif 1600w, /optimized/hero-section-bg-clean-1920.avif 1920w, /optimized/hero-section-bg-clean-2560.avif 2560w, /optimized/hero-section-bg-clean-3840.avif 3840w";
+const HERO_WEBP_SRC_SET = "/optimized/hero-section-bg-clean-640.webp 640w, /optimized/hero-section-bg-clean-960.webp 960w, /optimized/hero-section-bg-clean-1280.webp 1280w, /optimized/hero-section-bg-clean-1600.webp 1600w, /optimized/hero-section-bg-clean-1920.webp 1920w, /optimized/hero-section-bg-clean-2560.webp 2560w, /optimized/hero-section-bg-clean-3840.webp 3840w";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,8 +41,9 @@ export const Route = createFileRoute("/")({
       {
         rel: "preload",
         as: "image",
-        href: HERO_IMAGE,
-        imageSrcSet: HERO_IMAGE_SRC_SET,
+        type: "image/avif",
+        href: HERO_IMAGE_AVIF,
+        imageSrcSet: HERO_AVIF_SRC_SET,
         imageSizes: "100vw",
         fetchPriority: "high",
       },
@@ -119,7 +122,7 @@ const caseStudyIconStrip = [
 
 const caseStudyHeroMetrics = [
   { value: "3,000+", label: "Platform Issues Managed",          target: 3000, prefix: "",  suffix: "+",  comma: true  },
-  { value: "95+",       label: "SLA Performance on owned ticket volume", target: 95,   prefix: "",  suffix: "+",  comma: false },
+  { value: "95%+",      label: "SLA Performance on owned ticket volume", target: 95,   prefix: "",  suffix: "%+", comma: false },
   { value: "18+",    label: "Recurring Issue Patterns Identified & Resolved", target: 18,   prefix: "",  suffix: "+",   comma: false },
   { value: "<100",   label: "Open backlog maintained",           target: 100,  prefix: "<", suffix: "",   comma: false },
 ];
@@ -212,13 +215,15 @@ const dashboardScreenshots = [
   {
     title: "Executive Dashboard Page",
     image: "/optimized/case-study-page-3-960.webp",
-    srcSet: "/optimized/case-study-page-3-640.webp 640w, /optimized/case-study-page-3-960.webp 960w, /optimized/case-study-page-3-1280.webp 1280w",
+    avifSrcSet: "/optimized/case-study-page-3-640.avif 640w, /optimized/case-study-page-3-960.avif 960w, /optimized/case-study-page-3-1280.avif 1280w, /optimized/case-study-page-3-1600.avif 1600w",
+    srcSet: "/optimized/case-study-page-3-640.webp 640w, /optimized/case-study-page-3-960.webp 960w, /optimized/case-study-page-3-1280.webp 1280w, /optimized/case-study-page-3-1600.webp 1600w",
     alt: "Executive dashboard page showing Yardi support performance and operational reporting.",
   },
   {
     title: "Dashboard Detail Page",
     image: "/optimized/case-study-page-4-960.webp",
-    srcSet: "/optimized/case-study-page-4-640.webp 640w, /optimized/case-study-page-4-960.webp 960w, /optimized/case-study-page-4-1280.webp 1280w",
+    avifSrcSet: "/optimized/case-study-page-4-640.avif 640w, /optimized/case-study-page-4-960.avif 960w, /optimized/case-study-page-4-1280.avif 1280w, /optimized/case-study-page-4-1600.avif 1600w",
+    srcSet: "/optimized/case-study-page-4-640.webp 640w, /optimized/case-study-page-4-960.webp 960w, /optimized/case-study-page-4-1280.webp 1280w, /optimized/case-study-page-4-1600.webp 1600w",
     alt: "Dashboard detail page showing Yardi support findings and operational insights.",
   },
 ] as const;
@@ -536,17 +541,21 @@ function CaseStudySection() {
                           <figcaption className="border-b border-slate-200 bg-slate-50 px-4 py-3 text-sm font-extrabold text-[#0F172A] sm:px-5">
                             {screenshot.title}
                           </figcaption>
-                          <img
-                            src={screenshot.image}
-                            srcSet={screenshot.srcSet}
-                            sizes="(min-width: 1024px) 70vw, 100vw"
-                            alt={screenshot.alt}
-                            loading="lazy"
-                            decoding="async"
-                            width={3840}
-                            height={2160}
-                            className="block h-auto w-full bg-white"
-                          />
+                          <picture>
+                            <source srcSet={screenshot.avifSrcSet} sizes="(min-width: 1024px) 70vw, 100vw" type="image/avif" />
+                            <source srcSet={screenshot.srcSet} sizes="(min-width: 1024px) 70vw, 100vw" type="image/webp" />
+                            <img
+                              src={screenshot.image}
+                              srcSet={screenshot.srcSet}
+                              sizes="(min-width: 1024px) 70vw, 100vw"
+                              alt={screenshot.alt}
+                              loading="lazy"
+                              decoding="async"
+                              width={1600}
+                              height={900}
+                              className="block h-auto w-full bg-white"
+                            />
+                          </picture>
                         </motion.figure>
                       ))}
                     </div>
@@ -656,56 +665,59 @@ function HeroMedia() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.innerWidth < 1024) return;
 
-    const video = videoRef.current;
-    if (!video) return;
+    const timer = setTimeout(() => {
+      const video = videoRef.current;
+      if (!video) return;
 
-    video.muted = true;
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setIsPlaying(true);
-        })
-        .catch(() => {
-          // Autoplay policy or power-saving fallback
-        });
-    }
+      video.muted = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            // Autoplay policy fallback
+          });
+      }
+    }, 1200);
+
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="absolute inset-0 h-full w-full overflow-hidden pointer-events-none">
       <picture>
-        <source srcSet={HERO_IMAGE_SRC_SET} sizes="100vw" type="image/webp" />
+        <source srcSet={HERO_AVIF_SRC_SET} sizes="100vw" type="image/avif" />
+        <source srcSet={HERO_WEBP_SRC_SET} sizes="100vw" type="image/webp" />
         <img
-          src={HERO_IMAGE}
-          srcSet={HERO_IMAGE_SRC_SET}
+          src={HERO_IMAGE_WEBP}
+          srcSet={HERO_WEBP_SRC_SET}
           sizes="100vw"
           alt=""
-          width={1672}
-          height={941}
+          width={1920}
+          height={1080}
           loading="eager"
           fetchPriority="high"
           decoding="async"
-          style={{ willChange: "transform" }}
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95"
+          className="absolute inset-0 h-full w-full object-cover object-center brightness-[0.88] lg:brightness-[0.98]"
         />
       </picture>
       <video
         ref={videoRef}
-        autoPlay
         muted
         loop
         playsInline
-        preload="auto"
+        preload="none"
         onPlaying={() => setIsPlaying(true)}
         aria-hidden="true"
-        style={{ willChange: "opacity, transform" }}
-        className={`absolute inset-0 h-full w-full scale-[1.08] object-cover object-center brightness-[0.85] lg:scale-[1.12] lg:brightness-95 transition-opacity duration-1000 ${
+        className={`absolute inset-0 h-full w-full object-cover object-center brightness-[0.88] lg:brightness-[0.98] transition-opacity duration-1000 ${
           isPlaying ? "opacity-100" : "opacity-0"
         }`}
       >
-        <source src="/optimized/hero-bg-video-clean.mp4" type="video/mp4" />
+        <source src="/optimized/hero-bg-video-optimized.mp4" type="video/mp4" />
       </video>
     </div>
   );
@@ -745,7 +757,7 @@ function HomePage() {
         <div className="absolute bottom-0 right-0 h-24 w-72 bg-gradient-to-l from-[#020B1F] via-[#020B1F]/80 to-transparent sm:h-32 sm:w-96" />
 
         <div className="relative max-w-[86rem] mx-auto w-full px-6 py-12 pt-[90px] sm:px-6 md:py-24">
-          <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-full lg:max-w-4xl" style={{ isolation: "isolate", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
+          <motion.div initial={false} animate="show" variants={stagger} className="max-w-full lg:max-w-4xl" style={{ isolation: "isolate", backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
             <motion.span variants={fadeUp} className="inline-flex max-w-full items-center gap-2 rounded-full border border-cyan-300/25 bg-[#020B1F]/65 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.14em] text-cyan-200 shadow-[0_0_30px_rgba(34,211,238,0.12)] sm:backdrop-blur-md sm:px-4 sm:text-xs sm:tracking-widest">
               <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" /> Your Trusted Yardi Platform Partner
             </motion.span>
@@ -766,7 +778,18 @@ function HomePage() {
                 View Capabilities
               </Link>
             </motion.div>
-            <motion.div variants={fadeUp} className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-300 md:mt-12 md:gap-6">
+            <motion.div
+              variants={fadeUp}
+              className="mt-7 sm:mt-8 border-l-2 border-cyan-400/90 pl-3.5 py-0.5 text-left"
+            >
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] text-cyan-200/90">
+                PROUD MEMBER OF THE
+              </p>
+              <p className="mt-0.5 text-sm sm:text-base font-semibold text-white tracking-normal">
+                Yardi® Independent Consultant Network
+              </p>
+            </motion.div>
+            <motion.div variants={fadeUp} className="mt-6 md:mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-slate-300 md:gap-6">
               <span className="font-semibold text-cyan-300">Global Presence:</span>
               {["Australia", "India", "USA"].map((r) => (
                 <span key={r} className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-cyan-400" /> {r}</span>
@@ -1020,8 +1043,12 @@ function HomePage() {
                 className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white border border-slate-200/60">
                 <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
                   <div className="relative h-56 overflow-hidden">
-                    <img src={p.image} srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <picture>
+                      {p.avifSrcSet && <source srcSet={p.avifSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" type="image/avif" />}
+                      <source srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" type="image/webp" />
+                      <img src={p.image} srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    </picture>
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/30 to-transparent" />
                     <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
                       <div className="w-11 h-11 rounded-xl glass-dark grid place-items-center">

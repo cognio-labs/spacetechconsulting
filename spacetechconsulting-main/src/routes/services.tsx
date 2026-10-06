@@ -50,8 +50,11 @@ function Services() {
             <p className="mt-6 text-lg text-slate-300">From implementation to optimization — we cover the complete Yardi lifecycle with six dedicated service lines.</p>
           </div>
           <div className="relative">
-            <div className="absolute -inset-4 rounded-3xl bg-gradient-to-br from-cyan-400/22 via-blue-500/18 to-white/8 blur-2xl" />
-            <img src="/optimized/services-dashboard-1024.webp" srcSet="/optimized/services-dashboard-640.webp 640w, /optimized/services-dashboard-1024.webp 1024w, /optimized/services-dashboard-1536.webp 1536w" sizes="(min-width: 1024px) 50vw, 100vw" alt="SpaceTech Yardi services meeting" loading="eager" fetchPriority="high" decoding="async" width={1536} height={960} className="relative rounded-3xl border border-white/10 shadow-2xl" />
+            <picture>
+              <source srcSet="/optimized/services-dashboard-640.avif 640w, /optimized/services-dashboard-960.avif 960w, /optimized/services-dashboard-1280.avif 1280w, /optimized/services-dashboard-1536.avif 1536w, /optimized/services-dashboard-1800.avif 1800w" sizes="(min-width: 1024px) 50vw, 100vw" type="image/avif" />
+              <source srcSet="/optimized/services-dashboard-640.webp 640w, /optimized/services-dashboard-960.webp 960w, /optimized/services-dashboard-1280.webp 1280w, /optimized/services-dashboard-1536.webp 1536w, /optimized/services-dashboard-1800.webp 1800w" sizes="(min-width: 1024px) 50vw, 100vw" type="image/webp" />
+              <img src="/optimized/services-dashboard-1280.webp" srcSet="/optimized/services-dashboard-640.webp 640w, /optimized/services-dashboard-960.webp 960w, /optimized/services-dashboard-1280.webp 1280w, /optimized/services-dashboard-1536.webp 1536w, /optimized/services-dashboard-1800.webp 1800w" sizes="(min-width: 1024px) 50vw, 100vw" alt="SpaceTech Yardi services meeting" loading="eager" fetchPriority="high" decoding="async" width={1800} height={1125} className="relative rounded-3xl border border-white/10 shadow-2xl" />
+            </picture>
           </div>
         </div>
       </section>

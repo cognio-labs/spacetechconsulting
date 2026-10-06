@@ -318,7 +318,7 @@ function MissionVisionValues() {
             </div>
 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              {["ANZ-Focused", "Platform-First", "Always Performing"].map((tag) => (
+              {["Global Delivery", "Platform-First", "Always Performing"].map((tag) => (
                 <span
                   key={tag}
                   className="px-4 py-2 rounded-full text-sm font-semibold text-slate-400"

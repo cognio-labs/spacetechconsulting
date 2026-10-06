@@ -264,12 +264,13 @@ const group = { visible: { transition: { staggerChildren: 0.08 } } };
 
 function Counter(props: any) {
   const stat = props.stat;
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState<number | null>(null);
   const Icon = stat.icon;
   useEffect(
     function () {
       const start = performance.now();
       let frame = 0;
+      setValue(0);
       function tick(now: number) {
         const p = Math.min((now - start) / 1500, 1);
         setValue(Math.round(stat.target * (1 - Math.pow(1 - p, 3))));
@@ -282,6 +283,9 @@ function Counter(props: any) {
     },
     [stat.target],
   );
+  const display =
+    value === null ? stat.value : `${value.toLocaleString()}${stat.suffix}`;
+
   return h(
     motion.div,
     {
@@ -300,9 +304,11 @@ function Counter(props: any) {
     ),
     h(
       "div",
-      { className: "text-3xl font-extrabold text-[#0F172A] dark:text-white" },
-      value.toLocaleString(),
-      stat.suffix,
+      {
+        className: "text-3xl font-extrabold text-[#0F172A] dark:text-white",
+        "aria-label": `${stat.value} ${stat.label}`,
+      },
+      display,
     ),
     h(
       "p",
@@ -646,10 +652,25 @@ function About() {
               "SpaceTech Consulting combines deep Yardi expertise with enterprise engineering leadership to deliver operational excellence, platform reliability, and measurable business outcomes across complex property technology environments.",
             ),
             h(
+              "div",
+              {
+                className:
+                  "mt-5 max-w-2xl border-l-2 border-blue-600 pl-4 py-1 dark:border-cyan-400",
+              },
+              h(
+                "p",
+                {
+                  className:
+                    "text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200",
+                },
+                "SpaceTech Consulting is a member of the Yardi® Independent Consultant Network.",
+              ),
+            ),
+            h(
               "p",
               {
                 className:
-                  "mt-4 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg",
+                  "mt-5 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg",
               },
               "Built on real enterprise operating principles, SpaceTech brings continuous improvement and disciplined execution\u2014helping property organizations maximize the value of their Yardi investment through stronger governance, operational visibility, and accountability.",
             ),
@@ -694,18 +715,32 @@ function About() {
                 className:
                   "relative overflow-hidden rounded-[28px] border border-white bg-white shadow-[0_30px_90px_rgba(15,23,42,0.18)] dark:border-white/15 dark:bg-white/5 dark:shadow-[0_30px_90px_rgba(0,0,0,0.5)] backdrop-blur-sm",
               },
-              h("img", {
-                src: "/optimized/about-section-768.webp",
-                srcSet: "/optimized/about-section-480.webp 480w, /optimized/about-section-768.webp 768w, /optimized/about-section-1024.webp 1024w",
-                sizes: "(min-width: 1024px) 45vw, 100vw",
-                alt: "Enterprise consulting team",
-                width: 1024,
-                height: 768,
-                loading: "eager",
-                fetchPriority: "high",
-                decoding: "async",
-                className: "h-[420px] w-full object-cover",
-              }),
+              h(
+                "picture",
+                null,
+                h("source", {
+                  srcSet: "/optimized/about-section-480.avif 480w, /optimized/about-section-768.avif 768w, /optimized/about-section-1024.avif 1024w, /optimized/about-section-1536.avif 1536w",
+                  sizes: "(min-width: 1024px) 45vw, 100vw",
+                  type: "image/avif",
+                }),
+                h("source", {
+                  srcSet: "/optimized/about-section-480.webp 480w, /optimized/about-section-768.webp 768w, /optimized/about-section-1024.webp 1024w, /optimized/about-section-1536.webp 1536w",
+                  sizes: "(min-width: 1024px) 45vw, 100vw",
+                  type: "image/webp",
+                }),
+                h("img", {
+                  src: "/optimized/about-section-768.webp",
+                  srcSet: "/optimized/about-section-480.webp 480w, /optimized/about-section-768.webp 768w, /optimized/about-section-1024.webp 1024w, /optimized/about-section-1536.webp 1536w",
+                  sizes: "(min-width: 1024px) 45vw, 100vw",
+                  alt: "Enterprise consulting team",
+                  width: 1536,
+                  height: 1024,
+                  loading: "eager",
+                  fetchPriority: "high",
+                  decoding: "async",
+                  className: "h-[420px] w-full object-cover",
+                }),
+              ),
               h(
                 "div",
                 {

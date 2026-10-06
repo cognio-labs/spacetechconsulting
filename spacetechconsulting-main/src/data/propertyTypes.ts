@@ -6,6 +6,7 @@ export type PropertyType = {
   icon: LucideIcon;
   image: string;
   imageSrcSet: string;
+  avifSrcSet?: string;
   title: string;
   eyebrow: string;
   body: string;
@@ -18,7 +19,16 @@ export type PropertyType = {
 
 const optimizedImage = (name: string) => ({
   image: "/optimized/" + name + "-768.webp",
-  imageSrcSet: "/optimized/" + name + "-480.webp 480w, /optimized/" + name + "-768.webp 768w, /optimized/" + name + "-1024.webp 1024w",
+  imageSrcSet:
+    "/optimized/" + name + "-480.webp 480w, " +
+    "/optimized/" + name + "-768.webp 768w, " +
+    "/optimized/" + name + "-1024.webp 1024w, " +
+    "/optimized/" + name + "-1400.webp 1400w",
+  avifSrcSet:
+    "/optimized/" + name + "-480.avif 480w, " +
+    "/optimized/" + name + "-768.avif 768w, " +
+    "/optimized/" + name + "-1024.avif 1024w, " +
+    "/optimized/" + name + "-1400.avif 1400w",
 });
 
 export const propertyTypes: PropertyType[] = [

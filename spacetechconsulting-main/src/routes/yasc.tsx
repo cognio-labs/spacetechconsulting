@@ -199,9 +199,27 @@ function YascPage() {
   gap: 14px;
   margin-top: 32px;
 }
+.yasc-page .icn-hero {
+  margin-top: 26px;
+  padding-left: 14px;
+  border-left: 2px solid var(--teal-br);
+}
+.yasc-page .icn-hero .icn-label {
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: #B9CBE2;
+  font-weight: 700;
+}
+.yasc-page .icn-hero .icn-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 2px;
+}
 .yasc-page .hero-meta {
-  margin-top: 38px;
-  padding-top: 24px;
+  margin-top: 30px;
+  padding-top: 22px;
   border-top: 1px solid rgba(255,255,255,.16);
   display: flex;
   flex-wrap: wrap;
@@ -604,6 +622,10 @@ function YascPage() {
               See what we do in Yardi
             </a>
           </div>
+          <div className="icn-hero">
+            <div className="icn-label">Member of the</div>
+            <div className="icn-title">Yardi® Independent Consultant Network</div>
+          </div>
           <div className="hero-meta">
             <div className="m">
               <div className="n">3,000+</div>
@@ -908,7 +930,9 @@ function YascPage() {
           <img src="/optimized/footer-logo-600.webp" alt="SpaceTech Consulting" />
           <div className="fl">
             <div>
-              Enterprise Yardi consulting partner. Bringing out the best in Yardi.
+              Member of the Yardi® Independent Consultant Network
+              <br />
+              Bringing out the best in Yardi.
               <br />
               Australia &nbsp;/&nbsp; India &nbsp;/&nbsp; USA
             </div>

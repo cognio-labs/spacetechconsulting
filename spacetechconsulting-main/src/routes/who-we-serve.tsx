@@ -49,9 +49,13 @@ function WhoWeServe() {
             <motion.div key={p.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
               className="group relative rounded-3xl overflow-hidden shadow-elegant card-lift bg-white">
               <Link to="/who-we-serve/$slug" params={{ slug: p.slug }} className="block h-full">
-              <div className="relative h-60 overflow-hidden">
-                <img src={p.image} srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="relative h-60 overflow-hidden">
+                  <picture>
+                    {p.avifSrcSet && <source srcSet={p.avifSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" type="image/avif" />}
+                    <source srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" type="image/webp" />
+                    <img src={p.image} srcSet={p.imageSrcSet} sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt={p.title} loading="lazy" decoding="async" width={1024} height={768}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                  </picture>
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3">
                   <div className="w-11 h-11 rounded-xl glass-dark grid place-items-center">

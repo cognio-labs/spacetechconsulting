@@ -37,19 +37,30 @@ export function Footer() {
       <div className="relative max-w-[90rem] mx-auto grid gap-8 px-4 pb-10 pt-7 sm:px-6 sm:pb-14 md:grid-cols-2 lg:grid-cols-[1.15fr_0.95fr_0.95fr_1.15fr] lg:gap-8 lg:pb-16 lg:pt-10 xl:gap-12">
         <div className="min-w-0">
           <div className="mb-4 flex items-center overflow-hidden w-fit max-w-full">
-            <img
-              src="/optimized/footer-logo-600.webp"
-              alt="SpaceTech Consulting logo"
-              width={220}
-              height={58}
-              loading="lazy"
-              decoding="async"
-              className="block h-auto w-[148px] max-w-full shrink-0 object-contain object-left [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
-            />
+            <picture>
+              <source srcSet="/optimized/footer-logo-400.avif 400w, /optimized/footer-logo-600.avif 600w" type="image/avif" />
+              <source srcSet="/optimized/footer-logo-400.webp 400w, /optimized/footer-logo-600.webp 600w" type="image/webp" />
+              <img
+                src="/optimized/footer-logo-600.webp"
+                srcSet="/optimized/footer-logo-400.webp 400w, /optimized/footer-logo-600.webp 600w"
+                sizes="(min-width: 1280px) 212px, (min-width: 1024px) 198px, (min-width: 640px) 168px, 148px"
+                alt="SpaceTech Consulting logo"
+                width={220}
+                height={58}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-[148px] max-w-full shrink-0 object-contain object-left [image-rendering:auto] sm:w-[168px] lg:w-[198px] xl:w-[212px]"
+              />
+            </picture>
           </div>
-          <p className="max-w-xs text-xs leading-5 text-slate-400">
-            Enterprise Yardi Consulting Partner. Bringing out the best in Yardi.
-          </p>
+          <div className="max-w-xs border-l-2 border-cyan-400/80 pl-3 py-0.5">
+            <p className="text-xs font-semibold text-slate-200 leading-snug">
+              Member of the Yardi® Independent Consultant Network
+            </p>
+            <p className="mt-1 text-xs leading-5 text-slate-400">
+              Bringing out the best in Yardi.
+            </p>
+          </div>
           <div className="flex gap-2 mt-5">
             {contactDetails.regions.map((r) => (
               <span key={r} className="rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-medium text-cyan-300">{r}</span>
@@ -111,7 +122,7 @@ export function Footer() {
       <div className="relative border-t border-white/10">
         <div className="mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-3 px-4 sm:px-6 py-5 text-[11px] text-slate-500">
           <span>(c) 2026 SpaceTech Consulting. All rights reserved.</span>
-          <span>Enterprise Yardi Consulting Partner</span>
+          <span>Member of the Yardi® Independent Consultant Network</span>
         </div>
       </div>
     </footer>
